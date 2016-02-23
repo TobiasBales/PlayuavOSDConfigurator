@@ -6,9 +6,16 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
 import configureStore from './store/configureStore';
 import './app.global.css';
+import 'react-toolbox/lib/commons.scss';
+import extensiblePolyfill from 'extensible-polyfill';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+extensiblePolyfill('immutable');
 
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);
+
+injectTapEventPlugin();
 
 render(
   <Provider store={store}>

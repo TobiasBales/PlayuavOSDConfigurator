@@ -12,6 +12,17 @@ module.exports = {
     }, {
       test: /\.json$/,
       loader: 'json-loader'
+    },
+    {
+      test: /\.scss$/,
+      loaders: ['style', 'css?modules', 'sass'],
+      include: path.resolve(__dirname, './node_modules/react-flexbox-grid'),
+    },
+    {
+      test: /\.scss$/,
+      loaders: ['style', 'css?modules', 'sass'],
+      include: path.resolve(__dirname, './node_modules'),
+      exclude: path.resolve(__dirname, './node_modules/react-flexbox-grid'),
     }]
   },
   output: {
@@ -20,7 +31,7 @@ module.exports = {
     libraryTarget: 'commonjs2'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.scss'],
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
   },
   plugins: [

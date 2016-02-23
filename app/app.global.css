@@ -1,37 +1,58 @@
-body {
+label, span, div, select, option, input[readonly] {
+  -webkit-user-select: none;
+}
+
+html {
+  font-size: 10px;
+}
+
+.column {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.parameters {
+}
+
+.preview {
   position: relative;
-  color: white;
-  height: 100vh;
-  background-color: #232C39;
-  background-image: linear-gradient(45deg, rgba(0, 216, 255, .5) 10%, rgba(0, 1, 127, .7));
-  font-family: Arial, Helvetica, Helvetica Neue;
-  overflow-y: hidden;
 }
 
-h2 {
-  margin: 0;
-  font-size: 2.25rem;
-  font-weight: bold;
-  letter-spacing: -.025em;
-  color: #fff;
+.preview img {
+  width: 100%;
+  height: 100%;
 }
 
-p {
-  font-size: 24px;
+.preview .preview-widget {
+  position: absolute;
+  overflow: hidden;
 }
 
-li {
-  list-style: none;
+.parameters .parameter-list {
+  overflow: visible;
 }
 
-a {
-  color: white;
-  opacity: .75;
-  text-decoration: none;
+.label {
+  line-height: 1.6rem;
+  color: rgba(0, 0, 0, 0.26);
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+  display: inline-block;
 }
 
-a:hover {
-  opacity: 1;
-  text-decoration: none;
-  cursor: pointer;
+.font.small {
+  font-size: 20px;
+  font-family: IBM_EGA_8x14;
+  line-height: 20px;
+}
+
+.font.medium {
+  font-family: IBM_EGA_8x14;
+  font-size: 28px;
+  line-height: 28px;
+}
+
+.font.large {
+  font-size: 18px;
+  line-height: 18px;
 }

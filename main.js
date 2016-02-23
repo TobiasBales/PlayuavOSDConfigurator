@@ -21,17 +21,17 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 
-app.on('window-all-closed', () => {
+app.on('window-all-closed', function onAllCloed() {
   if (process.platform !== 'darwin') app.quit();
 });
 
 
-app.on('ready', () => {
+app.on('ready', function onReady() {
   mainWindow = new BrowserWindow({ width: 1024, height: 728 });
 
   mainWindow.loadURL(`file://${__dirname}/app/app.html`);
 
-  mainWindow.on('closed', () => {
+  mainWindow.on('closed', function onClosed() {
     mainWindow = null;
   });
 

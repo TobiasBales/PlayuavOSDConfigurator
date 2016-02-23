@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
-import counter from './counter';
+import parameters from './parameters';
 
 const rootReducer = combineReducers({
-  counter,
+  parameters,
   routing
 });
 
