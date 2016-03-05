@@ -20,6 +20,7 @@ export default class ParameterList extends Component {
         <Tab label="Power system">
           <Settings.BatteryVoltage/>
           <Settings.BatteryCurrent/>
+          <Settings.BatteryConsumed/>
           <Settings.BatteryRemaining/>
         </Tab>
         <Tab label="Position">
@@ -71,12 +72,6 @@ export default class ParameterList extends Component {
 // 'Attitude_MP_Scale_Frac'
 // 'Attitude_MP_Scale_Real'
 // 'Attitude_MP_V_Position'
-// 'BatteryConsumed_Enable'
-// 'BatteryConsumed_Font_Size'
-// 'BatteryConsumed_H_Alignment'
-// 'BatteryConsumed_H_Position'
-// 'BatteryConsumed_Panel'
-// 'BatteryConsumed_V_Position'
 // 'CHWDIR_Nmode_Enable'
 // 'CHWDIR_Nmode_H_Position'
 // 'CHWDIR_Nmode_Home_Radius'

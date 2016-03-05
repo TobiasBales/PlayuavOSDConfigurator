@@ -17,6 +17,7 @@ const initialState = Immutable.fromJS({
   numberOfPanels: 3,
   absoluteAltitude: basicSettings,
   armState: basicSettings,
+  batteryConsumed: basicSettings,
   batteryCurrent: basicSettings,
   batteryRemaining: basicSettings,
   batteryVoltage: basicSettings,

@@ -20,10 +20,10 @@ export default class Position extends Component {
     const { x, y } = this.props.position;
     return (
       <div>
-        <Column width={50}>
+        <Column width={50} style={{ 'padding-right': '5px' }}>
           <Input type="number" label="x position" value={x} onChange={this._onChange.bind(this, 'x')} />
         </Column>
-        <Column width={50}>
+        <Column width={50} style={{ 'padding-left': '5px' }}>
           <Input type="number" label="y position" value={y} onChange={this._onChange.bind(this, 'y')} />
         </Column>
       </div>
