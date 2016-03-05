@@ -3,16 +3,16 @@ import React, { Component } from 'react';
 import BasicSettings from './BasicSettings';
 import { bindStateForComponent } from '../../utils/parameters';
 
-class ArmState extends Component {
+class AbsoluteAltitude extends Component {
   static propTypes = {
     ...BasicSettings.propTypes
   }
 
   render() {
     return (
-      <BasicSettings name="arm state" {...this.props}/>
+      <BasicSettings name="absolute altitude" {...this.props}/>
      );
   }
 }
 
-export default bindStateForComponent('armState', ArmState);
+export default bindStateForComponent('absoluteAltitude', AbsoluteAltitude);

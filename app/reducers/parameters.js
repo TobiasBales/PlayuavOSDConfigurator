@@ -3,53 +3,25 @@ import { ENABLED, FONT_SIZE, H_ALIGNMENT, PANELS, POSITION } from '../actions/pa
 
 window.imm = Immutable;
 
+const basicSettings = {
+  enabled: true,
+  fontSize: 0,
+  hAlignment: 0,
+  panels: [true, false, false],
+  position: {
+    x: 10, y: 10
+  },
+};
+
 const initialState = Immutable.fromJS({
   numberOfPanels: 3,
-  armState: {
-    enabled: true,
-    fontSize: 0,
-    hAlignment: 0,
-    panels: [true, false, false],
-    position: {
-      x: 10, y: 10
-    },
-  },
-  batteryCurrent: {
-    enabled: true,
-    fontSize: 0,
-    hAlignment: 0,
-    panels: [true, false, false],
-    position: {
-      x: 10, y: 290
-    },
-  },
-  batteryRemaining: {
-    enabled: true,
-    fontSize: 0,
-    hAlignment: 0,
-    panels: [true, false, false],
-    position: {
-      x: 10, y: 330
-    },
-  },
-  batteryVoltage: {
-    enabled: true,
-    fontSize: 0,
-    hAlignment: 0,
-    panels: [true, false, false],
-    position: {
-      x: 10, y: 310
-    },
-  },
-  flightMode: {
-    enabled: true,
-    fontSize: 0,
-    hAlignment: 0,
-    panels: [true, false, false],
-    position: {
-      x: 230, y: 10
-    },
-  },
+  absoluteAltitude: basicSettings,
+  armState: basicSettings,
+  batteryCurrent: basicSettings,
+  batteryRemaining: basicSettings,
+  batteryVoltage: basicSettings,
+  flightMode: basicSettings,
+  relativeAltitude: basicSettings,
 });
 
 export default function parameters(state = initialState, action) {
