@@ -18,6 +18,7 @@ export default class ParameterList extends Component {
           <Settings.Time/>
           <Settings.TotalTrip/>
           <Settings.WPDistance/>
+          <Settings.RSSI/>
         </Tab>
         <Tab label="Power system">
           <Settings.BatteryVoltage/>
@@ -35,6 +36,14 @@ export default class ParameterList extends Component {
         <Tab label="Flight controller">
           <Settings.ArmState/>
           <Settings.FlightMode/>
+          <Settings.GPSStatus/>
+          <Settings.GPSLatitude/>
+          <Settings.GPSLongitude/>
+          <Settings.GPSHDOP/>
+          <Settings.GPS2Status/>
+          <Settings.GPS2Latitude/>
+          <Settings.GPS2Longitude/>
+          <Settings.GPS2HDOP/>
         </Tab>
       </Tabs>
     );
@@ -93,54 +102,6 @@ export default class ParameterList extends Component {
 // 'ClimbRate_Panel'
 // 'ClimbRate_V_Position'
 // 'FC_Type'
-// 'GPS2HDOP_Enable'
-// 'GPS2HDOP_Font_Size'
-// 'GPS2HDOP_H_Alignment'
-// 'GPS2HDOP_H_Position'
-// 'GPS2HDOP_Panel'
-// 'GPS2HDOP_V_Position'
-// 'GPS2Latitude_Enable'
-// 'GPS2Latitude_Font_Size'
-// 'GPS2Latitude_H_Alignment'
-// 'GPS2Latitude_H_Position'
-// 'GPS2Latitude_Panel'
-// 'GPS2Latitude_V_Position'
-// 'GPS2Longitude_Enable'
-// 'GPS2Longitude_Font_Size'
-// 'GPS2Longitude_H_Alignment'
-// 'GPS2Longitude_H_Position'
-// 'GPS2Longitude_Panel'
-// 'GPS2Longitude_V_Position'
-// 'GPS2Status_Enable'
-// 'GPS2Status_Font_Size'
-// 'GPS2Status_H_Alignment'
-// 'GPS2Status_H_Position'
-// 'GPS2Status_Panel'
-// 'GPS2Status_V_Position'
-// 'GPSHDOP_Enable'
-// 'GPSHDOP_Font_Size'
-// 'GPSHDOP_H_Alignment'
-// 'GPSHDOP_H_Position'
-// 'GPSHDOP_Panel'
-// 'GPSHDOP_V_Position'
-// 'GPSLatitude_Enable'
-// 'GPSLatitude_Font_Size'
-// 'GPSLatitude_H_Alignment'
-// 'GPSLatitude_H_Position'
-// 'GPSLatitude_Panel'
-// 'GPSLatitude_V_Position'
-// 'GPSLongitude_Enable'
-// 'GPSLongitude_Font_Size'
-// 'GPSLongitude_H_Alignment'
-// 'GPSLongitude_H_Position'
-// 'GPSLongitude_Panel'
-// 'GPSLongitude_V_Position'
-// 'GPSStatus_Enable'
-// 'GPSStatus_Font_Size'
-// 'GPSStatus_H_Alignment'
-// 'GPSStatus_H_Position'
-// 'GPSStatus_Panel'
-// 'GPSStatus_V_Position'
 // 'Map_Enable'
 // 'Map_Font_Size'
 // 'Map_H_Alignment'
@@ -161,16 +122,10 @@ export default class ParameterList extends Component {
 // 'PWM_Video_Chanel'
 // 'PWM_Video_Enable'
 // 'PWM_Video_Value'
-// 'RSSI_Enable'
-// 'RSSI_Font_Size'
-// 'RSSI_H_Alignment'
-// 'RSSI_H_Position'
 // 'RSSI_Max'
 // 'RSSI_Min'
-// 'RSSI_Panel'
 // 'RSSI_Raw_Enable'
 // 'RSSI_Type'
-// 'RSSI_V_Position'
 // 'Speed_Scale_Align'
 // 'Speed_Scale_Enable'
 // 'Speed_Scale_H_Position'
