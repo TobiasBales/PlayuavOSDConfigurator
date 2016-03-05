@@ -9,8 +9,8 @@ export default class Column extends Component {
 
   render() {
     const { children, width } = this.props;
-    let style = this.props.style || {};
-    style.width = width + '%'
+    const style = this.props.style || {};
+    style.width = width + '%';
 
     return (
       <div className="column" style={style} {...this.props}>

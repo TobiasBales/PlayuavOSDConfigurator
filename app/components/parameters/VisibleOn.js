@@ -10,7 +10,6 @@ export default class ParameterPanels extends Component {
   }
 
   _onChange(index, value) {
-    console.log(index, value, this.props.panels.set(index, value).get(index));
     this.props.setPanels(this.props.panels.set(index, value));
   }
 

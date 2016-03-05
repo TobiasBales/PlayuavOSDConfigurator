@@ -22,7 +22,13 @@ const initialState = Immutable.fromJS({
   batteryRemaining: basicSettings,
   batteryVoltage: basicSettings,
   flightMode: basicSettings,
+  homeDistance: basicSettings,
   relativeAltitude: basicSettings,
+  speedAir: basicSettings,
+  speedGround: basicSettings,
+  time: basicSettings,
+  totalTrip: basicSettings,
+  wpDistance: basicSettings,
 });
 
 export default function parameters(state = initialState, action) {

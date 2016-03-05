@@ -15,7 +15,9 @@ export default class ParameterList extends Component {
     return (
       <Tabs index={this.state.index} onChange={this._onChange}>
         <Tab label="General">
-          hi
+          <Settings.Time/>
+          <Settings.TotalTrip/>
+          <Settings.WPDistance/>
         </Tab>
         <Tab label="Power system">
           <Settings.BatteryVoltage/>
@@ -23,9 +25,12 @@ export default class ParameterList extends Component {
           <Settings.BatteryConsumed/>
           <Settings.BatteryRemaining/>
         </Tab>
-        <Tab label="Position">
+        <Tab label="Orientation">
           <Settings.AbsoluteAltitude/>
           <Settings.RelativeAltitude/>
+          <Settings.HomeDistance/>
+          <Settings.SpeedAir/>
+          <Settings.SpeedGround/>
         </Tab>
         <Tab label="Flight controller">
           <Settings.ArmState/>
@@ -136,12 +141,6 @@ export default class ParameterList extends Component {
 // 'GPSStatus_H_Position'
 // 'GPSStatus_Panel'
 // 'GPSStatus_V_Position'
-// 'HomeDistance_Enable'
-// 'HomeDistance_Font_Size'
-// 'HomeDistance_H_Alignment'
-// 'HomeDistance_H_Position'
-// 'HomeDistance_Panel'
-// 'HomeDistance_V_Position'
 // 'Map_Enable'
 // 'Map_Font_Size'
 // 'Map_H_Alignment'
@@ -172,18 +171,6 @@ export default class ParameterList extends Component {
 // 'RSSI_Raw_Enable'
 // 'RSSI_Type'
 // 'RSSI_V_Position'
-// 'Speed_Air_Enable'
-// 'Speed_Air_Font_Size'
-// 'Speed_Air_H_Alignment'
-// 'Speed_Air_H_Position'
-// 'Speed_Air_Panel'
-// 'Speed_Air_V_Position'
-// 'Speed_Ground_Enable'
-// 'Speed_Ground_Font_Size'
-// 'Speed_Ground_H_Alignment'
-// 'Speed_Ground_H_Position'
-// 'Speed_Ground_Panel'
-// 'Speed_Ground_V_Position'
 // 'Speed_Scale_Align'
 // 'Speed_Scale_Enable'
 // 'Speed_Scale_H_Position'
@@ -191,32 +178,14 @@ export default class ParameterList extends Component {
 // 'Speed_Scale_Source'
 // 'Speed_Scale_Type'
 // 'Speed_Scale_V_Position'
+// 'Throttle_Scale_Enable'
+// 'Throttle_Scale_Type'
 // 'Throttle_Enable'
 // 'Throttle_H_Position'
 // 'Throttle_Panel'
-// 'Throttle_Scale_Enable'
-// 'Throttle_Scale_Type'
 // 'Throttle_V_Position'
-// 'Time_Enable'
-// 'Time_Font_Size'
-// 'Time_H_Alignment'
-// 'Time_H_Position'
-// 'Time_Panel'
 // 'Time_Type'
-// 'Time_V_Position'
-// 'TotalTrip_Enable'
-// 'TotalTrip_Font_Size'
-// 'TotalTrip_H_Alignment'
-// 'TotalTrip_H_Position'
-// 'TotalTrip_Panel'
-// 'TotalTrip_V_Position'
 // 'Wind_Enable'
 // 'Wind_H_Position'
 // 'Wind_Panel'
 // 'Wind_V_Position'
-// 'WPDistance_Enable'
-// 'WPDistance_Font_Size'
-// 'WPDistance_H_Alignment'
-// 'WPDistance_H_Position'
-// 'WPDistance_Panel'
-// 'WPDistance_V_Position'
