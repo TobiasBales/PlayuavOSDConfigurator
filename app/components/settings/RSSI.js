@@ -10,7 +10,7 @@ class RSSI extends Component {
 
   render() {
     return (
-      <BasicSettings name="RSSI" {...this.props}/>
+      <BasicSettings name="rssi" {...this.props}/>
      );
   }
 }

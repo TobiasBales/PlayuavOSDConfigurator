@@ -10,7 +10,7 @@ class WPDistance extends Component {
 
   render() {
     return (
-      <BasicSettings name="way point distance" {...this.props}/>
+      <BasicSettings name="way-point distance" {...this.props}/>
      );
   }
 }

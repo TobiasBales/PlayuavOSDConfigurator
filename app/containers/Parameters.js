@@ -16,8 +16,6 @@ export default class ParameterList extends Component {
       <Tabs index={this.state.index} onChange={this._onChange}>
         <Tab label="General">
           <Settings.Time/>
-          <Settings.TotalTrip/>
-          <Settings.WPDistance/>
           <Settings.RSSI/>
         </Tab>
         <Tab label="Power system">
@@ -32,10 +30,14 @@ export default class ParameterList extends Component {
           <Settings.HomeDistance/>
           <Settings.SpeedAir/>
           <Settings.SpeedGround/>
+          <Settings.TotalTrip/>
         </Tab>
         <Tab label="Flight controller">
           <Settings.ArmState/>
           <Settings.FlightMode/>
+          <Settings.WPDistance/>
+        </Tab>
+        <Tab label="GPS">
           <Settings.GPSStatus/>
           <Settings.GPSLatitude/>
           <Settings.GPSLongitude/>
