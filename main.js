@@ -3,12 +3,11 @@
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const Menu = electron.Menu;
-const crashReporter = electron.crashReporter;
-const shell = electron.shell;
+const app = require('app');
+const BrowserWindow = require('browser-window');
+const Menu = require('menu');
+const crashReporter = require('crash-reporter');
+const shell = require('shell');
 let menu;
 let template;
 let mainWindow = null;
@@ -17,11 +16,11 @@ let mainWindow = null;
 crashReporter.start();
 
 if (process.env.NODE_ENV === 'development') {
-  require('electron-debug')();
+  require('./electron-debug')();
 }
 
 
-app.on('window-all-closed', function onAllCloed() {
+app.on('window-all-closed', function onAllClosed() {
   if (process.platform !== 'darwin') app.quit();
 });
 

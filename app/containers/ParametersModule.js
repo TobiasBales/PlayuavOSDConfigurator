@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { Tab, Tabs } from 'react-toolbox/lib/tabs';
 
 import Settings from '../components/Settings';

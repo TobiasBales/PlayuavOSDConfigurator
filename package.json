@@ -65,7 +65,7 @@
     "css-loader": "0.23.1",
     "del": "^2.0.1",
     "electron-packager": "^5.2.0",
-    "electron-prebuilt": "^0.30.8",
+    "electron-prebuilt": "^0.30.6",
     "electron-rebuild": "^1.0.0",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-plugin-react": "^4.1.0",
@@ -102,7 +102,6 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "css-modules-require-hook": "^3.0.0",
-    "electron-debug": "^0.5.2",
     "extensible-polyfill": "^1.0.1",
     "flexboxgrid": "^6.3.0",
     "font-awesome": "^4.4.0",
@@ -122,7 +121,8 @@
     "react": "^0.14.7",
     "redux": "^3.2.1",
     "redux-promise": "^0.5.0",
-    "redux-thunk": "^1.0.2"
+    "redux-thunk": "^1.0.2",
+    "serialport-electron": "^1.7.4-electron-0.30.6"
   },
   "devEngines": {
     "node": "4.x || 5.x",

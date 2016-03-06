@@ -16,13 +16,11 @@ module.exports = {
     {
       test: /\.scss$/,
       loaders: ['style', 'css?modules', 'sass'],
-      include: path.resolve(__dirname, './node_modules/react-flexbox-grid'),
+      include: path.resolve(__dirname, './node_modules'),
     },
     {
-      test: /\.scss$/,
-      loaders: ['style', 'css?modules', 'sass'],
-      include: path.resolve(__dirname, './node_modules'),
-      exclude: path.resolve(__dirname, './node_modules/react-flexbox-grid'),
+      test: /\.node$/,
+      loaders: ['node']
     }]
   },
   output: {
@@ -38,7 +36,7 @@ module.exports = {
 
   ],
   externals: [
-    // put your node 3rd party libraries which can't be built with webpack here
-    // (mysql, mongodb, and so on..)
+    // put your node 3rd party libraries which can't be built with webpack here (mysql, mongodb, and so on..)
+    'node_modules'
   ]
 };
