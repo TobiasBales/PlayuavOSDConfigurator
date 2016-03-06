@@ -25,7 +25,9 @@ function mapDispatchToProps(parameterName, dispatch) {
     setPanels: (panels) => {
       dispatch(ParameterActions.setPanels(parameterName, panels));
     },
-
+    setVideoMode: (videoMode) => {
+      dispatch(ParameterActions.setVideoMode(parameterName, videoMode));
+    }
   };
 }
 

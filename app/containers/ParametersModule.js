@@ -4,7 +4,7 @@ import { Tab, Tabs } from 'react-toolbox/lib/tabs';
 
 import Settings from '../components/Settings';
 
-export default class ParameterList extends Component {
+export default class ParametersModule extends Component {
   state = { index: 0 };
 
   _onChange = (index) => {
@@ -15,8 +15,7 @@ export default class ParameterList extends Component {
     return (
       <Tabs index={this.state.index} onChange={this._onChange}>
         <Tab label="General">
-          <Settings.Time/>
-          <Settings.RSSI/>
+          <Settings.VideoMode/>
         </Tab>
         <Tab label="Power system">
           <Settings.BatteryVoltage/>
@@ -35,6 +34,8 @@ export default class ParameterList extends Component {
         <Tab label="Flight controller">
           <Settings.ArmState/>
           <Settings.FlightMode/>
+          <Settings.Time/>
+          <Settings.RSSI/>
           <Settings.WPDistance/>
         </Tab>
         <Tab label="GPS">

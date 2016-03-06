@@ -1,5 +1,7 @@
 import Immutable from 'immutable';
-import { ENABLED, FONT_SIZE, H_ALIGNMENT, PANELS, POSITION } from '../actions/parameters';
+import {
+  ENABLED, FONT_SIZE, H_ALIGNMENT, PANELS, POSITION, VIDEO_MODE
+} from '../actions/parameters';
 
 window.imm = Immutable;
 
@@ -38,6 +40,9 @@ const initialState = Immutable.fromJS({
   time: basicSettings,
   totalTrip: basicSettings,
   wpDistance: basicSettings,
+  videoMode: {
+    videoMode: 1
+  },
 });
 
 export default function parameters(state = initialState, action) {
@@ -56,6 +61,8 @@ export default function parameters(state = initialState, action) {
       return state
         .updateIn([parameterName, 'position', 'x'], () => action.position.get('x'))
         .updateIn([parameterName, 'position', 'y'], () => action.position.get('y'));
+    case VIDEO_MODE:
+      return state.updateIn([parameterName, 'videoMode'], () => action.videoMode);
     default:
       return state;
   }

@@ -49,10 +49,10 @@ export default class BasicSettings extends Component {
       <Parameters.ParameterList name={name}>
         <Parameters.Enabled enabled={enabled} setEnabled={setEnabled} />
         <Parameters.Position position={position} setPosition={setPosition} />
-        <Column width={50} style={{ 'padding-left': '5px' }}>
+        <Column width={50} style={{ 'paddingLeft': '5px' }}>
           <Parameters.FontSize fontSize={fontSize} setFontSize={setFontSize} />
         </Column>
-        <Column width={50} style={{ 'padding-right': '5px' }}>
+        <Column width={50} style={{ 'paddingLight': '5px' }}>
           <Parameters.HorizontalAlignment hAlignment={hAlignment} setHAlignment={setHAlignment} />
         </Column>
         <Parameters.VisibleOn panels={panels} setPanels={setPanels} numberOfPanels={numberOfPanels} />

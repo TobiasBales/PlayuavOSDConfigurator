@@ -20,6 +20,7 @@ import SpeedAir from './settings/SpeedAir';
 import SpeedGround from './settings/SpeedGround';
 import Time from './settings/Time';
 import TotalTrip from './settings/TotalTrip';
+import VideoMode from './settings/VideoMode';
 import WPDistance from './settings/WPDistance';
 
 export default {
@@ -45,5 +46,6 @@ export default {
   SpeedGround,
   Time,
   TotalTrip,
+  VideoMode,
   WPDistance,
 };

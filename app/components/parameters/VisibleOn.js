@@ -23,11 +23,10 @@ export default class ParameterPanels extends Component {
         </div>
         <div>
           {[...Array(numberOfPanels)].map((_, i) =>
-            <span style={{ display: 'inline-block', 'margin-right': '10px' }}>
+            <span key={i} style={{ display: 'inline-block', 'marginRight': '10px' }}>
               <Checkbox
                 checked={panels.get(i)}
                 label={i + 1}
-                key={i}
                 onChange={this._onChange.bind(this, i)}
               />
             </span>
