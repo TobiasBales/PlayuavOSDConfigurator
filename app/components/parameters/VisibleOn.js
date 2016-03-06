@@ -5,16 +5,16 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 export default class ParameterPanels extends Component {
   static propTypes = {
     numberOfPanels: PropTypes.number.isRequired,
-    panels: ImmutablePropTypes.listOf(PropTypes.bool).isRequired,
-    setPanels: PropTypes.func.isRequired
+    visibleOn: ImmutablePropTypes.listOf(PropTypes.bool).isRequired,
+    setVisibleOn: PropTypes.func.isRequired
   }
 
   _onChange(index, value) {
-    this.props.setPanels(this.props.panels.set(index, value));
+    this.props.setVisibleOn(this.props.visibleOn.set(index, value));
   }
 
   render() {
-    const { numberOfPanels, panels } = this.props;
+    const { numberOfPanels, visibleOn } = this.props;
 
     return (
       <span>
@@ -25,7 +25,7 @@ export default class ParameterPanels extends Component {
           {[...Array(numberOfPanels)].map((_, i) =>
             <span key={i} style={{ display: 'inline-block', 'marginRight': '10px' }}>
               <Checkbox
-                checked={panels.get(i)}
+                checked={visibleOn.get(i)}
                 label={i + 1}
                 onChange={this._onChange.bind(this, i)}
               />

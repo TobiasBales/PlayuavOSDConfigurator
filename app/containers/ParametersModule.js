@@ -15,7 +15,7 @@ export default class ParametersModule extends Component {
     return (
       <Tabs index={this.state.index} onChange={this._onChange}>
         <Tab label="General">
-          <Settings.VideoMode/>
+          <Settings.Video/>
         </Tab>
         <Tab label="Power system">
           <Settings.BatteryVoltage/>
@@ -118,7 +118,6 @@ export default class ParametersModule extends Component {
 // 'Misc_Start_Row'
 // 'Misc_Units_Mode'
 // 'Misc_USART_BandRate'
-// 'Misc_Video_Mode'
 // 'PWM_Panel_Chanel'
 // 'PWM_Panel_Enable'
 // 'PWM_Panel_Value'

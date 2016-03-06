@@ -12,7 +12,7 @@ export default class BasicSettings extends Component {
       enabled: PropTypes.bool.isRequired,
       fontSize: PropTypes.number.isRequired,
       hAlignment: PropTypes.number.isRequired,
-      panels: ImmutablePropTypes.listOf(PropTypes.bool).isRequired,
+      visibleOn: ImmutablePropTypes.listOf(PropTypes.bool).isRequired,
       position: ImmutablePropTypes.contains({
         x: PropTypes.number.isRequired,
         y: PropTypes.number.isRequired,
@@ -21,7 +21,7 @@ export default class BasicSettings extends Component {
     numberOfPanels: PropTypes.number.isRequired,
     setEnabled: PropTypes.func.isRequired,
     setFontSize: PropTypes.func.isRequired,
-    setPanels: PropTypes.func.isRequired,
+    setVisibleOn: PropTypes.func.isRequired,
     setPosition: PropTypes.func.isRequired,
     setHAlignment: PropTypes.func.isRequired,
   }
@@ -34,28 +34,28 @@ export default class BasicSettings extends Component {
       setEnabled,
       setFontSize,
       setHAlignment,
-      setPanels,
+      setVisibleOn,
       setPosition,
     } = this.props;
     const {
       enabled,
       fontSize,
       hAlignment,
-      panels,
+      visibleOn,
       position,
     } = this.props.parameters;
 
     return (
       <Parameters.ParameterList name={name}>
         <Parameters.Enabled enabled={enabled} setEnabled={setEnabled} />
-        <Parameters.Position position={position} setPosition={setPosition} />
+        <Parameters.Position labelX="position x" labelY="position y" position={position} setPosition={setPosition} />
         <Column width={50} style={{ 'paddingLeft': '5px' }}>
           <Parameters.FontSize fontSize={fontSize} setFontSize={setFontSize} />
         </Column>
         <Column width={50} style={{ 'paddingLight': '5px' }}>
           <Parameters.HorizontalAlignment hAlignment={hAlignment} setHAlignment={setHAlignment} />
         </Column>
-        <Parameters.VisibleOn panels={panels} setPanels={setPanels} numberOfPanels={numberOfPanels} />
+        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels} />
         {children}
       </Parameters.ParameterList>
     );

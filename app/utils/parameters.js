@@ -4,7 +4,7 @@ import * as ParameterActions from '../actions/parameters';
 function mapStateToProps(parameterName, state) {
   return {
     parameters: state.parameters.get(parameterName),
-    numberOfPanels: state.parameters.get('numberOfPanels')
+    numberOfPanels: state.parameters.get('video').get('maxPanels')
   };
 }
 
@@ -19,14 +19,20 @@ function mapDispatchToProps(parameterName, dispatch) {
     setHAlignment: (hAlignment) => {
       dispatch(ParameterActions.setHAlignment(parameterName, hAlignment));
     },
-    setPosition: (x, y) => {
-      dispatch(ParameterActions.setPosition(parameterName, x, y));
+    setOffset: (offset) => {
+      dispatch(ParameterActions.setOffset(parameterName, offset));
     },
-    setPanels: (panels) => {
-      dispatch(ParameterActions.setPanels(parameterName, panels));
+    setPosition: (position) => {
+      dispatch(ParameterActions.setPosition(parameterName, position));
+    },
+    setVisibleOn: (visibleOn) => {
+      dispatch(ParameterActions.setVisibleOn(parameterName, visibleOn));
     },
     setVideoMode: (videoMode) => {
       dispatch(ParameterActions.setVideoMode(parameterName, videoMode));
+    },
+    setUnits: (units) => {
+      dispatch(ParameterActions.setUnits(parameterName, units));
     }
   };
 }
