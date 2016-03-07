@@ -4,8 +4,8 @@ export const H_ALIGNMENT = 'parameters/h_alignment';
 export const OFFSET = 'parameters/offset';
 export const POSITION = 'parameters/position';
 export const UNITS = 'parameters/units';
-export const VIDEO_MODE = 'parameter/video_mode';
-export const VISIBLE_ON = 'parameter/visible_on';
+export const VIDEO_MODE = 'parameters/video_mode';
+export const VISIBLE_ON = 'parameters/visible_on';
 
 export function setEnabled(parameter, enabled) {
   return { type: ENABLED, parameter, enabled };

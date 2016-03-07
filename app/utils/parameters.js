@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import * as ParameterActions from '../actions/parameters';
 
+
 function mapStateToProps(parameterName, state) {
   return {
     parameters: state.parameters.get(parameterName),
-    numberOfPanels: state.parameters.get('video').get('maxPanels')
+    numberOfPanels: state.parameters.get('video').get('maxPanels'),
+    connection: state.parameters.get('connection'),
   };
 }
 
@@ -33,7 +35,7 @@ function mapDispatchToProps(parameterName, dispatch) {
     },
     setUnits: (units) => {
       dispatch(ParameterActions.setUnits(parameterName, units));
-    }
+    },
   };
 }
 

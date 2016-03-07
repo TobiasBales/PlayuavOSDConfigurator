@@ -100,12 +100,14 @@
     "webpack-target-electron-renderer": "^0.4.0"
   },
   "dependencies": {
+    "chokidar": "^1.4.3",
     "classnames": "^2.2.3",
     "css-modules-require-hook": "^3.0.0",
     "extensible-polyfill": "^1.0.1",
     "flexboxgrid": "^6.3.0",
     "font-awesome": "^4.4.0",
     "immutable": "^3.7.6",
+    "material-design-icons-iconfont": "^2.0.4",
     "material-ui": "^0.14.4",
     "normalize.css": "^3.0.3",
     "postcss": "^5.0.18",
@@ -122,7 +124,8 @@
     "redux": "^3.2.1",
     "redux-promise": "^0.5.0",
     "redux-thunk": "^1.0.2",
-    "serialport-electron": "^1.7.4-electron-0.30.6"
+    "serialport-electron": "^1.7.4-electron-0.30.6",
+    "sleep": "^3.0.1"
   },
   "devEngines": {
     "node": "4.x || 5.x",

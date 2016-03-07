@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Checkbox from 'react-toolbox/lib/checkbox';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import Label from '../Label';
 
 export default class ParameterPanels extends Component {
   static propTypes = {
@@ -19,7 +20,7 @@ export default class ParameterPanels extends Component {
     return (
       <span>
         <div>
-          <label className="label">visible on panels</label>
+          <Label text="visible on panels"/>
         </div>
         <div>
           {[...Array(numberOfPanels)].map((_, i) =>

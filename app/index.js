@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import configureStore from './store/configureStore';
 import './app.global.css';
 import 'react-toolbox/lib/commons.scss';

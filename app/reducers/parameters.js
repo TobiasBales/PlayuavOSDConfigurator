@@ -1,9 +1,8 @@
 import Immutable from 'immutable';
-import {
-  ENABLED, FONT_SIZE, H_ALIGNMENT, VISIBLE_ON, POSITION, VIDEO_MODE, UNITS, OFFSET
-} from '../actions/parameters';
 
-window.imm = Immutable;
+import {
+  ENABLED, FONT_SIZE, H_ALIGNMENT, VISIBLE_ON, POSITION, VIDEO_MODE, UNITS, OFFSET,
+} from '../actions/parameters';
 
 const basicSettings = {
   enabled: true,
