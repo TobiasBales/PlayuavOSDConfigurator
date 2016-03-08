@@ -6,7 +6,6 @@ function mapStateToProps(parameterName, state) {
   return {
     parameters: state.parameters.get(parameterName),
     numberOfPanels: state.parameters.get('video').get('maxPanels'),
-    connection: state.parameters.get('connection'),
   };
 }
 
@@ -21,11 +20,11 @@ function mapDispatchToProps(parameterName, dispatch) {
     setHAlignment: (hAlignment) => {
       dispatch(ParameterActions.setHAlignment(parameterName, hAlignment));
     },
-    setOffset: (offset) => {
-      dispatch(ParameterActions.setOffset(parameterName, offset));
+    setOffset: (x, y) => {
+      dispatch(ParameterActions.setOffset(parameterName, x, y));
     },
-    setPosition: (position) => {
-      dispatch(ParameterActions.setPosition(parameterName, position));
+    setPosition: (x, y) => {
+      dispatch(ParameterActions.setPosition(parameterName, x, y));
     },
     setVisibleOn: (visibleOn) => {
       dispatch(ParameterActions.setVisibleOn(parameterName, visibleOn));
@@ -35,6 +34,9 @@ function mapDispatchToProps(parameterName, dispatch) {
     },
     setUnits: (units) => {
       dispatch(ParameterActions.setUnits(parameterName, units));
+    },
+    setParamsFromEEPROM: (eepromData) => {
+      dispatch(ParameterActions.setParamsFromEEPROM(eepromData));
     },
   };
 }

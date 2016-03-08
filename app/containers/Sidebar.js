@@ -12,7 +12,7 @@ class Sidebar extends Component {
     visible: PropTypes.bool.isRequired,
     showInfo: PropTypes.func.isRequired,
     showError: PropTypes.func.isRequired,
-
+    setParamsFromEEPROM: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -58,10 +58,10 @@ class Sidebar extends Component {
     this.props.showInfo('disconnected');
   }
 
-  _onOSDConfigReceived = (config) => {
+  _onOSDConfigReceived = (eepromData) => {
     this.setState({ ...this.state, readingOSD: false, writingOSD: false });
-    this.props.showInfo('read osd config');
-    console.log('read config', config);
+    this.props.setParamsFromEEPROM(eepromData);
+    this.props.showInfo('finished reading osd config');
   }
 
   _onSerialPortChanged = (serialPort) => {

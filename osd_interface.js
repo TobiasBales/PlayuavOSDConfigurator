@@ -53,11 +53,20 @@ class OSDInterface {
   getParams(callback) {
     this._flush();
     this._write([code.GET_PARAMS, code.EOC]);
-    this._read(1026, function getParamsCallback(buffer) {
-      if (!this._syncOk(buffer, 1024)) {
-        callback('Sync lost while reading parameters, please try again');
+    this._read(1026, function getParamsCallback(err, buffer) {
+      if (err) {
+        callback(err, null);
+        return;
       }
-      callback(null, buffer);
+      if (!this._syncOk(buffer, 1024)) {
+        callback('Sync lost while reading parameters, please try again', null);
+      }
+      const result = [];
+      for (let offset = 0; offset < buffer.length - 2; offset += 2) {
+        result.push(buffer.readUInt16LE(offset, false));
+      }
+
+      callback(null, result);
     }.bind(this));
   }
 
@@ -84,12 +93,17 @@ class OSDInterface {
       if (this.buffer.length >= bytes) {
         this.buffer.copy(result, 0, 0, bytes);
         this.buffer = this.buffer.slice(bytes, this.buffer.length);
-        callback(result);
+        callback(null, result);
+        return;
+      }
+
+      if (!this._open) {
+        callback('serial port was closed while waiting to read data', null);
         return;
       }
 
       if (count >= 100) {
-        throw new Error('waited to long (100us) to read ' + bytes + 'bytes');
+        callback('waited to long (100ms) to read ' + bytes + 'bytes', null)
       }
 
       count += 1;

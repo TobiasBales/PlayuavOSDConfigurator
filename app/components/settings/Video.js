@@ -10,10 +10,8 @@ class Video extends Component {
     parameters: ImmutablePropTypes.contains({
       videoMode: PropTypes.number.isRequired,
       units: PropTypes.number.isRequired,
-      offset: ImmutablePropTypes.contains({
-        x: PropTypes.number.isRequired,
-        y: PropTypes.number.isRequired,
-      }).isRequired,
+      offsetX: PropTypes.number.isRequired,
+      offsetY: PropTypes.number.isRequired,
     }).isRequired,
     setVideoMode: PropTypes.func.isRequired,
     setUnits: PropTypes.func.isRequired,
@@ -22,7 +20,7 @@ class Video extends Component {
 
   render() {
     const { setVideoMode, setUnits, setOffset } = this.props;
-    const { videoMode, units, offset } = this.props.parameters;
+    const { videoMode, units, offsetX, offsetY } = this.props.parameters;
 
     return (
       <Parameters.ParameterList name="video">
@@ -32,7 +30,7 @@ class Video extends Component {
         <Column width={50} style={{ 'paddingLeft': '5px' }}>
           <Parameters.Units units={units} setUnits={setUnits} />
         </Column>
-        <Parameters.Position labelX="offset x" labelY="offset y" position={offset} setPosition={setOffset} />
+        <Parameters.Position labelX="offset x" labelY="offset y" positionX={offsetX} positionY={offsetY} setPosition={setOffset} />
       </Parameters.ParameterList>
     );
   }

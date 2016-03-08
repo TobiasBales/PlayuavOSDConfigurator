@@ -6,6 +6,7 @@ export const POSITION = 'parameters/position';
 export const UNITS = 'parameters/units';
 export const VIDEO_MODE = 'parameters/video_mode';
 export const VISIBLE_ON = 'parameters/visible_on';
+export const PARAMS_FROM_EEPROM = 'parameters/params_from_eeprom';
 
 export function setEnabled(parameter, enabled) {
   return { type: ENABLED, parameter, enabled };
@@ -19,12 +20,12 @@ export function setHAlignment(parameter, hAlignment) {
   return { type: H_ALIGNMENT, parameter, hAlignment };
 }
 
-export function setOffset(parameter, offset) {
-  return { type: OFFSET, parameter, offset };
+export function setOffset(parameter, x, y) {
+  return { type: OFFSET, parameter, x, y };
 }
 
-export function setPosition(parameter, position) {
-  return { type: POSITION, parameter, position };
+export function setPosition(parameter, x, y) {
+  return { type: POSITION, parameter, x, y };
 }
 
 export function setUnits(parameter, units) {
@@ -37,4 +38,8 @@ export function setVideoMode(parameter, videoMode) {
 
 export function setVisibleOn(parameter, visibleOn) {
   return { type: VISIBLE_ON, parameter, visibleOn };
+}
+
+export function setParamsFromEEPROM(eepromData) {
+  return { type: PARAMS_FROM_EEPROM, eepromData };
 }

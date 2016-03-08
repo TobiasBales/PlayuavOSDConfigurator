@@ -17,27 +17,6 @@ let menu;
 let template;
 let mainWindow = null;
 
-// SerialPort.list(function listCallback(err, ports) {
-//   if (err) {
-//     throw new Error('Error while listing serial ports: ' + err);
-//   }
-//   const ct = new CommTool(ports[0].comName);
-//   setTimeout(function a() {
-//     ct.sync();
-//     ct.read(2, function b(data1) {
-//       console.log('sync result', data1);
-//       ct.getVersion();
-//       ct.read(3, function c(data2) {
-//         console.log('device result', data2);
-//         ct.getParams();
-//         ct.read(1024, function d(data3) {
-//           console.log('params result', data3.length, data3);
-//         });
-//       });
-//     });
-//   }, 550);
-// });
-
 let osdInterface = null;
 
 crashReporter.start();
@@ -311,5 +290,10 @@ app.on('ready', function onReady() {
         e.sender.send('osd-config', data);
       });
     });
+
+    // ipc.on('write-osd', function onWriteOSD(e, parameter) {
+    //   console.log('writing osd', parameter);
+    //   setTimeout(function () { e.sender.send('osd-config-written'); }, 1000);
+    // });
   }
 });
