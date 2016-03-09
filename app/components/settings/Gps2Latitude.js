@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
-import BasicSettings from './BasicSettings';
+import SimpleSettings from './SimpleSettings';
 import { bindStateForComponent } from '../../utils/parameters';
 
 class GPS2Latitude extends Component {
   static propTypes = {
-    ...BasicSettings.propTypes
+    ...SimpleSettings.propTypes
   }
 
   render() {
     return (
-      <BasicSettings name="gps 2 latitude" {...this.props}/>
+      <SimpleSettings name="gps 2 latitude" {...this.props}/>
      );
   }
 }

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
-import BasicSettings from './BasicSettings';
+import SimpleSettings from './SimpleSettings';
 import { bindStateForComponent } from '../../utils/parameters';
 
 class SpeedAir extends Component {
   static propTypes = {
-    ...BasicSettings.propTypes
+    ...SimpleSettings.propTypes
   }
 
   render() {
     return (
-      <BasicSettings name="speed air" {...this.props}/>
+      <SimpleSettings name="speed air" {...this.props}/>
      );
   }
 }

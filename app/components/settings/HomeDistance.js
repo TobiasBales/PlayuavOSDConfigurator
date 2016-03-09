@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
-import BasicSettings from './BasicSettings';
+import SimpleSettings from './SimpleSettings';
 import { bindStateForComponent } from '../../utils/parameters';
 
 class HomeDistance extends Component {
   static propTypes = {
-    ...BasicSettings.propTypes
+    ...SimpleSettings.propTypes
   }
 
   render() {
     return (
-      <BasicSettings name="home distance" {...this.props}/>
+      <SimpleSettings name="home distance" {...this.props}/>
     );
   }
 }

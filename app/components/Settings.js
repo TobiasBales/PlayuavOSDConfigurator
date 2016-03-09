@@ -1,51 +1,77 @@
 import AbsoluteAltitude from './settings/AbsoluteAltitude';
+import Alarms from './settings/Alarms';
+import AltitudeScale from './settings/AltitudeScale';
 import ArmState from './settings/ArmState';
+import Attitude3d from './settings/Attitude3d';
+import AttitudeMp from './settings/AttitudeMp';
+import Compass from './settings/Compass';
 import BatteryConsumed from './settings/BatteryConsumed';
 import BatteryCurrent from './settings/BatteryCurrent';
 import BatteryRemaining from './settings/BatteryRemaining';
 import BatteryVoltage from './settings/BatteryVoltage';
+import ClimbRate from './settings/ClimbRate';
 import FlightMode from './settings/FlightMode';
-import GPS2HDOP from './settings/GPS2HDOP';
-import GPS2Latitude from './settings/GPS2Latitude';
-import GPS2Longitude from './settings/GPS2Longitude';
-import GPS2Status from './settings/GPS2Status';
-import GPSHDOP from './settings/GPSHDOP';
-import GPSLatitude from './settings/GPSLatitude';
-import GPSLongitude from './settings/GPSLongitude';
-import GPSStatus from './settings/GPSStatus';
+import Gps2Hdop from './settings/Gps2Hdop';
+import Gps2Latitude from './settings/Gps2Latitude';
+import Gps2Longitude from './settings/Gps2Longitude';
+import Gps2Status from './settings/Gps2Status';
+import GpsHdop from './settings/GpsHdop';
+import GpsLatitude from './settings/GpsLatitude';
+import GpsLongitude from './settings/GpsLongitude';
+import GpsStatus from './settings/GpsStatus';
 import HomeDistance from './settings/HomeDistance';
+import Map from './settings/Map';
+import Radar from './settings/Radar';
 import RelativeAltitude from './settings/RelativeAltitude';
-import RSSI from './settings/RSSI';
+import Rssi from './settings/Rssi';
+import Serial from './settings/Serial';
 import SpeedAir from './settings/SpeedAir';
 import SpeedGround from './settings/SpeedGround';
+import SpeedScale from './settings/SpeedScale';
+import Switching from './settings/Switching';
+import Throttle from './settings/Throttle';
 import Time from './settings/Time';
 import TotalTrip from './settings/TotalTrip';
 import Video from './settings/Video';
+import Wind from './settings/Wind';
 import WPDistance from './settings/WPDistance';
 
 export default {
   AbsoluteAltitude,
+  Alarms,
+  AltitudeScale,
   ArmState,
+  Attitude3d,
+  AttitudeMp,
   BatteryConsumed,
   BatteryCurrent,
   BatteryRemaining,
   BatteryVoltage,
+  Compass,
+  ClimbRate,
   FlightMode,
-  GPS2HDOP,
-  GPS2Latitude,
-  GPS2Longitude,
-  GPS2Status,
-  GPSHDOP,
-  GPSLatitude,
-  GPSLongitude,
-  GPSStatus,
+  Gps2Hdop,
+  Gps2Latitude,
+  Gps2Longitude,
+  Gps2Status,
+  GpsHdop,
+  GpsLatitude,
+  GpsLongitude,
+  GpsStatus,
   HomeDistance,
+  Map,
+  Radar,
   RelativeAltitude,
-  RSSI,
+  Rssi,
+  Serial,
   SpeedAir,
+  SpeedScale,
+  Switching,
   SpeedGround,
+  Throttle,
   Time,
   TotalTrip,
   Video,
+  Wind,
   WPDistance,
 };

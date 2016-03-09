@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
-import BasicSettings from './BasicSettings';
+import SimpleSettings from './SimpleSettings';
 import { bindStateForComponent } from '../../utils/parameters';
 
 class BatteryCurrent extends Component {
   static propTypes = {
-    ...BasicSettings.propTypes
+    ...SimpleSettings.propTypes
   }
 
   render() {
     return (
-      <BasicSettings name="battery current" {...this.props}/>
+      <SimpleSettings name="battery current" {...this.props}/>
     );
   }
 }

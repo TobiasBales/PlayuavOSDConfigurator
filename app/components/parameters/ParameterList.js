@@ -4,7 +4,7 @@ import Column from '../Column';
 
 export default class ParamterList extends Component {
   static propTypes = {
-    children: PropTypes.arrayOf(PropTypes.element),
+    children: PropTypes.node,
     name: PropTypes.string.isRequired
   }
 

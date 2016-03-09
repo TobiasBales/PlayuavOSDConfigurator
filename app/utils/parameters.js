@@ -11,8 +11,20 @@ function mapStateToProps(parameterName, state) {
 
 function mapDispatchToProps(parameterName, dispatch) {
   return {
-    setEnabled: (enabled) => {
-      dispatch(ParameterActions.setEnabled(parameterName, enabled));
+    setAlarmEnabled: (alarm, enabled) => {
+      dispatch(ParameterActions.setAlarmEnabled(parameterName, alarm, enabled));
+    },
+    setAlarmValue: (alarm, value) => {
+      dispatch(ParameterActions.setAlarmValue(parameterName, alarm, value));
+    },
+    setBaudRate: (baudRate) => {
+      dispatch(ParameterActions.setBaudRate(parameterName, baudRate));
+    },
+    setChannel: (key, channel) => {
+      dispatch(ParameterActions.setChannel(parameterName, key, channel));
+    },
+    setFcType: (fcType) => {
+      dispatch(ParameterActions.setFcType(parameterName, fcType));
     },
     setFontSize: (fontSize) => {
       dispatch(ParameterActions.setFontSize(parameterName, fontSize));
@@ -20,23 +32,59 @@ function mapDispatchToProps(parameterName, dispatch) {
     setHAlignment: (hAlignment) => {
       dispatch(ParameterActions.setHAlignment(parameterName, hAlignment));
     },
+    setMax: (max) => {
+      dispatch(ParameterActions.setMax(parameterName, max));
+    },
+    setMaxPanels: (maxPanels) => {
+      dispatch(ParameterActions.setMaxPanels(parameterName, parseInt(maxPanels, 10)));
+    },
+    setMin: (min) => {
+      dispatch(ParameterActions.setMin(parameterName, min));
+    },
     setOffset: (x, y) => {
       dispatch(ParameterActions.setOffset(parameterName, x, y));
+    },
+    setParamsFromEEPROM: (eepromData) => {
+      dispatch(ParameterActions.setParamsFromEEPROM(eepromData));
     },
     setPosition: (x, y) => {
       dispatch(ParameterActions.setPosition(parameterName, x, y));
     },
-    setVisibleOn: (visibleOn) => {
-      dispatch(ParameterActions.setVisibleOn(parameterName, visibleOn));
+    setRadius: (key, radius) => {
+      dispatch(ParameterActions.setRadius(parameterName, key, radius));
     },
-    setVideoMode: (videoMode) => {
-      dispatch(ParameterActions.setVideoMode(parameterName, videoMode));
+    setRaw: (raw) => {
+      dispatch(ParameterActions.setRaw(parameterName, raw));
+    },
+    setScale: (scale) => {
+      dispatch(ParameterActions.setScale(parameterName, scale));
+    },
+    setScaleAlignment: (scaleAlignment) => {
+      dispatch(ParameterActions.setScaleAlignment(parameterName, scaleAlignment));
+    },
+    setScaleEnabled: (scaleEnabled) => {
+      dispatch(ParameterActions.setScaleEnabled(parameterName, scaleEnabled));
+    },
+    setScaleType: (scaleType) => {
+      dispatch(ParameterActions.setScaleType(parameterName, scaleType));
+    },
+    setType: (typeValue) => {
+      dispatch(ParameterActions.setType(parameterName, typeValue));
     },
     setUnits: (units) => {
       dispatch(ParameterActions.setUnits(parameterName, units));
     },
-    setParamsFromEEPROM: (eepromData) => {
-      dispatch(ParameterActions.setParamsFromEEPROM(eepromData));
+    setVAlignment: (vAlignment) => {
+      dispatch(ParameterActions.setVAlignment(parameterName, vAlignment));
+    },
+    setValue: (key, value) => {
+      dispatch(ParameterActions.setValue(parameterName, key, value));
+    },
+    setVideoMode: (videoMode) => {
+      dispatch(ParameterActions.setVideoMode(parameterName, videoMode));
+    },
+    setVisibleOn: (visibleOn) => {
+      dispatch(ParameterActions.setVisibleOn(parameterName, visibleOn));
     },
   };
 }

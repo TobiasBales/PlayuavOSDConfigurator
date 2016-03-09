@@ -3,16 +3,16 @@ import React, { Component } from 'react';
 import SimpleSettings from './SimpleSettings';
 import { bindStateForComponent } from '../../utils/parameters';
 
-class FlightMode extends Component {
+class GpsHdop extends Component {
   static propTypes = {
     ...SimpleSettings.propTypes
   }
 
   render() {
     return (
-      <SimpleSettings name="flight mode" {...this.props}/>
-    );
+      <SimpleSettings name="gps hdop" {...this.props}/>
+     );
   }
 }
 
-export default bindStateForComponent('flightMode', FlightMode);
+export default bindStateForComponent('gpsHdop', GpsHdop);
