@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
+import Immutable from 'immutable';
 import * as ParameterActions from '../actions/parameters';
-
 
 function mapStateToProps(parameterName, state) {
   return {
+    state: Immutable.fromJS(state.parameters),
     parameters: state.parameters.get(parameterName),
     numberOfPanels: state.parameters.get('video').get('maxPanels'),
   };

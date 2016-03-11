@@ -6,13 +6,16 @@ import React, { Component, PropTypes } from 'react';
 import ipc from 'ipc';
 import { bindStateForComponent } from '../utils/parameters';
 import Label from '../components/Label';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import eeprom from '../utils/eeprom';
 
 class Sidebar extends Component {
   static propTypes = {
-    visible: PropTypes.bool.isRequired,
-    showInfo: PropTypes.func.isRequired,
-    showError: PropTypes.func.isRequired,
     setParamsFromEEPROM: PropTypes.func.isRequired,
+    showError: PropTypes.func.isRequired,
+    showInfo: PropTypes.func.isRequired,
+    state: ImmutablePropTypes.map,
+    visible: PropTypes.bool.isRequired,
   }
 
   constructor(props) {
@@ -21,6 +24,7 @@ class Sidebar extends Component {
     ipc.on('connected', this._onConnected);
     ipc.on('disconnected', this._onDisconnted);
     ipc.on('osd-config', this._onOSDConfigReceived);
+    ipc.on('osd-config-written', this._onOSDConfigWritten);
     ipc.on('error', this._onError);
     ipc.send('get-serial-ports');
   }
@@ -64,6 +68,11 @@ class Sidebar extends Component {
     this.props.showInfo('finished reading osd config');
   }
 
+  _onOSDConfigWritten = () => {
+    this.setState({ ...this.state, readingOSD: false, writingOSD: false });
+    this.props.showInfo('finished writing osd config');
+  }
+
   _onSerialPortChanged = (serialPort) => {
     this.setState({ ...this.state, serialPort });
   }
@@ -79,8 +88,15 @@ class Sidebar extends Component {
   }
 
   _readFromOSD = () => {
+    this.props.showInfo('reading osd config ...');
     this.setState({ ...this.state, readingOSD: true });
     ipc.send('read-osd');
+  }
+
+  _writeToOSD = () => {
+    this.props.showInfo('writing osd config ...');
+    this.setState({ ...this.state, writingOSD: true });
+    ipc.send('write-osd', eeprom.fromParameters(this.props.state));
   }
 
   _renderConnectButton() {
@@ -98,6 +114,15 @@ class Sidebar extends Component {
     const label = readingOSD ? 'reading from osd ...' : 'read from osd';
     return (
       <Button label={label} onClick={this._readFromOSD} disabled={disabled} raised/>
+    );
+  }
+
+  _renderWriteOSDButton() {
+    const { connected, readingOSD, writingOSD } = this.state;
+    const disabled = !connected || readingOSD || writingOSD;
+    const label = writingOSD ? 'writing to osd ...' : 'write to osd';
+    return (
+      <Button label={label} onClick={this._writeToOSD} disabled={disabled} raised/>
     );
   }
 
@@ -149,7 +174,7 @@ class Sidebar extends Component {
           {serialPortSelector}
           {connectButton}
           {this._renderReadOSDButton()}
-          <Button label="write to osd" onClick={this._writeToOSD} disabled raised/>
+          {this._renderWriteOSDButton()}
         </Navigation>
       </Drawer>
     );

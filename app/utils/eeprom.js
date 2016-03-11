@@ -340,10 +340,18 @@ export function toParameters(eepromData) {
 }
 
 export function fromParameters(parameters) {
-  return eepromMapping.map((mapping) => {
+  const eepromData = eepromMapping.map((mapping) => {
     const converter = mapping.convertFromParameters ? mapping.convertFromParameters : (x) => x;
     return converter(parameters.getIn(mapping.path));
   });
+
+  // the eeprom is expected to be 1024bytes long, fill with zeros
+  // keep in mind we are storing uint16 here so 2 bytes per item
+  for (let i = eepromData.length; i < 512; i++) {
+    eepromData.push(0);
+  }
+
+  return eepromData;
 }
 
 export default {

@@ -291,9 +291,15 @@ app.on('ready', function onReady() {
       });
     });
 
-    // ipc.on('write-osd', function onWriteOSD(e, parameter) {
-    //   console.log('writing osd', parameter);
-    //   setTimeout(function () { e.sender.send('osd-config-written'); }, 1000);
-    // });
+    ipc.on('write-osd', function onWriteOSD(e, parameters) {
+      osdInterface.setParams(parameters, function onParameters(err) {
+        if (err) {
+          e.sender.send('error', err);
+          osdInterface.close();
+          return;
+        }
+        e.sender.send('osd-config-written');
+      });
+    });
   }
 });

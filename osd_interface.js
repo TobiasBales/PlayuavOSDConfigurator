@@ -22,6 +22,9 @@ const code = {
   READ_MULTI_MAX: 60,
 };
 
+const VERSION = 1;
+const FIRMWARE_VERSION = 10;
+
 class OSDInterface {
   constructor(serialPort, onOpen, onClose) {
     this.serialPort = new SerialPort.SerialPort(serialPort, { baudrate: 115200 });
@@ -36,18 +39,45 @@ class OSDInterface {
     this.serialPort.on('close', this._onClose.bind(this));
   }
 
-  sync() {
+  sync(callback) {
     this._flush();
-    this._write([code.GET_SYNC, code.EOC]);
+    this._write([code.GET_SYNC, code.EOC], function writeCallback(writeErr) {
+      if (callback && writeErr) {
+        callback(writeErr);
+      }
+      this._readSyncOk(0, function readCallback(err) {
+        if (callback) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          callback(null);
+        }
+      }.bind(this));
+    }.bind(this));
   }
 
   close() {
     this.serialPort.close();
   }
 
-  getVersion() {
+  getVersion(callback) {
     this._flush();
-    this._write([code.GET_DEVICE, code.INFO_OSD_REV, code.EOC]);
+    this._write([code.GET_DEVICE, code.INFO_OSD_REV, code.EOC], function writeCallback(writeErr) {
+      if (writeErr) {
+        callback(writeErr);
+        return;
+      }
+
+      this._readSyncOk(1, function versionCallback(err, data) {
+        let version = null;
+        if (data) {
+          version = data.readUInt8(0);
+        }
+        callback(err, version);
+      }.bind(this));
+    }.bind(this));
   }
 
   getParams(callback) {
@@ -70,8 +100,106 @@ class OSDInterface {
     }.bind(this));
   }
 
-  _write(data) {
-    this.serialPort.write(data);
+  setParams(data, callback) {
+    this.sync(function syncCallback(err) {
+      if (err) {
+        callback(err);
+        return;
+      }
+      this._flush();
+
+      this.getVersion(function infoCallback(infoErr, version) {
+        if (infoErr) {
+          callback(infoErr, null);
+          return;
+        }
+
+        if (version !== VERSION) {
+          callback('Unsupported version board - board: ' + version + ' supported: ' + VERSION, null);
+          return;
+        }
+        this._flush();
+
+        this._write([code.START_TRANSFER, code.EOC], function startTransferCallback(startTransferErr) {
+          if (startTransferErr) {
+            callback(startTransferErr);
+            return;
+          }
+
+          this._readSyncOk(0, function syncOk(syncOkErr) {
+            if (syncOkErr) {
+              callback(syncOkErr);
+              return;
+            }
+
+            function sendEndTransfer(endTransferErr) {
+              if (endTransferErr) {
+                callback(endTransferErr);
+                return;
+              }
+
+              this._read(2, function c(syncErr, syncData) {
+                if (syncErr) {
+                  callback(syncErr);
+                }
+                if (!this._syncOk(syncData, 0)) {
+                  callback('Sync lost while writing parameters, please try again');
+                  return;
+                }
+                this._flush();
+
+                this._write([code.SAVE_TO_EEPROM, code.EOC], function saveToEeprom(eepromErr) {
+                  if (eepromErr) {
+                    callback(eepromErr);
+                    return;
+                  }
+                  this._readSyncOk(0, callback);
+                }.bind(this));
+                callback();
+              }.bind(this));
+            }
+
+            function sendParamsChunkCallback(offset, chunkErr) {
+              if (chunkErr) {
+                callback(chunkErr);
+                return;
+              }
+
+              if (offset > data.length) {
+                this._flush();
+                this._write([code.END_TRANSFER, code.EOC], sendEndTransfer.bind(this));
+                return;
+              }
+
+              const endOffset = offset + code.PROG_MULTI_MAX / 2;
+              const dataChunk = data.slice(offset, endOffset);
+              this._setParamsChunk(dataChunk, sendParamsChunkCallback.bind(this, endOffset));
+            }
+            const dataChunk = data.slice(0, code.PROG_MULTI_MAX / 2);
+            this._setParamsChunk(dataChunk, sendParamsChunkCallback.bind(this, code.PROG_MULTI_MAX / 2));
+          }.bind(this));
+        }.bind(this));
+      }.bind(this));
+    }.bind(this));
+  }
+
+  _setParamsChunk(data, callback) {
+    const buffer = new Buffer((data.length * 2) + 3);
+    buffer.writeUInt8(code.SET_PARAMS, 0);
+    buffer.writeUInt8(data.length * 2, 1);
+    data.forEach(function each(byte, index) {
+      buffer.writeUInt16LE(byte, (index * 2) + 2);
+    });
+    buffer.writeUInt8(code.EOC, buffer.length - 1);
+
+    this._flush();
+    this._write(buffer, function writeCallback(err) {
+      if (err) {
+        callback(err);
+        return;
+      }
+      this._readSyncOk(0, callback);
+    }.bind(this));
   }
 
   _flush() {
@@ -103,7 +231,7 @@ class OSDInterface {
       }
 
       if (count >= 100) {
-        callback('waited to long (100ms) to read ' + bytes + 'bytes', null)
+        callback('waited to long (100ms) to read ' + bytes + 'bytes', null);
       }
 
       count += 1;
@@ -113,8 +241,44 @@ class OSDInterface {
     retry();
   }
 
+  _write(data, callback) {
+    this.serialPort.write(data, function writeCallback(writeErr) {
+      if (writeErr) {
+        if (callback) {
+          callback(writeErr);
+        }
+        return;
+      }
+      this.serialPort.drain(function drainCallback(drainErr) {
+        if (drainErr) {
+          if (callback) {
+            callback(drainErr);
+          }
+          return;
+        }
+        if (callback) {
+          callback(null);
+        }
+      }.bind(this));
+    }.bind(this));
+  }
+
   _syncOk(buffer, offset) {
     return buffer[offset] === code.INSYNC && buffer[offset + 1] === code.OK;
+  }
+
+  _readSyncOk(offset, callback) {
+    this._read(offset + 2, function readCallback(err, data) {
+      if (!this._syncOk(data, offset)) {
+        callback('Sync lost while reading parameters, please try again');
+        return;
+      }
+      if (err) {
+        callback(err, null);
+        return;
+      }
+      callback(err, data.slice(0, data.length - 2));
+    }.bind(this));
   }
 
   _onData(data) {
