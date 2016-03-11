@@ -14,8 +14,8 @@ export default class ParametersModule extends Component {
     return (
       <Tabs index={this.state.index} onChange={this._onChange}>
         <Tab label="General">
-          <Settings.Video/>
           <Settings.Alarms/>
+          <Settings.Video/>
           <Settings.Switching/>
           <Settings.Serial/>
         </Tab>
@@ -25,30 +25,32 @@ export default class ParametersModule extends Component {
           <Settings.BatteryConsumed/>
           <Settings.BatteryRemaining/>
         </Tab>
-        <Tab label="Orientation">
+        <Tab label="position">
           <Settings.AbsoluteAltitude/>
           <Settings.RelativeAltitude/>
           <Settings.HomeDistance/>
+          <Settings.AltitudeScale/>
+          <Settings.Radar/>
+          <Settings.Map/>
+          <Settings.Compass/>
+        </Tab>
+        <Tab label="avionics">
           <Settings.SpeedAir/>
           <Settings.SpeedGround/>
           <Settings.SpeedScale/>
           <Settings.TotalTrip/>
-          <Settings.AltitudeScale/>
           <Settings.AttitudeMp/>
           <Settings.Attitude3d/>
-          <Settings.Wind/>
           <Settings.Throttle/>
           <Settings.ClimbRate/>
-          <Settings.Radar/>
-          <Settings.Compass/>
-          <Settings.Map/>
+          <Settings.Wind/>
         </Tab>
         <Tab label="Flight controller">
+          <Settings.Time/>
           <Settings.ArmState/>
           <Settings.FlightMode/>
-          <Settings.Time/>
-          <Settings.Rssi/>
           <Settings.WPDistance/>
+          <Settings.Rssi/>
         </Tab>
         <Tab label="Gps">
           <Settings.GpsStatus/>
