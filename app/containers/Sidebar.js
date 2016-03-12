@@ -99,6 +99,11 @@ class Sidebar extends Component {
     ipc.send('write-osd', eeprom.fromParameters(this.props.state));
   }
 
+  _loadDefaults = () => {
+    this.props.setParamsFromEEPROM(eeprom.defaultEEPROM);
+    this.props.showInfo('loaded default osd config');
+  }
+
   _renderConnectButton() {
     const buttonLabel = this.state.connecting ? 'connecting ...' : 'connect';
     const buttonClickHandler = this.state.connecting ? this._disconnect : this._connect;
@@ -123,6 +128,14 @@ class Sidebar extends Component {
     const label = writingOSD ? 'writing to osd ...' : 'write to osd';
     return (
       <Button label={label} onClick={this._writeToOSD} disabled={disabled} raised/>
+    );
+  }
+
+  _renderLoadDefaultButton() {
+    const { readingOSD, writingOSD } = this.state;
+    const disabled = readingOSD || writingOSD;
+    return (
+      <Button label="load defaults" onClick={this._loadDefaults} disabled={disabled} raised/>
     );
   }
 
@@ -175,6 +188,7 @@ class Sidebar extends Component {
           {connectButton}
           {this._renderReadOSDButton()}
           {this._renderWriteOSDButton()}
+          {this._renderLoadDefaultButton()}
         </Navigation>
       </Drawer>
     );
