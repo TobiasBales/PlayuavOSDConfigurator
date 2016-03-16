@@ -1,6 +1,7 @@
+/* eslint strict: 0 */
 'use strict';
 
-const SerialPort = require('serialport-electron');
+const SerialPort = require('serialport');
 
 const code = {
   NOP: 0x00,
@@ -41,11 +42,11 @@ class OSDInterface {
 
   sync(callback) {
     this._flush();
-    this._write([code.GET_SYNC, code.EOC], function writeCallback(writeErr) {
+    this._write([code.GET_SYNC, code.EOC], (writeErr) => {
       if (callback && writeErr) {
         callback(writeErr);
       }
-      this._readSyncOk(0, function readCallback(err) {
+      this._readSyncOk(0, (err) => {
         if (callback) {
           if (err) {
             callback(err);
@@ -54,36 +55,38 @@ class OSDInterface {
 
           callback(null);
         }
-      }.bind(this));
-    }.bind(this));
+      });
+    });
   }
 
   close() {
-    this.serialPort.close();
+    if (this._open) {
+      this.serialPort.close();
+    }
   }
 
   getVersion(callback) {
     this._flush();
-    this._write([code.GET_DEVICE, code.INFO_OSD_REV, code.EOC], function writeCallback(writeErr) {
+    this._write([code.GET_DEVICE, code.INFO_OSD_REV, code.EOC], (writeErr) => {
       if (writeErr) {
         callback(writeErr);
         return;
       }
 
-      this._readSyncOk(1, function versionCallback(err, data) {
+      this._readSyncOk(1, (err, data) => {
         let version = null;
         if (data) {
           version = data.readUInt8(0);
         }
         callback(err, version);
-      }.bind(this));
-    }.bind(this));
+      });
+    });
   }
 
   getParams(callback) {
     this._flush();
     this._write([code.GET_PARAMS, code.EOC]);
-    this._read(1026, function getParamsCallback(err, buffer) {
+    this._read(1026, (err, buffer) => {
       if (err) {
         callback(err, null);
         return;
@@ -97,48 +100,48 @@ class OSDInterface {
       }
 
       callback(null, result);
-    }.bind(this));
+    });
   }
 
   setParams(data, callback) {
-    this.sync(function syncCallback(err) {
+    this.sync((err) => {
       if (err) {
         callback(err);
         return;
       }
       this._flush();
 
-      this.getVersion(function infoCallback(infoErr, version) {
+      this.getVersion((infoErr, version) => {
         if (infoErr) {
           callback(infoErr, null);
           return;
         }
 
         if (version !== VERSION) {
-          callback('Unsupported version board - board: ' + version + ' supported: ' + VERSION, null);
+          callback(`Unsupported version board - board: ${version} supported: ${VERSION}`);
           return;
         }
         this._flush();
 
-        this._write([code.START_TRANSFER, code.EOC], function startTransferCallback(startTransferErr) {
+        this._write([code.START_TRANSFER, code.EOC], (startTransferErr) => {
           if (startTransferErr) {
             callback(startTransferErr);
             return;
           }
 
-          this._readSyncOk(0, function syncOk(syncOkErr) {
+          this._readSyncOk(0, (syncOkErr) => {
             if (syncOkErr) {
               callback(syncOkErr);
               return;
             }
 
-            function sendEndTransfer(endTransferErr) {
+            const sendEndTransfer = (endTransferErr) => {
               if (endTransferErr) {
                 callback(endTransferErr);
                 return;
               }
 
-              this._read(2, function c(syncErr, syncData) {
+              this._read(2, (syncErr, syncData) => {
                 if (syncErr) {
                   callback(syncErr);
                 }
@@ -148,18 +151,18 @@ class OSDInterface {
                 }
                 this._flush();
 
-                this._write([code.SAVE_TO_EEPROM, code.EOC], function saveToEeprom(eepromErr) {
+                this._write([code.SAVE_TO_EEPROM, code.EOC], (eepromErr) => {
                   if (eepromErr) {
                     callback(eepromErr);
                     return;
                   }
                   this._readSyncOk(0, callback);
-                }.bind(this));
+                });
                 callback();
-              }.bind(this));
-            }
+              });
+            };
 
-            function sendParamsChunkCallback(offset, chunkErr) {
+            const sendParamsChunkCallback = (offset, chunkErr) => {
               if (chunkErr) {
                 callback(chunkErr);
                 return;
@@ -174,20 +177,22 @@ class OSDInterface {
               const endOffset = offset + code.PROG_MULTI_MAX / 2;
               const dataChunk = data.slice(offset, endOffset);
               this._setParamsChunk(dataChunk, sendParamsChunkCallback.bind(this, endOffset));
-            }
-            const dataChunk = data.slice(0, code.PROG_MULTI_MAX / 2);
-            this._setParamsChunk(dataChunk, sendParamsChunkCallback.bind(this, code.PROG_MULTI_MAX / 2));
-          }.bind(this));
-        }.bind(this));
-      }.bind(this));
-    }.bind(this));
+            };
+
+            const endOffset = code.PROG_MULTI_MAX / 2;
+            const dataChunk = data.slice(0, endOffset);
+            this._setParamsChunk(dataChunk, sendParamsChunkCallback.bind(this, endOffset));
+          });
+        });
+      });
+    });
   }
 
   _setParamsChunk(data, callback) {
     const buffer = new Buffer((data.length * 2) + 3);
     buffer.writeUInt8(code.SET_PARAMS, 0);
     buffer.writeUInt8(data.length * 2, 1);
-    data.forEach(function each(byte, index) {
+    data.forEach((byte, index) => {
       buffer.writeUInt16LE(byte, (index * 2) + 2);
     });
     buffer.writeUInt8(code.EOC, buffer.length - 1);
@@ -199,7 +204,7 @@ class OSDInterface {
         return;
       }
       this._readSyncOk(0, callback);
-    }.bind(this));
+    });
   }
 
   _flush() {
@@ -231,7 +236,7 @@ class OSDInterface {
       }
 
       if (count >= 100) {
-        callback('waited to long (100ms) to read ' + bytes + 'bytes', null);
+        callback(`waited to long (100ms) to read ${bytes} bytes`, null);
       }
 
       count += 1;
@@ -242,14 +247,14 @@ class OSDInterface {
   }
 
   _write(data, callback) {
-    this.serialPort.write(data, function writeCallback(writeErr) {
+    this.serialPort.write(data, (writeErr) => {
       if (writeErr) {
         if (callback) {
           callback(writeErr);
         }
         return;
       }
-      this.serialPort.drain(function drainCallback(drainErr) {
+      this.serialPort.drain((drainErr) => {
         if (drainErr) {
           if (callback) {
             callback(drainErr);
@@ -259,8 +264,8 @@ class OSDInterface {
         if (callback) {
           callback(null);
         }
-      }.bind(this));
-    }.bind(this));
+      });
+    });
   }
 
   _syncOk(buffer, offset) {
@@ -268,7 +273,7 @@ class OSDInterface {
   }
 
   _readSyncOk(offset, callback) {
-    this._read(offset + 2, function readCallback(err, data) {
+    this._read(offset + 2, (err, data) => {
       if (!this._syncOk(data, offset)) {
         callback('Sync lost while reading parameters, please try again');
         return;
@@ -278,7 +283,7 @@ class OSDInterface {
         return;
       }
       callback(err, data.slice(0, data.length - 2));
-    }.bind(this));
+    });
   }
 
   _onData(data) {

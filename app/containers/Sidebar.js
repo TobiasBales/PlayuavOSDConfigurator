@@ -1,13 +1,13 @@
 import Button from 'react-toolbox/lib/button';
-import Drawer from 'react-toolbox/lib/drawer';
 import Dropdown from 'react-toolbox/lib/dropdown';
 import Navigation from 'react-toolbox/lib/navigation';
 import React, { Component, PropTypes } from 'react';
-import ipc from 'ipc';
+import { ipcRenderer as ipc } from 'electron';
 import { bindStateForComponent } from '../utils/parameters';
 import Label from '../components/Label';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import eeprom from '../utils/eeprom';
+import Column from '../components/Column';
 
 class Sidebar extends Component {
   static propTypes = {
@@ -15,7 +15,6 @@ class Sidebar extends Component {
     showError: PropTypes.func.isRequired,
     showInfo: PropTypes.func.isRequired,
     state: ImmutablePropTypes.map,
-    visible: PropTypes.bool.isRequired,
   }
 
   constructor(props) {
@@ -42,7 +41,7 @@ class Sidebar extends Component {
     this.props.showError(error);
   }
 
-  _onSerialPortsReceived = (serialPorts) => {
+  _onSerialPortsReceived = (_, serialPorts) => {
     let serialPort = this.state.serialPort;
     if (serialPorts.length === 0) {
       serialPort = null;
@@ -58,11 +57,17 @@ class Sidebar extends Component {
   }
 
   _onDisconnted = () => {
-    this.setState({ ...this.state, connected: false, connecting: false, readingOSD: false, writingOSD: false });
+    this.setState({
+      ...this.state,
+      connected: false,
+      connecting: false,
+      readingOSD: false,
+      writingOSD: false
+    });
     this.props.showInfo('disconnected');
   }
 
-  _onOSDConfigReceived = (eepromData) => {
+  _onOSDConfigReceived = (_, eepromData) => {
     this.setState({ ...this.state, readingOSD: false, writingOSD: false });
     this.props.setParamsFromEEPROM(eepromData);
     this.props.showInfo('finished reading osd config');
@@ -109,7 +114,13 @@ class Sidebar extends Component {
     const buttonClickHandler = this.state.connecting ? this._disconnect : this._connect;
     const primary = !this.state.connecting;
     return (
-      <Button label={buttonLabel} onClick={buttonClickHandler} primary={primary} raised/>
+      <Button
+        label={buttonLabel}
+        onClick={buttonClickHandler}
+        primary={primary}
+        raised
+        style={{ margin: '2rem 0.5rem' }}
+      />
     );
   }
 
@@ -118,7 +129,7 @@ class Sidebar extends Component {
     const disabled = !connected || readingOSD || writingOSD;
     const label = readingOSD ? 'reading from osd ...' : 'read from osd';
     return (
-      <Button label={label} onClick={this._readFromOSD} disabled={disabled} raised/>
+      <Button label={label} onClick={this._readFromOSD} disabled={disabled} raised />
     );
   }
 
@@ -127,7 +138,7 @@ class Sidebar extends Component {
     const disabled = !connected || readingOSD || writingOSD;
     const label = writingOSD ? 'writing to osd ...' : 'write to osd';
     return (
-      <Button label={label} onClick={this._writeToOSD} disabled={disabled} raised/>
+      <Button label={label} onClick={this._writeToOSD} disabled={disabled} raised />
     );
   }
 
@@ -135,13 +146,19 @@ class Sidebar extends Component {
     const { readingOSD, writingOSD } = this.state;
     const disabled = readingOSD || writingOSD;
     return (
-      <Button label="load defaults" onClick={this._loadDefaults} disabled={disabled} raised/>
+      <Button label="load defaults" onClick={this._loadDefaults} disabled={disabled} raised />
     );
   }
 
   _renderDisconnectButton() {
     return (
-      <Button label="disconnect" onClick={this._disconnect} primary raised/>
+      <Button
+        label="disconnect"
+        onClick={this._disconnect}
+        primary
+        raised
+        style={{ margin: '2rem 0.5rem' }}
+      />
     );
   }
 
@@ -164,7 +181,7 @@ class Sidebar extends Component {
   _renderNoSerialPorts() {
     return (
       <div>
-        <Label text="serial port"/>
+        <Label text="serial port" />
         <div>No serial ports found</div>
       </div>
     );
@@ -176,21 +193,28 @@ class Sidebar extends Component {
 
     if (this.state.serialPorts.length) {
       serialPortSelector = this._renderSerialPortDropdown();
-      connectButton = this.state.connected ? this._renderDisconnectButton() : this._renderConnectButton();
+      connectButton = this.state.connected ?
+        this._renderDisconnectButton() : this._renderConnectButton();
     } else {
       serialPortSelector = this._renderNoSerialPorts();
     }
 
     return (
-      <Drawer active={this.props.visible} {...this.props}>
-        <Navigation type="vertical">
-          {serialPortSelector}
-          {connectButton}
-          {this._renderReadOSDButton()}
+      <div>
+        <Navigation type="horizontal">
+          <Column width={35}>
+            {connectButton}
+          </Column>
+          <Column width={65}>
+            {serialPortSelector}
+          </Column>
           {this._renderWriteOSDButton()}
+          {this._renderReadOSDButton()}
+          <br />
+          <br />
           {this._renderLoadDefaultButton()}
         </Navigation>
-      </Drawer>
+      </div>
     );
   }
 }

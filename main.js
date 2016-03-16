@@ -3,13 +3,14 @@
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
-const app = require('app');
-const BrowserWindow = require('browser-window');
-const Menu = require('menu');
-const crashReporter = require('crash-reporter');
-const shell = require('shell');
-const SerialPort = require('serialport-electron');
-const ipc = require('ipc');
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu;
+const crashReporter = electron.crashReporter;
+const shell = electron.shell;
+const SerialPort = require('serialport');
+const ipc = electron.ipcMain;
 const chokidar = require('chokidar');
 const OSDInterface = require('./osd_interface');
 
@@ -22,7 +23,7 @@ let osdInterface = null;
 crashReporter.start();
 
 if (process.env.NODE_ENV === 'development') {
-  require('./electron-debug')();
+  require('electron-debug')();
 }
 
 
@@ -34,7 +35,7 @@ app.on('window-all-closed', function onAllClosed() {
 app.on('ready', function onReady() {
   mainWindow = new BrowserWindow({ width: 1024, height: 728 });
 
-  mainWindow.loadUrl(`file://${__dirname}/app/app.html`);
+  mainWindow.loadURL(`file://${__dirname}/app/app.html`);
 
   mainWindow.on('closed', function onClosed() {
     mainWindow = null;

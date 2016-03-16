@@ -8,6 +8,8 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import configureStore from './store/configureStore';
 import './app.global.css';
 import 'react-toolbox/lib/commons.scss';
+import 'material-design-icons-iconfont/dist/material-design-icons';
+import 'roboto-fontface/css/roboto-fontface';
 import extensiblePolyfill from 'extensible-polyfill';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 

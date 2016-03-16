@@ -49,28 +49,28 @@ class Preview extends Component {
 
     return (
       <div className="preview" style={style}>
-        <img src={background}/>
-        <Previews.AbsoluteAltitude {...absoluteAltitude.toJS()} {...fcStatus} units={units}/>
-        <Previews.ArmState {...armState.toJS()} {...fcStatus}/>
-        <Previews.BatteryConsumed {...batteryConsumed.toJS()} {...fcStatus}/>
-        <Previews.BatteryCurrent {...batteryCurrent.toJS()} {...fcStatus}/>
-        <Previews.BatteryRemaining {...batteryRemaining.toJS()} {...fcStatus}/>
-        <Previews.BatteryVoltage {...batteryVoltage.toJS()} {...fcStatus}/>
-        <Previews.FlightMode {...flightMode.toJS()} {...fcStatus}/>
-        <Previews.GpsHdop {...gps2Hdop.toJS()} {...fcStatus}/>
-        <Previews.GpsHdop {...gpsHdop.toJS()} {...fcStatus}/>
-        <Previews.GpsLatitude {...gps2Latitude.toJS()} {...fcStatus}/>
-        <Previews.GpsLatitude {...gpsLatitude.toJS()} {...fcStatus}/>
-        <Previews.GpsLongitude {...gps2Longitude.toJS()} {...fcStatus}/>
-        <Previews.GpsLongitude {...gpsLongitude.toJS()} {...fcStatus}/>
-        <Previews.GpsStatus {...gps2Status.toJS()} {...fcStatus}/>
-        <Previews.GpsStatus {...gpsStatus.toJS()} {...fcStatus}/>
-        <Previews.RelativeAltitude {...relativeAltitude.toJS()} {...fcStatus} units={units}/>
-        <Previews.Rssi {...rssi.toJS()} {...fcStatus}/>
-        <Previews.SpeedAir {...speedAir.toJS()} {...fcStatus} units={units}/>
-        <Previews.SpeedGround {...speedGround.toJS()} {...fcStatus} units={units}/>
-        <Previews.Time {...time.toJS()} {...fcStatus}/>
-        <Previews.TotalTrip {...totalTrip.toJS()} {...fcStatus} units={units}/>
+        <img src={background} />
+        <Previews.AbsoluteAltitude {...absoluteAltitude.toJS()} {...fcStatus} units={units} />
+        <Previews.ArmState {...armState.toJS()} {...fcStatus} />
+        <Previews.BatteryConsumed {...batteryConsumed.toJS()} {...fcStatus} />
+        <Previews.BatteryCurrent {...batteryCurrent.toJS()} {...fcStatus} />
+        <Previews.BatteryRemaining {...batteryRemaining.toJS()} {...fcStatus} />
+        <Previews.BatteryVoltage {...batteryVoltage.toJS()} {...fcStatus} />
+        <Previews.FlightMode {...flightMode.toJS()} {...fcStatus} />
+        <Previews.GpsHdop {...gps2Hdop.toJS()} {...fcStatus} />
+        <Previews.GpsHdop {...gpsHdop.toJS()} {...fcStatus} />
+        <Previews.GpsLatitude {...gps2Latitude.toJS()} {...fcStatus} />
+        <Previews.GpsLatitude {...gpsLatitude.toJS()} {...fcStatus} />
+        <Previews.GpsLongitude {...gps2Longitude.toJS()} {...fcStatus} />
+        <Previews.GpsLongitude {...gpsLongitude.toJS()} {...fcStatus} />
+        <Previews.GpsStatus {...gps2Status.toJS()} {...fcStatus} />
+        <Previews.GpsStatus {...gpsStatus.toJS()} {...fcStatus} />
+        <Previews.RelativeAltitude {...relativeAltitude.toJS()} {...fcStatus} units={units} />
+        <Previews.Rssi {...rssi.toJS()} {...fcStatus} />
+        <Previews.SpeedAir {...speedAir.toJS()} {...fcStatus} units={units} />
+        <Previews.SpeedGround {...speedGround.toJS()} {...fcStatus} units={units} />
+        <Previews.Time {...time.toJS()} {...fcStatus} />
+        <Previews.TotalTrip {...totalTrip.toJS()} {...fcStatus} units={units} />
       </div>
     );
   }

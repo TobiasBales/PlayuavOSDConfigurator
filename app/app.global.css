@@ -16,7 +16,27 @@ html {
   vertical-align: top;
 }
 
+.relative {
+  position: relative;
+}
+
 .parameters {
+  position: absolute;
+  right: 0px;
+  left: 380px;
+  top: 0;
+}
+
+[data-react-toolbox= "dropdown"] label {
+  white-space: nowrap;
+}
+
+.sidebar {
+  padding: 5px;
+  position: absolute;
+  width: 380px;
+  top: 5px;
+  left: 5px;
 }
 
 .preview {
