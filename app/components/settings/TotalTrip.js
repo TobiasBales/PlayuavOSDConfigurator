@@ -5,7 +5,7 @@ import { bindStateForComponent } from '../../utils/parameters';
 
 class TotalTrip extends Component {
   static propTypes = {
-    ...SimpleSettings.propTypes
+    ...SimpleSettings.propTypes,
   }
 
   render() {

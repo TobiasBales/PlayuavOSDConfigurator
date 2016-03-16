@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'IBM_EGA_8x14';
+    src: url('./fonts/pxplus_ibm_ega8-webfont.woff2');
+}
+
 label, span, div, select, option, input[readonly] {
   -webkit-user-select: none;
 }

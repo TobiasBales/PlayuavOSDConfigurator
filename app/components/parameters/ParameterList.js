@@ -11,8 +11,8 @@ export default class ParamterList extends Component {
   render() {
     const { children, name } = this.props;
     return (
-      <Column width={25} style={{ padding: '5px' }}>
-        <Card>
+      <Column width={33} style={{ padding: '5px' }}>
+        <Card className="parameter-list">
           <CardTitle title={name}/>
           <CardText>
             {children}

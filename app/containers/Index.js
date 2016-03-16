@@ -5,6 +5,9 @@ import AppBar from 'react-toolbox/lib/app_bar';
 import FontIcon from 'react-toolbox/lib/font_icon';
 import Snackbar from 'react-toolbox/lib/snackbar';
 import Sidebar from './Sidebar';
+import Preview from './Preview';
+import Column from '../components/Column';
+
 
 export default class Index extends Component {
   state = {
@@ -47,7 +50,12 @@ export default class Index extends Component {
           showError={this._showErrorMessage}
           onOverlayClick={this._toggleSidebar}
         />
-        <ParametersModule/>
+        <Column width={30}>
+          <Preview/>
+        </Column>
+        <Column width={70}>
+          <ParametersModule/>
+        </Column>
         <Snackbar
           type="cancel"
           label={this.state.infoMessage}
