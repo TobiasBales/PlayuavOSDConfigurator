@@ -198,7 +198,7 @@ class OSDInterface {
     buffer.writeUInt8(code.EOC, buffer.length - 1);
 
     this._flush();
-    this._write(buffer, function writeCallback(err) {
+    this._write(buffer, (err) => {
       if (err) {
         callback(err);
         return;

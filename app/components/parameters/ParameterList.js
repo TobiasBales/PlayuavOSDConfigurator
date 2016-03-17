@@ -13,7 +13,7 @@ export default class ParamterList extends Component {
     return (
       <Column width={50} style={{ padding: '5px' }}>
         <Card className="parameter-list">
-          <CardTitle title={name}/>
+          <CardTitle title={name} />
           <CardText>
             {children}
           </CardText>

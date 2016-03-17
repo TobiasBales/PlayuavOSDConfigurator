@@ -35,13 +35,15 @@ export default class Index extends Component {
         <AppBar>
           PlayUAV OSD Configurator
         </AppBar>
-        <div className="relative">
+        <div className="main">
           <div className="sidebar">
             <Preview />
             <hr />
             <Sidebar showInfo={this._showInfoMessage} showError={this._showErrorMessage} />
           </div>
-          <ParametersModule />
+          <div className="parameters">
+            <ParametersModule />
+          </div>
         </div>
         <Snackbar
           type="cancel"

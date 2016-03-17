@@ -12,7 +12,7 @@ export default class ParametersModule extends Component {
 
   render() {
     return (
-      <Tabs className='parameters' index={this.state.index} onChange={this._onChange}>
+      <Tabs index={this.state.index} onChange={this._onChange}>
         <Tab label="General">
           <Settings.Alarms/>
           <Settings.Video/>

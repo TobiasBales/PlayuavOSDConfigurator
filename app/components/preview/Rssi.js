@@ -31,9 +31,9 @@ export default class Rssi extends StringPreview {
     }
 
     if (fontSize === 0) {
-      content = `${rssi.toFixed(0)}/`;
+      content = `RSSI:${rssi.toFixed(0)}/`;
     } else {
-      content = `${rssi.toFixed(0)}%%`;
+      content = `RSSI:${rssi.toFixed(0)}%%`;
     }
 
     return content;

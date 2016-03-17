@@ -1,18 +1,26 @@
 import eeprom from '../utils/eeprom';
 
 import {
-  ALARM_ENABLED, ALARM_VALUE, BAUD_RATE, CHANNEL, FC_TYPE, FONT_SIZE, H_ALIGNMENT,
-  MAX, MAX_PANELS, MIN, OFFSET, PARAMS_FROM_EEPROM, POSITION, RADIUS, RAW, SCALE,
-  SCALE_ALIGNMENT, SCALE_ENABLED, SCALE_TYPE, TYPE, UNITS, V_ALIGNMENT, VALUE,
-  VIDEO_MODE, VISIBLE_ON,
+  ALARM, ALARM_ENABLED, ALARM_VALUE, BAUD_RATE, CHANNEL, FC_TYPE, FONT_SIZE,
+  H_ALIGNMENT, MAX, MAX_PANELS, MIN, OFFSET, PANEL, PARAMS_FROM_EEPROM,
+  POSITION, RADIUS, RAW, SCALE, SCALE_ALIGNMENT, SCALE_ENABLED, SCALE_TYPE,
+  TYPE, UNITS, V_ALIGNMENT, VALUE, VIDEO_MODE, VISIBLE_ON,
 } from '../actions/parameters';
 
-const initialState = eeprom.toParameters(eeprom.defaultEEPROM);
+function addPreviewState(state) {
+  return state
+    .updateIn(['preview', 'panel'], () => 0)
+    .updateIn(['preview', 'alarm'], () => 0);
+}
+
+const initialState = addPreviewState(eeprom.toParameters(eeprom.defaultEEPROM));
 
 export default function parameters(state = initialState, action) {
   const parameterName = action.parameter;
 
   switch (action.type) {
+    case ALARM:
+      return state.updateIn([parameterName, 'alarm'], () => action.alarm);
     case ALARM_ENABLED:
       return state.updateIn([parameterName, `${action.alarm}Enabled`], () => action.enabled);
     case ALARM_VALUE:
@@ -37,8 +45,10 @@ export default function parameters(state = initialState, action) {
       return state
         .updateIn([parameterName, 'offsetX'], () => action.x)
         .updateIn([parameterName, 'offsetY'], () => action.y);
+    case PANEL:
+      return state.updateIn([parameterName, 'panel'], () => action.panel);
     case PARAMS_FROM_EEPROM:
-      return eeprom.toParameters(action.eepromData);
+      return addPreviewState(eeprom.toParameters(action.eepromData));
     case POSITION:
       return state
         .updateIn([parameterName, 'positionX'], () => action.x)

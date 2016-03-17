@@ -1,7 +1,7 @@
 import Button from 'react-toolbox/lib/button';
 import Dropdown from 'react-toolbox/lib/dropdown';
-import Navigation from 'react-toolbox/lib/navigation';
 import React, { Component, PropTypes } from 'react';
+import { Card, CardText } from 'react-toolbox/lib/card';
 import { ipcRenderer as ipc } from 'electron';
 import { bindStateForComponent } from '../utils/parameters';
 import Label from '../components/Label';
@@ -200,8 +200,8 @@ class Sidebar extends Component {
     }
 
     return (
-      <div>
-        <Navigation type="horizontal">
+      <Card className="connection">
+        <CardText>
           <Column width={35}>
             {connectButton}
           </Column>
@@ -213,8 +213,8 @@ class Sidebar extends Component {
           <br />
           <br />
           {this._renderLoadDefaultButton()}
-        </Navigation>
-      </div>
+        </CardText>
+      </Card>
     );
   }
 }

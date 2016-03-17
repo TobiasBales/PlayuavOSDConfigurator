@@ -36,10 +36,11 @@ export default class StringPreview extends Component {
   draw() {
     const font = fonts.getFont(this.props.fontSize);
     const context = this.refs.canvas.getContext('2d');
+    const content = this.content();
     this.clear(context);
 
-    if (this.props.visibleOn & Math.pow(2, this.props.panel) !== 0) {
-      canvas.drawString(context, this.content(), 0, 0, font);
+    if (content && (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
+      canvas.drawString(context, content, 0, 0, font);
     }
   }
 
@@ -47,7 +48,8 @@ export default class StringPreview extends Component {
     const { hAlignment, positionX, positionY, vAlignment } = this.props;
     const content = this.content();
     const font = fonts.getFont(this.props.fontSize);
-    const position = canvas.calculateStringPosition(content, positionX, positionY, hAlignment, vAlignment, font);
+    const position = canvas.calculateStringPosition(
+      content, positionX, positionY, hAlignment, vAlignment, font);
 
     return (
       <canvas

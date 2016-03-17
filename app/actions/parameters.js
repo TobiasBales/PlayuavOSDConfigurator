@@ -1,3 +1,4 @@
+export const ALARM = 'parameters/alarm';
 export const ALARM_ENABLED = 'parameters/alarm_enabled';
 export const ALARM_VALUE = 'parameters/alarm_value';
 export const BAUD_RATE = 'parameters/baud_rate';
@@ -9,6 +10,7 @@ export const MAX = 'parameters/max';
 export const MAX_PANELS = 'parameters/max_panels';
 export const MIN = 'parameters/min';
 export const OFFSET = 'parameters/offset';
+export const PANEL = 'parameters/panels';
 export const PARAMS_FROM_EEPROM = 'parameters/params_from_eeprom';
 export const POSITION = 'parameters/position';
 export const RADIUS = 'parameters/radius';
@@ -23,6 +25,10 @@ export const V_ALIGNMENT = 'parameters/v_alignment';
 export const VALUE = 'parameters/value';
 export const VIDEO_MODE = 'parameters/video_mode';
 export const VISIBLE_ON = 'parameters/visible_on';
+
+export function setAlarm(parameter, alarm) {
+  return { type: ALARM, parameter, alarm };
+}
 
 export function setAlarmEnabled(parameter, alarm, enabled) {
   return { type: ALARM_ENABLED, parameter, alarm, enabled };
@@ -66,6 +72,10 @@ export function setMin(parameter, min) {
 
 export function setOffset(parameter, x, y) {
   return { type: OFFSET, parameter, x, y };
+}
+
+export function setPanel(parameter, panel) {
+  return { type: PANEL, parameter, panel };
 }
 
 export function setParamsFromEEPROM(eepromData) {

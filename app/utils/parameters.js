@@ -12,6 +12,9 @@ function mapStateToProps(parameterName, state) {
 
 function mapDispatchToProps(parameterName, dispatch) {
   return {
+    setAlarm: (alarm) => {
+      dispatch(ParameterActions.setAlarm(parameterName, alarm));
+    },
     setAlarmEnabled: (alarm, enabled) => {
       dispatch(ParameterActions.setAlarmEnabled(parameterName, alarm, enabled));
     },
@@ -44,6 +47,9 @@ function mapDispatchToProps(parameterName, dispatch) {
     },
     setOffset: (x, y) => {
       dispatch(ParameterActions.setOffset(parameterName, x, y));
+    },
+    setPanel: (panel) => {
+      dispatch(ParameterActions.setPanel(parameterName, panel));
     },
     setParamsFromEEPROM: (eepromData) => {
       dispatch(ParameterActions.setParamsFromEEPROM(eepromData));
@@ -91,5 +97,6 @@ function mapDispatchToProps(parameterName, dispatch) {
 }
 
 export function bindStateForComponent(namespace, component) {
-  return connect(mapStateToProps.bind(null, namespace), mapDispatchToProps.bind(null, namespace))(component);
+  return connect(mapStateToProps.bind(null, namespace),
+    mapDispatchToProps.bind(null, namespace))(component);
 }

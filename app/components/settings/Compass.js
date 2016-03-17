@@ -9,7 +9,7 @@ class Compass extends Component {
   static propTypes = {
     numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
-      positionX: PropTypes.number.isRequired,
+      positionY: PropTypes.number.isRequired,
       visibleOn: PropTypes.number.isRequired,
     }).isRequired,
     setPosition: PropTypes.func.isRequired,
@@ -17,7 +17,7 @@ class Compass extends Component {
   }
 
   _setPosition = (position) => {
-    this.props.setPosition(parseInt(position, 10));
+    this.props.setPosition(null, parseInt(position, 10));
   }
 
   render() {
@@ -26,14 +26,14 @@ class Compass extends Component {
       setVisibleOn,
     } = this.props;
     const {
-      positionX,
+      positionY,
       visibleOn,
     } = this.props.parameters;
 
     return (
       <Parameters.ParameterList name="compass">
         <Column width={50} style={{ 'paddingRight': '5px' }}>
-          <Input type="number" label="position x" value={positionX} onChange={this._setPosition} />
+          <Input type="number" label="position y" value={positionY} onChange={this._setPosition} />
         </Column>
         <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels} />
       </Parameters.ParameterList>

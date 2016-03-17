@@ -23,11 +23,11 @@ export default class ParameterPanels extends Component {
     return (
       <span>
         <div>
-          <Label text="visible on panels"/>
+          <Label text="visible on panels" />
         </div>
         <div>
           {[...Array(numberOfPanels)].map((_, i) =>
-            <span key={i} style={{ display: 'inline-block', 'marginRight': '10px' }}>
+            <span key={i} style={{ display: 'inline-block', marginRight: '10px' }}>
               <Checkbox
                 checked={(visibleOn & Math.pow(2, i)) !== 0}
                 label={i + 1}

@@ -16,15 +16,23 @@ html {
   vertical-align: top;
 }
 
-.relative {
-  position: relative;
+.main {
+  position: absolute;
+  left: 0;
+  top: 64px;
+  right: 0;
+  bottom: 0;
 }
 
 .parameters {
   position: absolute;
   right: 0px;
-  left: 380px;
+  padding: 5px;
+  left: 400px;
   top: 0;
+  display:block;
+  bottom: 0;
+  overflow-y: auto;
 }
 
 [data-react-toolbox= "dropdown"] label {
@@ -34,9 +42,26 @@ html {
 .sidebar {
   padding: 5px;
   position: absolute;
-  width: 380px;
+  width: 400px;
   top: 5px;
   left: 5px;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+.sidebar .panel label {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.sidebar .connection {
+  overflow: visible;
+  margin: 5px 0;
+}
+
+.preview-card {
+  overflow: visible;
+  margin: 5px 0;
 }
 
 .preview {
