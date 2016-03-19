@@ -4,7 +4,6 @@ import StringPreview from './StringPreview';
 export default class Rssi extends StringPreview {
   static propTypes = {
     ...StringPreview.propTypes,
-    fontSize: PropTypes.number.isRequired,
     max: PropTypes.number.isRequired,
     min: PropTypes.number.isRequired,
     raw: PropTypes.number.isRequired,
@@ -13,7 +12,7 @@ export default class Rssi extends StringPreview {
   }
 
   content() {
-    const { fontSize, raw, type } = this.props;
+    const { raw, type } = this.props;
     let { max, min, rssi } = this.props;
     let content = '';
 
@@ -28,14 +27,10 @@ export default class Rssi extends StringPreview {
       }
 
       rssi = Math.max(0, rssi);
-    }
-
-    if (fontSize === 0) {
-      content = `RSSI:${rssi.toFixed(0)}/`;
+      content = `RSSI:${rssi.toFixed(0)}%`;
     } else {
-      content = `RSSI:${rssi.toFixed(0)}%%`;
+      content = `RSSI:${rssi.toFixed(0)}`;
     }
-
     return content;
   }
 }
