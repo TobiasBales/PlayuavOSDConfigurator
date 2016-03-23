@@ -360,11 +360,12 @@ function drawAttitudeSimple(context, width, height, roll, pitch, scale) {
   context.translate(- x, - y);
   const maxPitch = 60;
   const pitchY = pitch > maxPitch ? maxPitch : pitch < - maxPitch ? - maxPitch : pitch;
-  for (let i = 0; i < 4; i++) {
-    const lineOffset = 3 * radius + i * lineLength + i * lineSpacing + lineSpacing;
-    const lineY = y + pitchY;
-    drawLine(context, x - lineOffset, lineY, x - lineOffset - lineLength, lineY, true);
-    drawLine(context, x + lineOffset, lineY, x + lineOffset + lineLength, lineY, true);
+  let i = 0;
+  for (let index = 0; index < 16; index += 4) {
+    const xPos = 3 * radius + i * lineLength + i * lineSpacing + lineSpacing;
+    drawLine(context, x - xPos, y + pitchY, x - xPos - lineLength, y + pitchY, true);
+    drawLine(context, x + xPos, y + pitchY, x + xPos + lineLength, y + pitchY, true);
+    i++;
   }
   context.restore();
 }

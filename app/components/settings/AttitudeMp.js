@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../Parameters';
+import Column from '../Column';
 
 import { bindStateForComponent } from '../../utils/parameters';
 
@@ -10,11 +11,13 @@ class AttitudeMp extends Component {
       positionX: PropTypes.number.isRequired,
       positionY: PropTypes.number.isRequired,
       scale: PropTypes.number.isRequired,
+      type: PropTypes.number.isRequired,
       visibleOn: PropTypes.number.isRequired,
     }).isRequired,
     numberOfPanels: PropTypes.number.isRequired,
     setPosition: PropTypes.func.isRequired,
     setScale: PropTypes.func.isRequired,
+    setType: PropTypes.func.isRequired,
     setVisibleOn: PropTypes.func.isRequired,
   }
 
@@ -29,14 +32,28 @@ class AttitudeMp extends Component {
       positionX,
       positionY,
       scale,
+      type,
       visibleOn,
     } = this.props.parameters;
 
+    const typeOptions = [{ value: 0, label: 'mission planner' }, { value: 1, label: 'simple ' }];
+
     return (
       <Parameters.ParameterList name="attitude mp">
-        <Parameters.Position labelX="position x" labelY="position y" positionX={positionX} positionY={positionY} setPosition={setPosition} />
-        <Parameters.Scale setScale={setScale} scale={scale} />
-        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels} />
+        <Parameters.Position labelX="position x" labelY="position y"
+          positionX={positionX} positionY={positionY} setPosition={setPosition}
+        />
+        <Column width={50}>
+          <Parameters.Scale setScale={setScale} scale={scale} />
+        </Column>
+        <Column width={50}>
+          <Parameters.Select label="type" setValue={this.props.setType}
+            options={typeOptions} value={type}
+          />
+        </Column>
+        <Parameters.VisibleOn visibleOn={visibleOn}
+          setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
+        />
       </Parameters.ParameterList>
     );
   }

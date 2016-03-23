@@ -12,7 +12,7 @@ const pkg = require('./package.json');
 const devDeps = Object.keys(pkg.devDependencies);
 
 const appName = argv.name || argv.n || pkg.productName;
-const shouldUseAsar = argv.asar || argv.a || false;
+const shouldUseAsar = argv.asar || argv.a || true;
 const shouldBuildAll = argv.all || false;
 
 
