@@ -9,6 +9,17 @@ export default class Position extends Component {
     labelX: PropTypes.string.isRequired,
     labelY: PropTypes.string.isRequired,
     setPosition: PropTypes.func.isRequired,
+    xMin: PropTypes.number,
+    xMax: PropTypes.number,
+    yMin: PropTypes.number,
+    yMax: PropTypes.number,
+  }
+
+  static defaultProps = {
+    xMin: 0,
+    xMax: 350,
+    yMin: 0,
+    yMax: 230,
   }
 
   _onChange(axis, position) {
@@ -18,14 +29,18 @@ export default class Position extends Component {
   }
 
   render() {
-    const { labelX, labelY, positionX, positionY } = this.props;
+    const { labelX, labelY, positionX, positionY, xMin, xMax, yMin, yMax } = this.props;
     return (
       <div>
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
-          <Input type="number" label={labelX} value={positionX} onChange={this._onChange.bind(this, 'x')} />
+        <Column width={50} style={{ paddingRight: '5px' }}>
+          <Input type="number" label={labelX} value={positionX} min={xMin} max={xMax}
+            onChange={this._onChange.bind(this, 'x')}
+          />
         </Column>
-        <Column width={50} style={{ 'paddingLeft': '5px' }}>
-          <Input type="number" label={labelY} value={positionY} onChange={this._onChange.bind(this, 'y')} />
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Input type="number" label={labelY} value={positionY} min={yMin} max={yMax}
+            onChange={this._onChange.bind(this, 'y')}
+          />
         </Column>
       </div>
     );

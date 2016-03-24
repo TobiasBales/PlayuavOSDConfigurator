@@ -26,15 +26,17 @@ class Video extends Component {
 
     return (
       <Parameters.ParameterList name="video">
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
+        <Column width={50} style={{ paddingRight: '5px' }}>
           <Parameters.VideoMode videoMode={videoMode} setVideoMode={setVideoMode} />
         </Column>
-        <Column width={50} style={{ 'paddingLeft': '5px', 'paddingRight': '5px' }}>
+        <Column width={50} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
           <Parameters.Units units={units} setUnits={setUnits} />
         </Column>
-        <Parameters.Position labelX="offset x" labelY="offset y" positionX={offsetX} positionY={offsetY} setPosition={setOffset} />
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
-          <Input type="number" label="number of panels" value={maxPanels} onChange={setMaxPanels}/>
+        <Parameters.Position labelX="offset x" labelY="offset y" xMin={-20} xMax={20}
+          yMin={0} yMax={20} positionX={offsetX} positionY={offsetY} setPosition={setOffset}
+        />
+        <Column width={50} style={{ paddingRight: '5px' }}>
+          <Input type="number" label="number of panels" value={maxPanels} onChange={setMaxPanels} />
         </Column>
       </Parameters.ParameterList>
     );

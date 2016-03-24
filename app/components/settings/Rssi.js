@@ -66,17 +66,21 @@ class Rssi extends Component {
 
     return (
       <SimpleSettings name="rssi" {...this.props}>
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
-          <Input type="number" min={minInput} max={maxInput} label="min" value={min} onChange={this._setMin} />
+        <Column width={50} style={{ paddingRight: '5px' }}>
+          <Input type="number" min={minInput} max={maxInput}
+            label="min" value={min} onChange={this._setMin}
+          />
         </Column>
-        <Column width={50} style={{ 'paddingLeft': '5px' }}>
-          <Input type="number" min={minInput} max={maxInput} label="max" value={max} onChange={this._setMax} />
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Input type="number" min={minInput} max={maxInput}
+            label="max" value={max} onChange={this._setMax}
+          />
         </Column>
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
-          <Select label="input type" value={type} options={typeOptions} setValue={this._setType}/>
+        <Column width={50} style={{ paddingRight: '5px' }}>
+          <Select label="input type" value={type} options={typeOptions} setValue={this._setType} />
         </Column>
-        <Column width={50} style={{ 'paddingLeft': '5px' }}>
-          <Select label="display" value={raw} options={rawOptions} setValue={this._setRaw}/>
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Select label="display" value={raw} options={rawOptions} setValue={this._setRaw} />
         </Column>
       </SimpleSettings>
      );
