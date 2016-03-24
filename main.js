@@ -12,8 +12,10 @@ const shell = electron.shell;
 const SerialPort = require('serialport');
 const ipc = electron.ipcMain;
 const chokidar = require('chokidar');
+const dialog = electron.dialog;
 const OSDInterface = require('./app/main/osd_interface');
 const menus = require('./app/main/menu');
+const fs = require('fs');
 
 let mainWindow = null;
 
@@ -109,6 +111,25 @@ app.on('ready', () => {
         return;
       }
       e.sender.send('osd-config-written');
+    });
+  });
+
+  ipc.on('write-file', (e, parameters) => {
+    dialog.showSaveDialog({
+      defaultPath: 'osd_configuration.conf',
+      title: 'save config to file',
+      filters: [{ name: 'config file', extensions: ['conf'] }],
+      properties: ['openFile', 'createDirectory'],
+    }, (filename) => {
+      if (filename) {
+        fs.writeFile(filename, JSON.stringify(parameters), (err) => {
+          if (err) {
+            e.sender.send('error', err);
+            return;
+          }
+          e.sender.send('osd-file-written');
+        });
+      }
     });
   });
 });

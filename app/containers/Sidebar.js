@@ -8,6 +8,7 @@ import Label from '../components/Label';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import eeprom from '../utils/eeprom';
 
+
 class Sidebar extends Component {
   static propTypes = {
     setParamsFromEEPROM: PropTypes.func.isRequired,
@@ -23,6 +24,7 @@ class Sidebar extends Component {
     ipc.on('disconnected', this._onDisconnted);
     ipc.on('osd-config', this._onOSDConfigReceived);
     ipc.on('osd-config-written', this._onOSDConfigWritten);
+    ipc.on('osd-file-written', this._onConfigFileWritten);
     ipc.on('error', this._onError);
     ipc.send('get-serial-ports');
   }
@@ -77,6 +79,10 @@ class Sidebar extends Component {
     this.props.showInfo('finished writing osd config');
   }
 
+  _onConfigFileWritten = () => {
+    this.props.showInfo('wrote configuration to file');
+  }
+
   _onSerialPortChanged = (serialPort) => {
     this.setState({ ...this.state, serialPort });
   }
@@ -101,6 +107,10 @@ class Sidebar extends Component {
     this.props.showInfo('writing osd config ...');
     this.setState({ ...this.state, writingOSD: true });
     ipc.send('write-osd', eeprom.fromParameters(this.props.state));
+  }
+
+  _writeToFile = () => {
+    ipc.send('write-file', eeprom.fromParameters(this.props.state));
   }
 
   _loadDefaults = () => {
@@ -198,6 +208,12 @@ class Sidebar extends Component {
     );
   }
 
+  _renderWriteFileButton() {
+    return (
+      <Button onClick={this._writeToFile} label="save to file" raised />
+    );
+  }
+
   render() {
     let serialPortSelector;
     let connectButton;
@@ -221,6 +237,9 @@ class Sidebar extends Component {
           <br />
           {this._renderWriteOSDButton()}
           {this._renderReadOSDButton()}
+          <br />
+          <br />
+          {this._renderWriteFileButton()}
         </CardText>
       </Card>
     );
