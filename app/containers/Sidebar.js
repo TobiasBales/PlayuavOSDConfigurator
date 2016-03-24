@@ -25,6 +25,7 @@ class Sidebar extends Component {
     ipc.on('osd-config', this._onOSDConfigReceived);
     ipc.on('osd-config-written', this._onOSDConfigWritten);
     ipc.on('osd-file-written', this._onConfigFileWritten);
+    ipc.on('osd-file-read', this._onConfigFileRead);
     ipc.on('error', this._onError);
     ipc.send('get-serial-ports');
   }
@@ -71,16 +72,21 @@ class Sidebar extends Component {
   _onOSDConfigReceived = (_, eepromData) => {
     this.setState({ ...this.state, readingOSD: false, writingOSD: false });
     this.props.setParamsFromEEPROM(eepromData);
-    this.props.showInfo('finished reading osd config');
+    this.props.showInfo('finished reading osd configuration');
   }
 
   _onOSDConfigWritten = () => {
     this.setState({ ...this.state, readingOSD: false, writingOSD: false });
-    this.props.showInfo('finished writing osd config');
+    this.props.showInfo('finished writing osd configuration');
   }
 
   _onConfigFileWritten = () => {
     this.props.showInfo('wrote configuration to file');
+  }
+
+  _onConfigFileRead = (_, eepromData) => {
+    this.props.setParamsFromEEPROM(eepromData);
+    this.props.showInfo('read configuration from file');
   }
 
   _onSerialPortChanged = (serialPort) => {
@@ -98,13 +104,13 @@ class Sidebar extends Component {
   }
 
   _readFromOSD = () => {
-    this.props.showInfo('reading osd config ...');
+    this.props.showInfo('reading osd configuration ...');
     this.setState({ ...this.state, readingOSD: true });
     ipc.send('read-osd');
   }
 
   _writeToOSD = () => {
-    this.props.showInfo('writing osd config ...');
+    this.props.showInfo('writing osd configuration ...');
     this.setState({ ...this.state, writingOSD: true });
     ipc.send('write-osd', eeprom.fromParameters(this.props.state));
   }
@@ -113,9 +119,17 @@ class Sidebar extends Component {
     ipc.send('write-file', eeprom.fromParameters(this.props.state));
   }
 
+  _readFile = () => {
+    ipc.send('read-file');
+  }
+
   _loadDefaults = () => {
     this.props.setParamsFromEEPROM(eeprom.defaultEEPROM);
-    this.props.showInfo('loaded default osd config');
+    this.props.showInfo('loaded default osd configuration');
+  }
+
+  _refreshSerialPorts() {
+    ipc.send('get-serial-ports');
   }
 
   _renderConnectButton() {
@@ -168,10 +182,6 @@ class Sidebar extends Component {
     );
   }
 
-  _refreshSerialPorts() {
-    ipc.send('get-serial-ports');
-  }
-
   _renderDisconnectButton() {
     return (
       <Button
@@ -208,12 +218,6 @@ class Sidebar extends Component {
     );
   }
 
-  _renderWriteFileButton() {
-    return (
-      <Button onClick={this._writeToFile} label="save to file" raised />
-    );
-  }
-
   render() {
     let serialPortSelector;
     let connectButton;
@@ -239,7 +243,8 @@ class Sidebar extends Component {
           {this._renderReadOSDButton()}
           <br />
           <br />
-          {this._renderWriteFileButton()}
+          <Button onClick={this._writeToFile} label="save to file" raised />
+          <Button onClick={this._readFile} label="read from file" raised />
         </CardText>
       </Card>
     );

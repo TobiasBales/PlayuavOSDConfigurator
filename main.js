@@ -114,6 +114,27 @@ app.on('ready', () => {
     });
   });
 
+  ipc.on('read-file', (e) => {
+    dialog.showOpenDialog({
+      defaultPath: 'osd_configuration.conf',
+      title: 'read config from file',
+      filters: [{ name: 'config file', extensions: ['conf'] }],
+      properties: ['openFile'],
+    }, (files) => {
+      if (files && files.length > 0) {
+        const filename = files[0];
+        fs.readFile(filename, (err, data) => {
+          if (err) {
+            e.sender.send('error', err);
+            return;
+          }
+          const parameters = JSON.parse(data);
+          e.sender.send('osd-file-read', parameters);
+        });
+      }
+    });
+  });
+
   ipc.on('write-file', (e, parameters) => {
     dialog.showSaveDialog({
       defaultPath: 'osd_configuration.conf',
