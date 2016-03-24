@@ -84,6 +84,34 @@ html {
 
 .parameters .parameter-list {
   overflow: visible;
+  padding: 5px;
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+}
+
+@media(min-width: 1090px) {
+  .parameters .parameter-list {
+    width: 50%;
+  }
+}
+
+@media(min-width: 1390px) {
+  .parameters .parameter-list {
+    width: 33%;
+  }
+}
+
+@media(min-width: 1690px) {
+  .parameters .parameter-list {
+    width: 25%;
+  }
+}
+
+@media(min-width: 1990px) {
+  .parameters .parameter-list {
+    width: 20%;
+  }
 }
 
 .label {
