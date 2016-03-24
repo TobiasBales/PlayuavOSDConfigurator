@@ -7,7 +7,6 @@ import { bindStateForComponent } from '../utils/parameters';
 import Label from '../components/Label';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import eeprom from '../utils/eeprom';
-import Column from '../components/Column';
 
 class Sidebar extends Component {
   static propTypes = {
@@ -119,7 +118,6 @@ class Sidebar extends Component {
         onClick={buttonClickHandler}
         primary={primary}
         raised
-        style={{ margin: '2rem 0.5rem' }}
       />
     );
   }
@@ -150,6 +148,20 @@ class Sidebar extends Component {
     );
   }
 
+  _renderRefreshButton() {
+    if (process.platform !== 'win32') {
+      return;
+    }
+
+    return (
+      <Button label="refresh" onClick={this._refreshSerialPorts} raised />
+    );
+  }
+
+  _refreshSerialPorts() {
+    ipc.send('get-serial-ports');
+  }
+
   _renderDisconnectButton() {
     return (
       <Button
@@ -157,7 +169,6 @@ class Sidebar extends Component {
         onClick={this._disconnect}
         primary
         raised
-        style={{ margin: '2rem 0.5rem' }}
       />
     );
   }
@@ -202,17 +213,14 @@ class Sidebar extends Component {
     return (
       <Card className="connection">
         <CardText>
-          <Column width={35}>
-            {connectButton}
-          </Column>
-          <Column width={65}>
-            {serialPortSelector}
-          </Column>
+        {serialPortSelector}
+          {connectButton}
+          {this._renderRefreshButton()}
+          {this._renderLoadDefaultButton()}
+          <br />
+          <br />
           {this._renderWriteOSDButton()}
           {this._renderReadOSDButton()}
-          <br />
-          <br />
-          {this._renderLoadDefaultButton()}
         </CardText>
       </Card>
     );
