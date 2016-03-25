@@ -32,7 +32,7 @@ class Preview extends Component {
     const panel = this.props.parameters.get('panel');
     const alarm = this.props.parameters.get('alarm');
     const {
-      absoluteAltitude, alarms, altitudeScale, armState, attitudeMp, batteryConsumed,
+      absoluteAltitude, alarms, altitudeScale, armState, artificialHorizont, batteryConsumed,
       batteryCurrent, batteryRemaining, batteryVoltage, climbRate, compass, flightMode,
       gpsHdop, gpsLatitude, gpsLongitude, gpsStatus, gps2Hdop, gps2Latitude, gps2Longitude,
       gps2Status, homeDistance, radar, relativeAltitude, rssi, speedAir, speedScale,
@@ -115,8 +115,8 @@ class Preview extends Component {
             <Previews.ArmState {...armState.toJS()} {...fcStatus}
               setPosition={setPosition('armState')}
             />
-            <Previews.AttitudeMp {...attitudeMp.toJS()} {...fcStatus}
-              setPosition={setPosition('attitudeMp')}
+            <Previews.ArtificialHorizont {...artificialHorizont.toJS()} {...fcStatus}
+              setPosition={setPosition('artificialHorizont')}
             />
             <Previews.BatteryConsumed {...batteryConsumed.toJS()} {...fcStatus}
               setPosition={setPosition('batteryConsumed')}

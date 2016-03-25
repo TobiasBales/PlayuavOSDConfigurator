@@ -2,14 +2,14 @@ import AbsoluteAltitude from './settings/AbsoluteAltitude';
 import Alarms from './settings/Alarms';
 import AltitudeScale from './settings/AltitudeScale';
 import ArmState from './settings/ArmState';
+import ArtificialHorizont from './settings/ArtificialHorizont';
 import Attitude3d from './settings/Attitude3d';
-import AttitudeMp from './settings/AttitudeMp';
-import Compass from './settings/Compass';
 import BatteryConsumed from './settings/BatteryConsumed';
 import BatteryCurrent from './settings/BatteryCurrent';
 import BatteryRemaining from './settings/BatteryRemaining';
 import BatteryVoltage from './settings/BatteryVoltage';
 import ClimbRate from './settings/ClimbRate';
+import Compass from './settings/Compass';
 import FlightMode from './settings/FlightMode';
 import Gps2Hdop from './settings/Gps2Hdop';
 import Gps2Latitude from './settings/Gps2Latitude';
@@ -41,8 +41,8 @@ export default {
   Alarms,
   AltitudeScale,
   ArmState,
+  ArtificialHorizont,
   Attitude3d,
-  AttitudeMp,
   BatteryConsumed,
   BatteryCurrent,
   BatteryRemaining,

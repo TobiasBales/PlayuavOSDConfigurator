@@ -5,7 +5,7 @@ import Column from '../Column';
 
 import { bindStateForComponent } from '../../utils/parameters';
 
-class AttitudeMp extends Component {
+class ArtificialHorizont extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
       positionX: PropTypes.number.isRequired,
@@ -39,7 +39,7 @@ class AttitudeMp extends Component {
     const typeOptions = [{ value: 0, label: 'mission planner' }, { value: 1, label: 'simple ' }];
 
     return (
-      <Parameters.ParameterList name="attitude mp">
+      <Parameters.ParameterList name="artifical horizont">
         <Parameters.Position labelX="position x" labelY="position y"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
@@ -59,4 +59,4 @@ class AttitudeMp extends Component {
   }
 }
 
-export default bindStateForComponent('attitudeMp', AttitudeMp);
+export default bindStateForComponent('artificialHorizont', ArtificialHorizont);

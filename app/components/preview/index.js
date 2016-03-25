@@ -2,7 +2,7 @@ import AbsoluteAltitude from './AbsoluteAltitude';
 import Alarms from './Alarms';
 import AltitudeScale from './AltitudeScale';
 import ArmState from './ArmState';
-import AttitudeMp from './AttitudeMp';
+import ArtificialHorizont from './ArtificialHorizont';
 import BatteryConsumed from './BatteryConsumed';
 import BatteryCurrent from './BatteryCurrent';
 import BatteryRemaining from './BatteryRemaining';
@@ -32,7 +32,7 @@ export default {
   Alarms,
   AltitudeScale,
   ArmState,
-  AttitudeMp,
+  ArtificialHorizont,
   BatteryConsumed,
   BatteryCurrent,
   BatteryRemaining,

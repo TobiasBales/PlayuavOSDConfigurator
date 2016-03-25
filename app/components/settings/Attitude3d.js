@@ -38,14 +38,20 @@ class Attitude3d extends Component {
 
     return (
       <Parameters.ParameterList name="attitude 3d">
-        <Parameters.Position labelX="position x" labelY="position y" positionX={positionX} positionY={positionY} setPosition={setPosition} />
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
+        <Parameters.Position labelX="position x" labelY="position y"
+          positionX={positionX} positionY={positionY} setPosition={setPosition}
+        />
+        <Column width={50} style={{ paddingRight: '5px' }}>
           <Parameters.Scale setScale={setScale} scale={scale} />
         </Column>
-        <Column width={50} style={{ 'paddingLeft': '5px' }}>
-          <Parameters.Radius label="map radius" radiusKey="mapRadius" radius={mapRadius} setRadius={setRadius}/>
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Parameters.Radius label="map radius" radiusKey="mapRadius"
+            radius={mapRadius} setRadius={setRadius}
+          />
         </Column>
-        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels} />
+        <Parameters.VisibleOn visibleOn={visibleOn}
+          setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
+        />
       </Parameters.ParameterList>
     );
   }

@@ -39,7 +39,7 @@ export default class ParametersModule extends Component {
           <Settings.SpeedGround />
           <Settings.SpeedScale />
           <Settings.TotalTrip />
-          <Settings.AttitudeMp />
+          <Settings.ArtificialHorizont />
           <Settings.Attitude3d />
           <Settings.ClimbRate />
           <Settings.Wind />
