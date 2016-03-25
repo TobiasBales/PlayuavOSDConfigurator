@@ -14,53 +14,53 @@ export default class ParametersModule extends Component {
     return (
       <Tabs index={this.state.index} onChange={this._onChange}>
         <Tab label="General">
-          <Settings.Alarms/>
-          <Settings.Video/>
-          <Settings.Switching/>
-          <Settings.Serial/>
+          <Settings.Alarms />
+          <Settings.Video />
+          <Settings.Switching />
+          <Settings.Serial />
         </Tab>
         <Tab label="Power system">
-          <Settings.BatteryVoltage/>
-          <Settings.BatteryCurrent/>
-          <Settings.BatteryConsumed/>
-          <Settings.BatteryRemaining/>
+          <Settings.BatteryVoltage />
+          <Settings.BatteryCurrent />
+          <Settings.BatteryConsumed />
+          <Settings.BatteryRemaining />
         </Tab>
         <Tab label="position">
-          <Settings.AbsoluteAltitude/>
-          <Settings.RelativeAltitude/>
-          <Settings.HomeDistance/>
-          <Settings.AltitudeScale/>
-          <Settings.Radar/>
-          <Settings.Map/>
-          <Settings.Compass/>
+          <Settings.AbsoluteAltitude />
+          <Settings.RelativeAltitude />
+          <Settings.AltitudeScale />
+          <Settings.HomeDistance />
+          <Settings.Radar />
+          <Settings.Map />
+          <Settings.Compass />
         </Tab>
         <Tab label="avionics">
-          <Settings.SpeedAir/>
-          <Settings.SpeedGround/>
-          <Settings.SpeedScale/>
-          <Settings.TotalTrip/>
-          <Settings.AttitudeMp/>
-          <Settings.Attitude3d/>
-          <Settings.Throttle/>
-          <Settings.ClimbRate/>
-          <Settings.Wind/>
+          <Settings.SpeedAir />
+          <Settings.SpeedGround />
+          <Settings.SpeedScale />
+          <Settings.TotalTrip />
+          <Settings.AttitudeMp />
+          <Settings.Attitude3d />
+          <Settings.ClimbRate />
+          <Settings.Wind />
         </Tab>
         <Tab label="Flight controller">
-          <Settings.Time/>
-          <Settings.ArmState/>
-          <Settings.FlightMode/>
-          <Settings.WPDistance/>
-          <Settings.Rssi/>
+          <Settings.Time />
+          <Settings.ArmState />
+          <Settings.FlightMode />
+          <Settings.Throttle />
+          <Settings.Rssi />
+          <Settings.WPDistance />
         </Tab>
         <Tab label="Gps">
-          <Settings.GpsStatus/>
-          <Settings.GpsLatitude/>
-          <Settings.GpsLongitude/>
-          <Settings.GpsHdop/>
-          <Settings.Gps2Status/>
-          <Settings.Gps2Latitude/>
-          <Settings.Gps2Longitude/>
-          <Settings.Gps2Hdop/>
+          <Settings.GpsStatus />
+          <Settings.GpsHdop />
+          <Settings.GpsLatitude />
+          <Settings.GpsLongitude />
+          <Settings.Gps2Status />
+          <Settings.Gps2Hdop />
+          <Settings.Gps2Latitude />
+          <Settings.Gps2Longitude />
         </Tab>
       </Tabs>
     );
