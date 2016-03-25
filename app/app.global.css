@@ -80,7 +80,12 @@ html {
 .preview .preview-widget {
   position: absolute;
   overflow: hidden;
+  /*cursor: move;*/
 }
+
+/*.preview .preview-widget:hover {
+  box-shadow: inset 0 0 5px white, 0 0 5px black;
+}*/
 
 .parameters .parameter-list {
   overflow: visible;

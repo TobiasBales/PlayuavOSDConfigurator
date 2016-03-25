@@ -57,6 +57,9 @@ function mapDispatchToProps(parameterName, dispatch) {
     setPosition: (x, y) => {
       dispatch(ParameterActions.setPosition(parameterName, x, y));
     },
+    setParameterPosition: (parameter, x, y) => {
+      dispatch(ParameterActions.setPosition(parameter, x, y));
+    },
     setRadius: (key, radius) => {
       dispatch(ParameterActions.setRadius(parameterName, key, radius));
     },

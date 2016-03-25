@@ -68,15 +68,18 @@ export default class Radar extends Component {
     const radius = this.props.radius;
     const width = radius * 2 + 20;
     const height = radius * 2 + 20;
+    const visible = (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0;
 
     return (
-      <canvas
-        ref="canvas"
-        style={{ left: positionX - radius - 10, top: positionY - radius - 10 }}
-        width={width}
-        height={height}
-        className="preview-widget"
-      />
+      !visible ?
+        <canvas ref="canvas" /> :
+        <canvas
+          ref="canvas"
+          style={{ left: positionX - radius - 10, top: positionY - radius - 10 }}
+          width={width}
+          height={height}
+          className="preview-widget"
+        />
     );
   }
 }

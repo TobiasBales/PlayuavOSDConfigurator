@@ -9,12 +9,22 @@ export default class StringPreview extends Component {
     panel: PropTypes.number.isRequired,
     positionX: PropTypes.number.isRequired,
     positionY: PropTypes.number.isRequired,
+    setPosition: PropTypes.func.isRequired,
     vAlignment: PropTypes.number,
     visibleOn: PropTypes.number.isRequired,
   }
 
   static defaultProps = {
     vAlignment: 0,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      left: this.props.positionX,
+      top: this.props.positionY,
+    };
   }
 
   componentDidMount() {
@@ -44,6 +54,21 @@ export default class StringPreview extends Component {
     }
   }
 
+  _onDragStop = () => {
+    const { left, top } = this.state;
+    this.props.setPosition(left, top);
+    // this.setState({ ...this.state, left: 0, top: 0 });
+  }
+
+  _onDrag = (e, ui) => {
+    const { left, top } = this.state;
+    this.setState({
+      ...this.state,
+      left: left + ui.deltaX,
+      top: top + ui.deltaY
+    });
+  }
+
   render() {
     const { hAlignment, positionX, positionY, vAlignment } = this.props;
     const content = this.content();
@@ -51,14 +76,19 @@ export default class StringPreview extends Component {
     const position = canvas.calculateStringPosition(
       content, positionX, positionY, hAlignment, vAlignment, font);
 
+    const visible = this.content() &&
+      (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0;
+
     return (
-      <canvas
-        ref="canvas"
-        style={{ left: position.left, top: position.top }}
-        width={position.width}
-        height={position.height}
-        className="preview-widget"
-      />
+      !visible ?
+        <canvas ref="canvas" /> :
+        <canvas
+          ref="canvas"
+          style={{ left: position.left, top: position.top }}
+          width={position.width}
+          height={position.height}
+          className="preview-widget"
+        />
     );
   }
 }

@@ -16,6 +16,7 @@ class Preview extends Component {
     }).isRequired,
     setAlarm: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
+    setParameterPosition: PropTypes.func.isRequired,
     state: ImmutablePropTypes.map.isRequired,
   }
 
@@ -90,43 +91,114 @@ class Preview extends Component {
       { value: 6, label: 'high alt' }
     ];
 
+    const setPosition = (parameter) => {
+      return (x, y) => {
+        this.props.setParameterPosition(parameter, x, y);
+      }
+    };
+
     return (
       <Card className="preview-card">
         <CardText>
           <div className="preview" style={style}>
-            <img src={background} />
-            <Previews.AbsoluteAltitude {...absoluteAltitude.toJS()} {...fcStatus} units={units} />
-            <Previews.AltitudeScale {...altitudeScale.toJS()} {...fcStatus} units={units} />
-            <Previews.Alarms {...alarms.toJS()} {...fcStatus} visibleOn={255} />
-            <Previews.ArmState {...armState.toJS()} {...fcStatus} />
-            <Previews.AttitudeMp {...attitudeMp.toJS()} {...fcStatus} />
-            <Previews.BatteryConsumed {...batteryConsumed.toJS()} {...fcStatus} />
-            <Previews.BatteryCurrent {...batteryCurrent.toJS()} {...fcStatus} />
-            <Previews.BatteryRemaining {...batteryRemaining.toJS()} {...fcStatus} />
-            <Previews.BatteryVoltage {...batteryVoltage.toJS()} {...fcStatus} />
-            <Previews.ClimbRate {...climbRate.toJS()} {...fcStatus} />
-            <Previews.Compass {...compass.toJS()} {...fcStatus} />
-            <Previews.FlightMode {...flightMode.toJS()} {...fcStatus} />
-            <Previews.GpsHdop {...gps2Hdop.toJS()} {...fcStatus} />
-            <Previews.GpsHdop {...gpsHdop.toJS()} {...fcStatus} />
-            <Previews.GpsLatitude {...gps2Latitude.toJS()} {...fcStatus} />
-            <Previews.GpsLatitude {...gpsLatitude.toJS()} {...fcStatus} />
-            <Previews.GpsLongitude {...gps2Longitude.toJS()} {...fcStatus} />
-            <Previews.GpsLongitude {...gpsLongitude.toJS()} {...fcStatus} />
-            <Previews.GpsStatus {...gps2Status.toJS()} {...fcStatus} />
-            <Previews.GpsStatus {...gpsStatus.toJS()} {...fcStatus} />
-            <Previews.HomeDistance {...homeDistance.toJS()} {...fcStatus} units={units} />
-            <Previews.Radar {...radar.toJS()} {...fcStatus} />
-            <Previews.RelativeAltitude {...relativeAltitude.toJS()} {...fcStatus} units={units} />
-            <Previews.Rssi {...rssi.toJS()} {...fcStatus} />
-            <Previews.SpeedAir {...speedAir.toJS()} {...fcStatus} units={units} />
-            <Previews.SpeedGround {...speedGround.toJS()} {...fcStatus} units={units} />
-            <Previews.SpeedScale {...speedScale.toJS()} {...fcStatus} units={units} />
-            <Previews.Throttle {...throttle.toJS()} {...fcStatus} />
-            <Previews.Time {...time.toJS()} {...fcStatus} />
-            <Previews.TotalTrip {...totalTrip.toJS()} {...fcStatus} units={units} />
-            <Previews.WpDistance {...wpDistance.toJS()} {...fcStatus} units={units} />
-            <Previews.Wind {...wind.toJS()} {...fcStatus} units={units} />
+            <img src={background}
+            />
+            <Previews.AbsoluteAltitude {...absoluteAltitude.toJS()} {...fcStatus}
+              units={units} setPosition={setPosition('absoluteAltitude')}
+            />
+            <Previews.AltitudeScale {...altitudeScale.toJS()} {...fcStatus}
+              units={units} setPosition={setPosition('altitudeScale')}
+            />
+            <Previews.Alarms {...alarms.toJS()} {...fcStatus} visibleOn={255}
+              setPosition={setPosition('alarms')}
+            />
+            <Previews.ArmState {...armState.toJS()} {...fcStatus}
+              setPosition={setPosition('armState')}
+            />
+            <Previews.AttitudeMp {...attitudeMp.toJS()} {...fcStatus}
+              setPosition={setPosition('attitudeMp')}
+            />
+            <Previews.BatteryConsumed {...batteryConsumed.toJS()} {...fcStatus}
+              setPosition={setPosition('batteryConsumed')}
+            />
+            <Previews.BatteryCurrent {...batteryCurrent.toJS()} {...fcStatus}
+              setPosition={setPosition('batteryCurrent')}
+            />
+            <Previews.BatteryRemaining {...batteryRemaining.toJS()} {...fcStatus}
+              setPosition={setPosition('batteryRemaining')}
+            />
+            <Previews.BatteryVoltage {...batteryVoltage.toJS()} {...fcStatus}
+              setPosition={setPosition('batteryVoltage')}
+            />
+            <Previews.ClimbRate {...climbRate.toJS()} {...fcStatus}
+              setPosition={setPosition('climbRate')}
+            />
+            <Previews.Compass {...compass.toJS()} {...fcStatus}
+              setPosition={setPosition('compass')}
+            />
+            <Previews.FlightMode {...flightMode.toJS()} {...fcStatus}
+              setPosition={setPosition('flightMode')}
+            />
+            <Previews.GpsHdop {...gps2Hdop.toJS()} {...fcStatus}
+              setPosition={setPosition('gps2Hdop')}
+            />
+            <Previews.GpsHdop {...gpsHdop.toJS()} {...fcStatus}
+              setPosition={setPosition('gpsHdop')}
+            />
+            <Previews.GpsLatitude {...gps2Latitude.toJS()} {...fcStatus}
+              setPosition={setPosition('gps2Latitude')}
+            />
+            <Previews.GpsLatitude {...gpsLatitude.toJS()} {...fcStatus}
+              setPosition={setPosition('gpsLatitude')}
+            />
+            <Previews.GpsLongitude {...gps2Longitude.toJS()} {...fcStatus}
+              setPosition={setPosition('gps2Longitude')}
+            />
+            <Previews.GpsLongitude {...gpsLongitude.toJS()} {...fcStatus}
+              setPosition={setPosition('gpsLongitude')}
+            />
+            <Previews.GpsStatus {...gps2Status.toJS()} {...fcStatus}
+              setPosition={setPosition('gps2Status')}
+            />
+            <Previews.GpsStatus {...gpsStatus.toJS()} {...fcStatus}
+              setPosition={setPosition('gpsStatus')}
+            />
+            <Previews.HomeDistance {...homeDistance.toJS()} {...fcStatus}
+              units={units} setPosition={setPosition('homeDistance')}
+            />
+            <Previews.Radar {...radar.toJS()} {...fcStatus}
+              setPosition={setPosition('radar')}
+            />
+            <Previews.RelativeAltitude {...relativeAltitude.toJS()}
+              {...fcStatus} units={units} setPosition={setPosition('relativeAltitude')}
+            />
+            <Previews.Rssi {...rssi.toJS()} {...fcStatus}
+              setPosition={setPosition('rssi')} setPosition={setPosition('fcStatus')}
+            />
+            <Previews.SpeedAir {...speedAir.toJS()} {...fcStatus}
+              units={units} setPosition={setPosition('speedAir')}
+            />
+            <Previews.SpeedGround {...speedGround.toJS()} {...fcStatus}
+              units={units} setPosition={setPosition('speedGround')}
+            />
+            <Previews.SpeedScale {...speedScale.toJS()} {...fcStatus}
+              units={units} setPosition={setPosition('speedScale')}
+            />
+            <Previews.Throttle {...throttle.toJS()} {...fcStatus}
+              setPosition={setPosition('throttle')}
+            />
+            <Previews.Time {...time.toJS()} {...fcStatus}
+              setPosition={setPosition('time')}
+            />
+            <Previews.TotalTrip {...totalTrip.toJS()} {...fcStatus}
+              units={units} setPosition={setPosition('totalTrip')}
+            />
+            <Previews.WpDistance {...wpDistance.toJS()} {...fcStatus}
+              units={units} setPosition={setPosition('wpDistance')}
+            />
+            <Previews.Wind {...wind.toJS()} {...fcStatus} units={units}
+              setPosition={setPosition('wind')}
+            />
           </div>
           <Column width={50}>
             <Label text="panel" />
@@ -139,7 +211,7 @@ class Preview extends Component {
           <Column width={50}>
             <Dropdown label="alarm" source={alarmOptions}
               value={alarm} onChange={this._onAlarmChange}
-            />
+           />
           </Column>
         </CardText>
       </Card>

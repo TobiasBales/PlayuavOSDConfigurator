@@ -37,14 +37,18 @@ export default class Compass extends Component {
     const width = 180;
     const height = 40;
 
+    const visible = (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0;
+
     return (
-      <canvas
-        ref="canvas"
-        style={{ left: positionX - width / 2, top: positionY - 8 }}
-        width={width}
-        height={height}
-        className="preview-widget"
-      />
+      !visible ?
+        <canvas ref="canvas" /> :
+        <canvas
+          ref="canvas"
+          style={{ left: positionX - width / 2, top: positionY - 8 }}
+          width={width}
+          height={height}
+          className="preview-widget"
+        />
     );
   }
 }

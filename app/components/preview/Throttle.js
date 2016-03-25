@@ -63,15 +63,18 @@ export default class ThrottlePreview extends Component {
 
   render() {
     const { positionX, positionY } = this.props;
+    const visible = (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0;
 
     return (
-      <canvas
-        ref="canvas"
-        style={{ left: positionX - 25, top: positionY - 25 }}
-        width={51}
-        height={51}
-        className="preview-widget"
-      />
+      !visible ?
+        <canvas ref="canvas" /> :
+        <canvas
+          ref="canvas"
+          style={{ left: positionX - 25, top: positionY - 25 }}
+          width={51}
+          height={51}
+          className="preview-widget"
+        />
     );
   }
 }

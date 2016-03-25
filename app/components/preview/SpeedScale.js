@@ -56,14 +56,18 @@ export default class SpeedScale extends Component {
   render() {
     const { positionX, positionY, scaleAlignment } = this.props;
     const xOffset = scaleAlignment === 0 ? 0 : 75;
+    const visible = (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0;
+
     return (
-      <canvas
-        ref="canvas"
-        style={{ left: positionX - xOffset, top: positionY - 50 }}
-        width={75}
-        height={100}
-        className="preview-widget"
-      />
+      !visible ?
+        <canvas ref="canvas" /> :
+        <canvas
+          ref="canvas"
+          style={{ left: positionX - xOffset, top: positionY - 50 }}
+          width={75}
+          height={100}
+          className="preview-widget"
+        />
     );
   }
 }

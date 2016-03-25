@@ -56,15 +56,18 @@ export default class Wind extends Component {
     const windPosition = canvas.calculateStringPosition(windString, 0, 0, 0, 1, font);
     const width = windPosition.width + 20;
     const height = 18;
+    const visible = (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0;
 
     return (
-      <canvas
-        ref="canvas"
-        style={{ left: positionX - 6, top: positionY }}
-        width={width}
-        height={height}
-        className="preview-widget"
-      />
+      !visible ?
+        <canvas ref="canvas" /> :
+        <canvas
+          ref="canvas"
+          style={{ left: positionX - 6, top: positionY }}
+          width={width}
+          height={height}
+          className="preview-widget"
+        />
     );
   }
 }

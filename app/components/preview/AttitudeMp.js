@@ -45,15 +45,18 @@ export default class AttitudeMp extends Component {
 
   render() {
     const { positionX, positionY } = this.props;
+    const visible = (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0;
 
     return (
-      <canvas
-        ref="canvas"
-        style={{ left: positionX - 100, top: positionY - 70 }}
-        width={200}
-        height={140}
-        className="preview-widget"
-      />
+      !visible ?
+        <canvas ref="canvas" /> :
+        <canvas
+          ref="canvas"
+          style={{ left: positionX - 100, top: positionY - 70 }}
+          width={200}
+          height={140}
+          className="preview-widget"
+        />
     );
   }
 }

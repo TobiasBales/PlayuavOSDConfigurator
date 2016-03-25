@@ -62,15 +62,18 @@ export default class ClimbRate extends Component {
     const position = canvas.calculateStringPosition(
       this.content(), positionX, positionY, hAlignment, vAlignment, font);
     const arrowLength = this.props.fontSize === 0 ? 6 : 8;
+    const visible = (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0;
 
     return (
-      <canvas
-        ref="canvas"
-        style={{ left: position.left, top: position.top }}
-        width={position.width + 8}
-        height={arrowLength * 2}
-        className="preview-widget"
-      />
+      !visible ?
+        <canvas ref="canvas" /> :
+        <canvas
+          ref="canvas"
+          style={{ left: position.left, top: position.top }}
+          width={position.width + 8}
+          height={arrowLength * 2}
+          className="preview-widget"
+        />
     );
   }
 }
