@@ -6,6 +6,7 @@ export default class Radar extends Component {
   static propTypes = {
     heading: PropTypes.number.isRequired,
     homeBearing: PropTypes.number.isRequired,
+    homeRadius: PropTypes.number.isRequired,
     panel: PropTypes.number.isRequired,
     positionX: PropTypes.number.isRequired,
     positionY: PropTypes.number.isRequired,
@@ -13,6 +14,7 @@ export default class Radar extends Component {
     visibleOn: PropTypes.number.isRequired,
     wpBearing: PropTypes.number.isRequired,
     wpNumber: PropTypes.number.isRequired,
+    wpRadius: PropTypes.number.isRequired,
   }
 
   componentDidMount() {
@@ -43,7 +45,8 @@ export default class Radar extends Component {
     if ((this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
       const width = this.refs.canvas.width;
       const height = this.refs.canvas.height;
-      const radius = this.props.radius;
+      const { homeRadius, radius, wpRadius } = this.props;
+
       const posX = width / 2;
       const posY = height / 2;
       canvas.drawCircle(context, posX, posY, radius, true);
@@ -58,15 +61,15 @@ export default class Radar extends Component {
       const font = fonts.getFont(0);
       const homeString = 'H';
       const homeHeading = this.props.homeBearing;
-      const homeX = posX + (radius + 4) * Math.sin(homeHeading * Math.PI / 180);
-      const homeY = posY - (radius + 4) * Math.cos(homeHeading * Math.PI / 180);
+      const homeX = posX + homeRadius * Math.sin(homeHeading * Math.PI / 180);
+      const homeY = posY - homeRadius * Math.cos(homeHeading * Math.PI / 180);
       const homePosition = canvas.calculateStringPosition(homeString, homeX, homeY, 1, 1, font);
       canvas.drawString(context, homeString, homePosition.left, homePosition.top, font);
 
       const wpString = this.props.wpNumber.toFixed(0);
       const wpHeading = this.props.wpBearing;
-      const wpX = posX + (radius + 4) * Math.sin(wpHeading * Math.PI / 180);
-      const wpY = posY - (radius + 4) * Math.cos(wpHeading * Math.PI / 180);
+      const wpX = posX + wpRadius * Math.sin(wpHeading * Math.PI / 180);
+      const wpY = posY - wpRadius * Math.cos(wpHeading * Math.PI / 180);
       const wpPosition = canvas.calculateStringPosition(wpString, wpX, wpY, 1, 1, font);
       canvas.drawString(context, wpString, wpPosition.left, wpPosition.top, font);
     }
