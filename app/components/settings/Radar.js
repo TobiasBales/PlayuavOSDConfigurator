@@ -20,6 +20,11 @@ class Radar extends Component {
     setVisibleOn: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters) ||
+      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+  }
+
   render() {
     const {
       numberOfPanels,
@@ -38,17 +43,27 @@ class Radar extends Component {
 
     return (
       <Parameters.ParameterList name="radar">
-        <Parameters.Position labelX="position x" labelY="position y" positionX={positionX} positionY={positionY} setPosition={setPosition} />
-        <Column width={33} style={{ 'paddingRight': '5px' }}>
-          <Parameters.Radius label="radius" radiusKey="radius" radius={radius} setRadius={setRadius}/>
+        <Parameters.Position labelX="position x" labelY="position y"
+          positionX={positionX} positionY={positionY} setPosition={setPosition}
+        />
+        <Column width={33} style={{ paddingRight: '5px' }}>
+          <Parameters.Radius label="radius" radiusKey="radius"
+            radius={radius} setRadius={setRadius}
+          />
         </Column>
-        <Column width={33} style={{ 'paddingLeft': '5px', 'paddingRight': '5px' }}>
-          <Parameters.Radius label="home radius" radiusKey="homeRadius" radius={homeRadius} setRadius={setRadius}/>
+        <Column width={33} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
+          <Parameters.Radius label="home radius" radiusKey="homeRadius"
+            radius={homeRadius} setRadius={setRadius}
+          />
         </Column>
-        <Column width={33} style={{ 'paddingLeft': '5px' }}>
-          <Parameters.Radius label="wp radius" radiusKey="wpRadius" radius={wpRadius} setRadius={setRadius}/>
+        <Column width={33} style={{ paddingLeft: '5px' }}>
+          <Parameters.Radius label="wp radius" radiusKey="wpRadius"
+            radius={wpRadius} setRadius={setRadius}
+          />
         </Column>
-        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels} />
+        <Parameters.VisibleOn visibleOn={visibleOn}
+          setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
+        />
       </Parameters.ParameterList>
     );
   }

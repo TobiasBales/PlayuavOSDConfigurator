@@ -20,6 +20,11 @@ class Attitude3d extends Component {
     setVisibleOn: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters) ||
+      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+  }
+
   render() {
     const {
       numberOfPanels,

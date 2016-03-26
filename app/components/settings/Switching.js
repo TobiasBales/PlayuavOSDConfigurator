@@ -17,6 +17,10 @@ class Switching extends Component {
     setValue: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters);
+  }
+
   _setChannel(key, value) {
     this.props.setChannel(key, value);
   }
@@ -41,17 +45,25 @@ class Switching extends Component {
 
     return (
       <Parameters.ParameterList name="switching">
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
-          <Parameters.Select label="panel switch channel" value={panelChannel} options={channelOptions} setValue={this._setChannel.bind(this, 'panel')}/>
+        <Column width={50} style={{ paddingRight: '5px' }}>
+          <Parameters.Select label="panel switch channel" value={panelChannel}
+            options={channelOptions} setValue={this._setChannel.bind(this, 'panel')}
+          />
         </Column>
-        <Column width={50} style={{ 'paddingLeft': '5px' }}>
-          <Input type="number" label="value to switch" onChange={this._setValue.bind(this, 'panel')} value={panelValue}/>
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Input type="number" label="value to switch"
+            onChange={this._setValue.bind(this, 'panel')} value={panelValue}
+          />
         </Column>
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
-          <Parameters.Select label="video switch channel" value={videoChannel} options={channelOptions} setValue={this._setChannel.bind(this, 'video')}/>
+        <Column width={50} style={{ paddingRight: '5px' }}>
+          <Parameters.Select label="video switch channel" value={videoChannel}
+            options={channelOptions} setValue={this._setChannel.bind(this, 'video')}
+          />
         </Column>
-        <Column width={50} style={{ 'paddingLeft': '5px' }}>
-          <Input type="number" label="value to switch" onChange={this._setValue.bind(this, 'video')} value={videoValue}/>
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Input type="number" label="value to switch"
+            onChange={this._setValue.bind(this, 'video')} value={videoValue}
+          />
         </Column>
       </Parameters.ParameterList>
     );

@@ -15,6 +15,10 @@ class Serial extends Component {
     setFcType: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters);
+  }
+
   render() {
     const { baudRate, fcType, version, } = this.props.parameters;
     const { setBaudRate, setFcType } = this.props;
@@ -31,14 +35,18 @@ class Serial extends Component {
 
     return (
       <Parameters.ParameterList name="firmware">
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
-          <Parameters.Select label="flight controller" options={fcTypeOptions} setValue={setFcType} value={fcType}/>
+        <Column width={50} style={{ paddingRight: '5px' }}>
+          <Parameters.Select label="flight controller" options={fcTypeOptions}
+            setValue={setFcType} value={fcType}
+          />
         </Column>
-        <Column width={50} style={{ 'paddingLeft': '5px' }}>
-          <Parameters.Select label="baud rate" options={baudRateOptions} setValue={setBaudRate} value={baudRate}/>
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Parameters.Select label="baud rate" options={baudRateOptions}
+            setValue={setBaudRate} value={baudRate}
+          />
         </Column>
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
-        <Parameters.Text text={version} label="version"/>
+        <Column width={50} style={{ paddingRight: '5px' }}>
+        <Parameters.Text text={version} label="version" />
         </Column>
       </Parameters.ParameterList>
     );

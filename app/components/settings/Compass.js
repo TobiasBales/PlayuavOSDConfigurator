@@ -16,6 +16,11 @@ class Compass extends Component {
     setVisibleOn: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters) ||
+      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+  }
+
   _setPosition = (position) => {
     this.props.setPosition(null, parseInt(position, 10));
   }
@@ -32,10 +37,12 @@ class Compass extends Component {
 
     return (
       <Parameters.ParameterList name="compass">
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
+        <Column width={50} style={{ paddingRight: '5px' }}>
           <Input type="number" label="position y" value={positionY} onChange={this._setPosition} />
         </Column>
-        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels} />
+        <Parameters.VisibleOn visibleOn={visibleOn}
+          setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
+        />
       </Parameters.ParameterList>
     );
   }

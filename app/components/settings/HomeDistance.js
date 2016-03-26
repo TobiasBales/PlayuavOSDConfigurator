@@ -1,18 +1,8 @@
-import React, { Component } from 'react';
-
 import SimpleSettings from './SimpleSettings';
 import { bindStateForComponent } from '../../utils/parameters';
 
-class HomeDistance extends Component {
-  static propTypes = {
-    ...SimpleSettings.propTypes
-  }
-
-  render() {
-    return (
-      <SimpleSettings name="home distance" {...this.props}/>
-    );
-  }
+class HomeDistance extends SimpleSettings {
+  name = 'home distance';
 }
 
 export default bindStateForComponent('homeDistance', HomeDistance);

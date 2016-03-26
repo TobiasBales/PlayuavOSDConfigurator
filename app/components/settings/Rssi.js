@@ -31,6 +31,11 @@ class Rssi extends Component {
     setVisibleOn: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters) ||
+      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+  }
+
   _setMin = (min) => {
     this.props.setMin(parseInt(min, 10));
   }

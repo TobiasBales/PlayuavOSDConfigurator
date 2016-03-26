@@ -1,18 +1,8 @@
-import React, { Component } from 'react';
-
 import SimpleSettings from './SimpleSettings';
 import { bindStateForComponent } from '../../utils/parameters';
 
-class SpeedAir extends Component {
-  static propTypes = {
-    ...SimpleSettings.propTypes
-  }
-
-  render() {
-    return (
-      <SimpleSettings name="speed air" {...this.props}/>
-     );
-  }
+class SpeedAir extends SimpleSettings {
+  name = 'speed air';
 }
 
 export default bindStateForComponent('speedAir', SpeedAir);

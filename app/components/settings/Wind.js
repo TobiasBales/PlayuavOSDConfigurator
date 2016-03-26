@@ -16,6 +16,11 @@ class Wind extends Component {
     setVisibleOn: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters) ||
+      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+  }
+
   render() {
     const {
       numberOfPanels,
@@ -30,8 +35,12 @@ class Wind extends Component {
 
     return (
       <Parameters.ParameterList name="wind">
-        <Parameters.Position labelX="position x" labelY="position y" positionX={positionX} positionY={positionY} setPosition={setPosition} />
-        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels} />
+        <Parameters.Position labelX="position x" labelY="position y"
+          positionX={positionX} positionY={positionY} setPosition={setPosition}
+        />
+        <Parameters.VisibleOn visibleOn={visibleOn}
+          setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
+        />
       </Parameters.ParameterList>
     );
   }

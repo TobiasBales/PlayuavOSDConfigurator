@@ -31,6 +31,10 @@ class Alarms extends Component {
     setPosition: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters);
+  }
+
   _setEnabled(alarm, enabled) {
     this.props.setAlarmEnabled(alarm, parseInt(enabled, 10));
   }
@@ -53,45 +57,69 @@ class Alarms extends Component {
 
     return (
       <Parameters.ParameterList name="alarms">
-        <Parameters.Position labelX="position x" labelY="position y" positionX={positionX} positionY={positionY} setPosition={setPosition} />
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
+        <Parameters.Position labelX="position x" labelY="position y"
+          positionX={positionX} positionY={positionY} setPosition={setPosition}
+        />
+        <Column width={50} style={{ paddingRight: '5px' }}>
           <Parameters.FontSize fontSize={fontSize} setFontSize={setFontSize} />
         </Column>
-        <Column width={50} style={{ 'paddingLeft': '5px' }}>
+        <Column width={50} style={{ paddingLeft: '5px' }}>
           <Parameters.HorizontalAlignment hAlignment={hAlignment} setHAlignment={setHAlignment} />
         </Column>
-        <Column width={25} style={{ 'paddingRight': '5px' }}>
-          <Parameters.Select label="under speed" options={options} setValue={this._setEnabled.bind(this, 'underSpeed')} value={underSpeedEnabled}/>
+        <Column width={25} style={{ paddingRight: '5px' }}>
+          <Parameters.Select label="under speed" options={options}
+            setValue={this._setEnabled.bind(this, 'underSpeed')} value={underSpeedEnabled}
+          />
         </Column>
-        <Column width={25} style={{ 'paddingLeft': '5px', 'paddingRight': '5px' }}>
-          <Input type="number" label="value" onChange={this._setValue.bind(this, 'underSpeed')} value={underSpeedValue}/>
+        <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
+          <Input type="number" label="value"
+            onChange={this._setValue.bind(this, 'underSpeed')} value={underSpeedValue}
+          />
         </Column>
-        <Column width={25} style={{ 'paddingLeft': '5px', 'paddingRight': '5px' }}>
-          <Parameters.Select label="over speed" options={options} setValue={this._setEnabled.bind(this, 'overSpeed')} value={overSpeedEnabled}/>
+        <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
+          <Parameters.Select label="over speed" options={options}
+            setValue={this._setEnabled.bind(this, 'overSpeed')} value={overSpeedEnabled}
+          />
         </Column>
-        <Column width={25} style={{ 'paddingLeft': '5px' }}>
-          <Input type="number" label="value" onChange={this._setValue.bind(this, 'overSpeed')} value={overSpeedValue}/>
+        <Column width={25} style={{ paddingLeft: '5px' }}>
+          <Input type="number" label="value"
+            onChange={this._setValue.bind(this, 'overSpeed')} value={overSpeedValue}
+          />
         </Column>
-        <Column width={25} style={{ 'paddingRight': '5px' }}>
-          <Parameters.Select label="under alt" options={options} setValue={this._setEnabled.bind(this, 'underAlt')} value={underAltEnabled}/>
+        <Column width={25} style={{ paddingRight: '5px' }}>
+          <Parameters.Select label="under alt" options={options}
+            setValue={this._setEnabled.bind(this, 'underAlt')} value={underAltEnabled}
+          />
         </Column>
-        <Column width={25} style={{ 'paddingLeft': '5px', 'paddingRight': '5px' }}>
-          <Input type="number" label="value" onChange={this._setValue.bind(this, 'underAlt')} value={underAltValue}/>
+        <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
+          <Input type="number" label="value"
+            onChange={this._setValue.bind(this, 'underAlt')} value={underAltValue}
+          />
         </Column>
-        <Column width={25} style={{ 'paddingLeft': '5px', 'paddingRight': '5px' }}>
-          <Parameters.Select label="over alt" options={options} setValue={this._setEnabled.bind(this, 'overAlt')} value={overAltEnabled}/>
+        <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
+          <Parameters.Select label="over alt" options={options}
+            setValue={this._setEnabled.bind(this, 'overAlt')} value={overAltEnabled}
+          />
         </Column>
-        <Column width={25} style={{ 'paddingLeft': '5px' }}>
-          <Input type="number" label="value" onChange={this._setValue.bind(this, 'overAlt')} value={overAltValue}/>
+        <Column width={25} style={{ paddingLeft: '5px' }}>
+          <Input type="number" label="value"
+            onChange={this._setValue.bind(this, 'overAlt')} value={overAltValue}
+          />
         </Column>
-        <Column width={25} style={{ 'paddingRight': '5px' }}>
-          <Parameters.Select label="low battery" options={options} setValue={this._setEnabled.bind(this, 'lowBattery')} value={lowBatteryEnabled}/>
+        <Column width={25} style={{ paddingRight: '5px' }}>
+          <Parameters.Select label="low battery" options={options}
+            setValue={this._setEnabled.bind(this, 'lowBattery')} value={lowBatteryEnabled}
+          />
         </Column>
-        <Column width={25} style={{ 'paddingLeft': '5px', 'paddingRight': '5px' }}>
-          <Input type="number" label="value" onChange={this._setValue.bind(this, 'lowBattery')} value={lowBatteryValue}/>
+        <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
+          <Input type="number" label="value"
+            onChange={this._setValue.bind(this, 'lowBattery')} value={lowBatteryValue}
+          />
         </Column>
-        <Column width={50} style={{ 'paddingLeft': '5px' }}>
-          <Parameters.Select label="gps status" options={options} setValue={this._setEnabled.bind(this, 'gpsStatus')} value={gpsStatusEnabled}/>
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Parameters.Select label="gps status" options={options}
+            setValue={this._setEnabled.bind(this, 'gpsStatus')} value={gpsStatusEnabled}
+          />
         </Column>
       </Parameters.ParameterList>
     );

@@ -21,20 +21,33 @@ class AltitudeScale extends Component {
     setVisibleOn: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters) ||
+      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+  }
+
   render() {
-    const { setPosition, setScaleAlignment, setScaleType, setVisibleOn, numberOfPanels } = this.props;
+    const {
+      setPosition, setScaleAlignment, setScaleType, setVisibleOn, numberOfPanels
+    } = this.props;
     const { positionX, positionY, scaleAlignment, scaleType, visibleOn } = this.props.parameters;
 
     return (
       <Parameters.ParameterList name="altitude scale">
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
+        <Column width={50} style={{ paddingRight: '5px' }}>
           <Parameters.AltitudeScaleType setScaleType={setScaleType} scaleType={scaleType} />
         </Column>
-        <Column width={50} style={{ 'paddingLeft': '5px' }}>
-          <Parameters.ScaleAlignment setScaleAlignment={setScaleAlignment} scaleAlignment={scaleAlignment} />
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Parameters.ScaleAlignment setScaleAlignment={setScaleAlignment}
+            scaleAlignment={scaleAlignment}
+          />
         </Column>
-        <Parameters.Position labelX="position x" labelY="offset y" positionX={positionX} positionY={positionY} setPosition={setPosition} />
-        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels} />
+        <Parameters.Position labelX="position x" labelY="offset y"
+          positionX={positionX} positionY={positionY} setPosition={setPosition}
+        />
+        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn}
+          numberOfPanels={numberOfPanels}
+        />
       </Parameters.ParameterList>
     );
   }

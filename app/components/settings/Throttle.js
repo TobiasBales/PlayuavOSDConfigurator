@@ -20,6 +20,11 @@ class Throttle extends Component {
     setVisibleOn: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters) ||
+      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+  }
+
   render() {
     const { numberOfPanels, setPosition, setVisibleOn, setScaleEnabled, setScaleType } = this.props;
     const { positionX, positionY, visibleOn, scaleEnabled, scaleType } = this.props.parameters;
@@ -32,14 +37,22 @@ class Throttle extends Component {
 
     return (
       <Parameters.ParameterList name="throttle">
-        <Parameters.Position labelX="position x" labelY="position y" positionX={positionX} positionY={positionY} setPosition={setPosition} />
-        <Column width={50} style={{ 'paddingRight': '5px' }}>
-          <Parameters.Select label="style" value={scaleEnabled} options={scaleEnabledOptions} setValue={setScaleEnabled}/>
+        <Parameters.Position labelX="position x" labelY="position y"
+          positionX={positionX} positionY={positionY} setPosition={setPosition}
+        />
+        <Column width={50} style={{ paddingRight: '5px' }}>
+          <Parameters.Select label="style" value={scaleEnabled}
+            options={scaleEnabledOptions} setValue={setScaleEnabled}
+          />
         </Column>
-        <Column width={50} style={{ 'paddingLeft': '5px' }}>
-          <Parameters.Select label="scale orientation" value={scaleType} options={scaleTypeOptions} setValue={setScaleType}/>
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Parameters.Select label="scale orientation" value={scaleType}
+            options={scaleTypeOptions} setValue={setScaleType}
+          />
         </Column>
-        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels} />
+        <Parameters.VisibleOn visibleOn={visibleOn}
+          setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
+        />
       </Parameters.ParameterList>
     );
   }

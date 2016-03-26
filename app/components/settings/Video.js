@@ -20,6 +20,10 @@ class Video extends Component {
     setVideoMode: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters);
+  }
+
   render() {
     const { setVideoMode, setUnits, setMaxPanels, setOffset } = this.props;
     const { videoMode, units, offsetX, offsetY, maxPanels } = this.props.parameters;

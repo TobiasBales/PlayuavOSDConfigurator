@@ -1,18 +1,8 @@
-import React, { Component } from 'react';
-
 import SimpleSettings from './SimpleSettings';
 import { bindStateForComponent } from '../../utils/parameters';
 
-class AbsoluteAltitude extends Component {
-  static propTypes = {
-    ...SimpleSettings.propTypes
-  }
-
-  render() {
-    return (
-      <SimpleSettings name="absolute altitude" {...this.props}/>
-     );
-  }
+class AbsoluteAltitude extends SimpleSettings {
+  name = 'absolute altitude';
 }
 
 export default bindStateForComponent('absoluteAltitude', AbsoluteAltitude);

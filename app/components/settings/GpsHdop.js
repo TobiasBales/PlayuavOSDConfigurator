@@ -1,18 +1,8 @@
-import React, { Component } from 'react';
-
 import SimpleSettings from './SimpleSettings';
 import { bindStateForComponent } from '../../utils/parameters';
 
-class GpsHdop extends Component {
-  static propTypes = {
-    ...SimpleSettings.propTypes
-  }
-
-  render() {
-    return (
-      <SimpleSettings name="gps hdop" {...this.props}/>
-     );
-  }
+class GpsHdop extends SimpleSettings {
+  name = 'gps hdop';
 }
 
 export default bindStateForComponent('gpsHdop', GpsHdop);

@@ -17,6 +17,12 @@ class ClimbRate extends Component {
     setVisibleOn: PropTypes.func.isRequired,
     setPosition: PropTypes.func.isRequired,
   }
+
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters) ||
+      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+  }
+
   render() {
     const {
       numberOfPanels,
@@ -33,11 +39,15 @@ class ClimbRate extends Component {
 
     return (
       <Parameters.ParameterList name="climb rate">
-        <Parameters.Position labelX="position x" labelY="position y" positionX={positionX} positionY={positionY} setPosition={setPosition} />
-        <Column width={50} style={{ 'paddingLeft': '5px' }}>
+        <Parameters.Position labelX="position x" labelY="position y"
+          positionX={positionX} positionY={positionY} setPosition={setPosition}
+        />
+        <Column width={50} style={{ paddingLeft: '5px' }}>
           <Parameters.FontSize fontSize={fontSize} setFontSize={setFontSize} />
         </Column>
-        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels} />
+        <Parameters.VisibleOn visibleOn={visibleOn}
+          setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
+        />
       </Parameters.ParameterList>
     );
   }

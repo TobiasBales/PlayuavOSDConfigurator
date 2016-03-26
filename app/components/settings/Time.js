@@ -23,6 +23,11 @@ class Time extends Component {
     setVisibleOn: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !this.props.parameters.equals(nextProps.parameters) ||
+      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+  }
+
   render() {
     const { setType } = this.props;
     const { type } = this.props.parameters;
@@ -34,7 +39,9 @@ class Time extends Component {
 
     return (
       <SimpleSettings name="time" {...this.props}>
-        <Parameters.Select label="since" setValue={setType} value={type} options={typeOptions}/>
+        <Parameters.Select label="since" setValue={setType}
+          value={type} options={typeOptions}
+        />
       </SimpleSettings>
      );
   }
