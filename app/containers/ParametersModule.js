@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tab, Tabs } from 'react-toolbox/lib/tabs';
 
-import Settings from '../components/Settings';
+import Settings from '../containers/settings';
 
 export default class ParametersModule extends Component {
   state = { index: 0 };

@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Input from 'react-toolbox/lib/input';
-import Parameters from '../Parameters';
+import Parameters from '../../components/parameters';
 import { bindStateForComponent } from '../../utils/parameters';
-import Column from '../Column';
+import Column from '../../components/Column';
 
 class Video extends Component {
   static propTypes = {

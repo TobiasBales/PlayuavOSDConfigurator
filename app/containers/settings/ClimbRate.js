@@ -1,19 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Input from 'react-toolbox/lib/input';
-import Parameters from '../Parameters';
-import Column from '../Column';
+import Parameters from '../../components/parameters';
+import Column from '../../components/Column';
 import { bindStateForComponent } from '../../utils/parameters';
 
-class Compass extends Component {
+class ClimbRate extends Component {
   static propTypes = {
-    numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
-      positionY: PropTypes.number.isRequired,
+      fontSize: PropTypes.number.isRequired,
       visibleOn: PropTypes.number.isRequired,
+      positionX: PropTypes.number.isRequired,
+      positionY: PropTypes.number.isRequired,
     }).isRequired,
-    setPosition: PropTypes.func.isRequired,
+    numberOfPanels: PropTypes.number.isRequired,
+    setFontSize: PropTypes.func.isRequired,
     setVisibleOn: PropTypes.func.isRequired,
+    setPosition: PropTypes.func.isRequired,
   }
 
   shouldComponentUpdate(nextProps) {
@@ -21,24 +23,27 @@ class Compass extends Component {
       this.props.numberOfPanels !== (nextProps.numberOfPanels);
   }
 
-  _setPosition = (position) => {
-    this.props.setPosition(null, parseInt(position, 10));
-  }
-
   render() {
     const {
       numberOfPanels,
+      setFontSize,
+      setPosition,
       setVisibleOn,
     } = this.props;
     const {
+      fontSize,
+      positionX,
       positionY,
       visibleOn,
     } = this.props.parameters;
 
     return (
-      <Parameters.ParameterList name="compass">
-        <Column width={50} style={{ paddingRight: '5px' }}>
-          <Input type="number" label="position y" value={positionY} onChange={this._setPosition} />
+      <Parameters.ParameterList name="climb rate">
+        <Parameters.Position labelX="position x" labelY="position y"
+          positionX={positionX} positionY={positionY} setPosition={setPosition}
+        />
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Parameters.FontSize fontSize={fontSize} setFontSize={setFontSize} />
         </Column>
         <Parameters.VisibleOn visibleOn={visibleOn}
           setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
@@ -48,4 +53,4 @@ class Compass extends Component {
   }
 }
 
-export default bindStateForComponent('compass', Compass);
+export default bindStateForComponent('climbRate', ClimbRate);

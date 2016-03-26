@@ -1,23 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Parameters from '../Parameters';
-import Column from '../Column';
+import Parameters from '../../components/parameters';
+import Column from '../../components/Column';
 
-import { bindStateForComponent } from '../../utils/parameters';
-
-class ArtificialHorizont extends Component {
+export default class SimpleSettings extends Component {
   static propTypes = {
+    name: PropTypes.string,
+    children: PropTypes.node,
+    numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
+      fontSize: PropTypes.number.isRequired,
+      hAlignment: PropTypes.number.isRequired,
       positionX: PropTypes.number.isRequired,
       positionY: PropTypes.number.isRequired,
-      scale: PropTypes.number.isRequired,
-      type: PropTypes.number.isRequired,
       visibleOn: PropTypes.number.isRequired,
     }).isRequired,
-    numberOfPanels: PropTypes.number.isRequired,
+    setFontSize: PropTypes.func.isRequired,
+    setHAlignment: PropTypes.func.isRequired,
     setPosition: PropTypes.func.isRequired,
-    setScale: PropTypes.func.isRequired,
-    setType: PropTypes.func.isRequired,
     setVisibleOn: PropTypes.func.isRequired,
   }
 
@@ -28,40 +28,39 @@ class ArtificialHorizont extends Component {
 
   render() {
     const {
+      children,
       numberOfPanels,
+      setFontSize,
+      setHAlignment,
       setPosition,
-      setScale,
       setVisibleOn,
     } = this.props;
     const {
+      fontSize,
+      hAlignment,
       positionX,
       positionY,
-      scale,
-      type,
       visibleOn,
     } = this.props.parameters;
 
-    const typeOptions = [{ value: 0, label: 'mission planner' }, { value: 1, label: 'simple ' }];
+    const name = this.props.name || this.name;
 
     return (
-      <Parameters.ParameterList name="artifical horizont">
+      <Parameters.ParameterList name={name}>
         <Parameters.Position labelX="position x" labelY="position y"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
-        <Column width={50}>
-          <Parameters.Scale setScale={setScale} scale={scale} />
+        <Column width={50} style={{ paddingRight: '5px' }}>
+          <Parameters.FontSize fontSize={fontSize} setFontSize={setFontSize} />
         </Column>
-        <Column width={50}>
-          <Parameters.Select label="type" setValue={this.props.setType}
-            options={typeOptions} value={type}
-          />
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Parameters.HorizontalAlignment hAlignment={hAlignment} setHAlignment={setHAlignment} />
         </Column>
-        <Parameters.VisibleOn visibleOn={visibleOn}
-          setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
+        {children}
+        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn}
+          numberOfPanels={numberOfPanels}
         />
       </Parameters.ParameterList>
     );
   }
 }
-
-export default bindStateForComponent('artificialHorizont', ArtificialHorizont);

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Input from 'react-toolbox/lib/input';
-import Column from '../Column';
-import Select from '../parameters/Select';
+import Column from '../../components/Column';
+import Select from '../../components/parameters/Select';
 import SimpleSettings from './SimpleSettings';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { bindStateForComponent } from '../../utils/parameters';

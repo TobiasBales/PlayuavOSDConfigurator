@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Parameters from '../Parameters';
-import Column from '../Column';
+import Parameters from '../../components/parameters';
+import Column from '../../components/Column';
 import { bindStateForComponent } from '../../utils/parameters';
 
 class Radar extends Component {
