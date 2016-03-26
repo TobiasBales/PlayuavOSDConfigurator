@@ -31,6 +31,15 @@ export default class StringPreview extends Component {
     this.draw();
   }
 
+  shouldComponentUpdate(nextProps) {
+    return Object.keys(this.props).reduce((shouldUpdate, key) => {
+      if (key.startsWith('set')) {
+        return shouldUpdate;
+      }
+      return shouldUpdate || this.props[key] !== nextProps[key];
+    }, false);
+  }
+
   componentDidUpdate() {
     this.draw();
   }
