@@ -1,10 +1,12 @@
 import Button from 'react-toolbox/lib/button';
 import Dropdown from 'react-toolbox/lib/dropdown';
+import ProgressBar from 'react-toolbox/lib/progress_bar';
 import React, { Component, PropTypes } from 'react';
 import { Card, CardText } from 'react-toolbox/lib/card';
 import { ipcRenderer as ipc } from 'electron';
 import { bindStateForComponent } from '../utils/parameters';
 import Label from '../components/Label';
+import Column from '../components/Column';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import eeprom from '../utils/eeprom';
 
@@ -20,13 +22,13 @@ class Sidebar extends Component {
   constructor(props) {
     super(props);
     ipc.on('serial-ports', this._onSerialPortsReceived);
-    ipc.on('connected', this._onConnected);
-    ipc.on('disconnected', this._onDisconnted);
     ipc.on('osd-config', this._onOSDConfigReceived);
     ipc.on('osd-config-written', this._onOSDConfigWritten);
     ipc.on('osd-file-written', this._onConfigFileWritten);
     ipc.on('osd-file-read', this._onConfigFileRead);
+    ipc.on('firmware-uploaded', this._onFirmwareUploaded);
     ipc.on('error', this._onError);
+    ipc.on('progress', this._onProgress);
     ipc.send('get-serial-ports');
   }
 
@@ -37,10 +39,19 @@ class Sidebar extends Component {
     connecting: false,
     readingOSD: false,
     writingOSD: false,
+    uploading: false,
+    progress: 0,
   }
 
-  _onError = (error) => {
+  _onError = (e, error) => {
     this.props.showError(error);
+    this.setState({ ...this.state,
+      readingOSD: false, writingOSD: false, uploading: false, progress: 0
+    });
+  }
+
+  _onProgress = (_, progress) => {
+    this.setState({ ...this.state, progress });
   }
 
   _onSerialPortsReceived = (_, serialPorts) => {
@@ -53,30 +64,14 @@ class Sidebar extends Component {
     this.setState({ ...this.state, serialPorts, serialPort });
   }
 
-  _onConnected = () => {
-    this.setState({ ...this.state, connected: true, connecting: false });
-    this.props.showInfo('connected');
-  }
-
-  _onDisconnted = () => {
-    this.setState({
-      ...this.state,
-      connected: false,
-      connecting: false,
-      readingOSD: false,
-      writingOSD: false
-    });
-    this.props.showInfo('disconnected');
-  }
-
   _onOSDConfigReceived = (_, eepromData) => {
-    this.setState({ ...this.state, readingOSD: false, writingOSD: false });
+    this.setState({ ...this.state, readingOSD: false, progress: 0 });
     this.props.setParamsFromEEPROM(eepromData);
     this.props.showInfo('finished reading osd configuration');
   }
 
   _onOSDConfigWritten = () => {
-    this.setState({ ...this.state, readingOSD: false, writingOSD: false });
+    this.setState({ ...this.state, writingOSD: false, progress: 0 });
     this.props.showInfo('finished writing osd configuration');
   }
 
@@ -89,30 +84,25 @@ class Sidebar extends Component {
     this.props.showInfo('read configuration from file');
   }
 
-  _onSerialPortChanged = (serialPort) => {
+  _onFirmwareUploaded = () => {
+    this.setState({ ...this.state, uploading: false, progress: 0 });
+    this.props.showInfo('finished uploading firmware');
+  }
+
+  _onSerialPortChange = (serialPort) => {
     this.setState({ ...this.state, serialPort });
   }
 
-  _connect = () => {
-    this.setState({ ...this.state, connecting: true });
-    ipc.send('connect', this.state.serialPort);
-  }
-
-  _disconnect = () => {
-    this.setState({ ...this.state, connected: false, connecting: false });
-    ipc.send('disconnect');
-  }
-
   _readFromOSD = () => {
-    this.props.showInfo('reading osd configuration ...');
+    this.props.showInfo('reading osd configuration');
     this.setState({ ...this.state, readingOSD: true });
-    ipc.send('read-osd');
+    ipc.send('read-osd', this.state.serialPort);
   }
 
   _writeToOSD = () => {
-    this.props.showInfo('writing osd configuration ...');
+    this.props.showInfo('writing osd configuration');
     this.setState({ ...this.state, writingOSD: true });
-    ipc.send('write-osd', eeprom.fromParameters(this.props.state));
+    ipc.send('write-osd', this.state.serialPort, eeprom.fromParameters(this.props.state));
   }
 
   _writeToFile = () => {
@@ -121,6 +111,11 @@ class Sidebar extends Component {
 
   _readFile = () => {
     ipc.send('read-file');
+  }
+
+  _uploadFirmware = () => {
+    this.setState({ ...this.state, uploading: true });
+    ipc.send('upload-firmware', this.state.serialPort);
   }
 
   _loadDefaults = () => {
@@ -132,63 +127,55 @@ class Sidebar extends Component {
     ipc.send('get-serial-ports');
   }
 
-  _renderConnectButton() {
-    const buttonLabel = this.state.connecting ? 'connecting ...' : 'connect';
-    const buttonClickHandler = this.state.connecting ? this._disconnect : this._connect;
-    const primary = !this.state.connecting;
+  _renderReadOSDButton() {
+    const { readingOSD, writingOSD, uploading } = this.state;
+    const disabled = readingOSD || writingOSD || uploading;
+    const label = readingOSD ? 'reading from osd' : 'read from osd';
     return (
-      <Button
-        label={buttonLabel}
-        onClick={buttonClickHandler}
-        primary={primary}
-        raised
+      <Button onClick={this._readFromOSD} label={label}
+        icon="file_download" disabled={disabled} raised
       />
     );
   }
 
-  _renderReadOSDButton() {
-    const { connected, readingOSD, writingOSD } = this.state;
-    const disabled = !connected || readingOSD || writingOSD;
-    const label = readingOSD ? 'reading from osd ...' : 'read from osd';
-    return (
-      <Button label={label} onClick={this._readFromOSD} disabled={disabled} raised />
-    );
-  }
-
   _renderWriteOSDButton() {
-    const { connected, readingOSD, writingOSD } = this.state;
-    const disabled = !connected || readingOSD || writingOSD;
-    const label = writingOSD ? 'writing to osd ...' : 'write to osd';
+    const { readingOSD, writingOSD, uploading } = this.state;
+    const disabled = readingOSD || writingOSD || uploading;
+    const label = writingOSD ? 'writing to osd' : 'write to osd';
     return (
-      <Button label={label} onClick={this._writeToOSD} disabled={disabled} raised />
+      <Button onClick={this._writeToOSD} label={label}
+        icon="file_upload" disabled={disabled} raised
+      />
     );
   }
 
   _renderLoadDefaultButton() {
-    const { readingOSD, writingOSD } = this.state;
-    const disabled = readingOSD || writingOSD;
     return (
-      <Button label="load defaults" onClick={this._loadDefaults} disabled={disabled} raised />
+      <Button label="load defaults" icon="settings_backup_restore"
+        onClick={this._loadDefaults} raised
+      />
+    );
+  }
+
+  _renderUploadFirmwareButton() {
+    const { readingOSD, writingOSD, uploading } = this.state;
+    const disabled = readingOSD || writingOSD || uploading;
+    const label = uploading ? 'uploading firmware' : 'upload firmware';
+    return (
+      <Button onClick={this._uploadFirmware} label={label}
+        icon="present_to_all" raised disabled={disabled}
+      />
     );
   }
 
   _renderRefreshButton() {
-    if (process.platform !== 'win32') {
+    if (process.platform === 'linux') {
       return;
     }
 
     return (
-      <Button label="refresh" onClick={this._refreshSerialPorts} raised />
-    );
-  }
-
-  _renderDisconnectButton() {
-    return (
-      <Button
-        label="disconnect"
-        onClick={this._disconnect}
-        primary
-        raised
+      <Button style={{ margin: '2rem 0.5rem' }} label="refresh"
+        onClick={this._refreshSerialPorts} raised
       />
     );
   }
@@ -218,14 +205,19 @@ class Sidebar extends Component {
     );
   }
 
+  _renderProgressBar() {
+    if (!this.state.uploading && !this.state.writingOSD && !this.state.readingOSD) {
+      return;
+    }
+
+    return (<ProgressBar value={this.state.progress} mode="determinate" />);
+  }
+
   render() {
     let serialPortSelector;
-    let connectButton;
 
     if (this.state.serialPorts.length) {
       serialPortSelector = this._renderSerialPortDropdown();
-      connectButton = this.state.connected ?
-        this._renderDisconnectButton() : this._renderConnectButton();
     } else {
       serialPortSelector = this._renderNoSerialPorts();
     }
@@ -233,18 +225,25 @@ class Sidebar extends Component {
     return (
       <Card className="connection">
         <CardText>
-        {serialPortSelector}
-          {connectButton}
-          {this._renderRefreshButton()}
-          {this._renderLoadDefaultButton()}
+          <Column width={75}>
+            {serialPortSelector}
+          </Column>
+          <Column width={25}>
+            {this._renderRefreshButton()}
+          </Column>
           <br />
+          {this._renderProgressBar()}
           <br />
           {this._renderWriteOSDButton()}
           {this._renderReadOSDButton()}
           <br />
           <br />
-          <Button onClick={this._writeToFile} label="save to file" raised />
-          <Button onClick={this._readFile} label="read from file" raised />
+          {this._renderUploadFirmwareButton()}
+          {this._renderLoadDefaultButton()}
+          <br />
+          <br />
+          <Button onClick={this._writeToFile} label="save to file" icon="save" raised />
+          <Button onClick={this._readFile} label="read from file" icon="folder_open" raised />
         </CardText>
       </Card>
     );

@@ -4,6 +4,7 @@
 const webpack = require('webpack');
 const webpackTargetElectronRenderer = require('webpack-target-electron-renderer');
 const baseConfig = require('./webpack.config.base');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 
 const config = Object.create(baseConfig);
@@ -38,6 +39,7 @@ config.module.loaders.push({
 config.plugins.push(
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin(),
+  new WebpackNotifierPlugin(),
   new webpack.DefinePlugin({
     __DEV__: true,
     'process.env': {

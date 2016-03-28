@@ -1,6 +1,9 @@
 /* eslint strict: 0 */
 'use strict';
 
+const zlib = require('zlib');
+const atob = require('atob');
+
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 const electron = require('electron');
@@ -19,7 +22,7 @@ const fs = require('fs');
 
 let mainWindow = null;
 
-let osdInterface = null;
+const osdInterface = new OSDInterface();
 
 crashReporter.start();
 
@@ -70,53 +73,26 @@ app.on('ready', () => {
   };
 
   chokidar.watch('/dev/ttyACM*').on('all', sendSerialPorts);
+  chokidar.watch('/dev/cu.*').on('all', sendSerialPorts);
   ipc.on('get-serial-ports', sendSerialPorts);
 
-  ipc.on('connect', (e, serialPort) => {
-    if (osdInterface && osdInterface.isOpen()) {
-      osdInterface.close();
-    }
-
-    const onOpen = () => {
-      e.sender.send('connected');
-    };
-
-    const onClose = () => {
-      e.sender.send('disconnected');
-    };
-
-    osdInterface = new OSDInterface(serialPort, onOpen, onClose);
+  ipc.on('read-osd', (e, serialPort) => {
+    const reportProgress = (progress) => e.sender.send('progress', progress);
+    osdInterface.readParameters(serialPort, reportProgress)
+      .then(e.sender.send.bind(e.sender, 'osd-config'))
+      .catch(e.sender.send.bind(e.sender, 'error'));
   });
 
-  ipc.on('disconnect', () => {
-    osdInterface.close();
-  });
-
-  ipc.on('read-osd', (e) => {
-    osdInterface.getParams((err, data) => {
-      if (err) {
-        e.sender.send('error', err);
-        osdInterface.close();
-        return;
-      }
-      e.sender.send('osd-config', data);
-    });
-  });
-
-  ipc.on('write-osd', (e, parameters) => {
-    osdInterface.setParams(parameters, (err) => {
-      if (err) {
-        e.sender.send('error', err);
-        osdInterface.close();
-        return;
-      }
-      e.sender.send('osd-config-written');
-    });
+  ipc.on('write-osd', (e, serialPort, parameters) => {
+    const reportProgress = (progress) => e.sender.send('progress', progress);
+    osdInterface.writeParameters(serialPort, parameters, reportProgress)
+      .then(e.sender.send.bind(e.sender, 'osd-config-written'))
+      .catch(e.sender.send.bind(e.sender, 'error'));
   });
 
   ipc.on('read-file', (e) => {
     dialog.showOpenDialog({
-      defaultPath: 'osd_configuration.conf',
+      defaultPath: './osd_configuration.conf',
       title: 'read config from file',
       filters: [{ name: 'config file', extensions: ['conf'] }],
       properties: ['openFile'],
@@ -149,6 +125,39 @@ app.on('ready', () => {
             return;
           }
           e.sender.send('osd-file-written');
+        });
+      }
+    });
+  });
+
+  ipc.on('upload-firmware', (e, serialPort) => {
+    dialog.showOpenDialog({
+      defaultPath: 'osd_configuration.conf',
+      title: 'read config from file',
+      filters: [{ name: 'firmware file', extensions: ['hex'] }],
+      properties: ['openFile'],
+    }, (files) => {
+      if (files && files.length > 0) {
+        const filename = files[0];
+        fs.readFile(filename, (err, data) => {
+          if (err) {
+            e.sender.send('error', err);
+            return;
+          }
+          const firmware = JSON.parse(data);
+          const binary = atob(firmware.image);
+          const buffer = new Buffer(firmware.image.length);
+          for (let i = 0; i < buffer.length; i++) {
+            buffer[i] = binary.charCodeAt(i);
+          }
+          firmware.imagebytes = zlib.inflateSync(buffer);
+          const reportProgress = (progress) => {
+            e.sender.send('progress', progress);
+          };
+
+          osdInterface.uploadFirmware(serialPort, firmware, reportProgress)
+          .then(e.sender.send.bind(e.sender, 'firmware-uploaded'))
+          .catch(e.sender.send.bind(e.sender, 'error'));
         });
       }
     });
