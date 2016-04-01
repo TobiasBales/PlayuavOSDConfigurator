@@ -160,7 +160,7 @@ class Sidebar extends Component {
   _renderUploadFirmwareButton() {
     const { readingOSD, writingOSD, uploading } = this.state;
     const disabled = readingOSD || writingOSD || uploading;
-    const label = uploading ? 'uploading firmware' : 'upload firmware';
+    const label = uploading ? 'flashing firmware' : 'flash firmware';
     return (
       <Button onClick={this._uploadFirmware} label={label}
         icon="present_to_all" raised disabled={disabled}
