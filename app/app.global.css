@@ -90,6 +90,10 @@ html {
   vertical-align: top;
 }
 
+.parameters .parameter-list > div {
+  overflow: visible;
+}
+
 @media(min-width: 1090px) {
   .parameters .parameter-list {
     width: 50%;
