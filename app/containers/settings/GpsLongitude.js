@@ -2,7 +2,7 @@ import SimpleSettings from './SimpleSettings';
 import { bindStateForComponent } from '../../utils/parameters';
 
 class GPSLongitude extends SimpleSettings {
-  name = 'simple settings';
+  name = 'gps longitude';
 }
 
 export default bindStateForComponent('gpsLongitude', GPSLongitude);
