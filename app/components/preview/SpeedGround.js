@@ -22,6 +22,6 @@ export default class SpeedGround extends StringPreview {
     }
 
     const speed = speedGround * convertSpeed;
-    return `G-SPD: ${speed.toFixed(0)}${unitsSpeed}`;
+    return `GS ${speed.toFixed(0)}${unitsSpeed}`;
   }
 }

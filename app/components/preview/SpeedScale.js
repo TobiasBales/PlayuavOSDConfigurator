@@ -45,7 +45,7 @@ export default class SpeedScale extends Component {
     if ((this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
       const { speedAir, speedGround, scaleAlignment } = this.props;
       const hAlignment = scaleAlignment === 0 ? 0 : 2;
-      const prefix = this.props.scaleType === 0 ? 'GSPD' : 'ASPD';
+      const prefix = this.props.scaleType === 0 ? 'GS' : 'AS';
       const prefixPosition = canvas.calculateStringPosition(prefix, 0, 0, hAlignment, 0, font);
       const unitString = 'KM/H';
       const unitPosition = canvas.calculateStringPosition(

@@ -45,7 +45,7 @@ export default class AltitudeScale extends Component {
     if ((this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
       const { absoluteAltitude, relativeAltitude, scaleAlignment } = this.props;
       const hAlignment = scaleAlignment === 0 ? 0 : 2;
-      const prefix = this.props.scaleType === 0 ? 'AALT' : 'RALT';
+      const prefix = this.props.scaleType === 0 ? 'AAlt' : 'Alt';
       const prefixPosition = canvas.calculateStringPosition(prefix, 0, 0, hAlignment, 0, font);
       const unitString = 'M';
       const unitPosition = canvas.calculateStringPosition(

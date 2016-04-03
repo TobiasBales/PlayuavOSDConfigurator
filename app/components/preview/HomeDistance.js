@@ -10,6 +10,6 @@ export default class HomeDistance extends StringPreview {
   }
 
   content() {
-    return `H: ${units.convertDistance(this.props.homeDistance, this.props.units)}`;
+    return `H ${units.convertDistance(this.props.homeDistance, this.props.units)}`;
   }
 }

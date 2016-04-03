@@ -10,6 +10,6 @@ export default class AbsoluteAltitude extends StringPreview {
   }
 
   content() {
-    return `A-ALT: ${units.convertDistance(this.props.absoluteAltitude, this.props.units)}`;
+    return `AA ${units.convertDistance(this.props.absoluteAltitude, this.props.units)}`;
   }
 }

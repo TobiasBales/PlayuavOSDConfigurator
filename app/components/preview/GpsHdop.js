@@ -9,6 +9,6 @@ export default class GpsHdop extends StringPreview {
 
   content() {
     const { gpsHdop } = this.props;
-    return `HDOP:${(gpsHdop / 100).toFixed(1)}`;
+    return `HDOP ${(gpsHdop / 100).toFixed(1)}`;
   }
 }

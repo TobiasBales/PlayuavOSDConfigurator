@@ -22,6 +22,6 @@ export default class SpeedAir extends StringPreview {
     }
 
     const speed = speedAir * convertSpeed;
-    return `A-SPD: ${speed.toFixed(0)}${unitsSpeed}`;
+    return `AS ${speed.toFixed(0)}${unitsSpeed}`;
   }
 }

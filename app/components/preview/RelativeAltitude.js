@@ -10,6 +10,6 @@ export default class RelativeAltitude extends StringPreview {
   }
 
   content() {
-    return `R-ALT: ${units.convertDistance(this.props.relativeAltitude, this.props.units)}`;
+    return `A ${units.convertDistance(this.props.relativeAltitude, this.props.units)}`;
   }
 }

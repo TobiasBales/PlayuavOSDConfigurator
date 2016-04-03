@@ -10,6 +10,6 @@ export default class WpDistance extends StringPreview {
   }
 
   content() {
-    return `WP: ${units.convertDistance(this.props.wpDistance, this.props.units)}`;
+    return `WP ${units.convertDistance(this.props.wpDistance, this.props.units)}`;
   }
 }
