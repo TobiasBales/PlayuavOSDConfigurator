@@ -23,7 +23,7 @@ export const TYPE = 'parameters/type';
 export const UNITS = 'parameters/units';
 export const V_ALIGNMENT = 'parameters/v_alignment';
 export const VALUE = 'parameters/value';
-export const VIDEO_MODE = 'parameters/video_mode';
+export const MODE = 'parameters/mode';
 export const VISIBLE_ON = 'parameters/visible_on';
 
 export function setAlarm(parameter, alarm) {
@@ -126,8 +126,8 @@ export function setValue(parameter, key, value) {
   return { type: VALUE, parameter, key, value };
 }
 
-export function setVideoMode(parameter, videoMode) {
-  return { type: VIDEO_MODE, parameter, videoMode };
+export function setMode(parameter, prefix, mode) {
+  return { type: MODE, parameter, prefix, mode };
 }
 
 export function setVisibleOn(parameter, visibleOn) {

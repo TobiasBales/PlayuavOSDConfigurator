@@ -16,7 +16,7 @@ const defaultEEPROM = [
   2, 10, 100, 0, 0, 180, 133, 1, 0, 180, 133, 1, 0, 40, 0, 0,
   firmwareVersion, 1, 133, 133, 1, 1, 350, 34, 0, 2, 1, 1, 350, 210,
   0, 2, 0, 1, 4, 120, 1, 0, 0, 1, 2, 5, 25, 0, 0, 1, 1, 2, 5, 55,
-  0, 0, 0, 1, 7, 1, 1, 1, 350, 200, 0, 2
+  0, 0, 0, 1, 7, 1, 1, 1, 350, 200, 0, 2, 1, 1,
 ];
 
 function toEnabled(byte) {
@@ -332,6 +332,8 @@ const eepromMapping = [
   { path: ['efficiency', 'positionY'] },
   { path: ['efficiency', 'fontSize'] },
   { path: ['efficiency', 'hAlignment'] },
+  { path: ['switching', 'videoMode'] },
+  { path: ['switching', 'panelMode'] },
 ];
 
 const skeletonParameters = {

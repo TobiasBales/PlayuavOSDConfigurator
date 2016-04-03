@@ -17,7 +17,7 @@ class Video extends Component {
     setMaxPanels: PropTypes.func.isRequired,
     setOffset: PropTypes.func.isRequired,
     setUnits: PropTypes.func.isRequired,
-    setVideoMode: PropTypes.func.isRequired,
+    setMode: PropTypes.func.isRequired,
   }
 
   shouldComponentUpdate(nextProps) {
@@ -25,13 +25,13 @@ class Video extends Component {
   }
 
   render() {
-    const { setVideoMode, setUnits, setMaxPanels, setOffset } = this.props;
+    const { setMode, setUnits, setMaxPanels, setOffset } = this.props;
     const { videoMode, units, offsetX, offsetY, maxPanels } = this.props.parameters;
 
     return (
       <Parameters.ParameterList name="video">
         <Column width={50} style={{ paddingRight: '5px' }}>
-          <Parameters.VideoMode videoMode={videoMode} setVideoMode={setVideoMode} />
+          <Parameters.VideoMode videoMode={videoMode} setVideoMode={setMode.bind(this, 'video')} />
         </Column>
         <Column width={50} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
           <Parameters.Units units={units} setUnits={setUnits} />

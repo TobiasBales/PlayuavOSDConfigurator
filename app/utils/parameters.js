@@ -90,8 +90,8 @@ function mapDispatchToProps(parameterName, dispatch) {
     setValue: (key, value) => {
       dispatch(ParameterActions.setValue(parameterName, key, value));
     },
-    setVideoMode: (videoMode) => {
-      dispatch(ParameterActions.setVideoMode(parameterName, videoMode));
+    setMode: (prefix, mode) => {
+      dispatch(ParameterActions.setMode(parameterName, prefix, mode));
     },
     setVisibleOn: (visibleOn) => {
       dispatch(ParameterActions.setVisibleOn(parameterName, visibleOn));

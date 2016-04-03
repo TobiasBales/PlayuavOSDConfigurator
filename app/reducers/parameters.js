@@ -4,7 +4,7 @@ import {
   ALARM, ALARM_ENABLED, ALARM_VALUE, BAUD_RATE, CHANNEL, FC_TYPE, FONT_SIZE,
   H_ALIGNMENT, MAX, MAX_PANELS, MIN, OFFSET, PANEL, PARAMS_FROM_EEPROM,
   POSITION, RADIUS, RAW, SCALE, SCALE_ALIGNMENT, SCALE_ENABLED, SCALE_TYPE,
-  TYPE, UNITS, V_ALIGNMENT, VALUE, VIDEO_MODE, VISIBLE_ON,
+  TYPE, UNITS, V_ALIGNMENT, VALUE, MODE, VISIBLE_ON,
 } from '../actions/parameters';
 
 function addPreviewState(state) {
@@ -73,8 +73,8 @@ export default function parameters(state = initialState, action) {
       return state.updateIn([parameterName, 'vAlignment'], () => action.vAlignment);
     case VALUE:
       return state.updateIn([parameterName, `${action.key}Value`], () => action.value);
-    case VIDEO_MODE:
-      return state.updateIn([parameterName, 'videoMode'], () => action.videoMode);
+    case MODE:
+      return state.updateIn([parameterName, `${action.prefix}Mode`], () => action.mode);
     case VISIBLE_ON:
       return state.updateIn([parameterName, 'visibleOn'], () => action.visibleOn);
     default:

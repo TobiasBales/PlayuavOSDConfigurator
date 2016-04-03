@@ -9,11 +9,14 @@ class Switching extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
       panelChannel: PropTypes.number.isRequired,
+      panelMode: PropTypes.number.isRequired,
       panelValue: PropTypes.number.isRequired,
       videoChannel: PropTypes.number.isRequired,
+      videoMode: PropTypes.number.isRequired,
       videoValue: PropTypes.number.isRequired,
     }).isRequired,
     setChannel: PropTypes.func.isRequired,
+    setMode: PropTypes.func.isRequired,
     setValue: PropTypes.func.isRequired,
   }
 
@@ -30,7 +33,7 @@ class Switching extends Component {
   }
 
   render() {
-    const { panelChannel, panelValue, videoChannel, videoValue } = this.props.parameters;
+    const { panelChannel, panelMode, panelValue, videoChannel, videoMode, videoValue } = this.props.parameters;
     const channelOptions = [
       { value: 0, label: 'disabled' }, { value: 1, label: 'rc 1' },
       { value: 2, label: 'rc 2' }, { value: 3, label: 'rc 3' },
@@ -43,6 +46,10 @@ class Switching extends Component {
       { value: 15, label: 'rc 15' }, { value: 16, label: 'rc 16' }
     ];
 
+    const modeOptions = [
+      { value: 0, label: 'cycle' }, { value: 1, label: 'switch' }
+    ];
+
     return (
       <Parameters.ParameterList name="switching">
         <Column width={50} style={{ paddingRight: '5px' }}>
@@ -51,19 +58,33 @@ class Switching extends Component {
           />
         </Column>
         <Column width={50} style={{ paddingLeft: '5px' }}>
-          <Input type="number" label="value to switch"
-            onChange={this._setValue.bind(this, 'panel')} value={panelValue}
-          />
-        </Column>
-        <Column width={50} style={{ paddingRight: '5px' }}>
           <Parameters.Select label="video switch channel" value={videoChannel}
             options={channelOptions} setValue={this._setChannel.bind(this, 'video')}
           />
         </Column>
-        <Column width={50} style={{ paddingLeft: '5px' }}>
-          <Input type="number" label="value to switch"
-            onChange={this._setValue.bind(this, 'video')} value={videoValue}
+        <Column width={50} style={{ paddingRight: '5px' }}>
+          <Parameters.Select label="mode" value={panelMode}
+            options={modeOptions} setValue={this.props.setMode.bind(this, 'panel')}
           />
+        </Column>
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          <Parameters.Select label="mode" value={videoMode}
+            options={modeOptions} setValue={this.props.setMode.bind(this, 'video')}
+          />
+        </Column>
+        <Column width={50} style={{ paddingRight: '5px' }}>
+          { panelMode === 0 ?
+            <Input type="number" label="value to cycle"
+              onChange={this._setValue.bind(this, 'panel')} value={panelValue}
+            />
+            : null }
+        </Column>
+        <Column width={50} style={{ paddingLeft: '5px' }}>
+          { videoMode === 0 ?
+            <Input type="number" label="value to cycle"
+              onChange={this._setValue.bind(this, 'video')} value={videoValue}
+            />
+            : null }
         </Column>
       </Parameters.ParameterList>
     );
