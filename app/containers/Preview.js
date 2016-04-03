@@ -33,10 +33,10 @@ class Preview extends Component {
     const alarm = this.props.parameters.get('alarm');
     const {
       absoluteAltitude, alarms, altitudeScale, armState, artificialHorizont, batteryConsumed,
-      batteryCurrent, batteryRemaining, batteryVoltage, climbRate, compass, flightMode,
-      gpsHdop, gpsLatitude, gpsLongitude, gpsStatus, gps2Hdop, gps2Latitude, gps2Longitude,
-      gps2Status, homeDistance, radar, relativeAltitude, rssi, speedAir, speedScale,
-      speedGround, throttle, time, totalTrip, wpDistance, wind,
+      batteryCurrent, batteryRemaining, batteryVoltage, climbRate, compass, efficiency,
+      flightMode, gpsHdop, gpsLatitude, gpsLongitude, gpsStatus, gps2Hdop, gps2Latitude,
+      gps2Longitude, gps2Status, homeDistance, radar, relativeAltitude, rssi, speedAir,
+      speedScale, speedGround, throttle, time, totalTrip, wpDistance, wind,
     } = this.props.state;
     const units = this.props.state.get('video').get('units');
     const videoMode = this.props.state.get('video').get('videoMode');
@@ -94,15 +94,14 @@ class Preview extends Component {
     const setPosition = (parameter) => {
       return (x, y) => {
         this.props.setParameterPosition(parameter, x, y);
-      }
+      };
     };
 
     return (
       <Card className="preview-card">
         <CardText>
           <div className="preview" style={style}>
-            <img src={background}
-            />
+            <img src={background} />
             <Previews.AbsoluteAltitude {...absoluteAltitude.toJS()} {...fcStatus}
               units={units} setPosition={setPosition('absoluteAltitude')}
             />
@@ -135,6 +134,9 @@ class Preview extends Component {
             />
             <Previews.Compass {...compass.toJS()} {...fcStatus}
               setPosition={setPosition('compass')}
+            />
+            <Previews.Efficiency {...efficiency.toJS()} {...fcStatus}
+              units={units} setPosition={setPosition('compass')}
             />
             <Previews.FlightMode {...flightMode.toJS()} {...fcStatus}
               setPosition={setPosition('flightMode')}
@@ -211,7 +213,7 @@ class Preview extends Component {
           <Column width={50}>
             <Dropdown label="alarm" source={alarmOptions}
               value={alarm} onChange={this._onAlarmChange}
-           />
+            />
           </Column>
         </CardText>
       </Card>

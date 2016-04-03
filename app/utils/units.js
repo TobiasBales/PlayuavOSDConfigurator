@@ -5,6 +5,10 @@ const distanceDivider = [1000, 5280];
 const unitsShort = ['M', 'F'];
 const unitsLong = ['KM', 'M'];
 
+function distanceUnits(units) {
+  return unitsLong[units];
+}
+
 function convertSpeed(speed, units) {
   const unitsString = speedUnits[units];
   const convertedSpeed = convertSpeedWithoutUnits(speed, units);
@@ -51,4 +55,5 @@ export default {
   convertSpeed,
   convertDistanceWithoutUnits,
   convertSpeedWithoutUnits,
+  distanceUnits,
 };

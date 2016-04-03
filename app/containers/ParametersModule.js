@@ -43,6 +43,7 @@ export default class ParametersModule extends Component {
           <Settings.Attitude3d />
           <Settings.ClimbRate />
           <Settings.Wind />
+          <Settings.Efficiency />
         </Tab>
         <Tab label="Flight controller">
           <Settings.Time />

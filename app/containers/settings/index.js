@@ -10,6 +10,7 @@ import BatteryRemaining from './BatteryRemaining';
 import BatteryVoltage from './BatteryVoltage';
 import ClimbRate from './ClimbRate';
 import Compass from './Compass';
+import Efficiency from './Efficiency';
 import FlightMode from './FlightMode';
 import Gps2Hdop from './Gps2Hdop';
 import Gps2Latitude from './Gps2Latitude';
@@ -47,8 +48,9 @@ export default {
   BatteryCurrent,
   BatteryRemaining,
   BatteryVoltage,
-  Compass,
   ClimbRate,
+  Compass,
+  Efficiency,
   FlightMode,
   Gps2Hdop,
   Gps2Latitude,
