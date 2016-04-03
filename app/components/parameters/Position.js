@@ -15,13 +15,6 @@ export default class Position extends Component {
     yMax: PropTypes.number,
   }
 
-  static defaultProps = {
-    xMin: 0,
-    xMax: 350,
-    yMin: 0,
-    yMax: 230,
-  }
-
   _onChange(axis, position) {
     const x = axis === 'x' ? parseInt(position, 10) : this.props.positionX;
     const y = axis === 'y' ? parseInt(position, 10) : this.props.positionY;
