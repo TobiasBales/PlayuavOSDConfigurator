@@ -2,6 +2,9 @@
 
 A simple cross platform tool the playuav osd.
 
+## What does it look like?
+![](preview.png)
+
 ## Building
 
     npm install
