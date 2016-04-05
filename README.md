@@ -18,5 +18,8 @@ The current hex for the osd can be found [here](https://www.dropbox.com/s/vf7o4e
 
 If anyone knows a nice service for building things on windows/linux/os x and distributing the binaries please let me know @TobiasBales or by mail.
 
+## Warning
+This software comes with no guarantees, it has worked great for me so far but if you blow something up or brick your board, I might be willing to help you but no guarantees.
+
 ## Special thanks
 Special thanks go to the people who made/make the osd software/hardware and also the amazing people who made the electron-react-boilerplate which made the start of this project so much easier!
