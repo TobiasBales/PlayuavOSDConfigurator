@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import Dropdown from 'react-toolbox/lib/dropdown/Dropdown';
+import CustomPropTypes from '../../utils/PropTypes';
+import classNames from 'classnames';
 
 export default class Position extends Component {
   static propTypes = {
-    fontSize: PropTypes.number.isRequired,
+    fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     setFontSize: PropTypes.func.isRequired,
   }
 
@@ -19,10 +21,15 @@ export default class Position extends Component {
       { value: 2, label: 'large' },
     ];
 
+    const classes = classNames(
+      { modified: fontSize.get('value') !== fontSize.get('originalValue') },
+    );
+
     return (
       <Dropdown
         auto
-        value={fontSize}
+        className={classes}
+        value={fontSize.get('value')}
         source={options}
         onChange={this._onChange}
         label="font size"

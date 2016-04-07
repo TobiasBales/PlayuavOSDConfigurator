@@ -72,6 +72,7 @@ class Sidebar extends Component {
 
   _onOSDConfigWritten = () => {
     this.setState({ ...this.state, writingOSD: false, progress: 0 });
+    this.setAsBaseState(this.props.state);
     this.props.showInfo('finished writing osd configuration');
   }
 
@@ -250,4 +251,4 @@ class Sidebar extends Component {
   }
 }
 
-export default(bindStateForComponent('sidebar', Sidebar));
+export default(bindStateForComponent(null, Sidebar));

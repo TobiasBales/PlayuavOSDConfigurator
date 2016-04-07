@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import Input from 'react-toolbox/lib/input';
+import Input from '../../components/Input';
+import CustomPropTypes from '../../utils/PropTypes';
 
 export default class Scale extends Component {
   static propTypes = {
-    scale: PropTypes.number.isRequired,
+    scale: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     setScale: PropTypes.func.isRequired,
   }
 
@@ -15,7 +16,13 @@ export default class Scale extends Component {
     const { scale } = this.props;
     return (
       <div>
-        <Input type="number" step="0.1" label="scale" value={scale} onChange={this._onChange} />
+        <Input
+          type="number"
+          step="0.1"
+          label="scale"
+          value={scale}
+          onChange={this._onChange}
+        />
       </div>
     );
   }

@@ -1,28 +1,29 @@
 import React, { Component, PropTypes } from 'react';
 import Column from '../../components/Column';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Input from 'react-toolbox/lib/input';
+import Input from '../../components/Input';
 import Parameters from '../../components/parameters';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Alarms extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
-      fontSize: PropTypes.number.isRequired,
-      hAlignment: PropTypes.number.isRequired,
-      positionX: PropTypes.number.isRequired,
-      positionY: PropTypes.number.isRequired,
-      gpsStatusEnabled: PropTypes.number.isRequired,
-      lowBatteryEnabled: PropTypes.number.isRequired,
-      lowBatteryValue: PropTypes.number.isRequired,
-      underSpeedEnabled: PropTypes.number.isRequired,
-      underSpeedValue: PropTypes.number.isRequired,
-      overSpeedEnabled: PropTypes.number.isRequired,
-      overSpeedValue: PropTypes.number.isRequired,
-      underAltEnabled: PropTypes.number.isRequired,
-      underAltValue: PropTypes.number.isRequired,
-      overAltEnabled: PropTypes.number.isRequired,
-      overAltValue: PropTypes.number.isRequired,
+      fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      gpsStatusEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      lowBatteryEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      lowBatteryValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      underSpeedEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      underSpeedValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      overSpeedEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      overSpeedValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      underAltEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      underAltValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      overAltEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      overAltValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setAlarmEnabled: PropTypes.func.isRequired,
     setAlarmValue: PropTypes.func.isRequired,
@@ -60,63 +61,63 @@ class Alarms extends Component {
         <Parameters.Position labelX="position x" labelY="position y"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
-        <Column width={50} style={{ paddingRight: '5px' }}>
+        <Column width={50} >
           <Parameters.FontSize fontSize={fontSize} setFontSize={setFontSize} />
         </Column>
-        <Column width={50} style={{ paddingLeft: '5px' }}>
+        <Column width={50} >
           <Parameters.HorizontalAlignment hAlignment={hAlignment} setHAlignment={setHAlignment} />
         </Column>
-        <Column width={25} style={{ paddingRight: '5px' }}>
+        <Column width={25} >
           <Parameters.Select label="under speed" options={options}
             setValue={this._setEnabled.bind(this, 'underSpeed')} value={underSpeedEnabled}
           />
         </Column>
-        <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
+        <Column width={25}>
           <Input type="number" label="value"
-            onChange={this._setValue.bind(this, 'underSpeed')} value={underSpeedValue}
+              onChange={this._setValue.bind(this, 'underSpeed')} value={underSpeedValue}
           />
         </Column>
-        <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
+        <Column width={25}>
           <Parameters.Select label="over speed" options={options}
             setValue={this._setEnabled.bind(this, 'overSpeed')} value={overSpeedEnabled}
           />
         </Column>
-        <Column width={25} style={{ paddingLeft: '5px' }}>
+        <Column width={25} >
           <Input type="number" label="value"
             onChange={this._setValue.bind(this, 'overSpeed')} value={overSpeedValue}
           />
         </Column>
-        <Column width={25} style={{ paddingRight: '5px' }}>
+        <Column width={25} >
           <Parameters.Select label="under alt" options={options}
             setValue={this._setEnabled.bind(this, 'underAlt')} value={underAltEnabled}
           />
         </Column>
-        <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
+        <Column width={25}>
           <Input type="number" label="value"
             onChange={this._setValue.bind(this, 'underAlt')} value={underAltValue}
           />
         </Column>
-        <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
+        <Column width={25}>
           <Parameters.Select label="over alt" options={options}
             setValue={this._setEnabled.bind(this, 'overAlt')} value={overAltEnabled}
           />
         </Column>
-        <Column width={25} style={{ paddingLeft: '5px' }}>
+        <Column width={25} >
           <Input type="number" label="value"
             onChange={this._setValue.bind(this, 'overAlt')} value={overAltValue}
           />
         </Column>
-        <Column width={25} style={{ paddingRight: '5px' }}>
+        <Column width={25} >
           <Parameters.Select label="low battery" options={options}
             setValue={this._setEnabled.bind(this, 'lowBattery')} value={lowBatteryEnabled}
           />
         </Column>
-        <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
-          <Input type="number" label="value"
+        <Column width={25}>
+          <Input label="value" type="number"
             onChange={this._setValue.bind(this, 'lowBattery')} value={lowBatteryValue}
           />
         </Column>
-        <Column width={50} style={{ paddingLeft: '5px' }}>
+        <Column width={50} >
           <Parameters.Select label="gps status" options={options}
             setValue={this._setEnabled.bind(this, 'gpsStatus')} value={gpsStatusEnabled}
           />

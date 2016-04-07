@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import Input from 'react-toolbox/lib/input';
+import Input from '../../components/Input';
 import Column from '../Column';
+import CustomPropTypes from '../../utils/PropTypes';
 
 export default class Position extends Component {
   static propTypes = {
-    positionX: PropTypes.number.isRequired,
-    positionY: PropTypes.number.isRequired,
+    positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+    positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     labelX: PropTypes.string.isRequired,
     labelY: PropTypes.string.isRequired,
     setPosition: PropTypes.func.isRequired,
@@ -16,8 +17,8 @@ export default class Position extends Component {
   }
 
   _onChange(axis, position) {
-    const x = axis === 'x' ? parseInt(position, 10) : this.props.positionX;
-    const y = axis === 'y' ? parseInt(position, 10) : this.props.positionY;
+    const x = axis === 'x' ? parseInt(position, 10) : this.props.positionX.get('value');
+    const y = axis === 'y' ? parseInt(position, 10) : this.props.positionY.get('value');
     this.props.setPosition(x, y);
   }
 
@@ -25,14 +26,14 @@ export default class Position extends Component {
     const { labelX, labelY, positionX, positionY, xMin, xMax, yMin, yMax } = this.props;
     return (
       <div>
-        <Column width={50} style={{ paddingRight: '5px' }}>
-          <Input type="number" label={labelX} value={positionX} min={xMin} max={xMax}
-            onChange={this._onChange.bind(this, 'x')}
+        <Column width={50}>
+          <Input type="number" label={labelX} value={positionX}
+            min={xMin} max={xMax} onChange={this._onChange.bind(this, 'x')}
           />
         </Column>
-        <Column width={50} style={{ paddingLeft: '5px' }}>
-          <Input type="number" label={labelY} value={positionY} min={yMin} max={yMax}
-            onChange={this._onChange.bind(this, 'y')}
+        <Column width={50}>
+          <Input type="number" label={labelY} value={positionY}
+            min={yMin} max={yMax} onChange={this._onChange.bind(this, 'y')}
           />
         </Column>
       </div>

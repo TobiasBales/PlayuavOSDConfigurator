@@ -9,11 +9,12 @@ export default class ParamterList extends Component {
 
   render() {
     const { children, name } = this.props;
+    const contentStyle = { padding: 0 };
     return (
       <div className="parameter-list">
         <Card>
           <CardTitle title={name} />
-          <CardText>
+          <CardText style={contentStyle}>
             {children}
           </CardText>
         </Card>

@@ -3,15 +3,16 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../../components/parameters';
 import Column from '../../components/Column';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Throttle extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
-      positionX: PropTypes.number.isRequired,
-      positionY: PropTypes.number.isRequired,
-      scaleEnabled: PropTypes.number.isRequired,
-      scaleType: PropTypes.number.isRequired,
-      visibleOn: PropTypes.number.isRequired,
+      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      scaleEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      scaleType: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     numberOfPanels: PropTypes.number.isRequired,
     setPosition: PropTypes.func.isRequired,
@@ -40,12 +41,12 @@ class Throttle extends Component {
         <Parameters.Position labelX="position x" labelY="position y"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
-        <Column width={50} style={{ paddingRight: '5px' }}>
+        <Column width={50} >
           <Parameters.Select label="style" value={scaleEnabled}
             options={scaleEnabledOptions} setValue={setScaleEnabled}
           />
         </Column>
-        <Column width={50} style={{ paddingLeft: '5px' }}>
+        <Column width={50} >
           <Parameters.Select label="scale orientation" value={scaleType}
             options={scaleTypeOptions} setValue={setScaleType}
           />

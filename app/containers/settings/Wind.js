@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../../components/parameters';
-
+import CustomPropTypes from '../../utils/PropTypes';
 import { bindStateForComponent } from '../../utils/parameters';
 
 class Wind extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
-      positionX: PropTypes.number.isRequired,
-      positionY: PropTypes.number.isRequired,
-      visibleOn: PropTypes.number.isRequired,
+      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     numberOfPanels: PropTypes.number.isRequired,
     setPosition: PropTypes.func.isRequired,

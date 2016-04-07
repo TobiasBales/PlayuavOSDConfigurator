@@ -3,15 +3,16 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../../components/parameters';
 import Column from '../../components/Column';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Attitude3d extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
-      positionX: PropTypes.number.isRequired,
-      positionY: PropTypes.number.isRequired,
-      mapRadius: PropTypes.number.isRequired,
-      scale: PropTypes.number.isRequired,
-      visibleOn: PropTypes.number.isRequired,
+      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      mapRadius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      scale: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     numberOfPanels: PropTypes.number.isRequired,
     setPosition: PropTypes.func.isRequired,
@@ -46,10 +47,10 @@ class Attitude3d extends Component {
         <Parameters.Position labelX="position x" labelY="position y"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
-        <Column width={50} style={{ paddingRight: '5px' }}>
+        <Column width={50} >
           <Parameters.Scale setScale={setScale} scale={scale} />
         </Column>
-        <Column width={50} style={{ paddingLeft: '5px' }}>
+        <Column width={50} >
           <Parameters.Radius label="map radius" radiusKey="mapRadius"
             radius={mapRadius} setRadius={setRadius}
           />

@@ -1,10 +1,11 @@
 import eeprom from '../utils/eeprom';
 
 import {
-  ALARM, ALARM_ENABLED, ALARM_VALUE, BAUD_RATE, CHANNEL, FC_TYPE, FONT_SIZE,
-  H_ALIGNMENT, MAX, MAX_PANELS, MIN, OFFSET, PANEL, PARAMS_FROM_EEPROM,
-  POSITION, RADIUS, RAW, SCALE, SCALE_ALIGNMENT, SCALE_ENABLED, SCALE_TYPE,
-  TYPE, UNITS, V_ALIGNMENT, VALUE, MODE, VISIBLE_ON,
+  ALARM, ALARM_ENABLED, ALARM_VALUE, AS_BASE_STATE, BAUD_RATE, CHANNEL,
+  FC_TYPE, FONT_SIZE, H_ALIGNMENT, MAX, MAX_PANELS, MIN, OFFSET, PANEL,
+  PARAMS_FROM_EEPROM, POSITION, RADIUS, RAW, SCALE, SCALE_ALIGNMENT,
+  SCALE_ENABLED, SCALE_TYPE, TYPE, UNITS, V_ALIGNMENT, VALUE, MODE,
+  VISIBLE_ON,
 } from '../actions/parameters';
 
 function addPreviewState(state) {
@@ -13,7 +14,11 @@ function addPreviewState(state) {
     .updateIn(['preview', 'alarm'], () => 0);
 }
 
-const initialState = addPreviewState(eeprom.toParameters(eeprom.defaultEEPROM));
+function setAsBaseState(state, baseState = null) {
+  return state.updateIn(['originalState'], () => baseState || state);
+}
+
+const initialState = setAsBaseState(addPreviewState(eeprom.toParameters(eeprom.defaultEEPROM)));
 
 export default function parameters(state = initialState, action) {
   const parameterName = action.parameter;
@@ -25,6 +30,8 @@ export default function parameters(state = initialState, action) {
       return state.updateIn([parameterName, `${action.alarm}Enabled`], () => action.enabled);
     case ALARM_VALUE:
       return state.updateIn([parameterName, `${action.alarm}Value`], () => action.value);
+    case AS_BASE_STATE:
+      return setAsBaseState(state, action.state);
     case BAUD_RATE:
       return state.updateIn([parameterName, 'baudRate'], () => action.baudRate);
     case CHANNEL:
@@ -48,7 +55,7 @@ export default function parameters(state = initialState, action) {
     case PANEL:
       return state.updateIn([parameterName, 'panel'], () => action.panel);
     case PARAMS_FROM_EEPROM:
-      return addPreviewState(eeprom.toParameters(action.eepromData));
+      return addPreviewState(setAsBaseState(eeprom.toParameters(action.eepromData)));
     case POSITION:
       return state
         .updateIn([parameterName, 'positionX'], () => action.x)

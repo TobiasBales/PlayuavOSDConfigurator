@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import Input from 'react-toolbox/lib/input';
+import Input from '../../components/Input';
+import CustomPropTypes from '../../utils/PropTypes';
 
 export default class Radius extends Component {
   static propTypes = {
     radiusKey: PropTypes.string.isRequired,
-    radius: PropTypes.number.isRequired,
+    radius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     label: PropTypes.string.isRequired,
     setRadius: PropTypes.func.isRequired,
   }
@@ -15,9 +16,15 @@ export default class Radius extends Component {
 
   render() {
     const { radius, label } = this.props;
+
     return (
       <div>
-        <Input type="number" label={label} value={radius} onChange={this._onChange.bind(this)} />
+        <Input
+          type="number"
+          label={label}
+          value={radius}
+          onChange={this._onChange.bind(this)}
+        />
       </div>
     );
   }

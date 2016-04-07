@@ -1,19 +1,19 @@
 import React, { Component, PropTypes } from 'react';
-
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../../components/parameters';
 import Column from '../../components/Column';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Map extends Component {
   static propTypes = {
     numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
-      fontSize: PropTypes.number.isRequired,
-      hAlignment: PropTypes.number.isRequired,
-      radius: PropTypes.number.isRequired,
-      vAlignment: PropTypes.number.isRequired,
-      visibleOn: PropTypes.number.isRequired,
+      fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      radius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      vAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setFontSize: PropTypes.func.isRequired,
     setHAlignment: PropTypes.func.isRequired,
@@ -35,16 +35,16 @@ class Map extends Component {
 
     return (
       <Parameters.ParameterList name="map">
-        <Column width={50} style={{ paddingRight: '5px' }}>
+        <Column width={50} >
           <Parameters.VerticalAlignment vAlignment={vAlignment} setVAlignment={setVAlignment} />
         </Column>
-        <Column width={50} style={{ paddingLeft: '5px' }}>
+        <Column width={50} >
           <Parameters.HorizontalAlignment hAlignment={hAlignment} setHAlignment={setHAlignment} />
         </Column>
-        <Column width={50} style={{ paddingRight: '5px' }}>
+        <Column width={50} >
           <Parameters.FontSize fontSize={fontSize} setFontSize={setFontSize} />
         </Column>
-        <Column width={50} style={{ paddingLeft: '5px' }}>
+        <Column width={50} >
           <Parameters.Radius label="radius" radius={radius}
             radiusKey="radius" setRadius={setRadius}
           />

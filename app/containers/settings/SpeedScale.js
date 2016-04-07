@@ -3,16 +3,17 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../../components/parameters';
 import { bindStateForComponent } from '../../utils/parameters';
 import Column from '../../components/Column';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class SpeedScale extends Component {
   static propTypes = {
     numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
-      positionX: PropTypes.number.isRequired,
-      positionY: PropTypes.number.isRequired,
-      scaleAlignment: PropTypes.number.isRequired,
-      scaleType: PropTypes.number.isRequired,
-      visibleOn: PropTypes.number.isRequired,
+      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      scaleAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      scaleType: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setPosition: PropTypes.func.isRequired,
     setScaleAlignment: PropTypes.func.isRequired,
@@ -33,10 +34,10 @@ class SpeedScale extends Component {
 
     return (
       <Parameters.ParameterList name="speed scale">
-        <Column width={50} style={{ paddingRight: '5px' }}>
+        <Column width={50} >
           <Parameters.SpeedScaleType setScaleType={setScaleType} scaleType={scaleType} />
         </Column>
-        <Column width={50} style={{ paddingLeft: '5px' }}>
+        <Column width={50} >
           <Parameters.ScaleAlignment setScaleAlignment={setScaleAlignment}
             scaleAlignment={scaleAlignment}
           />

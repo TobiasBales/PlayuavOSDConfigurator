@@ -4,16 +4,17 @@ import Parameters from '../../components/parameters';
 import Column from '../../components/Column';
 import Input from 'react-toolbox/lib/input';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Switching extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
-      panelChannel: PropTypes.number.isRequired,
-      panelMode: PropTypes.number.isRequired,
-      panelValue: PropTypes.number.isRequired,
-      videoChannel: PropTypes.number.isRequired,
-      videoMode: PropTypes.number.isRequired,
-      videoValue: PropTypes.number.isRequired,
+      panelChannel: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      panelMode: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      panelValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      videoChannel: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      videoMode: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      videoValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setChannel: PropTypes.func.isRequired,
     setMode: PropTypes.func.isRequired,
@@ -52,34 +53,34 @@ class Switching extends Component {
 
     return (
       <Parameters.ParameterList name="switching">
-        <Column width={50} style={{ paddingRight: '5px' }}>
+        <Column width={50} >
           <Parameters.Select label="panel switch channel" value={panelChannel}
             options={channelOptions} setValue={this._setChannel.bind(this, 'panel')}
           />
         </Column>
-        <Column width={50} style={{ paddingLeft: '5px' }}>
+        <Column width={50} >
           <Parameters.Select label="video switch channel" value={videoChannel}
             options={channelOptions} setValue={this._setChannel.bind(this, 'video')}
           />
         </Column>
-        <Column width={50} style={{ paddingRight: '5px' }}>
+        <Column width={50} >
           <Parameters.Select label="mode" value={panelMode}
             options={modeOptions} setValue={this.props.setMode.bind(this, 'panel')}
           />
         </Column>
-        <Column width={50} style={{ paddingLeft: '5px' }}>
+        <Column width={50} >
           <Parameters.Select label="mode" value={videoMode}
             options={modeOptions} setValue={this.props.setMode.bind(this, 'video')}
           />
         </Column>
-        <Column width={50} style={{ paddingRight: '5px' }}>
+        <Column width={50} >
           { panelMode === 0 ?
             <Input type="number" label="value to cycle"
               onChange={this._setValue.bind(this, 'panel')} value={panelValue}
             />
             : null }
         </Column>
-        <Column width={50} style={{ paddingLeft: '5px' }}>
+        <Column width={50} >
           { videoMode === 0 ?
             <Input type="number" label="value to cycle"
               onChange={this._setValue.bind(this, 'video')} value={videoValue}
