@@ -7,17 +7,14 @@ function getTemplate(app, shell, mainWindow) {
     template = [{
       label: 'Electron',
       submenu: [{
-        label: 'About ElectronReact',
+        label: 'About Playuav OSD Configurator',
         selector: 'orderFrontStandardAboutPanel:'
       }, {
         type: 'separator'
       }, {
-        label: 'Services',
-        submenu: []
-      }, {
         type: 'separator'
       }, {
-        label: 'Hide ElectronReact',
+        label: 'Hide Playuav OSD Configurator',
         accelerator: 'Command+H',
         selector: 'hide:'
       }, {
@@ -93,42 +90,26 @@ function getTemplate(app, shell, mainWindow) {
         }
       }]
     }, {
-      label: 'Window',
-      submenu: [{
-        label: 'Minimize',
-        accelerator: 'Command+M',
-        selector: 'performMiniaturize:'
-      }, {
-        label: 'Close',
-        accelerator: 'Command+W',
-        selector: 'performClose:'
-      }, {
-        type: 'separator'
-      }, {
-        label: 'Bring All to Front',
-        selector: 'arrangeInFront:'
-      }]
-    }, {
       label: 'Help',
       submenu: [{
-        label: 'Learn More',
+        label: 'Playuav OSD wiki',
         click() {
-          shell.openExternal('http://electron.atom.io');
+          shell.openExternal('http://www.playuav.com/wiki/doku.php?id=projects:playuavosd:start');
         }
       }, {
-        label: 'Documentation',
+        label: 'Playuav OSD homepage/forum',
         click() {
-          shell.openExternal('https://github.com/atom/electron/tree/master/docs#readme');
+          shell.openExternal('http://en.playuav.com/');
         }
       }, {
-        label: 'Community Discussions',
+        label: 'Playuav OSD Configurator issues',
         click() {
-          shell.openExternal('https://discuss.atom.io/c/electron');
+          shell.openExternal('https://github.com/TobiasBales/PlayuavOSDConfigurator');
         }
       }, {
-        label: 'Search Issues',
+        label: 'Playuav OSD Configurator sources',
         click() {
-          shell.openExternal('https://github.com/atom/electron/issues');
+          shell.openExternal('https://github.com/TobiasBales/PlayuavOSDConfigurator');
         }
       }]
     }];
@@ -136,9 +117,6 @@ function getTemplate(app, shell, mainWindow) {
     template = [{
       label: '&File',
       submenu: [{
-        label: '&Open',
-        accelerator: 'Ctrl+O'
-      }, {
         label: '&Close',
         accelerator: 'Ctrl+W',
         click() {
@@ -175,24 +153,24 @@ function getTemplate(app, shell, mainWindow) {
     }, {
       label: 'Help',
       submenu: [{
-        label: 'Learn More',
+        label: 'Playuav OSD wiki',
         click() {
-          shell.openExternal('http://electron.atom.io');
+          shell.openExternal('http://www.playuav.com/wiki/doku.php?id=projects:playuavosd:start');
         }
       }, {
-        label: 'Documentation',
+        label: 'Playuav OSD homepage/forum',
         click() {
-          shell.openExternal('https://github.com/atom/electron/tree/master/docs#readme');
+          shell.openExternal('http://en.playuav.com/');
         }
       }, {
-        label: 'Community Discussions',
+        label: 'Playuav OSD Configurator issues',
         click() {
-          shell.openExternal('https://discuss.atom.io/c/electron');
+          shell.openExternal('https://github.com/TobiasBales/PlayuavOSDConfigurator');
         }
       }, {
-        label: 'Search Issues',
+        label: 'Playuav OSD Configurator sources',
         click() {
-          shell.openExternal('https://github.com/atom/electron/issues');
+          shell.openExternal('https://github.com/TobiasBales/PlayuavOSDConfigurator');
         }
       }]
     }];
