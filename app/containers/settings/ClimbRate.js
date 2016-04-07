@@ -3,14 +3,15 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../../components/parameters';
 import Column from '../../components/Column';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class ClimbRate extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
-      fontSize: PropTypes.number.isRequired,
-      visibleOn: PropTypes.number.isRequired,
-      positionX: PropTypes.number.isRequired,
-      positionY: PropTypes.number.isRequired,
+      fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     numberOfPanels: PropTypes.number.isRequired,
     setFontSize: PropTypes.func.isRequired,

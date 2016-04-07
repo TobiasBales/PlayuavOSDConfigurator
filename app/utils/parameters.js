@@ -3,9 +3,20 @@ import Immutable from 'immutable';
 import * as ParameterActions from '../actions/parameters';
 
 function mapStateToProps(parameterName, state) {
+  let parameters = Immutable.fromJS({});
+  if (parameterName) {
+    parameters = state.parameters.get(parameterName).reduce((newParams, _, key) => {
+      const path = [parameterName, key];
+      const value = {
+        value: state.parameters.getIn(path),
+        originalValue: state.parameters.getIn(['originalState', ...path]),
+      };
+      return newParams.update(key, () => Immutable.fromJS(value));
+    }, Immutable.fromJS({}));
+  }
   return {
     state: Immutable.fromJS(state.parameters),
-    parameters: state.parameters.get(parameterName),
+    parameters,
     numberOfPanels: state.parameters.get('video').get('maxPanels'),
   };
 }
@@ -20,6 +31,9 @@ function mapDispatchToProps(parameterName, dispatch) {
     },
     setAlarmValue: (alarm, value) => {
       dispatch(ParameterActions.setAlarmValue(parameterName, alarm, value));
+    },
+    setAsBaseState: (state) => {
+      dispatch(ParameterActions.setAsBaseState(state));
     },
     setBaudRate: (baudRate) => {
       dispatch(ParameterActions.setBaudRate(parameterName, baudRate));

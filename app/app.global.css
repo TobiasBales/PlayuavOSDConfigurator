@@ -118,29 +118,16 @@ html {
   }
 }
 
+.modified {
+  background-color: #EEEEEE;
+}
+
 .label {
   line-height: 1.6rem;
   color: rgba(0, 0, 0, 0.26);
   font-size: 1.2rem;
   margin-bottom: 0.6rem;
   display: inline-block;
-}
-
-.font.small {
-  font-size: 20px;
-  font-family: IBM_EGA_8x14;
-  line-height: 20px;
-}
-
-.font.medium {
-  font-family: IBM_EGA_8x14;
-  font-size: 28px;
-  line-height: 28px;
-}
-
-.font.large {
-  font-size: 18px;
-  line-height: 18px;
 }
 
 .material-icons {

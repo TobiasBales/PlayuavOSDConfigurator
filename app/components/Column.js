@@ -1,19 +1,22 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 
 export default class Column extends Component {
   static propTypes = {
     children: PropTypes.node,
     style: PropTypes.object,
+    className: PropTypes.string,
     width: PropTypes.number.isRequired,
   }
 
   render() {
     const { children, width } = this.props;
     const style = this.props.style || {};
-    style.width = width + '%';
+    style.width = `${width}%`;
+    const classes = classNames('column', this.props.classes);
 
     return (
-      <div className="column" style={style} {...this.props}>
+      <div className={classes} style={style} {...this.props}>
         {children}
       </div>
     );

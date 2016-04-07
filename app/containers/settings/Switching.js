@@ -4,16 +4,17 @@ import Parameters from '../../components/parameters';
 import Column from '../../components/Column';
 import Input from 'react-toolbox/lib/input';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Switching extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
-      panelChannel: PropTypes.number.isRequired,
-      panelMode: PropTypes.number.isRequired,
-      panelValue: PropTypes.number.isRequired,
-      videoChannel: PropTypes.number.isRequired,
-      videoMode: PropTypes.number.isRequired,
-      videoValue: PropTypes.number.isRequired,
+      panelChannel: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      panelMode: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      panelValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      videoChannel: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      videoMode: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      videoValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setChannel: PropTypes.func.isRequired,
     setMode: PropTypes.func.isRequired,

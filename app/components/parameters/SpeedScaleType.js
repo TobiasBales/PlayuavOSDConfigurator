@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import Dropdown from 'react-toolbox/lib/dropdown/Dropdown';
+import CustomPropTypes from '../../utils/PropTypes';
 
 export default class SpeedScaleType extends Component {
   static propTypes = {
-    scaleType: PropTypes.number.isRequired,
+    scaleType: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     setScaleType: PropTypes.func.isRequired,
   }
 
@@ -21,7 +22,7 @@ export default class SpeedScaleType extends Component {
     return (
       <Dropdown
         auto
-        value={scaleType}
+        value={scaleType.get('value')}
         source={options}
         onChange={this._onChange}
         label="type"

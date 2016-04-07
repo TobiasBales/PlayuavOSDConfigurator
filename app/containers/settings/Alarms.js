@@ -1,28 +1,29 @@
 import React, { Component, PropTypes } from 'react';
 import Column from '../../components/Column';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Input from 'react-toolbox/lib/input';
+import Input from '../../components/Input';
 import Parameters from '../../components/parameters';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Alarms extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
-      fontSize: PropTypes.number.isRequired,
-      hAlignment: PropTypes.number.isRequired,
-      positionX: PropTypes.number.isRequired,
-      positionY: PropTypes.number.isRequired,
-      gpsStatusEnabled: PropTypes.number.isRequired,
-      lowBatteryEnabled: PropTypes.number.isRequired,
-      lowBatteryValue: PropTypes.number.isRequired,
-      underSpeedEnabled: PropTypes.number.isRequired,
-      underSpeedValue: PropTypes.number.isRequired,
-      overSpeedEnabled: PropTypes.number.isRequired,
-      overSpeedValue: PropTypes.number.isRequired,
-      underAltEnabled: PropTypes.number.isRequired,
-      underAltValue: PropTypes.number.isRequired,
-      overAltEnabled: PropTypes.number.isRequired,
-      overAltValue: PropTypes.number.isRequired,
+      fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      gpsStatusEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      lowBatteryEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      lowBatteryValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      underSpeedEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      underSpeedValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      overSpeedEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      overSpeedValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      underAltEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      underAltValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      overAltEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      overAltValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setAlarmEnabled: PropTypes.func.isRequired,
     setAlarmValue: PropTypes.func.isRequired,
@@ -73,7 +74,7 @@ class Alarms extends Component {
         </Column>
         <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
           <Input type="number" label="value"
-            onChange={this._setValue.bind(this, 'underSpeed')} value={underSpeedValue}
+              onChange={this._setValue.bind(this, 'underSpeed')} value={underSpeedValue}
           />
         </Column>
         <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
@@ -112,7 +113,7 @@ class Alarms extends Component {
           />
         </Column>
         <Column width={25} style={{ paddingLeft: '5px', paddingRight: '5px' }}>
-          <Input type="number" label="value"
+          <Input label="value" type="number"
             onChange={this._setValue.bind(this, 'lowBattery')} value={lowBatteryValue}
           />
         </Column>

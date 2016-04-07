@@ -3,15 +3,16 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../../components/parameters';
 import Column from '../../components/Column';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Attitude3d extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
-      positionX: PropTypes.number.isRequired,
-      positionY: PropTypes.number.isRequired,
-      mapRadius: PropTypes.number.isRequired,
-      scale: PropTypes.number.isRequired,
-      visibleOn: PropTypes.number.isRequired,
+      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      mapRadius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      scale: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     numberOfPanels: PropTypes.number.isRequired,
     setPosition: PropTypes.func.isRequired,

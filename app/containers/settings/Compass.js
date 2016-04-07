@@ -1,16 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Input from 'react-toolbox/lib/input';
+import Input from '../../components/Input';
 import Parameters from '../../components/parameters';
 import Column from '../../components/Column';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Compass extends Component {
   static propTypes = {
     numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
-      positionY: PropTypes.number.isRequired,
-      visibleOn: PropTypes.number.isRequired,
+      positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setPosition: PropTypes.func.isRequired,
     setVisibleOn: PropTypes.func.isRequired,

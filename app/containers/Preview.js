@@ -8,11 +8,12 @@ import Column from '../components/Column';
 import Previews from '../components/preview';
 import Label from '../components/Label';
 import background from '../../static/background.png';
+import CustomPropTypes from '../utils/PropTypes';
 
 class Preview extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
-      panel: PropTypes.number.isRequired,
+      panel: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setAlarm: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
@@ -29,8 +30,8 @@ class Preview extends Component {
   }
 
   render() {
-    const panel = this.props.parameters.get('panel');
-    const alarm = this.props.parameters.get('alarm');
+    const panel = this.props.parameters.get('panel').get('value');
+    const alarm = this.props.parameters.get('alarm').get('value');
     const {
       absoluteAltitude, alarms, altitudeScale, armState, artificialHorizont, batteryConsumed,
       batteryCurrent, batteryRemaining, batteryVoltage, climbRate, compass, efficiency,
@@ -91,11 +92,8 @@ class Preview extends Component {
       { value: 6, label: 'high alt' }
     ];
 
-    const setPosition = (parameter) => {
-      return (x, y) => {
-        this.props.setParameterPosition(parameter, x, y);
-      };
-    };
+    const setPosition = (parameter) =>
+      (x, y) => this.props.setParameterPosition(parameter, x, y);
 
     return (
       <Card className="preview-card">

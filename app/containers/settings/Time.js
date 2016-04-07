@@ -3,18 +3,19 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../../components/parameters';
 import SimpleSettings from './SimpleSettings';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Time extends Component {
   static propTypes = {
     name: PropTypes.string,
     numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
-      fontSize: PropTypes.number.isRequired,
-      hAlignment: PropTypes.number.isRequired,
-      positionX: PropTypes.number.isRequired,
-      positionY: PropTypes.number.isRequired,
-      type: PropTypes.number.isRequired,
-      visibleOn: PropTypes.number.isRequired,
+      fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      type: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setFontSize: PropTypes.func.isRequired,
     setHAlignment: PropTypes.func.isRequired,

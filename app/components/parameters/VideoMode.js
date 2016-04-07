@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import Dropdown from 'react-toolbox/lib/dropdown/Dropdown';
+import CustomPropTypes from '../../utils/PropTypes';
+import classNames from 'classnames';
 
 export default class VideoMode extends Component {
   static propTypes = {
-    videoMode: PropTypes.number.isRequired,
+    videoMode: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     setVideoMode: PropTypes.func.isRequired,
   }
 
@@ -17,11 +19,15 @@ export default class VideoMode extends Component {
       { value: 0, label: 'ntsc' },
       { value: 1, label: 'pal' },
     ];
+    const classes = classNames({
+      modified: videoMode.get('value') !== videoMode.get('originalValue')
+    });
 
     return (
       <Dropdown
         auto
-        value={videoMode}
+        className={classes}
+        value={videoMode.get('value')}
         source={options}
         onChange={this._onChange}
         label="video mode"

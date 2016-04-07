@@ -1,6 +1,7 @@
 export const ALARM = 'parameters/alarm';
 export const ALARM_ENABLED = 'parameters/alarm_enabled';
 export const ALARM_VALUE = 'parameters/alarm_value';
+export const AS_BASE_STATE = 'as_base_state';
 export const BAUD_RATE = 'parameters/baud_rate';
 export const CHANNEL = 'parameters/channel';
 export const FC_TYPE = 'parameters/fc_type';
@@ -36,6 +37,10 @@ export function setAlarmEnabled(parameter, alarm, enabled) {
 
 export function setAlarmValue(parameter, alarm, value) {
   return { type: ALARM_VALUE, parameter, alarm, value };
+}
+
+export function setAsBaseState(state) {
+  return { type: AS_BASE_STATE, state };
 }
 
 export function setBaudRate(parameter, baudRate) {

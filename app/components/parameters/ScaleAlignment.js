@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import Dropdown from 'react-toolbox/lib/dropdown/Dropdown';
+import CustomPropTypes from '../../utils/PropTypes';
 
 export default class ScaleAlignment extends Component {
   static propTypes = {
-    scaleAlignment: PropTypes.number.isRequired,
+    scaleAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     setScaleAlignment: PropTypes.func.isRequired,
   }
 
@@ -21,7 +22,7 @@ export default class ScaleAlignment extends Component {
     return (
       <Dropdown
         auto
-        value={scaleAlignment}
+        value={scaleAlignment.get('value')}
         source={options}
         onChange={this._onChange}
         label="alignment"

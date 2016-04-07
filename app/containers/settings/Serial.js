@@ -3,13 +3,14 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../../components/parameters';
 import { bindStateForComponent } from '../../utils/parameters';
 import Column from '../../components/Column';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Serial extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
-      baudRate: PropTypes.number.isRequired,
-      fcType: PropTypes.number.isRequired,
-      version: PropTypes.number.isRequired,
+      baudRate: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      fcType: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      version: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setBaudRate: PropTypes.func.isRequired,
     setFcType: PropTypes.func.isRequired,
@@ -46,7 +47,7 @@ class Serial extends Component {
           />
         </Column>
         <Column width={50} style={{ paddingRight: '5px' }}>
-        <Parameters.Text text={version} label="version" />
+        <Parameters.Text text={version.get('value')} label="version" />
         </Column>
       </Parameters.ParameterList>
     );

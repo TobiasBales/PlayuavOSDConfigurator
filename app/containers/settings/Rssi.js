@@ -1,25 +1,26 @@
 import React, { Component, PropTypes } from 'react';
-import Input from 'react-toolbox/lib/input';
+import Input from '../../components/Input';
 import Column from '../../components/Column';
 import Select from '../../components/parameters/Select';
 import SimpleSettings from './SimpleSettings';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Rssi extends Component {
   static propTypes = {
     name: PropTypes.string,
     numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
-      fontSize: PropTypes.number.isRequired,
-      hAlignment: PropTypes.number.isRequired,
-      max: PropTypes.number.isRequired,
-      min: PropTypes.number.isRequired,
-      positionX: PropTypes.number.isRequired,
-      positionY: PropTypes.number.isRequired,
-      raw: PropTypes.number.isRequired,
-      type: PropTypes.number.isRequired,
-      visibleOn: PropTypes.number.isRequired,
+      fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      max: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      min: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      raw: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      type: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setFontSize: PropTypes.func.isRequired,
     setHAlignment: PropTypes.func.isRequired,
