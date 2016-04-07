@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/TobiasBales/PlayuavOSDConfigurator.png?label=ready&title=Ready)](https://waffle.io/TobiasBales/PlayuavOSDConfigurator)
 # Playuav OSD Configurator
 
 A simple cross platform tool the playuav osd.
