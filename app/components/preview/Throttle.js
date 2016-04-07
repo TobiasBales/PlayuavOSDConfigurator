@@ -30,10 +30,6 @@ export default class ThrottlePreview extends Component {
     this.draw();
   }
 
-  content() {
-    return `${this.props.throttle.toFixed(0)}%`;
-  }
-
   clear(context) {
     context.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
   }
@@ -44,12 +40,13 @@ export default class ThrottlePreview extends Component {
     this.clear(context);
 
     if ((this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
-      const string = canvas.calculateStringPosition(this.content(), 0, 0, 2, 2, font);
-      const posX = 25;
-      const posY = 25;
-      canvas.drawString(context, this.content(), posX - string.width, posY, font);
 
       if (this.props.scaleEnabled) {
+        const string = `${this.props.throttle.toFixed(0)}%`;
+        const position = canvas.calculateStringPosition(string, 0, 0, 2, 2, font);
+        const posX = 75;
+        const posY = 25;
+        canvas.drawString(context, string, posX - position.width, posY, font);
         const posThY = Math.round(this.props.throttle * 0.5, 0);
         const posThX = posX - 25 + posThY;
 
@@ -66,6 +63,13 @@ export default class ThrottlePreview extends Component {
           canvas.drawLine(context, posX + 25, posY + 10, posX + 25, posY + 14);
           canvas.drawLine(context, posX - 25, posY + 10, posX - 25, posY + 14);
         }
+      } else {
+        const string = `thr ${this.props.throttle.toFixed(0)}%`;
+        console.log('else', string);
+        const position = canvas.calculateStringPosition(string, 0, 0, 2, 2, font);
+        const posX = 75;
+        const posY = 25;
+        canvas.drawString(context, string, posX - position.width, posY, font);
       }
     }
   }
@@ -79,8 +83,8 @@ export default class ThrottlePreview extends Component {
         <canvas ref="canvas" /> :
         <canvas
           ref="canvas"
-          style={{ left: positionX - 25, top: positionY - 25 }}
-          width={51}
+          style={{ left: positionX - 75, top: positionY - 25 }}
+          width={101}
           height={51}
           className="preview-widget"
         />
