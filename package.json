@@ -88,7 +88,7 @@
     "mocha": "^2.3.0",
     "node-libs-browser": "^1.0.0",
     "node-sass": "^3.4.2",
-    "react-addons-test-utils": "^0.14.2",
+    "react-addons-test-utils": "^15.0.1",
     "redux-devtools": "^3.0.1",
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.5",
