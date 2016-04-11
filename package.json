@@ -124,7 +124,7 @@
     "react-redux": "^4.4.2",
     "react-router": "^2.0.0",
     "react-router-redux": "^4.0.0",
-    "react-semantify": "^0.4.1",
+    "react-semantify": "^0.4.2",
     "react-tap-event-plugin": "^0.2.2",
     "react-toolbox": "^0.16.1",
     "redux": "^3.2.1",
