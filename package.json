@@ -115,7 +115,7 @@
     "font-awesome": "^4.4.0",
     "immutable": "^3.7.6",
     "material-design-icons-iconfont": "^2.0.5",
-    "normalize.css": "^3.0.3",
+    "normalize.css": "^4.1.0",
     "postcss": "^5.0.18",
     "react": "^0.14.7",
     "react-addons-css-transition-group": "^15.0.1",
