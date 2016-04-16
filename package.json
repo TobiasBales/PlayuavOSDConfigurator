@@ -113,7 +113,7 @@
     "extensible-polyfill": "^1.0.1",
     "flexboxgrid": "^6.3.0",
     "font-awesome": "^4.4.0",
-    "immutable": "^3.7.6",
+    "immutable": "^3.8.0",
     "material-design-icons-iconfont": "^2.0.5",
     "normalize.css": "^3.0.3",
     "postcss": "^5.0.18",
