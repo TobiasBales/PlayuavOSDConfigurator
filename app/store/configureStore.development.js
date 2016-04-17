@@ -8,6 +8,11 @@ import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 
 const logger = createLogger({
+  actionTransformer: (action) => (
+    Object.assign({}, action, {
+      type: String(action.type),
+    })
+  ),
   level: 'info',
   collapsed: true,
 });

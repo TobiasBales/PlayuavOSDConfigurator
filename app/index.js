@@ -1,3 +1,6 @@
+import extensiblePolyfill from 'extensible-polyfill';
+extensiblePolyfill('immutable');
+
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -9,10 +12,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import './app.global.css';
 import 'react-toolbox/lib/commons.scss';
 import 'roboto-fontface/css/roboto-fontface';
-import extensiblePolyfill from 'extensible-polyfill';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
-extensiblePolyfill('immutable');
 
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);

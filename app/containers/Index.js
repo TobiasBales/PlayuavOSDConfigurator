@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import ParametersModule from './ParametersModule';
-import App from 'react-toolbox/lib/app';
-import AppBar from 'react-toolbox/lib/app_bar';
 import Snackbar from 'react-toolbox/lib/snackbar';
 import Sidebar from './Sidebar';
 import Preview from './Preview';
@@ -31,10 +29,7 @@ export default class Index extends Component {
 
   render() {
     return (
-      <App>
-        <AppBar>
-          PlayUAV OSD Configurator
-        </AppBar>
+      <div>
         <div className="main">
           <div className="sidebar">
             <Preview />
@@ -63,7 +58,7 @@ export default class Index extends Component {
           action="dismiss"
           icon="warning"
         />
-      </App>
+      </div>
     );
   }
 }

@@ -5,7 +5,7 @@ export default class Column extends Component {
   static propTypes = {
     children: PropTypes.node,
     style: PropTypes.object,
-    className: PropTypes.string,
+    classes: PropTypes.string,
     width: PropTypes.number.isRequired,
   }
 

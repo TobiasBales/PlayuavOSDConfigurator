@@ -30,18 +30,19 @@ class Sidebar extends Component {
     ipc.on('error', this._onError);
     ipc.on('progress', this._onProgress);
     ipc.send('get-serial-ports');
+
+    this.state = {
+      serialPorts: [],
+      serialPort: null,
+      connected: false,
+      connecting: false,
+      readingOSD: false,
+      writingOSD: false,
+      uploading: false,
+      progress: 0,
+    };
   }
 
-  state = {
-    serialPorts: [],
-    serialPort: null,
-    connected: false,
-    connecting: false,
-    readingOSD: false,
-    writingOSD: false,
-    uploading: false,
-    progress: 0,
-  }
 
   _onError = (e, error) => {
     this.props.showError(error);
@@ -182,9 +183,9 @@ class Sidebar extends Component {
   }
 
   _renderSerialPortDropdown() {
-    const serialPorts = this.state.serialPorts.map((port) => {
-      return { value: port.comName, label: port.comName };
-    });
+    const serialPorts = this.state.serialPorts.map((port) => ({
+      value: port.comName, label: port.comName
+    }));
 
     return (
       <Dropdown
