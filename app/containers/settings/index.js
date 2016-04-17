@@ -21,6 +21,7 @@ import GpsLatitude from './GpsLatitude';
 import GpsLongitude from './GpsLongitude';
 import GpsStatus from './GpsStatus';
 import HomeDistance from './HomeDistance';
+import LinkQuality from './LinkQuality';
 import Map from './Map';
 import Radar from './Radar';
 import RelativeAltitude from './RelativeAltitude';
@@ -61,6 +62,7 @@ export default {
   GpsLongitude,
   GpsStatus,
   HomeDistance,
+  LinkQuality,
   Map,
   Radar,
   RelativeAltitude,

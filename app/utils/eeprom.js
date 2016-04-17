@@ -17,6 +17,7 @@ const defaultEEPROM = [
   firmwareVersion, 1, 133, 133, 1, 1, 350, 34, 0, 2, 1, 1, 350, 210,
   0, 2, 0, 1, 4, 120, 1, 0, 0, 1, 2, 5, 25, 0, 0, 1, 1, 2, 5, 55,
   0, 0, 0, 1, 7, 1, 1, 1, 350, 200, 0, 2, 1, 1,
+  0, 0, 200, 220, 0, 0, 5, 1000, 2000, 0
 ];
 
 function toEnabled(byte) {
@@ -334,6 +335,17 @@ const eepromMapping = [
   { path: ['efficiency', 'hAlignment'] },
   { path: ['switching', 'videoMode'] },
   { path: ['switching', 'panelMode'] },
+  { path: ['linkQuality', 'visibleOn'],
+    convertFromParameters: toEnabled },
+  { path: ['linkQuality', 'panel'] },
+  { path: ['linkQuality', 'positionX'] },
+  { path: ['linkQuality', 'positionY'] },
+  { path: ['linkQuality', 'fontSize'] },
+  { path: ['linkQuality', 'hAlignment'] },
+  { path: ['linkQuality', 'type'] },
+  { path: ['linkQuality', 'min'] },
+  { path: ['linkQuality', 'max'] },
+  { path: ['linkQuality', 'raw'] },
 ];
 
 const skeletonParameters = {
@@ -361,6 +373,7 @@ const skeletonParameters = {
   gpsLongitude: {},
   gpsStatus: {},
   homeDistance: {},
+  linkQuality: {},
   map: {},
   preview: {},
   pwmPanel: {},

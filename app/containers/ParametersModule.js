@@ -51,6 +51,7 @@ export default class ParametersModule extends Component {
           <Settings.FlightMode />
           <Settings.Throttle />
           <Settings.Rssi />
+          <Settings.LinkQuality />
           <Settings.WPDistance />
         </Tab>
         <Tab label="Gps">

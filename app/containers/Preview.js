@@ -35,9 +35,9 @@ class Preview extends Component {
     const {
       absoluteAltitude, alarms, altitudeScale, armState, artificialHorizont, batteryConsumed,
       batteryCurrent, batteryRemaining, batteryVoltage, climbRate, compass, efficiency,
-      flightMode, gpsHdop, gpsLatitude, gpsLongitude, gpsStatus, gps2Hdop, gps2Latitude,
-      gps2Longitude, gps2Status, homeDistance, radar, relativeAltitude, rssi, speedAir,
-      speedScale, speedGround, throttle, time, totalTrip, wpDistance, wind,
+      flightMode, linkQuality, gpsHdop, gpsLatitude, gpsLongitude, gpsStatus, gps2Hdop,
+      gps2Latitude, gps2Longitude, gps2Status, homeDistance, radar, relativeAltitude,
+      rssi, speedAir, speedScale, speedGround, throttle, time, totalTrip, wpDistance, wind,
     } = this.props.state;
     const units = this.props.state.get('video').get('units');
     const videoMode = this.props.state.get('video').get('videoMode');
@@ -64,6 +64,7 @@ class Preview extends Component {
       heading: 30,
       homeBearing: 163,
       homeDistance: 18135,
+      linkQuality: 1970,
       panel,
       pitch: 10,
       relativeAltitude: 138,
@@ -165,6 +166,9 @@ class Preview extends Component {
             />
             <Previews.HomeDistance {...homeDistance.toJS()} {...fcStatus}
               units={units} setPosition={setPosition('homeDistance')}
+            />
+            <Previews.LinkQuality {...linkQuality.toJS()} {...fcStatus}
+              setPosition={setPosition('linkQuality')}
             />
             <Previews.Radar {...radar.toJS()} {...fcStatus}
               setPosition={setPosition('radar')}

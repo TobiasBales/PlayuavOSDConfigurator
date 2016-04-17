@@ -27,9 +27,9 @@ export default class Rssi extends StringPreview {
       }
 
       rssi = Math.max(0, rssi);
-      content = `RSSI:${rssi.toFixed(0)}%`;
+      content = `RSSI ${rssi.toFixed(0)}%`;
     } else {
-      content = `RSSI:${rssi.toFixed(0)}`;
+      content = `RSSI ${rssi.toFixed(0)}`;
     }
     return content;
   }
