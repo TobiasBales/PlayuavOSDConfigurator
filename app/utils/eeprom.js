@@ -337,7 +337,7 @@ const eepromMapping = [
   { path: ['switching', 'panelMode'] },
   { path: ['linkQuality', 'visibleOn'],
     convertFromParameters: toEnabled },
-  { path: ['linkQuality', 'panel'] },
+  { path: ['linkQuality', 'visibleOn'] },
   { path: ['linkQuality', 'positionX'] },
   { path: ['linkQuality', 'positionY'] },
   { path: ['linkQuality', 'fontSize'] },
