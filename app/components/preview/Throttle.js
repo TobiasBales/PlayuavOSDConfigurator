@@ -40,7 +40,6 @@ export default class ThrottlePreview extends Component {
     this.clear(context);
 
     if ((this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
-
       if (this.props.scaleEnabled) {
         const string = `${this.props.throttle.toFixed(0)}%`;
         const position = canvas.calculateStringPosition(string, 0, 0, 2, 2, font);
@@ -65,7 +64,6 @@ export default class ThrottlePreview extends Component {
         }
       } else {
         const string = `thr ${this.props.throttle.toFixed(0)}%`;
-        console.log('else', string);
         const position = canvas.calculateStringPosition(string, 0, 0, 2, 2, font);
         const posX = 75;
         const posY = 25;

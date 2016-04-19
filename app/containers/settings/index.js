@@ -34,6 +34,7 @@ import Switching from './Switching';
 import Throttle from './Throttle';
 import Time from './Time';
 import TotalTrip from './TotalTrip';
+import VarioGraph from './VarioGraph';
 import Video from './Video';
 import Wind from './Wind';
 import WPDistance from './WPDistance';
@@ -75,6 +76,7 @@ export default {
   Throttle,
   Time,
   TotalTrip,
+  VarioGraph,
   Video,
   Wind,
   WPDistance,

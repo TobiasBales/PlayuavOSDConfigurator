@@ -42,6 +42,7 @@ export default class ParametersModule extends Component {
           <Settings.ArtificialHorizont />
           <Settings.Attitude3d />
           <Settings.ClimbRate />
+          <Settings.VarioGraph />
           <Settings.Wind />
           <Settings.Efficiency />
         </Tab>

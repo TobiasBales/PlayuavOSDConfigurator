@@ -119,7 +119,7 @@ function drawRectangle(context, x, y, width, height, black = false, outline = fa
   if (outline) {
     context.beginPath();
     context.rect(x + 0.5, y + 0.5, width, height);
-    context.lineWidth = 3;
+    context.lineWidth = 2;
     context.strokeStyle = black ? 'black' : 'white';
     context.stroke();
   }
@@ -141,6 +141,22 @@ function drawLine(context, x0, y0, x1, y1, outline = false, black = false) {
   }
   context.lineWidth = 1;
   context.strokeStyle = black ? 'black' : 'white';
+  context.stroke();
+}
+
+function drawSegmentedLine(context, outline, points) {
+  context.beginPath();
+  for (let i = 0; i < points.length - 2; i += 2) {
+    context.moveTo(points[i] + 0.5, points[i + 1] + 0.5);
+    context.lineTo(points[i + 2] + 0.5, points[i + 3] + 0.5);
+  }
+  if (outline) {
+    context.lineWidth = 3;
+    context.strokeStyle = 'black';
+    context.stroke();
+  }
+  context.lineWidth = 1;
+  context.strokeStyle = 'white';
   context.stroke();
 }
 
@@ -378,6 +394,8 @@ export default {
   drawCompass,
   drawFilledRectangle,
   drawLine,
+  drawRectangle,
+  drawSegmentedLine,
   drawString,
   drawVerticalScale,
 };

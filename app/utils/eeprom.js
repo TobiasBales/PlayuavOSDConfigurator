@@ -17,7 +17,7 @@ const defaultEEPROM = [
   firmwareVersion, 1, 133, 133, 1, 1, 350, 34, 0, 2, 1, 1, 350, 210,
   0, 2, 0, 1, 4, 120, 1, 0, 0, 1, 2, 5, 25, 0, 0, 1, 1, 2, 5, 55,
   0, 0, 0, 1, 7, 1, 1, 1, 350, 200, 0, 2, 1, 1,
-  0, 0, 200, 220, 0, 0, 5, 1000, 2000, 0
+  0, 0, 200, 220, 0, 0, 5, 1000, 2000, 0, 0, 0, 200, 200
 ];
 
 function toEnabled(byte) {
@@ -346,6 +346,11 @@ const eepromMapping = [
   { path: ['linkQuality', 'min'] },
   { path: ['linkQuality', 'max'] },
   { path: ['linkQuality', 'raw'] },
+  { path: ['varioGraph', 'visibleOn'],
+    convertFromParameters: toEnabled },
+  { path: ['varioGraph', 'visibleOn'] },
+  { path: ['varioGraph', 'positionX'] },
+  { path: ['varioGraph', 'positionY'] },
 ];
 
 const skeletonParameters = {

@@ -37,7 +37,8 @@ class Preview extends Component {
       batteryCurrent, batteryRemaining, batteryVoltage, climbRate, compass, efficiency,
       flightMode, linkQuality, gpsHdop, gpsLatitude, gpsLongitude, gpsStatus, gps2Hdop,
       gps2Latitude, gps2Longitude, gps2Status, homeDistance, radar, relativeAltitude,
-      rssi, speedAir, speedScale, speedGround, throttle, time, totalTrip, wpDistance, wind,
+      rssi, speedAir, speedScale, speedGround, throttle, time, totalTrip, varioGraph,
+      wpDistance, wind,
     } = this.props.state;
     const units = this.props.state.get('video').get('units');
     const videoMode = this.props.state.get('video').get('videoMode');
@@ -77,6 +78,8 @@ class Preview extends Component {
       timeSinceHeartbeat: 0,
       timeSinceStartup: 3823541,
       totalTrip: 23947,
+      varioData: [0, 2, 2, 1, 0, -1, -2, -5, -2, -1, -1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 3, 3,
+        3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 4, 4, 6, 6, 8, 8, 9, 9],
       vehicleType: 1,
       windDirection: 0,
       windSpeed: 18,
@@ -196,6 +199,9 @@ class Preview extends Component {
             />
             <Previews.TotalTrip {...totalTrip.toJS()} {...fcStatus}
               units={units} setPosition={setPosition('totalTrip')}
+            />
+            <Previews.VarioGraph {...varioGraph.toJS()} {...fcStatus}
+              setPosition={setPosition('varioGraph')}
             />
             <Previews.WpDistance {...wpDistance.toJS()} {...fcStatus}
               units={units} setPosition={setPosition('wpDistance')}
