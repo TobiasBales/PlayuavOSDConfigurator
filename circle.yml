@@ -3,6 +3,7 @@ machine:
     version: 5.10.1
 test:
   override:
+    - npm run lint
     - npm run package
   post:
     - cd release/linux-x64/ && zip -r ../../PlayUAVOSDConfigurator-linux-x64.zip PlayUAVOSDConfigurator-linux-x64/
