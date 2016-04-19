@@ -1,0 +1,9 @@
+machine:
+  node:
+    version: 5.10.1
+test:
+  override:
+    - npm run package
+  post:
+    - cd release/linux-x64/ && zip -r ../../PlayUAVOSDConfigurator-linux-x64.zip PlayUAVOSDConfigurator-linux-x64/
+    - cp PlayUAVOSDConfigurator-linux-x64.zip $CIRCLE_ARTIFACTS/
