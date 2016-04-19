@@ -25,7 +25,7 @@ If anyone knows a nice service for building things on windows/linux/os x and dis
 
 - Commit messages should follow the [angular commit message format](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#format-of-the-commit-message)
 - Pull requests will be automatically built on circle ci
-- Run eslint against your changes (npm run lint) currently canvas.js does have some errors, those will be fixed soon and then the linting will go into ci too
+- Run eslint against your changes (npm run lint)
 
 ## Warning
 This software comes with no guarantees, it has worked great for me so far but if you blow something up or brick your board, I might be willing to help you but no guarantees.
