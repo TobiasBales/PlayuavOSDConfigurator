@@ -34,7 +34,9 @@ class Switching extends Component {
   }
 
   render() {
-    const { panelChannel, panelMode, panelValue, videoChannel, videoMode, videoValue } = this.props.parameters;
+    const {
+      panelChannel, panelMode, panelValue, videoChannel, videoMode, videoValue
+    } = this.props.parameters;
     const channelOptions = [
       { value: 0, label: 'disabled' }, { value: 1, label: 'rc 1' },
       { value: 2, label: 'rc 2' }, { value: 3, label: 'rc 3' },

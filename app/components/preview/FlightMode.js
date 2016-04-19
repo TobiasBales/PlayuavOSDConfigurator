@@ -33,7 +33,6 @@ export default class FlightMode extends StringPreview {
           case 17: return 'BRAK';
           default: return 'unknown';
         }
-        break;
       case 1:
         switch (flightMode) {
           case 0: return 'MANU';
@@ -52,7 +51,6 @@ export default class FlightMode extends StringPreview {
           case 16: return 'INIT';
           default: return 'unknown';
         }
-        break;
       default: return 'unknown';
     }
   }

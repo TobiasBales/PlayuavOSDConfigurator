@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import fonts from '../../utils/fonts';
 import canvas from '../../utils/canvas';
-import CustomPropTypes from '../../utils/PropTypes';
 
 export default class StringPreview extends Component {
   static propTypes = {

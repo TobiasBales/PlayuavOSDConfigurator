@@ -1,14 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
-export default class Label extends Component {
-  static propTypes = {
-    text: PropTypes.string.isRequired,
-  }
-
-  render() {
-    const { text } = this.props;
-    return (
-      <label className="label">{text}</label>
-    );
-  }
+export default function Label(props) {
+  const { text } = props;
+  return (
+    <label className="label">{text}</label>
+  );
 }
+
+Label.propTypes = {
+  text: PropTypes.string.isRequired,
+};

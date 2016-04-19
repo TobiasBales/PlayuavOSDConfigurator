@@ -35,7 +35,7 @@ const code = {
 };
 
 const VERSION = 1;
-const FIRMWARE_VERSION = 10;
+// const FIRMWARE_VERSION = 10;
 
 class OSDInterface {
   constructor() {
@@ -340,15 +340,15 @@ class OSDInterface {
   }
 
   _readWithSyncOk(bytes) {
-    return this._promise((resolve, reject) => {
-      return this._read(bytes + 2).then((data) => {
+    return this._promise((resolve, reject) => (
+      this._read(bytes + 2).then((data) => {
         if (data[bytes] !== code.INSYNC || data[bytes + 1] !== code.OK) {
           return reject('Sync lost while reading parameters, please try again');
         }
 
         resolve(data.slice(0, data.length - 2));
-      }).then(resolve, reject);
-    });
+      }).then(resolve, reject)
+    ));
   }
 
   _sync() {

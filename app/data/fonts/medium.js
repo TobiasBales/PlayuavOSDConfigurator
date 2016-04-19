@@ -264,7 +264,8 @@ function getData(charCode) {
   const outlineStart = shapeStart + dimensions.height;
 
   const shapeData = data.slice(shapeStart, shapeStart + dimensions.height);
-  const outlineData = data.slice(outlineStart, outlineStart + dimensions.height).map((b) => ~b >>> 0);
+  const outlineData =
+    data.slice(outlineStart, outlineStart + dimensions.height).map((b) => ~b >>> 0);
   return { shape: shapeData, outline: outlineData };
 }
 

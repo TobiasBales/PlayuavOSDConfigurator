@@ -2,7 +2,7 @@ import { PropTypes } from 'react';
 import StringPreview from './StringPreview';
 
 function padNumber(number, digits) {
-  return ('0000000000000' + number).slice(-digits);
+  return (`0000000000000${number}`).slice(-digits);
 }
 
 export default class Time extends StringPreview {

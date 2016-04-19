@@ -74,7 +74,7 @@ class Alarms extends Component {
         </Column>
         <Column width={25}>
           <Input type="number" label="value"
-              onChange={this._setValue.bind(this, 'underSpeed')} value={underSpeedValue}
+            onChange={this._setValue.bind(this, 'underSpeed')} value={underSpeedValue}
           />
         </Column>
         <Column width={25}>

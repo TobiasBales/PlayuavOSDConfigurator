@@ -1,24 +1,22 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-export default class Column extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    style: PropTypes.object,
-    classes: PropTypes.string,
-    width: PropTypes.number.isRequired,
-  }
+export default function Column(props) {
+  const { children, width } = props;
+  const style = props.style || {};
+  style.width = `${width}%`;
+  const classes = classNames('column', props.classes);
 
-  render() {
-    const { children, width } = this.props;
-    const style = this.props.style || {};
-    style.width = `${width}%`;
-    const classes = classNames('column', this.props.classes);
-
-    return (
-      <div className={classes} style={style} {...this.props}>
-        {children}
-      </div>
-    );
-  }
+  return (
+    <div className={classes} style={style} {...props}>
+      {children}
+    </div>
+  );
 }
+
+Column.propTypes = {
+  children: PropTypes.node,
+  style: PropTypes.object,
+  classes: PropTypes.string,
+  width: PropTypes.number.isRequired,
+};
