@@ -11,15 +11,21 @@ A simple cross platform tool the playuav osd.
     npm run package
 
 ## Binaries
-[Windows](https://www.dropbox.com/s/2t72nirw21kmvap/PlayUAVOSDConfigurator-win32-ia32.zip?dl=0)
+- [Windows](https://www.dropbox.com/s/2t72nirw21kmvap/PlayUAVOSDConfigurator-win32-ia32.zip?dl=0)
+- [OS X](https://www.dropbox.com/s/d96cpi1d64v5qoy/playuav.zip?dl=0)
+- [Linux](https://circleci.com/api/v1/project/TobiasBales/PlayuavOSDConfigurator/latest/artifacts/0/$CIRCLE_ARTIFACTS/PlayUAVOSDConfigurator-linux-x64.zip?branch=master&filter=successful)
 
-[OS X](https://www.dropbox.com/s/d96cpi1d64v5qoy/playuav.zip?dl=0)
+The windows and os x builds are currently done by hand and will most likely be a bit older, linux is the successful build of the master branch
 
-Linux will be added in the coming days.
-
-The current hex for the osd can be found [here](https://www.dropbox.com/s/vf7o4ef35ldzs86/PlayuavOSD.hex?dl=0) it includes the simple ahi, efficiency panel and new video/panel switching.
+The current hex for the osd can be found the readme of the [repository](https://github.com/TobiasBales/PlayuavOSD) it includes everything that is currently in the master branch.
 
 If anyone knows a nice service for building things on windows/linux/os x and distributing the binaries please let me know @TobiasBales or by mail.
+
+## Contributing
+
+- Commit messages should follow the [angular commit message format](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#format-of-the-commit-message)
+- Pull requests will be automatically built on circle ci
+- Run eslint against your changes (npm run lint) currently canvas.js does have some errors, those will be fixed soon and then the linting will go into ci too
 
 ## Warning
 This software comes with no guarantees, it has worked great for me so far but if you blow something up or brick your board, I might be willing to help you but no guarantees.
