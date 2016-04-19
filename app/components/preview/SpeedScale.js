@@ -1,9 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import Canvas from '../../utils/Canvas';
+import PreviewBase from './PreviewBase';
 import fonts from '../../utils/fonts';
-import canvas from '../../utils/canvas';
 import units from '../../utils/units';
 
-export default class SpeedScale extends Component {
+export default class SpeedScale extends PreviewBase {
   static propTypes = {
     speedGround: PropTypes.number.isRequired,
     panel: PropTypes.number.isRequired,
@@ -16,49 +17,27 @@ export default class SpeedScale extends Component {
     visibleOn: PropTypes.number.isRequired,
   }
 
-  componentDidMount() {
-    this.draw();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return Object.keys(this.props).reduce((shouldUpdate, key) => {
-      if (key.startsWith('set')) {
-        return shouldUpdate;
-      }
-      return shouldUpdate || this.props[key] !== nextProps[key];
-    }, false);
-  }
-
-  componentDidUpdate() {
-    this.draw();
-  }
-
-  clear(context) {
-    context.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
-  }
-
   draw() {
     const font = fonts.getFont(0);
-    const context = this.refs.canvas.getContext('2d');
-    this.clear(context);
+    this.canvas.clear();
 
     if ((this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
       const { speedAir, speedGround, scaleAlignment } = this.props;
       const hAlignment = scaleAlignment === 0 ? 0 : 2;
       const prefix = this.props.scaleType === 0 ? 'GS' : 'AS';
-      const prefixPosition = canvas.calculateStringPosition(prefix, 0, 0, hAlignment, 0, font);
+      const prefixPosition = Canvas.calculateStringPosition(prefix, 0, 0, hAlignment, 0, font);
       const unitString = 'KM/H';
-      const unitPosition = canvas.calculateStringPosition(
+      const unitPosition = Canvas.calculateStringPosition(
         unitString, 0, 0, hAlignment, 0, font);
       const speed = this.props.scaleType === 0 ? speedGround : speedAir;
       const posX = scaleAlignment === 0 ? 0 : 75;
       const posY = 50;
       const scaleSpeed = units.convertSpeedWithoutUnits(speed, this.props.units);
-      canvas.drawVerticalScale(context,
+      this.canvas.drawVerticalScale(
         Math.round(scaleSpeed, 0),
         60, scaleAlignment, posX, posY, 72, 10, 20, 5, 8, 11, 100, font);
-      canvas.drawString(context, prefix, posX + prefixPosition.left, posY - 50, font);
-      canvas.drawString(context, unitString, posX + unitPosition.left, posY + 40, font);
+      this.canvas.drawString(prefix, posX + prefixPosition.left, posY - 50, font);
+      this.canvas.drawString(unitString, posX + unitPosition.left, posY + 40, font);
     }
   }
 

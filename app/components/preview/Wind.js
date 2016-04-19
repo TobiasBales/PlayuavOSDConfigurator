@@ -1,9 +1,10 @@
-import React, { Component, PropTypes } from 'react';
-import canvas from '../../utils/canvas';
+import React, { PropTypes } from 'react';
+import Canvas from '../../utils/Canvas';
+import PreviewBase from './PreviewBase';
 import fonts from '../../utils/fonts';
 import units from '../../utils/units';
 
-export default class Wind extends Component {
+export default class Wind extends PreviewBase {
   static propTypes = {
     panel: PropTypes.number.isRequired,
     positionX: PropTypes.number.isRequired,
@@ -14,46 +15,24 @@ export default class Wind extends Component {
     windSpeed: PropTypes.number.isRequired,
   }
 
-  componentDidMount() {
-    this.draw();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return Object.keys(this.props).reduce((shouldUpdate, key) => {
-      if (key.startsWith('set')) {
-        return shouldUpdate;
-      }
-      return shouldUpdate || this.props[key] !== nextProps[key];
-    }, false);
-  }
-
-  componentDidUpdate() {
-    this.draw();
-  }
-
-  clear(context) {
-    context.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
-  }
-
   draw() {
-    const context = this.refs.canvas.getContext('2d');
-    this.clear(context);
+    this.canvas.clear();
     const height = this.refs.canvas.height;
     const posY = height / 2;
     const font = fonts.getFont(0);
 
     if ((this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
       const windString = units.convertSpeed(this.props.windSpeed, this.props.units);
-      const windPosition = canvas.calculateStringPosition(windString, 20, posY, 0, 1, font);
-      canvas.drawString(context, windString, windPosition.left, windPosition.top, font);
+      const windPosition = Canvas.calculateStringPosition(windString, 20, posY, 0, 1, font);
+      this.canvas.drawString(windString, windPosition.left, windPosition.top, font);
 
       context.save();
       context.translate(9, 9);
       context.rotate(this.props.windDirection * Math.PI / 180);
       context.translate(-9, -9);
-      canvas.drawLine(context, 6, 7, 9, 1);
-      canvas.drawLine(context, 9, 1, 12, 7);
-      canvas.drawLine(context, 9, 16, 9, 7, true);
+      this.canvas.drawLine(6, 7, 9, 1);
+      this.canvas.drawLine(9, 1, 12, 7);
+      this.canvas.drawLine(9, 16, 9, 7, true);
       context.restore();
     }
   }
@@ -62,7 +41,7 @@ export default class Wind extends Component {
     const { positionX, positionY } = this.props;
     const font = fonts.getFont(0);
     const windString = units.convertSpeed(this.props.windSpeed, this.props.units);
-    const windPosition = canvas.calculateStringPosition(windString, 0, 0, 0, 1, font);
+    const windPosition = Canvas.calculateStringPosition(windString, 0, 0, 0, 1, font);
     const width = windPosition.width + 20;
     const height = 18;
     const visible = (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0;

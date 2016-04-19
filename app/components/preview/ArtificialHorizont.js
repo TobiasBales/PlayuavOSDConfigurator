@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import canvas from '../../utils/canvas';
+import React, { PropTypes } from 'react';
+import PreviewBase from './PreviewBase';
 
-export default class AttitudeMp extends Component {
+export default class AttitudeMp extends PreviewBase {
   static propTypes = {
     panel: PropTypes.number.isRequired,
     pitch: PropTypes.number.isRequired,
@@ -14,39 +14,17 @@ export default class AttitudeMp extends Component {
     yaw: PropTypes.number.isRequired,
   }
 
-  componentDidMount() {
-    this.draw();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return Object.keys(this.props).reduce((shouldUpdate, key) => {
-      if (key.startsWith('set')) {
-        return shouldUpdate;
-      }
-      return shouldUpdate || this.props[key] !== nextProps[key];
-    }, false);
-  }
-
-  componentDidUpdate() {
-    this.draw();
-  }
-
-  clear(context) {
-    context.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
-  }
-
   draw() {
-    const context = this.refs.canvas.getContext('2d');
-    this.clear(context);
+    this.canvas.clear();
     const width = this.refs.canvas.width;
     const height = this.refs.canvas.height;
 
     if ((this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
       if (this.props.type === 0) {
-        canvas.drawAttitudeMp(context, width, height,
+        this.canvas.drawAttitudeMp(width, height,
           this.props.roll, this.props.pitch, this.props.scale);
       } else {
-        canvas.drawAttitudeSimple(context, width, height,
+        this.canvas.drawAttitudeSimple(width, height,
           this.props.roll, this.props.pitch, this.props.scale);
       }
     }

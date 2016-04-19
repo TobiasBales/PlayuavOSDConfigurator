@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import Canvas from '../../utils/Canvas';
+import PreviewBase from './PreviewBase';
 import fonts from '../../utils/fonts';
-import canvas from '../../utils/canvas';
 
-export default class ClimbRate extends Component {
+export default class ClimbRate extends PreviewBase {
   static propTypes = {
     climbRate: PropTypes.number.isRequired,
     fontSize: PropTypes.number.isRequired,
@@ -16,45 +17,23 @@ export default class ClimbRate extends Component {
     vAlignment: 0,
   }
 
-  componentDidMount() {
-    this.draw();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return Object.keys(this.props).reduce((shouldUpdate, key) => {
-      if (key.startsWith('set')) {
-        return shouldUpdate;
-      }
-      return shouldUpdate || this.props[key] !== nextProps[key];
-    }, false);
-  }
-
-  componentDidUpdate() {
-    this.draw();
-  }
-
-  clear(context) {
-    context.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
-  }
-
   draw() {
     const font = fonts.getFont(this.props.fontSize);
-    const context = this.refs.canvas.getContext('2d');
     const arrowLength = this.props.fontSize === 0 ? 6 : 8;
-    this.clear(context);
+    this.canvas.clear();
 
     if ((this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
       const xPos = 3;
       const yPos = this.refs.canvas.height / 2;
-      canvas.drawString(context, this.content(), xPos + 5, yPos - font.dimensions.height / 2, font);
+      this.canvas.drawString(this.content(), xPos + 5, yPos - font.dimensions.height / 2, font);
       if (this.props.climbRate > 0) {
-        canvas.drawLine(context, xPos, yPos - arrowLength, xPos, yPos + arrowLength, true);
-        canvas.drawLine(context, xPos - 3, yPos - arrowLength + 3, xPos, yPos - arrowLength);
-        canvas.drawLine(context, xPos + 3, yPos - arrowLength + 3, xPos, yPos - arrowLength);
+        this.canvas.drawLine(xPos, yPos - arrowLength, xPos, yPos + arrowLength, true);
+        this.canvas.drawLine(xPos - 3, yPos - arrowLength + 3, xPos, yPos - arrowLength);
+        this.canvas.drawLine(xPos + 3, yPos - arrowLength + 3, xPos, yPos - arrowLength);
       } else if (this.props.climbRate < 0) {
-        canvas.drawLine(context, xPos, yPos - arrowLength, xPos, yPos + arrowLength, true);
-        canvas.drawLine(context, xPos - 3, yPos + arrowLength - 3, xPos, yPos + arrowLength);
-        canvas.drawLine(context, xPos + 3, yPos + arrowLength - 3, xPos, yPos + arrowLength);
+        this.canvas.drawLine(xPos, yPos - arrowLength, xPos, yPos + arrowLength, true);
+        this.canvas.drawLine(xPos - 3, yPos + arrowLength - 3, xPos, yPos + arrowLength);
+        this.canvas.drawLine(xPos + 3, yPos + arrowLength - 3, xPos, yPos + arrowLength);
       }
     }
   }
@@ -68,7 +47,7 @@ export default class ClimbRate extends Component {
     const hAlignment = 0;
     const vAlignment = 1;
     const font = fonts.getFont(this.props.fontSize);
-    const position = canvas.calculateStringPosition(
+    const position = Canvas.calculateStringPosition(
       this.content(), positionX, positionY, hAlignment, vAlignment, font);
     const arrowLength = this.props.fontSize === 0 ? 6 : 8;
     const visible = (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0;

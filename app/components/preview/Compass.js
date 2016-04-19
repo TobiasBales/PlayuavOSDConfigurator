@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import canvas from '../../utils/canvas';
+import React, { PropTypes } from 'react';
+import PreviewBase from './PreviewBase';
 
-export default class Compass extends Component {
+export default class Compass extends PreviewBase {
   static propTypes = {
     heading: PropTypes.number.isRequired,
     panel: PropTypes.number.isRequired,
@@ -9,34 +9,12 @@ export default class Compass extends Component {
     visibleOn: PropTypes.number.isRequired,
   }
 
-  componentDidMount() {
-    this.draw();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return Object.keys(this.props).reduce((shouldUpdate, key) => {
-      if (key.startsWith('set')) {
-        return shouldUpdate;
-      }
-      return shouldUpdate || this.props[key] !== nextProps[key];
-    }, false);
-  }
-
-  componentDidUpdate() {
-    this.draw();
-  }
-
-  clear(context) {
-    context.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
-  }
-
   draw() {
-    const context = this.refs.canvas.getContext('2d');
-    this.clear(context);
+    this.canvas.clear();
     const posY = 8;
 
     if ((this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
-      canvas.drawCompass(context, this.props.heading, posY);
+      this.canvas.drawCompass(this.props.heading, posY);
     }
   }
 

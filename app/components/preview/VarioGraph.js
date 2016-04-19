@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import canvas from '../../utils/canvas';
+import React, { PropTypes } from 'react';
+import PreviewBase from './PreviewBase';
 
-export default class VarioGraphPreview extends Component {
+export default class VarioGraphPreview extends PreviewBase {
   static propTypes = {
     panel: PropTypes.number.isRequired,
     positionX: PropTypes.number.isRequired,
@@ -10,35 +10,13 @@ export default class VarioGraphPreview extends Component {
     visibleOn: PropTypes.number.isRequired,
   }
 
-  componentDidMount() {
-    this.draw();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return Object.keys(this.props).reduce((shouldUpdate, key) => {
-      if (key.startsWith('set')) {
-        return shouldUpdate;
-      }
-      return shouldUpdate || this.props[key] !== nextProps[key];
-    }, false);
-  }
-
-  componentDidUpdate() {
-    this.draw();
-  }
-
-  clear(context) {
-    context.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
-  }
-
   draw() {
-    const context = this.refs.canvas.getContext('2d');
-    this.clear(context);
+    this.canvas.clear();
 
     if ((this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
       const { height, width } = this.refs.canvas;
       const { varioData } = this.props;
-      canvas.drawRectangle(context, 2, 2, width - 4, height - 4, true, true);
+      this.canvas.drawRectangle(2, 2, width - 4, height - 4, true, true);
       const points = [];
 
       for (let i = 0; i < varioData.length - 1; i++) {
@@ -46,7 +24,7 @@ export default class VarioGraphPreview extends Component {
         const y = height - (varioData[x] + height / 2);
         points.push(x + 3, y + 2);
       }
-      canvas.drawSegmentedLine(context, true, points);
+      this.canvas.drawSegmentedLine(true, points);
     }
   }
 
