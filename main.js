@@ -73,7 +73,6 @@ app.on('ready', () => {
   };
 
   chokidar.watch('/dev/ttyACM*').on('all', sendSerialPorts);
-  chokidar.watch('/dev/cu.*').on('all', sendSerialPorts);
   ipc.on('get-serial-ports', sendSerialPorts);
 
   ipc.on('read-osd', (e, serialPort) => {
