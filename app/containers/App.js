@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import AppContainer from 'react-toolbox/lib/app';
 import AppBar from 'react-toolbox/lib/app_bar';
-import { IconButton } from 'react-toolbox/lib/button';
-import Drawer from 'react-toolbox/lib/drawer';
-import { List, ListItem } from 'react-toolbox/lib/list';
+import { Layout, NavDrawer, Panel, List, ListItem, IconButton } from 'react-toolbox';
 
 export default class App extends Component {
 
@@ -25,12 +22,8 @@ export default class App extends Component {
 
   render() {
     return (
-      <AppContainer>
-        <AppBar>
-          <IconButton inverse icon="reorder" onClick={this._toggleDrawer} />
-          PlayUAV OSD Configurator
-        </AppBar>
-        <Drawer active={this.state.showDrawer} onOverlayClick={this._toggleDrawer}>
+      <Layout>
+        <NavDrawer active={this.state.showDrawer} onOverlayClick={this._toggleDrawer}>
           <List selectable ripple>
             <ListItem
               leftIcon="settings_overscan"
@@ -45,17 +38,23 @@ export default class App extends Component {
               onClick={this._toggleDrawer}
             />
           </List>
-        </Drawer>
-        {this.props.children}
-        {
-          (() => {
-            if (process.env.NODE_ENV !== 'production') {
-              const DevTools = require('./DevTools');
-              return <DevTools />;
-            }
-          })()
-        }
-      </AppContainer>
+        </NavDrawer>
+        <Panel>
+          <AppBar>
+            <IconButton inverse icon="menu" onClick={this._toggleDrawer} />
+            PlayUAV OSD Configurator
+          </AppBar>
+          {this.props.children}
+          {
+            (() => {
+              if (process.env.NODE_ENV !== 'production') {
+                const DevTools = require('./DevTools');
+                return <DevTools />;
+              }
+            })()
+          }
+        </Panel>
+      </Layout>
     );
   }
 }
