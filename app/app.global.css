@@ -6,6 +6,10 @@ html {
   font-size: 10px;
 }
 
+#root {
+  height: 100%;
+}
+
 .column {
   display: inline-block;
   vertical-align: top;
