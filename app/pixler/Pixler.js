@@ -7,11 +7,16 @@ import Column from '../components/Column';
 import Output from './Output';
 
 function Pixler(props) {
-  const { outline, shape, wide } = props;
+  const { fontSize, outline, shape } = props;
   return (
     <div>
       <Column width={50}>
-        <Editor setPixel={props.setPixel} outline={outline} shape={shape} wide={wide} />
+        <Editor
+          setPixel={props.setPixel}
+          fontSize={fontSize}
+          outline={outline}
+          shape={shape}
+        />
       </Column>
       <Column width={50}>
         <Output outline={outline} shape={shape} />
@@ -23,8 +28,8 @@ function Pixler(props) {
 Pixler.propTypes = {
   setPixel: PropTypes.func.isRequired,
   outline: PropTypes.arrayOf(PropTypes.number).isRequired,
+  fontSize: PropTypes.number.isRequired,
   shape: PropTypes.arrayOf(PropTypes.number).isRequired,
-  wide: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {

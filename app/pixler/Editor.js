@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Pixel from './Pixel';
 import { EMPTY, OUTLINE, SHAPE } from './actions';
 import styles from './Editor.css';
+import fonts from '../utils/fonts';
 import { Card, CardText, CardTitle } from 'react-toolbox/lib/card';
 
 export default class Editor extends Component {
@@ -9,7 +10,7 @@ export default class Editor extends Component {
     setPixel: PropTypes.func.isRequired,
     outline: PropTypes.arrayOf(PropTypes.number).isRequired,
     shape: PropTypes.arrayOf(PropTypes.number).isRequired,
-    wide: PropTypes.bool.isRequired,
+    fontSize: PropTypes.number.isRequired,
   }
 
   _setPixel = (row, column, type) => {
@@ -17,8 +18,7 @@ export default class Editor extends Component {
   }
 
   render() {
-    const width = 8;
-    const height = 14;
+    const { height, width } = fonts.getFont(this.props.fontSize).dimensions;
 
     const pixels = [...Array(height)].map((_, row) => {
       const shape = this.props.shape[row];

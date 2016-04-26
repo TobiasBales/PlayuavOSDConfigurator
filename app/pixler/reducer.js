@@ -1,12 +1,14 @@
 import Immutable from 'immutable';
 import {
-  EMPTY, SHAPE, OUTLINE, CLEAR, SET_OUTLINE, SET_PIXEL, SET_SHAPE
+  EMPTY, SHAPE, OUTLINE, CLEAR, MIRROR,
+  SET_FONT_SIZE, SET_OUTLINE, SET_PIXEL, SET_SHAPE
 } from './actions';
+import fonts from '../utils/fonts';
 
 const initialState = Immutable.fromJS({
-  wide: false,
-  shape: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  fontSize: 0,
   outline: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  shape: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 });
 
 const set = (column) =>
@@ -19,6 +21,19 @@ const unset = (column) =>
     prev | Math.pow(2, column)
 );
 
+const setArrayLength = (length) => (array) =>
+  array.setSize(length).map((value) => value || 0);
+
+const mirrorByte = (width) => (byte) => {
+  let newByte = 0;
+  for (let i = 0; i < width; i++) {
+    if (byte & Math.pow(2, i)) {
+      newByte |= Math.pow(2, width - 1 - i);
+    }
+  }
+  return newByte;
+};
+
 export default function pixler(state = initialState, action) {
   const column = action.column;
   const row = action.row;
@@ -27,6 +42,19 @@ export default function pixler(state = initialState, action) {
       return state
         .update('outline', (arr) => arr.map(() => 0))
         .update('shape', (arr) => arr.map(() => 0));
+    case MIRROR: {
+      const { width } = fonts.getFont(state.get('fontSize')).dimensions;
+      return state
+        .update('outline', (arr) => arr.map(mirrorByte(width)))
+        .update('shape', (arr) => arr.map(mirrorByte(width)));
+    }
+    case SET_FONT_SIZE: {
+      const { height } = fonts.getFont(action.payload).dimensions;
+      return state
+        .set('fontSize', action.payload)
+        .update('outline', setArrayLength(height))
+        .update('shape', setArrayLength(height));
+    }
     case SET_OUTLINE:
       return state.set('outline', Immutable.fromJS(action.payload));
     case SET_SHAPE:

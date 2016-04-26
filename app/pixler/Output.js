@@ -1,17 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import { Card, CardText, CardTitle } from 'react-toolbox/lib/card';
-import { clear, setOutline, setShape } from './actions';
+import { clear, mirror, setFontSize, setOutline, setShape } from './actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button, Input } from 'react-toolbox';
+import { Button, Dropdown, Input } from 'react-toolbox';
 
 class Output extends Component {
   static propTypes = {
+    clear: PropTypes.func.isRequired,
+    fontSize: PropTypes.number.isRequired,
     outline: PropTypes.arrayOf(PropTypes.number).isRequired,
     shape: PropTypes.arrayOf(PropTypes.number).isRequired,
-    clear: PropTypes.func.isRequired,
-    setShape: PropTypes.func.isRequired,
+    mirror: PropTypes.func.isRequired,
+    setFontSize: PropTypes.func.isRequired,
     setOutline: PropTypes.func.isRequired,
+    setShape: PropTypes.func.isRequired,
   }
 
   _parseValueString = (value) => {
@@ -30,25 +33,16 @@ class Output extends Component {
     this.props.setShape(shape);
   }
 
-  _mirror = () => {
-    const { outline, shape } = this.props;
-    const mirror = (byte) => {
-      let newByte = 0;
-      for (let i = 0; i < 8; i++) {
-        if (byte & Math.pow(2, i)) {
-          newByte |= Math.pow(2, 7 - i);
-        }
-      }
-      return newByte;
-    };
-    this.props.setOutline(outline.map(mirror));
-    this.props.setShape(shape.map(mirror));
-  }
-
   render() {
     const toHex = (byte) => `0x${byte.toString(16)}`;
     const shape = this.props.shape.map(toHex).join(', ');
     const outline = this.props.outline.map(toHex).join(', ');
+    const fontSizes = [
+      { label: 'small', value: 0 },
+      { label: 'medium', value: 1 },
+      { label: 'large', value: 2 },
+    ];
+
     return (
       <Card>
         <CardTitle title="output" subtitle="this can be copied to the font file" />
@@ -56,16 +50,25 @@ class Output extends Component {
           <Input label="shape" value={shape} onChange={this._onShapeChanged} />
           <Input label="outline" value={outline} onChange={this._onOutlineChanged} />
           <Button onClick={this.props.clear} label="clear" raised />
-          <Button onClick={this._mirror} label="mirror" raised />
+          <Button onClick={this.props.mirror} label="mirror" raised />
+          <Dropdown
+            auto
+            value={this.props.fontSize}
+            onChange={this.props.setFontSize}
+            label="font size"
+            source={fontSizes}
+          />
         </CardText>
       </Card>
     );
   }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+  fontSize: state.pixler.get('fontSize'),
+});
 
 const mapDispatchersToProps = (dispatch) =>
-  bindActionCreators({ clear, setOutline, setShape }, dispatch);
+  bindActionCreators({ clear, mirror, setFontSize, setOutline, setShape }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchersToProps)(Output);
