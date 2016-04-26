@@ -46,7 +46,7 @@ export default class Editor extends Component {
     });
 
     const columnNumbers = [...Array(width)].map((_, i) => (
-      <div className={styles.square}>{i + 1}</div>
+      <div key={i} className={styles.square}>{i + 1}</div>
     ));
 
     return (
