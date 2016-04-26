@@ -30,6 +30,21 @@ class Output extends Component {
     this.props.setShape(shape);
   }
 
+  _mirror = () => {
+    const { outline, shape } = this.props;
+    const mirror = (byte) => {
+      let newByte = 0;
+      for (let i = 0; i < 8; i++) {
+        if (byte & Math.pow(2, i)) {
+          newByte |= Math.pow(2, 7 - i);
+        }
+      }
+      return newByte;
+    };
+    this.props.setOutline(outline.map(mirror));
+    this.props.setShape(shape.map(mirror));
+  }
+
   render() {
     const toHex = (byte) => `0x${byte.toString(16)}`;
     const shape = this.props.shape.map(toHex).join(', ');
@@ -41,6 +56,7 @@ class Output extends Component {
           <Input label="shape" value={shape} onChange={this._onShapeChanged} />
           <Input label="outline" value={outline} onChange={this._onOutlineChanged} />
           <Button onClick={this.props.clear} label="clear" raised />
+          <Button onClick={this._mirror} label="mirror" raised />
         </CardText>
       </Card>
     );
