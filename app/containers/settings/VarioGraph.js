@@ -26,7 +26,7 @@ class VarioGraph extends Component {
     const { positionX, positionY, visibleOn } = this.props.parameters;
 
     return (
-      <Parameters.ParameterList name="vario graph">
+      <Parameters.ParameterList name="vario graph (not implemented yet)">
         <Parameters.Position labelX="position x" labelY="position y"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
