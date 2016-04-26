@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import AppBar from 'react-toolbox/lib/app_bar';
 import { Layout, NavDrawer, Panel, List, ListItem, IconButton } from 'react-toolbox';
+import styles from './App.css';
 
 export default class App extends Component {
 
@@ -44,7 +45,9 @@ export default class App extends Component {
             <IconButton inverse icon="menu" onClick={this._toggleDrawer} />
             PlayUAV OSD Configurator
           </AppBar>
-          {this.props.children}
+          <div className={styles.mainContent}>
+            {this.props.children}
+          </div>
           {
             (() => {
               if (process.env.NODE_ENV !== 'production') {
