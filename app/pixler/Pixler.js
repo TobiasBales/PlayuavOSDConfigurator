@@ -13,7 +13,7 @@ function Pixler(props) {
       <Column width={50}>
         <Editor setPixel={props.setPixel} outline={outline} shape={shape} wide={wide} />
       </Column>
-      <Column width={30}>
+      <Column width={50}>
         <Output outline={outline} shape={shape} />
       </Column>
     </div>
