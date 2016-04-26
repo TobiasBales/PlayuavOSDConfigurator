@@ -6,7 +6,7 @@ export const MIRROR = 'pixler/mirror';
 export const SET_FONT_SIZE = 'pixler/set_font_size';
 export const SET_OUTLINE = 'pixler/set_outline';
 export const SET_PIXEL = 'pixler/set_pixel';
-export const SET_SHAPE = 'pixler/set_outline';
+export const SET_SHAPE = 'pixler/set_shape';
 
 export function clear() {
   return { type: CLEAR };

@@ -5,7 +5,7 @@ import chaiImmutable from 'chai-immutable';
 import Immutable from 'immutable';
 import pixler from '../../app/pixler/reducer';
 import {
-  EMPTY, SHAPE, OUTLINE, CLEAR, MIRROR, SET_FONT_SIZE, SET_OUTLINE, SET_PIXEL,
+  EMPTY, SHAPE, OUTLINE, CLEAR, MIRROR, SET_FONT_SIZE, SET_OUTLINE, SET_SHAPE, SET_PIXEL,
 } from '../../app/pixler/actions';
 
 chai.use(chaiImmutable);
@@ -68,6 +68,11 @@ describe('reducers', () => {
     it('should handle SET_OUTLINE', () => {
       const state = pixler(undefined, { type: SET_OUTLINE, payload: [1, 1, 1, 1, 1, 1, 1, 1] });
       expect(state.get('outline')).to.equal(Immutable.List.of(1, 1, 1, 1, 1, 1, 1, 1));
+    });
+
+    it('should handle SET_SHAPE', () => {
+      const state = pixler(undefined, { type: SET_SHAPE, payload: [1, 1, 1, 1, 1, 1, 1, 1] });
+      expect(state.get('shape')).to.equal(Immutable.List.of(1, 1, 1, 1, 1, 1, 1, 1));
     });
 
     it('should handle SET_PIXEL', () => {
