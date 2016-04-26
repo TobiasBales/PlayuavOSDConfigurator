@@ -3,6 +3,7 @@ import Checkbox from 'react-toolbox/lib/checkbox';
 import Label from '../Label';
 import CustomPropTypes from '../../utils/PropTypes';
 import classNames from 'classnames';
+import styles from './VisibleOn.css';
 
 export default class ParameterPanels extends Component {
   static propTypes = {
@@ -22,8 +23,8 @@ export default class ParameterPanels extends Component {
   render() {
     const { numberOfPanels, visibleOn } = this.props;
     const classes = classNames({
-      modified: visibleOn.get('value') !== visibleOn.get('originalValue')
-    });
+      modified: visibleOn.get('value') !== visibleOn.get('originalValue'),
+    }, styles.base);
 
     return (
       <div className={classes}>
