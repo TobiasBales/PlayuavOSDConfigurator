@@ -24,7 +24,7 @@ export default class VarioGraphPreview extends PreviewBase {
         const y = height - (varioData[x] + height / 2);
         points.push(x + 3, y + 2);
       }
-      this.canvas.drawSegmentedLine(true, points);
+      this.canvas.drawSegmentedLine(true, false, points);
     }
   }
 
