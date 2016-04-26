@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import {
-  EMPTY, SHAPE, OUTLINE, SET_OUTLINE, SET_PIXEL, SET_SHAPE
+  EMPTY, SHAPE, OUTLINE, CLEAR, SET_OUTLINE, SET_PIXEL, SET_SHAPE
 } from './actions';
 
 const initialState = Immutable.fromJS({
@@ -23,6 +23,10 @@ export default function pixler(state = initialState, action) {
   const column = action.column;
   const row = action.row;
   switch (action.type) {
+    case CLEAR:
+      return state
+        .update('outline', (arr) => arr.map(() => 0))
+        .update('shape', (arr) => arr.map(() => 0));
     case SET_OUTLINE:
       return state.set('outline', Immutable.fromJS(action.payload));
     case SET_SHAPE:

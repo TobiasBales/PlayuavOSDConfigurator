@@ -1,14 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { Card, CardText, CardTitle } from 'react-toolbox/lib/card';
-import { setOutline, setShape } from './actions';
+import { clear, setOutline, setShape } from './actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Input from 'react-toolbox/lib/input';
+import { Button, Input } from 'react-toolbox';
 
 class Output extends Component {
   static propTypes = {
     outline: PropTypes.arrayOf(PropTypes.number).isRequired,
     shape: PropTypes.arrayOf(PropTypes.number).isRequired,
+    clear: PropTypes.func.isRequired,
     setShape: PropTypes.func.isRequired,
     setOutline: PropTypes.func.isRequired,
   }
@@ -39,7 +40,7 @@ class Output extends Component {
         <CardText>
           <Input label="shape" value={shape} onChange={this._onShapeChanged} />
           <Input label="outline" value={outline} onChange={this._onOutlineChanged} />
-
+          <Button onClick={this.props.clear} label="clear" raised />
         </CardText>
       </Card>
     );
@@ -49,6 +50,6 @@ class Output extends Component {
 const mapStateToProps = () => ({});
 
 const mapDispatchersToProps = (dispatch) =>
-  bindActionCreators({ setOutline, setShape, }, dispatch);
+  bindActionCreators({ clear, setOutline, setShape }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchersToProps)(Output);

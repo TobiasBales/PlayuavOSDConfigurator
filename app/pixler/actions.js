@@ -1,9 +1,14 @@
 export const EMPTY = Symbol('pixler/empty');
 export const SHAPE = Symbol('pixler/shape');
 export const OUTLINE = Symbol('pixler/outline');
+export const CLEAR = Symbol('pixler/clear');
 export const SET_OUTLINE = Symbol('pixler/set_outline');
 export const SET_PIXEL = Symbol('pixler/set_pixel');
 export const SET_SHAPE = Symbol('pixler/set_outline');
+
+export function clear() {
+  return { type: CLEAR };
+}
 
 export function setOutline(outline) {
   return { type: SET_OUTLINE, payload: outline };
