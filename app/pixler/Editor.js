@@ -37,8 +37,17 @@ export default class Editor extends Component {
         return <Pixel key={key} setPixel={this._setPixel.bind(this, row, column)} type={EMPTY} />;
       });
 
-      return <div key={row} className={styles.row}>{rowPixels}</div>;
+      return (
+        <div key={row} className={styles.row}>
+          {rowPixels}
+          <div className={styles.square}>{row + 1}</div>
+        </div>
+      );
     });
+
+    const columnNumbers = [...Array(width)].map((_, i) => (
+      <div className={styles.square}>{i + 1}</div>
+    ));
 
     return (
       <Card>
@@ -46,7 +55,12 @@ export default class Editor extends Component {
           title="pixler"
           subtitle="left click to set shape, right click to set outline, second click to clear"
         />
-        <CardText>{pixels}</CardText>
+        <CardText>
+          <div className={styles.row}>
+            {columnNumbers}
+          </div>
+          {pixels}
+        </CardText>
       </Card>
     );
   }
