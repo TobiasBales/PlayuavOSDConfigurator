@@ -59,6 +59,7 @@
     "babel-preset-react-hmre": "^1.0.1",
     "babel-preset-stage-0": "^6.3.13",
     "chai": "^3.3.0",
+    "chai-immutable": "^1.5.4",
     "chromedriver": "^2.19.0",
     "co-mocha": "^1.1.2",
     "concurrently": "^2.0.0",

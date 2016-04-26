@@ -7,8 +7,8 @@ import fonts from '../utils/fonts';
 
 const initialState = Immutable.fromJS({
   fontSize: 0,
-  outline: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  shape: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  outline: [0, 0, 0, 0, 0, 0, 0, 0],
+  shape: [0, 0, 0, 0, 0, 0, 0, 0],
 });
 
 const set = (column) =>
