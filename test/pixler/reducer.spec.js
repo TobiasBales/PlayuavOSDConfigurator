@@ -7,7 +7,7 @@ import {
 
 
 describe('reducers', () => {
-  describe('counter', () => {
+  describe('pixler', () => {
     it('should handle initial state', () => {
       const state = pixler(undefined, {});
       expect(state).keys('fontSize', 'outline', 'shape');
