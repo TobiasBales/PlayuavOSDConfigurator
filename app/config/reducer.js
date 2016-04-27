@@ -22,44 +22,45 @@ const initialState = setAsBaseState(addPreviewState(eeprom.toParameters(eeprom.d
 
 export default function parameters(state = initialState, action) {
   const parameterName = action.parameter;
+  const payload = action.payload;
 
   switch (action.type) {
     case ALARM:
-      return state.updateIn([parameterName, 'alarm'], () => action.alarm);
+      return state.setIn([parameterName, 'alarm'], payload);
     case ALARM_ENABLED:
-      return state.updateIn([parameterName, `${action.alarm}Enabled`], () => action.enabled);
+      return state.setIn([parameterName, `${payload.alarm}Enabled`], payload.enabled);
     case ALARM_VALUE:
-      return state.updateIn([parameterName, `${action.alarm}Value`], () => action.value);
+      return state.setIn([parameterName, `${payload.alarm}Value`], payload.value);
     case AS_BASE_STATE:
       return setAsBaseState(state, action.state);
     case BAUD_RATE:
-      return state.updateIn([parameterName, 'baudRate'], () => action.baudRate);
+      return state.setIn([parameterName, 'baudRate'], payload);
     case CHANNEL:
-      return state.updateIn([parameterName, `${action.key}Channel`], () => action.channel);
+      return state.setIn([parameterName, `${payload.key}Channel`], payload.channel);
     case FC_TYPE:
       return state.updateIn([parameterName, 'fcType'], () => action.fcType);
     case FONT_SIZE:
-      return state.updateIn([parameterName, 'fontSize'], () => action.fontSize);
+      return state.setIn([parameterName, 'fontSize'], payload);
     case H_ALIGNMENT:
-      return state.updateIn([parameterName, 'hAlignment'], () => action.hAlignment);
+      return state.setIn([parameterName, 'hAlignment'], payload);
     case MAX:
-      return state.updateIn([parameterName, 'max'], () => action.max);
+      return state.setIn([parameterName, 'max'], payload);
     case MAX_PANELS:
-      return state.updateIn([parameterName, 'maxPanels'], () => action.maxPanels);
+      return state.setIn([parameterName, 'maxPanels'], payload);
     case MIN:
-      return state.updateIn([parameterName, 'min'], () => action.min);
+      return state.setIn([parameterName, 'min'], payload);
     case OFFSET:
       return state
-        .updateIn([parameterName, 'offsetX'], () => action.x)
-        .updateIn([parameterName, 'offsetY'], () => action.y);
+        .setIn([parameterName, 'offsetX'], payload.x)
+        .setIn([parameterName, 'offsetY'], payload.y);
     case PANEL:
       return state.updateIn([parameterName, 'panel'], () => action.panel);
     case PARAMS_FROM_EEPROM:
       return addPreviewState(setAsBaseState(eeprom.toParameters(action.eepromData)));
     case POSITION:
       return state
-        .updateIn([parameterName, 'positionX'], () => action.x)
-        .updateIn([parameterName, 'positionY'], () => action.y);
+        .setIn([parameterName, 'positionX'], payload.x)
+        .setIn([parameterName, 'positionY'], payload.y);
     case RADIUS:
       return state.updateIn([parameterName, action.key], () => action.radius);
     case RAW:
@@ -83,7 +84,7 @@ export default function parameters(state = initialState, action) {
     case MODE:
       return state.updateIn([parameterName, `${action.prefix}Mode`], () => action.mode);
     case VISIBLE_ON:
-      return state.updateIn([parameterName, 'visibleOn'], () => action.visibleOn);
+      return state.setIn([parameterName, 'visibleOn'], payload);
     default:
       return state;
   }

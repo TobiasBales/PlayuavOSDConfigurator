@@ -28,15 +28,15 @@ export const MODE = 'parameters/mode';
 export const VISIBLE_ON = 'parameters/visible_on';
 
 export function setAlarm(parameter, alarm) {
-  return { type: ALARM, parameter, alarm };
+  return { type: ALARM, parameter, payload: alarm };
 }
 
 export function setAlarmEnabled(parameter, alarm, enabled) {
-  return { type: ALARM_ENABLED, parameter, alarm, enabled };
+  return { type: ALARM_ENABLED, parameter, payload: { alarm, enabled } };
 }
 
 export function setAlarmValue(parameter, alarm, value) {
-  return { type: ALARM_VALUE, parameter, alarm, value };
+  return { type: ALARM_VALUE, parameter, payload: { alarm, value } };
 }
 
 export function setAsBaseState(state) {
@@ -44,11 +44,11 @@ export function setAsBaseState(state) {
 }
 
 export function setBaudRate(parameter, baudRate) {
-  return { type: BAUD_RATE, parameter, baudRate };
+  return { type: BAUD_RATE, parameter, payload: baudRate };
 }
 
 export function setChannel(parameter, key, channel) {
-  return { type: CHANNEL, parameter, key, channel };
+  return { type: CHANNEL, parameter, payload: { key, channel } };
 }
 
 export function setFcType(parameter, fcType) {
@@ -56,27 +56,27 @@ export function setFcType(parameter, fcType) {
 }
 
 export function setFontSize(parameter, fontSize) {
-  return { type: FONT_SIZE, parameter, fontSize };
+  return { type: FONT_SIZE, parameter, payload: fontSize };
 }
 
 export function setHAlignment(parameter, hAlignment) {
-  return { type: H_ALIGNMENT, parameter, hAlignment };
+  return { type: H_ALIGNMENT, parameter, payload: hAlignment };
 }
 
 export function setMax(parameter, max) {
-  return { type: MAX, parameter, max };
+  return { type: MAX, parameter, payload: max };
 }
 
 export function setMaxPanels(parameter, maxPanels) {
-  return { type: MAX_PANELS, parameter, maxPanels };
+  return { type: MAX_PANELS, parameter, payload: maxPanels };
 }
 
 export function setMin(parameter, min) {
-  return { type: MIN, parameter, min };
+  return { type: MIN, parameter, payload: min };
 }
 
 export function setOffset(parameter, x, y) {
-  return { type: OFFSET, parameter, x, y };
+  return { type: OFFSET, parameter, payload: { x, y } };
 }
 
 export function setPanel(parameter, panel) {
@@ -88,7 +88,7 @@ export function setParamsFromEEPROM(eepromData) {
 }
 
 export function setPosition(parameter, x, y) {
-  return { type: POSITION, parameter, x, y };
+  return { type: POSITION, parameter, payload: { x, y } };
 }
 
 export function setRadius(parameter, key, radius) {
@@ -136,5 +136,5 @@ export function setMode(parameter, prefix, mode) {
 }
 
 export function setVisibleOn(parameter, visibleOn) {
-  return { type: VISIBLE_ON, parameter, visibleOn };
+  return { type: VISIBLE_ON, parameter, payload: visibleOn };
 }
