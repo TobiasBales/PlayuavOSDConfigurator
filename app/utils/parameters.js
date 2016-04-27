@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
-import * as ParameterActions from '../actions/parameters';
+import * as ParameterActions from '../config/actions';
 
 function mapStateToProps(parameterName, state) {
   let parameters = Immutable.fromJS({});

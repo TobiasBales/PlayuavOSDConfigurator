@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
-import parameters from './parameters';
-import pixler from '../pixler/reducer';
+import parameters from './config/reducer';
+import pixler from './pixler/reducer';
 
 const rootReducer = combineReducers({
   parameters,

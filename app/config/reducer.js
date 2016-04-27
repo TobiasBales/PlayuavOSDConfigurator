@@ -6,7 +6,7 @@ import {
   PARAMS_FROM_EEPROM, POSITION, RADIUS, RAW, SCALE, SCALE_ALIGNMENT,
   SCALE_ENABLED, SCALE_TYPE, TYPE, UNITS, V_ALIGNMENT, VALUE, MODE,
   VISIBLE_ON,
-} from '../actions/parameters';
+} from './actions';
 
 function addPreviewState(state) {
   return state
