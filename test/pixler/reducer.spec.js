@@ -1,14 +1,9 @@
-import extensiblePolyfill from 'extensible-polyfill';
-extensiblePolyfill('immutable');
-import chai, { expect } from 'chai';
-import chaiImmutable from 'chai-immutable';
+import { expect } from 'chai';
 import Immutable from 'immutable';
 import pixler from '../../app/pixler/reducer';
 import {
   EMPTY, SHAPE, OUTLINE, CLEAR, MIRROR, SET_FONT_SIZE, SET_OUTLINE, SET_SHAPE, SET_PIXEL,
 } from '../../app/pixler/actions';
-
-chai.use(chaiImmutable);
 
 
 describe('reducers', () => {
