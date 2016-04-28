@@ -4,8 +4,9 @@ machine:
 test:
   override:
     - npm run lint
-    - npm run test
+    - npm run test-ci
     - npm run package
   post:
     - cd release/linux-x64/ && zip -r ../../PlayUAVOSDConfigurator-linux-x64.zip PlayUAVOSDConfigurator-linux-x64/
     - cp PlayUAVOSDConfigurator-linux-x64.zip $CIRCLE_ARTIFACTS/
+    - cp test-results.xml $CIRCLE_TEST_REPORTS/

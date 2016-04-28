@@ -6,6 +6,7 @@
   "main": "main.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive --require ./test/setup.js test/**/*.spec.js",
+    "test-ci": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive --reporter mocha-junit-reporter --require ./test/setup.js test/**/*.spec.js",
     "test-watch": "npm test -- --watch",
     "test-e2e": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --require ./test/setup.js --require co-mocha ./test/e2e.js",
     "lint": "eslint app *.js",
@@ -86,6 +87,7 @@
     "less-loader": "^2.2.2",
     "minimist": "^1.2.0",
     "mocha": "^2.3.0",
+    "mocha-junit-reporter": "^1.11.1",
     "node-libs-browser": "^1.0.0",
     "node-sass": "3.4.2",
     "phantomjs-polyfill": "0.0.2",
