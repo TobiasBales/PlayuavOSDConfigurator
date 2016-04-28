@@ -26,14 +26,14 @@ export default class Wind extends PreviewBase {
       const windPosition = Canvas.calculateStringPosition(windString, 20, posY, 0, 1, font);
       this.canvas.drawString(windString, windPosition.left, windPosition.top, font);
 
-      context.save();
-      context.translate(9, 9);
-      context.rotate(this.props.windDirection * Math.PI / 180);
-      context.translate(-9, -9);
+      this.canvas.save();
+      this.canvas.translate(9, 9);
+      this.canvas.rotate(this.props.windDirection * Math.PI / 180);
+      this.canvas.translate(-9, -9);
       this.canvas.drawLine(6, 7, 9, 1);
       this.canvas.drawLine(9, 1, 12, 7);
       this.canvas.drawLine(9, 16, 9, 7, true);
-      context.restore();
+      this.canvas.restore();
     }
   }
 
