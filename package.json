@@ -108,6 +108,7 @@
   },
   "dependencies": {
     "atob": "^2.0.3",
+    "bluebird": "^2.9.30",
     "chokidar": "^1.4.3",
     "classnames": "^2.2.3",
     "crc-32": "^0.4.0",
