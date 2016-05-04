@@ -24,17 +24,19 @@ export default class Editor extends Component {
       const shape = this.props.shape[row];
       const outline = this.props.outline[row];
 
-      const rowPixels = [...Array(width)].map((__, column) => {
+      const rowPixels = [...Array(width)].map((__, i) => {
+        const column = width - i;
         const key = `${row}${column}`;
+        let type = null;
         if (shape & outline & Math.pow(2, column)) {
-          return (
-            <Pixel key={key} setPixel={this._setPixel.bind(this, row, column)} type={OUTLINE} />
-          );
+          type = OUTLINE;
+        } else if (shape & Math.pow(2, column)) {
+          type = SHAPE;
+        } else {
+          type = EMPTY;
         }
-        if (shape & Math.pow(2, column)) {
-          return <Pixel key={key} setPixel={this._setPixel.bind(this, row, column)} type={SHAPE} />;
-        }
-        return <Pixel key={key} setPixel={this._setPixel.bind(this, row, column)} type={EMPTY} />;
+
+        return (<Pixel key={key} setPixel={this._setPixel.bind(this, row, column)} type={type} />);
       });
 
       return (

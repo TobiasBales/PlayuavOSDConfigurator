@@ -11,8 +11,8 @@ describe('reducers', () => {
     it('should handle initial state', () => {
       const state = pixler(undefined, {});
       expect(state).keys('fontSize', 'outline', 'shape');
-      expect(state.get('outline')).to.equal(Immutable.List.of(0, 0, 0, 0, 0, 0, 0, 0));
-      expect(state.get('shape')).to.equal(Immutable.List.of(0, 0, 0, 0, 0, 0, 0, 0));
+      expect(state.get('outline')).to.equal(Immutable.List.of(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+      expect(state.get('shape')).to.equal(Immutable.List.of(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
     });
 
     it('should handle CLEAR', () => {
@@ -72,16 +72,16 @@ describe('reducers', () => {
 
     it('should handle SET_PIXEL', () => {
       const state = pixler(undefined, { type: SET_PIXEL, pixelType: SHAPE, row: 0, column: 0 });
-      expect(state.get('shape')).to.equal(Immutable.List.of(0x01, 0, 0, 0, 0, 0, 0, 0));
-      expect(state.get('outline')).to.equal(Immutable.List.of(0, 0, 0, 0, 0, 0, 0, 0));
+      expect(state.get('shape')).to.equal(Immutable.List.of(0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+      expect(state.get('outline')).to.equal(Immutable.List.of(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 
       const newState = pixler(state, { type: SET_PIXEL, pixelType: OUTLINE, row: 0, column: 1 });
-      expect(newState.get('shape')).to.equal(Immutable.List.of(0x03, 0, 0, 0, 0, 0, 0, 0));
-      expect(newState.get('outline')).to.equal(Immutable.List.of(0x02, 0, 0, 0, 0, 0, 0, 0));
+      expect(newState.get('shape')).to.equal(Immutable.List.of(0x03, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+      expect(newState.get('outline')).to.equal(Immutable.List.of(0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 
       const lastState = pixler(newState, { type: SET_PIXEL, pixelType: EMPTY, row: 0, column: 0 });
-      expect(lastState.get('shape')).to.equal(Immutable.List.of(0x02, 0, 0, 0, 0, 0, 0, 0));
-      expect(lastState.get('outline')).to.equal(Immutable.List.of(0x02, 0, 0, 0, 0, 0, 0, 0));
+      expect(lastState.get('shape')).to.equal(Immutable.List.of(0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+      expect(lastState.get('outline')).to.equal(Immutable.List.of(0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0));
     });
   });
 });
