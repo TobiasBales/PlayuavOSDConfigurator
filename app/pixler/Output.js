@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Card, CardText, CardTitle } from 'react-toolbox/lib/card';
-import { clear, mirror, setFontSize, setOutline, setShape } from './actions';
+import {
+  clear, mirror, setFontSize, setOutline, setShape, shiftDown, shiftLeft, shiftRight, shiftUp,
+} from './actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button, Dropdown, Input } from 'react-toolbox';
@@ -15,6 +17,10 @@ class Output extends Component {
     setFontSize: PropTypes.func.isRequired,
     setOutline: PropTypes.func.isRequired,
     setShape: PropTypes.func.isRequired,
+    shiftDown: PropTypes.func.isRequired,
+    shiftLeft: PropTypes.func.isRequired,
+    shiftRight: PropTypes.func.isRequired,
+    shiftUp: PropTypes.func.isRequired,
   }
 
   _parseValueString = (value) => {
@@ -49,8 +55,6 @@ class Output extends Component {
         <CardText>
           <Input label="shape" value={shape} onChange={this._onShapeChanged} />
           <Input label="outline" value={outline} onChange={this._onOutlineChanged} />
-          <Button onClick={this.props.clear} label="clear" raised />
-          <Button onClick={this.props.mirror} label="mirror" raised />
           <Dropdown
             auto
             value={this.props.fontSize}
@@ -58,6 +62,12 @@ class Output extends Component {
             label="font size"
             source={fontSizes}
           />
+          <Button onClick={this.props.clear} label="clear" raised />
+          <Button onClick={this.props.mirror} label="mirror" raised />
+          <Button icon="arrow_back" onClick={this.props.shiftLeft} raised />
+          <Button icon="arrow_forward" onClick={this.props.shiftRight} raised />
+          <Button icon="arrow_upward" onClick={this.props.shiftUp} raised />
+          <Button icon="arrow_downward" onClick={this.props.shiftDown} raised />
         </CardText>
       </Card>
     );
@@ -69,6 +79,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchersToProps = (dispatch) =>
-  bindActionCreators({ clear, mirror, setFontSize, setOutline, setShape }, dispatch);
+  bindActionCreators({
+    clear, mirror, setFontSize, setOutline, setShape, shiftDown, shiftLeft, shiftRight, shiftUp,
+  }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchersToProps)(Output);

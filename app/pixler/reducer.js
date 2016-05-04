@@ -2,6 +2,7 @@ import Immutable from 'immutable';
 import {
   EMPTY, SHAPE, OUTLINE, CLEAR, MIRROR,
   SET_FONT_SIZE, SET_OUTLINE, SET_PIXEL, SET_SHAPE,
+  SHIFT_DOWN, SHIFT_LEFT, SHIFT_RIGHT, SHIFT_UP,
 } from './actions';
 import fonts from '../utils/fonts';
 
@@ -76,6 +77,23 @@ export default function pixler(state = initialState, action) {
         default:
           return state;
       }
+    case SHIFT_DOWN: {
+      return state
+        .update('outline', (arr) => arr.unshift(0).slice(0, -1))
+        .update('shape', (arr) => arr.unshift(0).slice(0, -1));
+    }
+    case SHIFT_LEFT:
+      return state
+        .update('outline', (arr) => arr.map((b) => b << 1))
+        .update('shape', (arr) => arr.map((b) => b << 1));
+    case SHIFT_RIGHT:
+      return state
+        .update('outline', (arr) => arr.map((b) => b >> 1))
+        .update('shape', (arr) => arr.map((b) => b >> 1));
+    case SHIFT_UP:
+      return state
+        .update('outline', (arr) => arr.slice(1).push(0))
+        .update('shape', (arr) => arr.slice(1).push(0));
     default:
       return state;
   }
