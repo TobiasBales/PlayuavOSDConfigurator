@@ -1,5 +1,6 @@
 import { PropTypes } from 'react';
 import StringPreview from './StringPreview';
+import * as icons from '../../data/icons/lookup';
 
 export default class Rssi extends StringPreview {
   static propTypes = {
@@ -9,6 +10,10 @@ export default class Rssi extends StringPreview {
     raw: PropTypes.number.isRequired,
     rssi: PropTypes.number.isRequired,
     type: PropTypes.number.isRequired,
+  }
+
+  icon() {
+    return icons.RSSI;
   }
 
   content() {
@@ -27,9 +32,9 @@ export default class Rssi extends StringPreview {
       }
 
       rssi = Math.max(0, rssi);
-      content = `RSSI ${rssi.toFixed(0)}%`;
+      content = `${rssi.toFixed(0)}%`;
     } else {
-      content = `RSSI ${rssi.toFixed(0)}`;
+      content = `${rssi.toFixed(0)}`;
     }
     return content;
   }
