@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Column from '../../components/Column';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Input from '../../components/Input';
-import Parameters from '../../components/parameters';
+import Parameters from '../parameters';
 import { bindStateForComponent } from '../../utils/parameters';
 import CustomPropTypes from '../../utils/PropTypes';
 

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Label from '../Label';
+import Label from '../../components/Label';
 
 export default function Text(props) {
   const { label, text } = props;

@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Parameters from '../../components/parameters';
+import Parameters from '../parameters';
 import { bindStateForComponent } from '../../utils/parameters';
 import Column from '../../components/Column';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class SpeedScale extends Component {
+class AltitudeScale extends Component {
   static propTypes = {
     numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
@@ -33,9 +33,9 @@ class SpeedScale extends Component {
     const { positionX, positionY, scaleAlignment, scaleType, visibleOn } = this.props.parameters;
 
     return (
-      <Parameters.ParameterList name="speed scale">
+      <Parameters.ParameterList name="altitude scale">
         <Column width={50} >
-          <Parameters.SpeedScaleType setScaleType={setScaleType} scaleType={scaleType} />
+          <Parameters.AltitudeScaleType setScaleType={setScaleType} scaleType={scaleType} />
         </Column>
         <Column width={50} >
           <Parameters.ScaleAlignment setScaleAlignment={setScaleAlignment}
@@ -45,12 +45,12 @@ class SpeedScale extends Component {
         <Parameters.Position labelX="position x" labelY="offset y"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
-        <Parameters.VisibleOn visibleOn={visibleOn}
-          setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
+        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn}
+          numberOfPanels={numberOfPanels}
         />
       </Parameters.ParameterList>
     );
   }
 }
 
-export default bindStateForComponent('speedScale', SpeedScale);
+export default bindStateForComponent('altitudeScale', AltitudeScale);

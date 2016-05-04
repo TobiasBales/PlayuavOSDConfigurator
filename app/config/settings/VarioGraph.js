@@ -1,18 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Input from '../../components/Input';
-import Parameters from '../../components/parameters';
-import Column from '../../components/Column';
+import Parameters from '../parameters';
 import { bindStateForComponent } from '../../utils/parameters';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class Compass extends Component {
+class VarioGraph extends Component {
   static propTypes = {
-    numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
+      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
+    numberOfPanels: PropTypes.number.isRequired,
     setPosition: PropTypes.func.isRequired,
     setVisibleOn: PropTypes.func.isRequired,
   }
@@ -22,25 +21,15 @@ class Compass extends Component {
       this.props.numberOfPanels !== (nextProps.numberOfPanels);
   }
 
-  _setPosition = (position) => {
-    this.props.setPosition(null, parseInt(position, 10));
-  }
-
   render() {
-    const {
-      numberOfPanels,
-      setVisibleOn,
-    } = this.props;
-    const {
-      positionY,
-      visibleOn,
-    } = this.props.parameters;
+    const { numberOfPanels, setPosition, setVisibleOn } = this.props;
+    const { positionX, positionY, visibleOn } = this.props.parameters;
 
     return (
-      <Parameters.ParameterList name="compass">
-        <Column width={50} >
-          <Input type="number" label="position y" value={positionY} onChange={this._setPosition} />
-        </Column>
+      <Parameters.ParameterList name="vario graph (not implemented yet)">
+        <Parameters.Position labelX="position x" labelY="position y"
+          positionX={positionX} positionY={positionY} setPosition={setPosition}
+        />
         <Parameters.VisibleOn visibleOn={visibleOn}
           setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
         />
@@ -49,4 +38,4 @@ class Compass extends Component {
   }
 }
 
-export default bindStateForComponent('compass', Compass);
+export default bindStateForComponent('varioGraph', VarioGraph);
