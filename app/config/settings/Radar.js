@@ -1,22 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Parameters from '../../components/parameters';
+import Parameters from '../parameters';
 import Column from '../../components/Column';
 import { bindStateForComponent } from '../../utils/parameters';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class ClimbRate extends Component {
+class Radar extends Component {
   static propTypes = {
+    numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
-      fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
-      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      homeRadius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      radius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      wpRadius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
-    numberOfPanels: PropTypes.number.isRequired,
-    setFontSize: PropTypes.func.isRequired,
-    setVisibleOn: PropTypes.func.isRequired,
     setPosition: PropTypes.func.isRequired,
+    setRadius: PropTypes.func.isRequired,
+    setVisibleOn: PropTypes.func.isRequired,
   }
 
   shouldComponentUpdate(nextProps) {
@@ -27,24 +29,38 @@ class ClimbRate extends Component {
   render() {
     const {
       numberOfPanels,
-      setFontSize,
       setPosition,
+      setRadius,
       setVisibleOn,
     } = this.props;
     const {
-      fontSize,
+      homeRadius,
       positionX,
       positionY,
+      radius,
       visibleOn,
+      wpRadius,
     } = this.props.parameters;
 
     return (
-      <Parameters.ParameterList name="climb rate">
+      <Parameters.ParameterList name="radar">
         <Parameters.Position labelX="position x" labelY="position y"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
-        <Column width={50} >
-          <Parameters.FontSize fontSize={fontSize} setFontSize={setFontSize} />
+        <Column width={33} >
+          <Parameters.Radius label="radius" radiusKey="radius"
+            radius={radius} setRadius={setRadius}
+          />
+        </Column>
+        <Column width={33}>
+          <Parameters.Radius label="home radius" radiusKey="homeRadius"
+            radius={homeRadius} setRadius={setRadius}
+          />
+        </Column>
+        <Column width={33} >
+          <Parameters.Radius label="wp radius" radiusKey="wpRadius"
+            radius={wpRadius} setRadius={setRadius}
+          />
         </Column>
         <Parameters.VisibleOn visibleOn={visibleOn}
           setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
@@ -54,4 +70,4 @@ class ClimbRate extends Component {
   }
 }
 
-export default bindStateForComponent('climbRate', ClimbRate);
+export default bindStateForComponent('radar', Radar);

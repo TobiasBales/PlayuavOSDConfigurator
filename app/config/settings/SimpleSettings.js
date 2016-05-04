@@ -1,23 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Parameters from '../../components/parameters';
+import Parameters from '../parameters';
 import Column from '../../components/Column';
-import { bindStateForComponent } from '../../utils/parameters';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class Radar extends Component {
+export default class SimpleSettings extends Component {
   static propTypes = {
+    name: PropTypes.string,
+    children: PropTypes.node,
     numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
-      homeRadius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
-      radius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
-      wpRadius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
+    setFontSize: PropTypes.func.isRequired,
+    setHAlignment: PropTypes.func.isRequired,
     setPosition: PropTypes.func.isRequired,
-    setRadius: PropTypes.func.isRequired,
     setVisibleOn: PropTypes.func.isRequired,
   }
 
@@ -26,48 +27,45 @@ class Radar extends Component {
       this.props.numberOfPanels !== (nextProps.numberOfPanels);
   }
 
+  parameterModified(key) {
+    return this.props.parameters.get(key) !== this.props.parameters.get(`base${key}`);
+  }
+
   render() {
     const {
+      children,
       numberOfPanels,
+      setFontSize,
+      setHAlignment,
       setPosition,
-      setRadius,
       setVisibleOn,
     } = this.props;
     const {
-      homeRadius,
+      fontSize,
+      hAlignment,
       positionX,
       positionY,
-      radius,
       visibleOn,
-      wpRadius,
     } = this.props.parameters;
 
+    const name = this.props.name || this.name;
+
     return (
-      <Parameters.ParameterList name="radar">
+      <Parameters.ParameterList name={name}>
         <Parameters.Position labelX="position x" labelY="position y"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
-        <Column width={33} >
-          <Parameters.Radius label="radius" radiusKey="radius"
-            radius={radius} setRadius={setRadius}
-          />
+        <Column width={50} >
+          <Parameters.FontSize fontSize={fontSize} setFontSize={setFontSize} />
         </Column>
-        <Column width={33}>
-          <Parameters.Radius label="home radius" radiusKey="homeRadius"
-            radius={homeRadius} setRadius={setRadius}
-          />
+        <Column width={50} >
+          <Parameters.HorizontalAlignment hAlignment={hAlignment} setHAlignment={setHAlignment} />
         </Column>
-        <Column width={33} >
-          <Parameters.Radius label="wp radius" radiusKey="wpRadius"
-            radius={wpRadius} setRadius={setRadius}
-          />
-        </Column>
-        <Parameters.VisibleOn visibleOn={visibleOn}
-          setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
+        {children}
+        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn}
+          numberOfPanels={numberOfPanels}
         />
       </Parameters.ParameterList>
     );
   }
 }
-
-export default bindStateForComponent('radar', Radar);

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Parameters from '../../components/parameters';
+import Parameters from '../parameters';
 import Column from '../../components/Column';
 import { bindStateForComponent } from '../../utils/parameters';
 import CustomPropTypes from '../../utils/PropTypes';

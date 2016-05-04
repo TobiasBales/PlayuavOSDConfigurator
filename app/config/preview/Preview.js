@@ -3,12 +3,12 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Card, CardText } from 'react-toolbox/lib/card';
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { RadioGroup, RadioButton } from 'react-toolbox/lib/radio';
-import { bindStateForComponent } from '../utils/parameters';
-import Column from '../components/Column';
-import Previews from '../components/preview';
-import Label from '../components/Label';
-import background from '../../static/background.png';
-import CustomPropTypes from '../utils/PropTypes';
+import { bindStateForComponent } from '../../utils/parameters';
+import Column from '../../components/Column';
+import Previews from '.';
+import Label from '../../components/Label';
+import background from '../../../static/background.png';
+import CustomPropTypes from '../../utils/PropTypes';
 
 class Preview extends Component {
   static propTypes = {

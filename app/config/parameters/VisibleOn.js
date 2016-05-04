@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Checkbox from 'react-toolbox/lib/checkbox';
-import Label from '../Label';
+import Label from '../../components/Label';
 import CustomPropTypes from '../../utils/PropTypes';
 import classNames from 'classnames';
 import styles from './VisibleOn.css';

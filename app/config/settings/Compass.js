@@ -1,17 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Parameters from '../../components/parameters';
-import CustomPropTypes from '../../utils/PropTypes';
+import Input from '../../components/Input';
+import Parameters from '../parameters';
+import Column from '../../components/Column';
 import { bindStateForComponent } from '../../utils/parameters';
+import CustomPropTypes from '../../utils/PropTypes';
 
-class Wind extends Component {
+class Compass extends Component {
   static propTypes = {
+    numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
-      positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
-    numberOfPanels: PropTypes.number.isRequired,
     setPosition: PropTypes.func.isRequired,
     setVisibleOn: PropTypes.func.isRequired,
   }
@@ -21,23 +22,25 @@ class Wind extends Component {
       this.props.numberOfPanels !== (nextProps.numberOfPanels);
   }
 
+  _setPosition = (position) => {
+    this.props.setPosition(null, parseInt(position, 10));
+  }
+
   render() {
     const {
       numberOfPanels,
-      setPosition,
       setVisibleOn,
     } = this.props;
     const {
-      positionX,
       positionY,
       visibleOn,
     } = this.props.parameters;
 
     return (
-      <Parameters.ParameterList name="wind">
-        <Parameters.Position labelX="position x" labelY="position y"
-          positionX={positionX} positionY={positionY} setPosition={setPosition}
-        />
+      <Parameters.ParameterList name="compass">
+        <Column width={50} >
+          <Input type="number" label="position y" value={positionY} onChange={this._setPosition} />
+        </Column>
         <Parameters.VisibleOn visibleOn={visibleOn}
           setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
         />
@@ -46,4 +49,4 @@ class Wind extends Component {
   }
 }
 
-export default bindStateForComponent('wind', Wind);
+export default bindStateForComponent('compass', Compass);
