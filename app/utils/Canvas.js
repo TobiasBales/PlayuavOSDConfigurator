@@ -51,24 +51,30 @@ export default class Canvas {
 
   drawCharacter(char, x, y, font) {
     const charData = font.getData(char);
+    const { height, width } = font.dimensions;
+    const { shape, outline } = charData;
+    this.drawCharacterData(x, y, shape, outline, width, height);
+  }
 
-    for (let row = 0; row < font.dimensions.height; row++) {
-      const shape = charData.shape[row];
-      const outline = charData.outline[row];
+  drawCharacterData(x, y, shapes, outlines, width, height) {
+    for (let row = 0; row < height; row++) {
+      const shape = shapes[row];
+      const outline = outlines[row];
 
-      for (let column = 0; column < font.dimensions.width; column++) {
+      for (let column = 0; column < width; column++) {
         if (shape & Math.pow(2, column)) {
           this._setPixelData(255, 255, 255, 255);
-          this.context.putImageData(this.pixel, x + (font.dimensions.width - column - 1), y + row);
+          this.context.putImageData(this.pixel, x + (width - column - 1), y + row);
         }
 
         if (shape & outline & Math.pow(2, column)) {
           this._setPixelData(0, 0, 0, 255);
-          this.context.putImageData(this.pixel, x + (font.dimensions.width - column - 1), y + row);
+          this.context.putImageData(this.pixel, x + (width - column - 1), y + row);
         }
       }
     }
   }
+
 
   drawString(string, x, y, font, xSpacing = 0) {
     const width = font.dimensions.width;
@@ -356,7 +362,8 @@ export default class Canvas {
     this.context.stroke();
   }
 
-  static calculateStringPosition(string, x, y, hAlignment, vAlignment, font, xSpacing = 0) {
+  static calculateStringPosition(string, x, y, hAlignment, vAlignment,
+    font, xSpacing = 0, icon = false) {
     if (!string) {
       return { left: x, top: y, height: 0, width: 0 };
     }
@@ -369,7 +376,10 @@ export default class Canvas {
     ), '').length;
 
     const height = numberOfLines * fontSize.height;
-    const width = numberOfCharacters * (fontSize.width + xSpacing);
+    let width = numberOfCharacters * (fontSize.width + xSpacing);
+    if (icon) {
+      width += fontSize.width + 2;
+    }
 
     const position = { left: x, top: y };
 
