@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import Canvas from '../../utils/Canvas';
 import PreviewBase from './PreviewBase';
 import fonts from '../../utils/fonts';
+import icons from '../../utils/icons';
 
 export default class StringPreview extends PreviewBase {
   static propTypes = {
@@ -19,6 +20,10 @@ export default class StringPreview extends PreviewBase {
     vAlignment: 0,
   }
 
+  icon() {
+    return null;
+  }
+
   content() {
     return '';
   }
@@ -29,7 +34,14 @@ export default class StringPreview extends PreviewBase {
     this.canvas.clear();
 
     if (content && (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0) {
-      this.canvas.drawString(content, 0, 0, font);
+      const icon = this.icon();
+      const hasIcon = icon !== null;
+      const x = hasIcon ? font.dimensions.width + 2 : 0;
+      if (hasIcon) {
+        const iconFont = icons.getFont(this.props.fontSize);
+        this.canvas.drawCharacter(icon, 0, 0, iconFont);
+      }
+      this.canvas.drawString(content, x, 0, font);
     }
   }
 
@@ -37,8 +49,9 @@ export default class StringPreview extends PreviewBase {
     const { hAlignment, positionX, positionY, vAlignment } = this.props;
     const content = this.content();
     const font = fonts.getFont(this.props.fontSize);
+    const hasIcon = this.icon() !== null;
     const position = Canvas.calculateStringPosition(
-      content, positionX, positionY, hAlignment, vAlignment, font);
+      content, positionX, positionY, hAlignment, vAlignment, font, 0, hasIcon);
 
     const visible = this.content() &&
       (this.props.visibleOn & Math.pow(2, this.props.panel)) !== 0;

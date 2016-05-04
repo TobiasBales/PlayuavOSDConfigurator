@@ -1,5 +1,6 @@
 import { PropTypes } from 'react';
 import StringPreview from './StringPreview';
+import * as icons from '../../data/icons/lookup';
 
 export default class GpsHdop extends StringPreview {
   static propTypes = {
@@ -7,8 +8,12 @@ export default class GpsHdop extends StringPreview {
     gpsHdop: PropTypes.number.isRequired,
   }
 
+  icon() {
+    return icons.HDOP;
+  }
+
   content() {
     const { gpsHdop } = this.props;
-    return `HDOP ${(gpsHdop / 100).toFixed(1)}`;
+    return `${(gpsHdop / 100).toFixed(1)}`;
   }
 }

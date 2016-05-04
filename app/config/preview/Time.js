@@ -1,5 +1,6 @@
 import { PropTypes } from 'react';
 import StringPreview from './StringPreview';
+import * as icons from '../../data/icons/lookup';
 
 function padNumber(number, digits) {
   return (`0000000000000${number}`).slice(-digits);
@@ -12,6 +13,10 @@ export default class Time extends StringPreview {
     timeSinceHeartbeat: PropTypes.number.isRequired,
     timeSinceStartup: PropTypes.number.isRequired,
     type: PropTypes.number.isRequired,
+  }
+
+  icon() {
+    return icons.TIME;
   }
 
   content() {

@@ -1,5 +1,6 @@
 import { PropTypes } from 'react';
 import StringPreview from './StringPreview';
+import * as icons from '../../data/icons/lookup';
 
 export default class LinkQuality extends StringPreview {
   static propTypes = {
@@ -8,6 +9,10 @@ export default class LinkQuality extends StringPreview {
     min: PropTypes.number.isRequired,
     raw: PropTypes.number.isRequired,
     linkQuality: PropTypes.number.isRequired,
+  }
+
+  icon() {
+    return icons.LINK_QUALITY;
   }
 
   content() {
@@ -21,9 +26,9 @@ export default class LinkQuality extends StringPreview {
       }
 
       linkQuality = Math.max(0, linkQuality);
-      content = `LIQU ${linkQuality.toFixed(0)}%`;
+      content = `${linkQuality.toFixed(0)}%`;
     } else {
-      content = `LIQU ${linkQuality.toFixed(0)}`;
+      content = `${linkQuality.toFixed(0)}`;
     }
     return content;
   }

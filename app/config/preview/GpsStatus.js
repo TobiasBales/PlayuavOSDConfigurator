@@ -1,5 +1,6 @@
 import { PropTypes } from 'react';
 import StringPreview from './StringPreview';
+import * as icons from '../../data/icons/lookup';
 
 const NO_GPS = 0;
 const NO_FIX = 1;
@@ -14,6 +15,10 @@ export default class GpsStatus extends StringPreview {
     gpsStatus: PropTypes.number.isRequired,
   }
 
+  icon() {
+    return icons.GPS;
+  }
+
   content() {
     const { gpsSattelites, gpsStatus } = this.props;
     let content = '';
@@ -26,13 +31,13 @@ export default class GpsStatus extends StringPreview {
         content = 'NOFIX';
         break;
       case FIX_2D:
-        content = `2D-${gpsSattelites}`;
+        content = `${gpsSattelites}`;
         break;
       case FIX_3D:
-        content = `3D-${gpsSattelites}`;
+        content = `${gpsSattelites}`;
         break;
       case FIX_3D_DGPS:
-        content = `D3D-${gpsSattelites}`;
+        content = `${gpsSattelites}`;
         break;
       default:
         content = 'unknown';
