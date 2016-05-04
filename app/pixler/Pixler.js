@@ -3,6 +3,7 @@ import { setPixel } from './actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Editor from './Editor';
+import Preview from './Preview';
 import Column from '../components/Column';
 import Output from './Output';
 
@@ -17,6 +18,7 @@ function Pixler(props) {
           outline={outline}
           shape={shape}
         />
+        <Preview outline={outline} shape={shape} fontSize={fontSize} />
       </Column>
       <Column width={50}>
         <Output outline={outline} shape={shape} />
