@@ -1,14 +1,14 @@
 import Immutable from 'immutable';
 import {
   EMPTY, SHAPE, OUTLINE, CLEAR, MIRROR,
-  SET_FONT_SIZE, SET_OUTLINE, SET_PIXEL, SET_SHAPE
+  SET_FONT_SIZE, SET_OUTLINE, SET_PIXEL, SET_SHAPE,
 } from './actions';
 import fonts from '../utils/fonts';
 
 const initialState = Immutable.fromJS({
   fontSize: 0,
-  outline: [0, 0, 0, 0, 0, 0, 0, 0],
-  shape: [0, 0, 0, 0, 0, 0, 0, 0],
+  outline: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  shape: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 });
 
 const set = (column) =>
