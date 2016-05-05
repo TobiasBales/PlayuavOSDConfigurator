@@ -8,7 +8,7 @@ import fonts from '../utils/fonts';
 
 const initialState = Immutable.fromJS({
   fontSize: 0,
-  outline: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  outline: [0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff],
   shape: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 });
 
@@ -22,8 +22,8 @@ const unset = (column) =>
     prev | Math.pow(2, column)
 );
 
-const setArrayLength = (length) => (array) =>
-  array.setSize(length).map((value) => value || 0);
+const setArrayLength = (length, fallback) => (array) =>
+  array.setSize(length).map((value) => value || fallback);
 
 const mirrorByte = (width) => (byte) => {
   let newByte = 0;
@@ -53,8 +53,8 @@ export default function pixler(state = initialState, action) {
       const { height } = fonts.getFont(action.payload).dimensions;
       return state
         .set('fontSize', action.payload)
-        .update('outline', setArrayLength(height))
-        .update('shape', setArrayLength(height));
+        .update('outline', setArrayLength(height, 0xff))
+        .update('shape', setArrayLength(height, 0));
     }
     case SET_OUTLINE:
       return state.set('outline', Immutable.fromJS(action.payload));
@@ -65,15 +65,15 @@ export default function pixler(state = initialState, action) {
         case EMPTY:
           return state
             .update('shape', (arr) => arr.update(row, set(column)))
-            .update('outline', (arr) => arr.update(row, set(column)));
+            .update('outline', (arr) => arr.update(row, unset(column)));
         case SHAPE:
           return state
             .update('shape', (arr) => arr.update(row, unset(column)))
-            .update('outline', (arr) => arr.update(row, set(column)));
+            .update('outline', (arr) => arr.update(row, unset(column)));
         case OUTLINE:
           return state
             .update('shape', (arr) => arr.update(row, unset(column)))
-            .update('outline', (arr) => arr.update(row, unset(column)));
+            .update('outline', (arr) => arr.update(row, set(column)));
         default:
           return state;
       }

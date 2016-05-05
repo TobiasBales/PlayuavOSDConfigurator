@@ -20,9 +20,12 @@ export default class Preview extends Component {
   }
 
   draw() {
-    const { height, width } = fonts.getFont(this.props.fontSize).dimensions;
+    const font = fonts.getFont(this.props.fontSize);
+    const { height, width } = font.dimensions;
     const { shape, outline } = this.props;
-    this.canvas.drawCharacterData(height / 2, width / 2, shape, outline, width, height);
+    const invertedOutline = outline.map((b) => ~b >>> 0);
+    this.canvas.clear();
+    this.canvas.drawCharacterData(height / 2, width / 2, shape, invertedOutline, width, height);
   }
 
   render() {
