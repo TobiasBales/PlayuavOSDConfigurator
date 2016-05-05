@@ -25,7 +25,7 @@ export default class Editor extends Component {
       const outline = this.props.outline[row];
 
       const rowPixels = [...Array(width)].map((__, i) => {
-        const column = width - i;
+        const column = width - i - 1;
         const key = `${row}${column}`;
         let type = null;
         if (shape & outline & Math.pow(2, column)) {
