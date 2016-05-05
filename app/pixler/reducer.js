@@ -56,10 +56,16 @@ export default function pixler(state = initialState, action) {
         .update('outline', setArrayLength(height, 0xff))
         .update('shape', setArrayLength(height, 0));
     }
-    case SET_OUTLINE:
-      return state.set('outline', Immutable.fromJS(action.payload));
-    case SET_SHAPE:
-      return state.set('shape', Immutable.fromJS(action.payload));
+    case SET_OUTLINE: {
+      const { height } = fonts.getFont(state.get('fontSize')).dimensions;
+      const outline = Immutable.fromJS(action.payload);
+      return state.set('outline', setArrayLength(height, 0xff)(outline));
+    }
+    case SET_SHAPE: {
+      const { height } = fonts.getFont(state.get('fontSize')).dimensions;
+      const shape = Immutable.fromJS(action.payload);
+      return state.set('shape', setArrayLength(height, 0)(shape));
+    }
     case SET_PIXEL:
       switch (action.pixelType) {
         case EMPTY:

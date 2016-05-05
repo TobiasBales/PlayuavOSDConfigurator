@@ -62,13 +62,19 @@ describe('reducers', () => {
     });
 
     it('should handle SET_OUTLINE', () => {
-      const state = pixler(undefined, { type: SET_OUTLINE, payload: [1, 1, 1, 1, 1, 1, 1, 1] });
-      expect(state.get('outline')).to.equal(Immutable.List.of(1, 1, 1, 1, 1, 1, 1, 1));
+      const state = pixler(undefined, {
+        type: SET_OUTLINE, payload: [0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff]
+      });
+      expect(state.get('outline')).to.equal(
+        Immutable.List.of(0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff));
     });
 
     it('should handle SET_SHAPE', () => {
-      const state = pixler(undefined, { type: SET_SHAPE, payload: [1, 1, 1, 1, 1, 1, 1, 1] });
-      expect(state.get('shape')).to.equal(Immutable.List.of(1, 1, 1, 1, 1, 1, 1, 1));
+      const state = pixler(undefined, {
+        type: SET_SHAPE, payload: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      });
+      expect(state.get('shape')).to.equal(
+        Immutable.List.of(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
     });
 
     it('should handle SET_PIXEL', () => {
