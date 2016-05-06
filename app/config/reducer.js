@@ -56,7 +56,7 @@ export default function parameters(state = initialState, action) {
     case PANEL:
       return state.updateIn([parameterName, 'panel'], () => action.panel);
     case PARAMS_FROM_EEPROM:
-      return addPreviewState(setAsBaseState(eeprom.toParameters(action.eepromData)));
+      return setAsBaseState(addPreviewState(eeprom.toParameters(action.eepromData)));
     case POSITION:
       return state
         .setIn([parameterName, 'positionX'], payload.x)
