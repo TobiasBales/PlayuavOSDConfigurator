@@ -76,15 +76,15 @@ export default function pixler(state = initialState, action) {
         case EMPTY:
           return state
             .update('shape', (arr) => arr.update(row, set(column)))
-            .update('outline', (arr) => arr.update(row, unset(column)));
+            .update('outline', (arr) => arr.update(row, set(column)));
         case SHAPE:
           return state
             .update('shape', (arr) => arr.update(row, unset(column)))
-            .update('outline', (arr) => arr.update(row, unset(column)));
+            .update('outline', (arr) => arr.update(row, set(column)));
         case OUTLINE:
           return state
             .update('shape', (arr) => arr.update(row, unset(column)))
-            .update('outline', (arr) => arr.update(row, set(column)));
+            .update('outline', (arr) => arr.update(row, unset(column)));
         default:
           return state;
       }

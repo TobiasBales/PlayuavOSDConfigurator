@@ -7,6 +7,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button, Dropdown, Input } from 'react-toolbox';
+import fonts from '../utils/fonts';
 
 class Output extends Component {
   static propTypes = {
@@ -43,8 +44,10 @@ class Output extends Component {
 
   render() {
     const toHex = (byte) => `0x${byte.toString(16)}`;
+    const { width } = fonts.getFont(this.props.fontSize).dimensions;
+    const invert = (byte) => ((~byte >>> 0) & Math.pow(2, width) - 1);
     const shape = this.props.shape.map(toHex).join(', ');
-    const outline = this.props.outline.map(toHex).join(', ');
+    const outline = this.props.outline.map(invert).map(toHex).join(', ');
     const fontSizes = [
       { label: 'small', value: 0 },
       { label: 'medium', value: 1 },

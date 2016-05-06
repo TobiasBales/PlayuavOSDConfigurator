@@ -28,7 +28,7 @@ export default class Editor extends Component {
         const column = width - i - 1;
         const key = `${row}${column}`;
         let type = null;
-        if (shape & (~outline) & Math.pow(2, column)) {
+        if (shape & outline & Math.pow(2, column)) {
           type = OUTLINE;
         } else if (shape & Math.pow(2, column)) {
           type = SHAPE;

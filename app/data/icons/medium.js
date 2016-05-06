@@ -25,7 +25,7 @@ const outline = [
 const dimensions = { width: 8, height: 14 };
 
 function getData(index) {
-  return { shape: shape[index], outline: outline[index] };
+  return { shape: shape[index], outline: outline[index].map((b) => (~b >>> 0) & Math.pow(2, dimensions.width) - 1) };
 }
 
 export default { dimensions, getData };

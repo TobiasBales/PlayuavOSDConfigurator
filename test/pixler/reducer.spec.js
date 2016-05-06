@@ -24,8 +24,9 @@ describe('reducers', () => {
       });
       const newState = pixler(state, { type: CLEAR });
       const zeroList = Immutable.List.of(0, 0, 0, 0, 0, 0, 0, 0);
+      const ffList = Immutable.List.of(0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff);
 
-      expect(newState.get('outline')).to.equal(zeroList);
+      expect(newState.get('outline')).to.equal(ffList);
       expect(newState.get('shape')).to.equal(zeroList);
     });
 
@@ -79,19 +80,25 @@ describe('reducers', () => {
 
     it('should handle SET_PIXEL', () => {
       const state = pixler(undefined, { type: SET_PIXEL, pixelType: SHAPE, row: 0, column: 0 });
-      expect(state.get('shape')).to.equal(Immutable.List.of(0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-      expect(state.get('outline')).to.equal(
-        Immutable.List.of(0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff));
+      it('for SHAPE', () => {
+        expect(state.get('shape')).to.equal(Immutable.List.of(0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+        expect(state.get('outline')).to.equal(
+          Immutable.List.of(0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff));
+      });
 
       const newState = pixler(state, { type: SET_PIXEL, pixelType: OUTLINE, row: 0, column: 1 });
-      expect(newState.get('shape')).to.equal(Immutable.List.of(0x03, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-      expect(newState.get('outline')).to.equal(
-        Immutable.List.of(0xfd, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff));
+      it('for OUTLINE', () => {
+        expect(newState.get('shape')).to.equal(Immutable.List.of(0x03, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+        expect(newState.get('outline')).to.equal(
+          Immutable.List.of(0xfd, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff));
+      });
 
       const lastState = pixler(newState, { type: SET_PIXEL, pixelType: EMPTY, row: 0, column: 0 });
-      expect(lastState.get('shape')).to.equal(Immutable.List.of(0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-      expect(lastState.get('outline')).to.equal(
-        Immutable.List.of(0xfd, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff));
+      it('for EMPTY', () => {
+        expect(lastState.get('shape')).to.equal(Immutable.List.of(0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+        expect(lastState.get('outline')).to.equal(
+          Immutable.List.of(0xfd, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff));
+      });
     });
   });
 });

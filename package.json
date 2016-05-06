@@ -18,7 +18,8 @@
     "package-all": "npm run package -- --all",
     "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && electron-rebuild -v 0.36.11 -p -f -w serialport -e node_modules/electron-prebuilt",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
-    "clean": "rm -rf node_modules"
+    "clean": "rm -rf node_modules",
+    "validate": "npm ls"
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"
@@ -91,6 +92,7 @@
     "node-libs-browser": "^1.0.0",
     "node-sass": "3.4.2",
     "phantomjs-polyfill": "0.0.2",
+    "precommit-hook": "^3.0.0",
     "react-addons-test-utils": "^15.0.1",
     "redux-devtools": "^3.0.1",
     "redux-devtools-dock-monitor": "^1.0.1",
@@ -142,5 +144,10 @@
   "devEngines": {
     "node": "4.x || 5.x",
     "npm": "2.x || 3.x"
-  }
+  },
+  "pre-commit": [
+    "lint",
+    "validate",
+    "test"
+  ]
 }
