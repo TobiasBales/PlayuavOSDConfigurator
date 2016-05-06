@@ -2,6 +2,9 @@
 logs
 *.log
 
+.jshintrc
+.jshintignore
+
 test-results.xml
 
 # Runtime data
