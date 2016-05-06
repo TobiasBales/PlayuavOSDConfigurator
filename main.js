@@ -143,6 +143,7 @@ app.on('ready', () => {
             e.sender.send('error', err);
             return;
           }
+          e.sender.send('firmware-uploading');
           const firmware = JSON.parse(data);
           const binary = atob(firmware.image);
           const buffer = new Buffer(firmware.image.length);

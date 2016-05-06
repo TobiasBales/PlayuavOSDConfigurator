@@ -26,6 +26,7 @@ class Sidebar extends Component {
     ipc.on('osd-config-written', this._onOSDConfigWritten);
     ipc.on('osd-file-written', this._onConfigFileWritten);
     ipc.on('osd-file-read', this._onConfigFileRead);
+    ipc.on('firmware-uploading', this._onFirmwareUploading);
     ipc.on('firmware-uploaded', this._onFirmwareUploaded);
     ipc.on('error', this._onError);
     ipc.on('progress', this._onProgress);
@@ -86,6 +87,11 @@ class Sidebar extends Component {
     this.props.showInfo('read configuration from file');
   }
 
+  _onFirmwareUploading = () => {
+    this.setState({ ...this.state, uploading: true, progress: 0 });
+    this.props.showInfo('uploading firmware');
+  }
+
   _onFirmwareUploaded = () => {
     this.setState({ ...this.state, uploading: false, progress: 0 });
     this.props.showInfo('finished uploading firmware');
@@ -116,7 +122,6 @@ class Sidebar extends Component {
   }
 
   _uploadFirmware = () => {
-    this.setState({ ...this.state, uploading: true });
     ipc.send('upload-firmware', this.state.serialPort);
   }
 
