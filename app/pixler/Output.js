@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Card, CardText, CardTitle } from 'react-toolbox/lib/card';
 import {
-  clear, mirror, setFontSize, setOutline, setShape, shiftDown, shiftLeft, shiftRight, shiftUp,
+  clear, invertOutline, mirror, setFontSize, setOutline, setShape,
+  shiftDown, shiftLeft, shiftRight, shiftUp,
 } from './actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -14,6 +15,7 @@ class Output extends Component {
     outline: PropTypes.arrayOf(PropTypes.number).isRequired,
     shape: PropTypes.arrayOf(PropTypes.number).isRequired,
     mirror: PropTypes.func.isRequired,
+    invertOutline: PropTypes.func.isRequired,
     setFontSize: PropTypes.func.isRequired,
     setOutline: PropTypes.func.isRequired,
     setShape: PropTypes.func.isRequired,
@@ -64,6 +66,8 @@ class Output extends Component {
           />
           <Button onClick={this.props.clear} label="clear" raised />
           <Button onClick={this.props.mirror} label="mirror" raised />
+          <Button onClick={this.props.invertOutline} label="invert outline" raised />
+          <br />
           <Button icon="arrow_back" onClick={this.props.shiftLeft} raised />
           <Button icon="arrow_forward" onClick={this.props.shiftRight} raised />
           <Button icon="arrow_upward" onClick={this.props.shiftUp} raised />
@@ -80,7 +84,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchersToProps = (dispatch) =>
   bindActionCreators({
-    clear, mirror, setFontSize, setOutline, setShape, shiftDown, shiftLeft, shiftRight, shiftUp,
+    clear, invertOutline, mirror, setFontSize, setOutline, setShape,
+    shiftDown, shiftLeft, shiftRight, shiftUp,
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchersToProps)(Output);

@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import {
-  EMPTY, SHAPE, OUTLINE, CLEAR, MIRROR,
+  EMPTY, SHAPE, OUTLINE, CLEAR, INVERT_OUTLINE, MIRROR,
   SET_FONT_SIZE, SET_OUTLINE, SET_PIXEL, SET_SHAPE,
   SHIFT_DOWN, SHIFT_LEFT, SHIFT_RIGHT, SHIFT_UP,
 } from './actions';
@@ -43,6 +43,11 @@ export default function pixler(state = initialState, action) {
       return state
         .update('outline', (arr) => arr.map(() => 0))
         .update('shape', (arr) => arr.map(() => 0));
+    case INVERT_OUTLINE: {
+      const { width } = fonts.getFont(state.get('fontSize')).dimensions;
+      return state
+        .update('outline', (arr) => arr.map((b) => (~b >>> 0) & (Math.pow(2, width) - 1)));
+    }
     case MIRROR: {
       const { width } = fonts.getFont(state.get('fontSize')).dimensions;
       return state

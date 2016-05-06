@@ -2,6 +2,7 @@ export const EMPTY = 'pixler/empty';
 export const SHAPE = 'pixler/shape';
 export const OUTLINE = 'pixler/outline';
 export const CLEAR = 'pixler/clear';
+export const INVERT_OUTLINE = 'pixler/invert_outline';
 export const MIRROR = 'pixler/mirror';
 export const SET_FONT_SIZE = 'pixler/set_font_size';
 export const SET_OUTLINE = 'pixler/set_outline';
@@ -14,6 +15,10 @@ export const SHIFT_UP = 'pixler/shift_up';
 
 export function clear() {
   return { type: CLEAR };
+}
+
+export function invertOutline() {
+  return { type: INVERT_OUTLINE };
 }
 
 export function mirror() {
