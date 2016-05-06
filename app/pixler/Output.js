@@ -68,6 +68,7 @@ class Output extends Component {
           <Button onClick={this.props.mirror} label="mirror" raised />
           <Button onClick={this.props.invertOutline} label="invert outline" raised />
           <br />
+          <br />
           <Button icon="arrow_back" onClick={this.props.shiftLeft} raised />
           <Button icon="arrow_forward" onClick={this.props.shiftRight} raised />
           <Button icon="arrow_upward" onClick={this.props.shiftUp} raised />
