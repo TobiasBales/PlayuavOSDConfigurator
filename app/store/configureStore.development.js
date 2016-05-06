@@ -13,6 +13,17 @@ const logger = createLogger({
       type: String(action.type),
     })
   ),
+  stateTransformer: (state) => {
+    const plainState = {};
+    Object.keys(state).forEach((key) => {
+      if (typeof state[key].toJS === 'function') {
+        plainState[key] = state[key].toJS();
+      } else {
+        plainState[key] = state[key];
+      }
+    });
+    return plainState;
+  },
   level: 'info',
   collapsed: true,
 });
