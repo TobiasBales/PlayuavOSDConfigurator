@@ -1,281 +1,88 @@
-# HEAD
-
-#### Improvements
-
-- **Added [redux-logger](https://github.com/fcomb/redux-logger)**
-- **Upgraded [react-router-redux](https://github.com/reactjs/react-router-redux) to v4**
-- **Upgraded dependencies**
-- **Added `npm run dev` command:** [#162](https://github.com/chentsulin/electron-react-boilerplate/pull/162)
-
-#### Breaking Changes
-
-- **css module as default:** [#154](https://github.com/chentsulin/electron-react-boilerplate/pull/154).
-- **set default NODE_ENV to production:** [#140](https://github.com/chentsulin/electron-react-boilerplate/issues/140)
-
-
-# 0.8.0 (2015.2.17)
-
-#### Bug fixed
-
-- **Fix lint errors**
-- **Fix Webpack publicPath for production builds**: [#119](https://github.com/chentsulin/electron-react-boilerplate/issues/119).
-- **package script now chooses correct OS icon extension**
-
-#### Improvements
-
-- **babel 6**
-- **Upgrade Dependencies**
-- **Enable CSS source maps**
-- **Add json-loader**: [#128](https://github.com/chentsulin/electron-react-boilerplate/issues/128).
-- **react-router 2.0 and react-router-redux 3.0**
-
-
-# 0.7.1 (2015.12.27)
-
-#### Bug fixed
-
-- **Fixed npm script on windows 10:** [#103](https://github.com/chentsulin/electron-react-boilerplate/issues/103).
-- **history and react-router version bump**: [#109](https://github.com/chentsulin/electron-react-boilerplate/issues/109), [#110](https://github.com/chentsulin/electron-react-boilerplate/pull/110).
-
-#### Improvements
-
-- **electron 0.36**
-
-
-
-# 0.7.0 (2015.12.16)
-
-#### Bug fixed
-
-- **Fixed process.env.NODE_ENV variable in webpack:** [#74](https://github.com/chentsulin/electron-react-boilerplate/pull/74).
-- **add missing object-assign**: [#76](https://github.com/chentsulin/electron-react-boilerplate/pull/76).
-- **packaging in npm@3:** [#77](https://github.com/chentsulin/electron-react-boilerplate/pull/77).
-- **compatibility in windows:** [#100](https://github.com/chentsulin/electron-react-boilerplate/pull/100).
-- **disable chrome debugger in production env:** [#102](https://github.com/chentsulin/electron-react-boilerplate/pull/102).
-
-#### Improvements
-
-- **redux**
-- **css-modules**
-- **upgrade to react-router 1.x**
-- **unit tests**
-- **e2e tests**
-- **travis-ci**
-- **upgrade to electron 0.35.x**
-- **use es2015**
-- **check dev engine for node and npm**
-
-
-# 0.6.5 (2015.11.7)
-
-#### Improvements
-
-- **Bump style-loader to 0.13**
-- **Bump css-loader to 0.22**
-
-
-# 0.6.4 (2015.10.27)
-
-#### Improvements
-
-- **Bump electron-debug to 0.3**
-
-
-# 0.6.3 (2015.10.26)
-
-#### Improvements
-
-- **Initialize ExtractTextPlugin once:** [#64](https://github.com/chentsulin/electron-react-boilerplate/issues/64).
-
-
-# 0.6.2 (2015.10.18)
-
-#### Bug fixed
-
-- **Babel plugins production env not be set properly:** [#57](https://github.com/chentsulin/electron-react-boilerplate/issues/57).
-
-
-# 0.6.1 (2015.10.17)
-
-#### Improvements
-
-- **Bump electron to v0.34.0**
-
-
-# 0.6.0 (2015.10.16)
-
-#### Breaking Changes
-
-- **From react-hot-loader to react-transform**
-
-
-# 0.5.2 (2015.10.15)
-
-#### Improvements
-
-- **Run tests with babel-register:** [#29](https://github.com/chentsulin/electron-react-boilerplate/issues/29).
-
-
-# 0.5.1 (2015.10.12)
-
-#### Bug fixed
-
-- **Fix #51:** use `path.join(__dirname` instead of `./`.
-
-
-# 0.5.0 (2015.10.11)
-
-#### Improvements
-
-- **Simplify webpack config** see [#50](https://github.com/chentsulin/electron-react-boilerplate/pull/50).
-
-#### Breaking Changes
-
-- **webpack configs**
-- **port changed:** changed default port from 2992 to 3000.
-- **npm scripts:** remove `start-dev` and `dev-server`. rename `hot-dev-server` to `hot-server`.
-
-
-# 0.4.3 (2015.9.22)
-
-#### Bug fixed
-
-- **Fix #45 zeromq crash:** bump version of `electron-prebuilt`.
-
-
-# 0.4.2 (2015.9.15)
-
-#### Bug fixed
-
-- **run start-hot breaks chrome refresh(CTRL+R) (#42)**: bump `electron-debug` to `0.2.1`
-
-
-# 0.4.1 (2015.9.11)
-
-#### Improvements
-
-- **use electron-prebuilt version for packaging (#33)**
-
-
-# 0.4.0 (2015.9.5)
-
-#### Improvements
-
-- **update dependencies**
-
-
-# 0.3.0 (2015.8.31)
-
-#### Improvements
-
-- **eslint-config-airbnb**
-
-
-# 0.2.10 (2015.8.27)
-
-#### Features
-
-- **custom placeholder icon**
-
-#### Improvements
-
-- **electron-renderer as target:** via [webpack-target-electron-renderer](https://github.com/chentsulin/webpack-target-electron-renderer)
-
-
-# 0.2.9 (2015.8.18)
-
-#### Bug fixed
-
-- **Fix hot-reload**
-
-
-# 0.2.8 (2015.8.13)
-
-#### Improvements
-
-- **bump electron-debug**
-- **babelrc**
-- **organize webpack scripts**
-
-
-# 0.2.7 (2015.7.9)
-
-#### Bug fixed
-
-- **defaultProps:** fix typos.
-
-
-# 0.2.6 (2015.7.3)
-
-#### Features
-
-- **menu**
-
-#### Bug fixed
-
-- **package.js:** include webpack build.
-
-
-# 0.2.5 (2015.7.1)
-
-#### Features
-
-- **NPM Script:** support multi-platform
-- **package:** `--all` option
-
-
-# 0.2.4 (2015.6.9)
-
-#### Bug fixed
-
-- **Eslint:** typo, [#17](https://github.com/chentsulin/electron-react-boilerplate/issues/17) and improve `.eslintrc`
-
-
-# 0.2.3 (2015.6.3)
-
-#### Features
-
-- **Package Version:** use latest release electron version as default
-- **Ignore Large peerDependencies**
-
-#### Bug fixed
-
-- **Npm Script:** typo, [#6](https://github.com/chentsulin/electron-react-boilerplate/pull/6)
-- **Missing css:** [#7](https://github.com/chentsulin/electron-react-boilerplate/pull/7)
-
-
-# 0.2.2 (2015.6.2)
-
-#### Features
-
-- **electron-debug**
-
-#### Bug fixed
-
-- **Webpack:** add `.json` and `.node` to extensions for imitating node require.
-- **Webpack:** set `node_modules` to externals for native module support.
-
-
-# 0.2.1 (2015.5.30)
-
-#### Bug fixed
-
-- **Webpack:** #1, change build target to `atom`.
-
-
-# 0.2.0 (2015.5.30)
-
-#### Features
-
-- **Ignore:** `test`, `tools`, `release` folder and devDependencies in `package.json`.
-- **Support asar**
-- **Support icon**
-
-
-# 0.1.0 (2015.5.27)
-
-#### Features
-
-- **Webpack:** babel, react-hot, ...
-- **Flux:** actions, api, components, containers, stores..
-- **Package:** darwin (osx), linux and win32 (windows) platform.
+__PlayUAVOSDConfigurator__
+
+#   (2016-05-07)
+
+
+
+---
+
+## Bug Fixes
+
+- make everything work with the current version of react-toolbox (#64)
+  ([1167fb96](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/1167fb965acf447d388f43f2367b0b4ed1bb2b6b))
+- **config:** reading saved config files
+  ([fd4770b9](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/fd4770b9a03e526f96704728179ce2a9cbcafa46))
+- **editor:** correct column positioning in the editor
+  ([f077b20a](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/f077b20ad7e2e09be3e6ace70c52d039ac7d990b))
+- **icons:**
+  - outline inversion when loading data
+  ([2a23045e](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/2a23045e146e5ac706ec2e8870481fadb58837fb))
+  - correct icon outlines
+  ([6dfeeec2](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/6dfeeec29ef8bfa2d84d7b7e5a3ffb93140a86db))
+- **main:** remove file watch for /dev/cu.* since it can result in linux issues
+  ([ce8d1d5f](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/ce8d1d5f9cf4ccba8f09d9d6c912bc4498c2fa43))
+- **pixler:**
+  - correct inverted outline handling
+  ([c2f2fde7](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/c2f2fde786f8b2d79d999b574904624dc4858202))
+  - mirror pixel rendering to match osd/preview
+  ([fdbc2402](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/fdbc2402335109d6aec71f785c524ba36bde9edc))
+  - correct default outline/shape sizes
+  ([afb5d585](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/afb5d585ae61a4dc5cd4422f96c8d5ba379d20db))
+  - make output selectable
+  ([9a928c23](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/9a928c23843761b8d4c4fcdf2bbb1dcb20fdc1cd))
+- **preview:**
+  - fix wind preview after canvas refactoring
+  ([c3153807](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/c3153807adaeff211eae5ae940873752fd2eba81))
+  - fix variograph preview
+  ([213caa24](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/213caa24de619b481d7ab2b4a735a0cfe0cdf59e))
+
+
+## Features
+
+- start configurator in fullscreen mode
+  ([3d37cd16](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/3d37cd1661cad0650d982265f2cdd4fcbe1f9cb2))
+- **config:**
+  - indicate firmware is uploading only after upload started
+  ([479a231f](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/479a231f3b21e40217a52f01941b63d02c962b5f))
+  - add not implemented yet info to vario graph
+  ([b269c6f1](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/b269c6f1ffe0cfd81d4f9b58f7fb1d3fd50c4203))
+- **config, preview:** add vario graph
+  ([0fa964b1](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/0fa964b16f63641253b6e6e08f5212bec098f52b))
+- **pixler:**
+  - add loading of icons/characters
+  ([4263dbe7](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/4263dbe731dd3594a2af0b1eb9f40341d29a1b75))
+  - add outline inverting
+  ([a6b12630](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/a6b1263023f7c3955d3919dbfcbbaaceecd30f4b))
+  - limit pasted outline/shape lengths to font height
+  ([0ec68952](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/0ec689523d72cb86151b89eab7cad5d67ca2b698))
+  - add preview
+  ([e3cc2451](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/e3cc2451c9f00813287f3ab849d0a70d207e2107))
+  - add up/down/left/right shifting
+  ([b0116938](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/b011693814d67f1d1bb51c1eafad19e3f8caa97d))
+  - add font size selection
+  ([72cec7a0](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/72cec7a0715beb9c58d4d2b768d4f27da295ac79))
+  - add mirror button
+  ([feb9ce35](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/feb9ce356ec729d249984cefab25493b5bedda6c))
+  - add column/row numbers
+  ([9faf01ee](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/9faf01ee178c13522b7ae6b45917484f69aa705b))
+  - clear button
+  ([3571369b](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/3571369b86d924aa476bc652cf403d74516095d0))
+  - allow pasting data to allow reediting previous icons
+  ([30bc1793](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/30bc17931f5e97d83606630fc30bd658d5fdb4a3))
+  - add basic pixler to design icons
+  ([d0ba1b82](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/d0ba1b82d83e92ba9f8eb20293d04a989cc99bdc))
+- **preview:** add icons instead of labels
+  ([90cefe8e](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/90cefe8ea1e269ae0c58958a097b836e3012ec1e))
+- **preview,config:** add link quality
+  ([802de162](git@github.com:TobiasBales/PlayuavOSDConfigurator/commit/802de162850299450f1569297f6760763b28c6ac))
+
+
+## Documentation
+
+- remove eslint breakage hint
+- add link to circle ci linux artifact, add contributing section
+
+
+
+---
+<sub><sup>*Generated with [git-changelog](https://github.com/rafinskipg/git-changelog). If you have any problem or suggestion, create an issue.* :) **Thanks** </sub></sup>
