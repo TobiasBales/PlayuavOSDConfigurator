@@ -526,4 +526,6 @@ function getData(charCode) {
   return { shape: shapeData, outline: outlineData };
 }
 
-export default { dimensions, getData };
+const length = shape.length / dimensions.height;
+
+export default { dimensions, getData, length, offset: 0 };

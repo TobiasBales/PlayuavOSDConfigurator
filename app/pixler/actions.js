@@ -3,6 +3,8 @@ export const SHAPE = 'pixler/shape';
 export const OUTLINE = 'pixler/outline';
 export const CLEAR = 'pixler/clear';
 export const INVERT_OUTLINE = 'pixler/invert_outline';
+export const LOAD_CHARACTER = 'pixler/load_character';
+export const LOAD_ICON = 'pixler/load_icon';
 export const MIRROR = 'pixler/mirror';
 export const SET_FONT_SIZE = 'pixler/set_font_size';
 export const SET_OUTLINE = 'pixler/set_outline';
@@ -19,6 +21,14 @@ export function clear() {
 
 export function invertOutline() {
   return { type: INVERT_OUTLINE };
+}
+
+export function loadCharacter(character) {
+  return { type: LOAD_CHARACTER, payload: character };
+}
+
+export function loadIcon(icon) {
+  return { type: LOAD_ICON, payload: icon };
 }
 
 export function mirror() {

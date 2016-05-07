@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { Card, CardText, CardTitle } from 'react-toolbox/lib/card';
 import {
-  clear, invertOutline, mirror, setFontSize, setOutline, setShape,
-  shiftDown, shiftLeft, shiftRight, shiftUp,
+  clear, invertOutline, mirror, loadCharacter, loadIcon, setFontSize,
+  setOutline, setShape, shiftDown, shiftLeft, shiftRight, shiftUp,
 } from './actions';
 import { bindActionCreators } from 'redux';
+import Column from '../components/Column';
 import { connect } from 'react-redux';
 import { Button, Dropdown, Input } from 'react-toolbox';
 import fonts from '../utils/fonts';
@@ -13,17 +14,28 @@ class Output extends Component {
   static propTypes = {
     clear: PropTypes.func.isRequired,
     fontSize: PropTypes.number.isRequired,
-    outline: PropTypes.arrayOf(PropTypes.number).isRequired,
-    shape: PropTypes.arrayOf(PropTypes.number).isRequired,
-    mirror: PropTypes.func.isRequired,
     invertOutline: PropTypes.func.isRequired,
+    loadCharacter: PropTypes.func.isRequired,
+    loadIcon: PropTypes.func.isRequired,
+    mirror: PropTypes.func.isRequired,
+    outline: PropTypes.arrayOf(PropTypes.number).isRequired,
     setFontSize: PropTypes.func.isRequired,
     setOutline: PropTypes.func.isRequired,
     setShape: PropTypes.func.isRequired,
+    shape: PropTypes.arrayOf(PropTypes.number).isRequired,
     shiftDown: PropTypes.func.isRequired,
     shiftLeft: PropTypes.func.isRequired,
     shiftRight: PropTypes.func.isRequired,
     shiftUp: PropTypes.func.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedIcon: null,
+      selectedCharacter: null,
+    };
   }
 
   _parseValueString = (value) => {
@@ -42,6 +54,16 @@ class Output extends Component {
     this.props.setShape(shape);
   }
 
+  _onIconChanged = (icon) => {
+    this.setState({ ...this.state, selectedCharacter: null, selectedIcon: icon });
+    this.props.loadIcon(icon);
+  }
+
+  _onCharacterChanged = (character) => {
+    this.setState({ ...this.state, selectedCharacter: character, selectedIcon: null });
+    this.props.loadCharacter(character);
+  }
+
   render() {
     const toHex = (byte) => `0x${byte.toString(16)}`;
     const { width } = fonts.getFont(this.props.fontSize).dimensions;
@@ -53,6 +75,20 @@ class Output extends Component {
       { label: 'medium', value: 1 },
       { label: 'large', value: 2 },
     ];
+    const icons = [
+      { label: 'GPS', value: 0 },
+      { label: 'HDOP', value: 1 },
+      { label: 'TIME', value: 2 },
+      { label: 'WP_DISTANCE', value: 3 },
+      { label: 'TOTAL_TRIP', value: 4 },
+      { label: 'RSSI', value: 5 },
+      { label: 'LINK_QUALITY', value: 6 },
+      { label: 'HOME_DISTANCE', value: 7 },
+    ];
+    const font = fonts.getFont(this.props.fontSize);
+    const characters = [...Array(font.length)].map((_, i) => (
+      { value: i, label: String.fromCharCode(i) }
+    )).filter((a, i) => i > 32);
 
     return (
       <Card>
@@ -60,22 +96,34 @@ class Output extends Component {
         <CardText>
           <Input label="shape" value={shape} onChange={this._onShapeChanged} />
           <Input label="outline" value={outline} onChange={this._onOutlineChanged} />
-          <Dropdown
-            auto
-            value={this.props.fontSize}
-            onChange={this.props.setFontSize}
-            label="font size"
-            source={fontSizes}
-          />
-          <Button onClick={this.props.clear} label="clear" raised />
-          <Button onClick={this.props.mirror} label="mirror" raised />
-          <Button onClick={this.props.invertOutline} label="invert outline" raised />
+          <Column width={33}>
+            <Dropdown auto value={this.props.fontSize} label="font size"
+              onChange={this.props.setFontSize} source={fontSizes}
+            />
+          </Column>
+          <Column width={33}>
+            <Dropdown auto value={this.state.selectedIcon}
+              onChange={this._onIconChanged} label="load icon" source={icons}
+            />
+          </Column>
+          <Column width={33}>
+            <Dropdown auto value={this.state.selectedCharacter}
+              onChange={this._onCharacterChanged} label="load character" source={characters}
+            />
+          </Column>
+          <Column width={100}>
+            <Button onClick={this.props.clear} label="clear" raised />
+            <Button onClick={this.props.mirror} label="mirror" raised />
+            <Button onClick={this.props.invertOutline} label="invert outline" raised />
+          </Column>
           <br />
           <br />
-          <Button icon="arrow_back" onClick={this.props.shiftLeft} raised />
-          <Button icon="arrow_forward" onClick={this.props.shiftRight} raised />
-          <Button icon="arrow_upward" onClick={this.props.shiftUp} raised />
-          <Button icon="arrow_downward" onClick={this.props.shiftDown} raised />
+          <Column width={100}>
+            <Button icon="arrow_back" onClick={this.props.shiftLeft} raised />
+            <Button icon="arrow_forward" onClick={this.props.shiftRight} raised />
+            <Button icon="arrow_upward" onClick={this.props.shiftUp} raised />
+            <Button icon="arrow_downward" onClick={this.props.shiftDown} raised />
+          </Column>
         </CardText>
       </Card>
     );
@@ -88,8 +136,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchersToProps = (dispatch) =>
   bindActionCreators({
-    clear, invertOutline, mirror, setFontSize, setOutline, setShape,
-    shiftDown, shiftLeft, shiftRight, shiftUp,
+    clear, invertOutline, mirror, loadCharacter, loadIcon, setFontSize,
+    setOutline, setShape, shiftDown, shiftLeft, shiftRight, shiftUp,
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchersToProps)(Output);

@@ -1,10 +1,11 @@
 import Immutable from 'immutable';
 import {
-  EMPTY, SHAPE, OUTLINE, CLEAR, INVERT_OUTLINE, MIRROR,
-  SET_FONT_SIZE, SET_OUTLINE, SET_PIXEL, SET_SHAPE,
+  EMPTY, SHAPE, OUTLINE, CLEAR, INVERT_OUTLINE, LOAD_CHARACTER,
+  LOAD_ICON, MIRROR, SET_FONT_SIZE, SET_OUTLINE, SET_PIXEL, SET_SHAPE,
   SHIFT_DOWN, SHIFT_LEFT, SHIFT_RIGHT, SHIFT_UP,
 } from './actions';
 import fonts from '../utils/fonts';
+import icons from '../utils/icons';
 
 const initialState = Immutable.fromJS({
   fontSize: 0,
@@ -41,12 +42,24 @@ export default function pixler(state = initialState, action) {
   switch (action.type) {
     case CLEAR:
       return state
-        .update('outline', (arr) => arr.map(() => 0))
+        .update('outline', (arr) => arr.map(() => 0xff))
         .update('shape', (arr) => arr.map(() => 0));
     case INVERT_OUTLINE: {
       const { width } = fonts.getFont(state.get('fontSize')).dimensions;
       return state
         .update('outline', (arr) => arr.map((b) => (~b >>> 0) & (Math.pow(2, width) - 1)));
+    }
+    case LOAD_CHARACTER: {
+      const { shape, outline } = fonts.getFont(state.get('fontSize')).getData(action.payload);
+      return state
+        .set('outline', Immutable.fromJS(outline))
+        .set('shape', Immutable.fromJS(shape));
+    }
+    case LOAD_ICON: {
+      const { shape, outline } = icons.getFont(state.get('fontSize')).getData(action.payload);
+      return state
+        .set('outline', Immutable.fromJS(outline))
+        .set('shape', Immutable.fromJS(shape));
     }
     case MIRROR: {
       const { width } = fonts.getFont(state.get('fontSize')).dimensions;
