@@ -9,15 +9,16 @@ const defaultEEPROM = [
   1, 2, 0, 230, 0, 0, 1, 2, 70, 230, 0, 0, 1, 2, 200, 230, 0, 0,
   1, 2, 280, 230, 0, 0, 1, 1, 350, 220, 0, 2, 1, 2, 5, 10, 0, 0,
   1, 1, 350, 1, 0, 1, 2, 5, 40, 0, 0, 1, 1, 10, 0, 0, 1,
-  1, 1, 285, 202, 1, 1, 70, 14, 0, 0, 1, 1, 70, 24, 0, 0, 1,
-  2, 15, 1, 1, 30, 35, 20, 25, 25, 1, 1, 0, 1, 2, 0, 3, 1, 6,
+  1, 1, 285, 202, 1, 1, 40, 14, 0, 0, 1, 1, 40, 24, 0, 0, 1,
+  2, 15, 0, 0, 30, 35, 20, 25, 25, 1, 1, 0, 1, 2, 0, 3, 1, 6,
   1200, 1, 7, 1200, 180, 25, 1, 1, 1, 1, 20, 0, 2, 0, 100, 0, 10,
   0, 1000, 1, 1, 5, 220, 0, 0, 1, 70, 220, 0, 0, 0, 255, 0, 0, 1,
   2, 10, 100, 0, 0, 180, 133, 1, 0, 180, 133, 1, 0, 40, 0, 0,
   firmwareVersion, 1, 133, 133, 1, 1, 350, 34, 0, 2, 1, 1, 350, 210,
   0, 2, 0, 1, 4, 120, 1, 0, 0, 1, 2, 5, 25, 0, 0, 1, 1, 2, 5, 55,
   0, 0, 0, 1, 7, 1, 1, 1, 350, 200, 0, 2, 1, 1,
-  0, 0, 200, 220, 0, 0, 5, 1000, 2000, 0, 0, 0, 200, 200
+  0, 0, 200, 220, 0, 0, 5, 1000, 2000, 0, 0, 0, 200, 200,
+  1, 1, 15, 15,
 ];
 
 function toEnabled(byte) {
@@ -351,6 +352,11 @@ const eepromMapping = [
   { path: ['varioGraph', 'visibleOn'] },
   { path: ['varioGraph', 'positionX'] },
   { path: ['varioGraph', 'positionY'] },
+  { path: ['homeDirection', 'visibleOn'],
+    convertFromParameters: toEnabled },
+  { path: ['homeDirection', 'visibleOn'] },
+  { path: ['homeDirection', 'positionX'] },
+  { path: ['homeDirection', 'positionY'] },
 ];
 
 const skeletonParameters = {
@@ -377,6 +383,7 @@ const skeletonParameters = {
   gpsLatitude: {},
   gpsLongitude: {},
   gpsStatus: {},
+  homeDirection: {},
   homeDistance: {},
   linkQuality: {},
   map: {},

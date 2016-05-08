@@ -24,7 +24,7 @@ export default class Canvas {
   _drawRectangle(x, y, width, height, lineWidth, black) {
     this.context.beginPath();
     this.context.rect(x + 0.5, y + 0.5, width, height);
-    this.context.lineWidth = 2;
+    this.context.lineWidth = lineWidth;
     this.context.strokeStyle = black ? 'black' : 'white';
     this.context.stroke();
   }
@@ -87,7 +87,7 @@ export default class Canvas {
 
   drawRectangle(x, y, width, height, black = false, outline = false) {
     if (outline) {
-      this._drawRectangle(x, y, width, height, 2, black);
+      this._drawRectangle(x, y, width, height, 1, black);
     }
 
     this._drawRectangle(x, y, width, height, 1, !black);

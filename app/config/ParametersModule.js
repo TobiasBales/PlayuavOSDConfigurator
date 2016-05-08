@@ -30,6 +30,7 @@ export default class ParametersModule extends Component {
           <Settings.RelativeAltitude />
           <Settings.AltitudeScale />
           <Settings.HomeDistance />
+          <Settings.HomeDirection />
           <Settings.Radar />
           <Settings.Map />
           <Settings.Compass />

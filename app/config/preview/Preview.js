@@ -36,7 +36,7 @@ class Preview extends Component {
       absoluteAltitude, alarms, altitudeScale, armState, artificialHorizont, batteryConsumed,
       batteryCurrent, batteryRemaining, batteryVoltage, climbRate, compass, efficiency,
       flightMode, linkQuality, gpsHdop, gpsLatitude, gpsLongitude, gpsStatus, gps2Hdop,
-      gps2Latitude, gps2Longitude, gps2Status, homeDistance, radar, relativeAltitude,
+      gps2Latitude, gps2Longitude, gps2Status, homeDirection, homeDistance, radar, relativeAltitude,
       rssi, speedAir, speedScale, speedGround, throttle, time, totalTrip, varioGraph,
       wpDistance, wind,
     } = this.props.state;
@@ -166,6 +166,9 @@ class Preview extends Component {
             />
             <Previews.GpsStatus {...gpsStatus.toJS()} {...fcStatus}
               setPosition={setPosition('gpsStatus')}
+            />
+            <Previews.HomeDirection {...homeDirection.toJS()} {...fcStatus}
+              setPosition={setPosition('homeDirection')}
             />
             <Previews.HomeDistance {...homeDistance.toJS()} {...fcStatus}
               units={units} setPosition={setPosition('homeDistance')}
