@@ -14,6 +14,7 @@ import eeprom from '../utils/eeprom';
 class Sidebar extends Component {
   static propTypes = {
     setParamsFromEEPROM: PropTypes.func.isRequired,
+    setAsBaseState: PropTypes.func.isRequired,
     showError: PropTypes.func.isRequired,
     showInfo: PropTypes.func.isRequired,
     state: ImmutablePropTypes.map,
@@ -74,7 +75,7 @@ class Sidebar extends Component {
 
   _onOSDConfigWritten = () => {
     this.setState({ ...this.state, writingOSD: false, progress: 0 });
-    this.setAsBaseState(this.props.state);
+    this.props.setAsBaseState(this.props.state);
     this.props.showInfo('finished writing osd configuration');
   }
 
