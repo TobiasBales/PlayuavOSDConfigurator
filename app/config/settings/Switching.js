@@ -41,12 +41,12 @@ class Switching extends Component {
       { value: 0, label: 'disabled' }, { value: 1, label: 'rc 1' },
       { value: 2, label: 'rc 2' }, { value: 3, label: 'rc 3' },
       { value: 4, label: 'rc 4' }, { value: 5, label: 'rc 5' },
-      { value: 5, label: 'rc 5' }, { value: 6, label: 'rc 6' },
-      { value: 7, label: 'rc 7' }, { value: 8, label: 'rc 8' },
-      { value: 9, label: 'rc 9' }, { value: 10, label: 'rc 10' },
-      { value: 11, label: 'rc 11' }, { value: 12, label: 'rc 12' },
-      { value: 13, label: 'rc 13' }, { value: 14, label: 'rc 14' },
-      { value: 15, label: 'rc 15' }, { value: 16, label: 'rc 16' }
+      { value: 6, label: 'rc 6' }, { value: 7, label: 'rc 7' },
+      { value: 8, label: 'rc 8' }, { value: 9, label: 'rc 9' },
+      { value: 10, label: 'rc 10' }, { value: 11, label: 'rc 11' },
+      { value: 12, label: 'rc 12' }, { value: 13, label: 'rc 13' },
+      { value: 14, label: 'rc 14' }, { value: 15, label: 'rc 15' },
+      { value: 16, label: 'rc 16' }
     ];
 
     const modeOptions = [
