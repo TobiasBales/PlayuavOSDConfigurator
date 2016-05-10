@@ -23,6 +23,11 @@ If anyone knows a nice service for building things on windows/linux/os x and dis
 
 ## Contributing
 
+### Development server
+    npm run hot-server
+    npm run start-hot
+
+### Commit messages, ci, linting etc
 - Commit messages should follow the [angular commit message format](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#format-of-the-commit-message)
 - Pull requests will be automatically built on circle ci
 - Run eslint against your changes (npm run lint)
