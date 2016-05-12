@@ -76,6 +76,23 @@ app.on('ready', () => {
   chokidar.watch('/dev/ttyACM*').on('all', sendSerialPorts);
   ipc.on('get-serial-ports', sendSerialPorts);
 
+  ipc.on('load-default-config', (e) => {
+    if (fs.existsSync('./default.conf')) {
+      fs.readFile('./default.conf', (err, data) => {
+        if (err) {
+          e.sender.send('error', `${err} while reading default.conf`);
+          return;
+        }
+        try {
+          const parameters = JSON.parse(data);
+          e.sender.send('osd-file-read', parameters, true);
+        } catch (error) {
+          e.sender.send('error', `${error.message} while reading default.conf`);
+        }
+      });
+    }
+  });
+
   ipc.on('read-osd', (e, serialPort) => {
     const reportProgress = (progress) => e.sender.send('progress', progress);
     osdInterface.readParameters(serialPort, reportProgress)

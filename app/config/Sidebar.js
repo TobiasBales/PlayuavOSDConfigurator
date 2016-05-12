@@ -32,6 +32,7 @@ class Sidebar extends Component {
     ipc.on('error', this._onError);
     ipc.on('progress', this._onProgress);
     ipc.send('get-serial-ports');
+    ipc.send('load-default-config');
 
     this.state = {
       serialPorts: [],
@@ -83,9 +84,13 @@ class Sidebar extends Component {
     this.props.showInfo('wrote configuration to file');
   }
 
-  _onConfigFileRead = (_, eepromData) => {
+  _onConfigFileRead = (_, eepromData, wasDefaultFile = false) => {
     this.props.setParamsFromEEPROM(eepromData);
-    this.props.showInfo('read configuration from file');
+    if (wasDefaultFile) {
+      this.props.showInfo('read default configuration from default.conf');
+    } else {
+      this.props.showInfo('read configuration from file');
+    }
   }
 
   _onFirmwareUploading = () => {
