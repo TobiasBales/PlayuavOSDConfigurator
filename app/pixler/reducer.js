@@ -23,6 +23,17 @@ const unset = (column) =>
     prev | Math.pow(2, column)
 );
 
+const promoteToNewWidth = (oldWidth, newWidth) =>
+  (arr) => arr.map((b) => {
+    let result = b;
+    if (oldWidth < newWidth) {
+      for (let i = oldWidth; i <= newWidth; i++) {
+        result |= Math.pow(2, i);
+      }
+    }
+    return result;
+  });
+
 const setArrayLength = (length, fallback) => (array) =>
   array.setSize(length).map((value) => value || fallback);
 
@@ -40,10 +51,12 @@ export default function pixler(state = initialState, action) {
   const column = action.column;
   const row = action.row;
   switch (action.type) {
-    case CLEAR:
+    case CLEAR: {
+      const { width } = fonts.getFont(state.get('fontSize')).dimensions;
       return state
-        .update('outline', (arr) => arr.map(() => 0xff))
+        .update('outline', (arr) => arr.map(() => Math.pow(2, width) - 1))
         .update('shape', (arr) => arr.map(() => 0));
+    }
     case INVERT_OUTLINE: {
       const { width } = fonts.getFont(state.get('fontSize')).dimensions;
       return state
@@ -68,16 +81,20 @@ export default function pixler(state = initialState, action) {
         .update('shape', (arr) => arr.map(mirrorByte(width)));
     }
     case SET_FONT_SIZE: {
-      const { height } = fonts.getFont(action.payload).dimensions;
+      const { height, width } = fonts.getFont(action.payload).dimensions;
+      const oldWidth = fonts.getFont(state.get('fontSize')).dimensions.width;
       return state
         .set('fontSize', action.payload)
-        .update('outline', setArrayLength(height, 0xff))
-        .update('shape', setArrayLength(height, 0));
+        .update('outline', setArrayLength(height, Math.pow(2, width) - 1))
+        .update('outline', promoteToNewWidth(oldWidth, width))
+        .update('outline', (arr) => arr.map((b) => b & (Math.pow(2, width) - 1)))
+        .update('shape', setArrayLength(height, 0))
+        .update('shape', (arr) => arr.map((b) => b & (Math.pow(2, width) - 1)));
     }
     case SET_OUTLINE: {
-      const { height } = fonts.getFont(state.get('fontSize')).dimensions;
+      const { height, width } = fonts.getFont(state.get('fontSize')).dimensions;
       const outline = Immutable.fromJS(action.payload);
-      return state.set('outline', setArrayLength(height, 0xff)(outline));
+      return state.set('outline', setArrayLength(height, Math.pow(2, width) - 1)(outline));
     }
     case SET_SHAPE: {
       const { height } = fonts.getFont(state.get('fontSize')).dimensions;
