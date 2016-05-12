@@ -15,6 +15,8 @@ A simple cross platform tool the playuav osd.
 - [OS X](https://www.dropbox.com/s/d96cpi1d64v5qoy/playuav.zip?dl=0)
 - [Linux](https://circleci.com/api/v1/project/TobiasBales/PlayuavOSDConfigurator/latest/artifacts/0/$CIRCLE_ARTIFACTS/PlayUAVOSDConfigurator-linux-x64.zip?branch=master&filter=successful)
 
+![build status](https://circleci.com/gh/TobiasBales/PlayuavOSDConfigurator.png?circle-token=48fc88939139fd5c29f96cfe25e14c412c2dd244&style=shield)
+
 The windows and os x builds are currently done by hand and will most likely be a bit older, linux is the successful build of the master branch
 
 The current hex for the osd can be found the readme of the [repository](https://github.com/TobiasBales/PlayuavOSD) it includes everything that is currently in the master branch.
