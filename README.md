@@ -10,6 +10,24 @@ A simple cross platform tool the playuav osd.
     npm install
     npm run package
 
+## Features
+
+#### Config
+The part to configure the osd
+* change settings
+* flash firmware
+* write/read settings to osd
+* write/read settings to file
+* reset settings to default
+* load settings from default.conf on startup (located in same directory as executable)
+
+#### Pixler
+Helper to make new icons/characters
+* Create glyphs for small/medium/large fonts
+* mirror image
+* invert mask (black/white handling)
+* move pixels around in frame
+
 ## Binaries
 - [Windows](https://www.dropbox.com/s/2t72nirw21kmvap/PlayUAVOSDConfigurator-win32-ia32.zip?dl=0)
 - [OS X](https://www.dropbox.com/s/d96cpi1d64v5qoy/playuav.zip?dl=0)
