@@ -24,7 +24,9 @@ let mainWindow = null;
 
 const osdInterface = new OSDInterface();
 
-crashReporter.start();
+crashReporter.start({
+  companyName: 'prettyrandom'
+});
 
 if (process.env.NODE_ENV === 'development') {
   require('electron-debug')();
