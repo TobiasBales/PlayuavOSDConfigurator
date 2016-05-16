@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Card, CardText } from 'react-toolbox/lib/card';
-import Dropdown from 'react-toolbox/lib/dropdown';
 import { RadioGroup, RadioButton } from 'react-toolbox/lib/radio';
-import { bindStateForComponent } from '../../utils/parameters';
-import Column from '../../components/Column';
-import Previews from '.';
-import Label from '../../components/Label';
+import actions from '../actions';
 import background from '../../../static/background.png';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Column from '../../components/Column';
 import CustomPropTypes from '../../utils/PropTypes';
+import Dropdown from 'react-toolbox/lib/dropdown';
+import Immutable from 'immutable';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import Label from '../../components/Label';
+import Previews from '.';
 
 class Preview extends Component {
   static propTypes = {
@@ -17,16 +20,16 @@ class Preview extends Component {
     }).isRequired,
     setAlarm: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
-    setParameterPosition: PropTypes.func.isRequired,
+    setPosition: PropTypes.func.isRequired,
     state: ImmutablePropTypes.map.isRequired,
   }
 
   _onPanelChange = (panel) => {
-    this.props.setPanel(panel);
+    this.props.setPanel('preview', panel);
   }
 
   _onAlarmChange = (alarm) => {
-    this.props.setAlarm(alarm);
+    this.props.setAlarm('preview', alarm);
   }
 
   render() {
@@ -97,7 +100,7 @@ class Preview extends Component {
     ];
 
     const setPosition = (parameter) =>
-      (x, y) => this.props.setParameterPosition(parameter, x, y);
+      (x, y) => this.props.setPosition(parameter, x, y);
 
     return (
       <Card className="preview-card">
@@ -232,4 +235,23 @@ class Preview extends Component {
   }
 }
 
-export default bindStateForComponent('preview', Preview);
+function mapStateToProps(state) {
+  const params = state.parameters;
+  const numberOfPanels = params.getIn(['video', 'maxPanels']);
+
+  const parameters = params.get('preview').reduce((newParams, _, key) => {
+    const value = Immutable.fromJS({
+      value: params.getIn(['preview', key]),
+      originalValue: params.getIn(['originalState', 'preview', key]),
+    });
+    return newParams.set(key, value);
+  }, Immutable.fromJS({ numberOfPanels }));
+
+  return { parameters, state: state.parameters };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Preview);

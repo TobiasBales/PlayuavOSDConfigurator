@@ -19,7 +19,7 @@ export default class Scale extends Component {
       <div>
         <Input
           type="number"
-          step="0.1"
+          step={0.1}
           label="scale"
           value={scale}
           onChange={this._onChange}

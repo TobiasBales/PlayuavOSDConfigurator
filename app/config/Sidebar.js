@@ -1,14 +1,16 @@
-import Button from 'react-toolbox/lib/button';
-import Dropdown from 'react-toolbox/lib/dropdown';
-import ProgressBar from 'react-toolbox/lib/progress_bar';
 import React, { Component, PropTypes } from 'react';
 import { Card, CardText } from 'react-toolbox/lib/card';
 import { ipcRenderer as ipc } from 'electron';
-import { bindStateForComponent } from '../utils/parameters';
-import Label from '../components/Label';
+import actions from './actions';
+import { bindActionCreators } from 'redux';
+import Button from 'react-toolbox/lib/button';
+import { connect } from 'react-redux';
 import Column from '../components/Column';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import Dropdown from 'react-toolbox/lib/dropdown';
 import eeprom from '../utils/eeprom';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import Label from '../components/Label';
+import ProgressBar from 'react-toolbox/lib/progress_bar';
 
 
 class Sidebar extends Component {
@@ -263,4 +265,12 @@ class Sidebar extends Component {
   }
 }
 
-export default(bindStateForComponent(null, Sidebar));
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
