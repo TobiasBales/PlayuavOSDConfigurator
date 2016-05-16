@@ -57,9 +57,16 @@ export default function parameters(state = initialState, action) {
       return state.updateIn([parameterName, 'panel'], () => action.panel);
     case PARAMS_FROM_EEPROM: {
       let eepromData = action.eepromData;
+      for (let i = eepromData.length; i > 0; i--) {
+        if (eepromData[i - 1] !== 0) {
+          eepromData = eepromData.slice(0, i);
+          break;
+        }
+      }
+
       const defaultEEPROM = eeprom.defaultEEPROM;
-      if (eepromData.size < defaultEEPROM.size) {
-        const missingData = defaultEEPROM.slice(eepromData.size, defaultEEPROM.size);
+      if (eepromData.length < defaultEEPROM.length) {
+        const missingData = defaultEEPROM.slice(eepromData.length, defaultEEPROM.length);
         eepromData = eepromData.concat(missingData);
       }
       return setAsBaseState(addPreviewState(eeprom.toParameters(eepromData)));
