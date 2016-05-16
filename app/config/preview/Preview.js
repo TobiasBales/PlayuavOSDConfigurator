@@ -38,10 +38,10 @@ class Preview extends Component {
     const {
       absoluteAltitude, alarms, altitudeScale, armState, artificialHorizont, batteryConsumed,
       batteryCurrent, batteryRemaining, batteryVoltage, climbRate, compass, efficiency,
-      flightMode, linkQuality, gpsHdop, gpsLatitude, gpsLongitude, gpsStatus, gps2Hdop,
-      gps2Latitude, gps2Longitude, gps2Status, homeDirection, homeDistance, radar, relativeAltitude,
-      rssi, speedAir, speedScale, speedGround, throttle, time, totalTrip, varioGraph,
-      wpDistance, wind,
+      flightMode, linkQuality, homeLatitude, homeLongitude, gpsHdop, gpsLatitude, gpsLongitude,
+      gpsStatus, gps2Hdop, gps2Latitude, gps2Longitude, gps2Status, homeDirection, homeDistance,
+      radar, relativeAltitude, rssi, speedAir, speedScale, speedGround, throttle, time,
+      totalTrip, varioGraph, wpDistance, wind,
     } = this.props.state;
     const units = this.props.state.get('video').get('units');
     const videoMode = this.props.state.get('video').get('videoMode');
@@ -60,6 +60,8 @@ class Preview extends Component {
       batteryVoltage: 12.4,
       climbRate: 3.8,
       flightMode: 0,
+      homeLatitude: 484330500,
+      homeLongitude: -46790000,
       gpsHdop: 57,
       gpsLatitude: 484330500,
       gpsLongitude: -46790000,
@@ -145,6 +147,12 @@ class Preview extends Component {
             />
             <Previews.FlightMode {...flightMode.toJS()} {...fcStatus}
               setPosition={setPosition('flightMode')}
+            />
+            <Previews.HomeLatitude {...homeLatitude.toJS()} {...fcStatus}
+              setPosition={setPosition('homeLatitude')}
+            />
+            <Previews.HomeLongitude {...homeLongitude.toJS()} {...fcStatus}
+              setPosition={setPosition('homeLongitude')}
             />
             <Previews.GpsHdop {...gps2Hdop.toJS()} {...fcStatus}
               setPosition={setPosition('gps2Hdop')}

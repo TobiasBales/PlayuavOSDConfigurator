@@ -219,6 +219,14 @@ class ParametersModule extends Component {
             parameters={this._props('gps2Longitude')}
             {...this._actions()}
           />
+          <Settings.HomeLatitude
+            parameters={this._props('homeLatitude')}
+            {...this._actions()}
+          />
+          <Settings.HomeLongitude
+            parameters={this._props('homeLongitude')}
+            {...this._actions()}
+          />
         </Tab>
       </Tabs>
     );

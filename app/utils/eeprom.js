@@ -18,7 +18,7 @@ const defaultEEPROM = [
   0, 2, 0, 1, 4, 120, 1, 0, 0, 1, 2, 5, 25, 0, 0, 1, 1, 2, 5, 55,
   0, 0, 0, 1, 7, 1, 1, 1, 350, 200, 0, 2, 1, 1,
   0, 0, 200, 220, 0, 0, 5, 1000, 2000, 0, 0, 0, 200, 200,
-  1, 1, 15, 15,
+  1, 1, 15, 15, 1, 1, 184, 240, 0, 0, 1, 1, 264, 240, 0, 0,
 ];
 
 function toEnabled(byte) {
@@ -357,6 +357,20 @@ const eepromMapping = [
   { path: ['homeDirection', 'visibleOn'] },
   { path: ['homeDirection', 'positionX'] },
   { path: ['homeDirection', 'positionY'] },
+  { path: ['homeLatitude', 'visibleOn'],
+    convertFromParameters: toEnabled },
+  { path: ['homeLatitude', 'visibleOn'] },
+  { path: ['homeLatitude', 'positionX'] },
+  { path: ['homeLatitude', 'positionY'] },
+  { path: ['homeLatitude', 'fontSize'] },
+  { path: ['homeLatitude', 'hAlignment'] },
+  { path: ['homeLongitude', 'visibleOn'],
+    convertFromParameters: toEnabled },
+  { path: ['homeLongitude', 'visibleOn'] },
+  { path: ['homeLongitude', 'positionX'] },
+  { path: ['homeLongitude', 'positionY'] },
+  { path: ['homeLongitude', 'fontSize'] },
+  { path: ['homeLongitude', 'hAlignment'] },
 ];
 
 const skeletonParameters = {
@@ -379,6 +393,8 @@ const skeletonParameters = {
   gps2Latitude: {},
   gps2Longitude: {},
   gps2Status: {},
+  homeLatitude: {},
+  homeLongitude: {},
   gpsHdop: {},
   gpsLatitude: {},
   gpsLongitude: {},

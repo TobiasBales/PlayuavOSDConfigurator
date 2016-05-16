@@ -12,6 +12,8 @@ import ClimbRate from './ClimbRate';
 import Compass from './Compass';
 import Efficiency from './Efficiency';
 import FlightMode from './FlightMode';
+import HomeLatitude from './HomeLatitude';
+import HomeLongitude from './HomeLongitude';
 import Gps2Hdop from './Gps2Hdop';
 import Gps2Latitude from './Gps2Latitude';
 import Gps2Longitude from './Gps2Longitude';
@@ -55,6 +57,8 @@ export default {
   Compass,
   Efficiency,
   FlightMode,
+  HomeLatitude,
+  HomeLongitude,
   Gps2Hdop,
   Gps2Latitude,
   Gps2Longitude,
