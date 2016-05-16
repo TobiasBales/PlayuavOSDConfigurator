@@ -2,11 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../parameters';
 import Column from '../../components/Column';
-import Input from 'react-toolbox/lib/input';
-import { bindStateForComponent } from '../../utils/parameters';
+import Input from '../../components/Input';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class Switching extends Component {
+export default class Switching extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
       panelChannel: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
@@ -26,11 +25,11 @@ class Switching extends Component {
   }
 
   _setChannel(key, value) {
-    this.props.setChannel(key, value);
+    this.props.setChannel('switching', key, value);
   }
 
   _setValue(key, value) {
-    this.props.setValue(key, parseInt(value, 10));
+    this.props.setValue('switching', key, parseInt(value, 10));
   }
 
   render() {
@@ -67,23 +66,23 @@ class Switching extends Component {
         </Column>
         <Column width={50} >
           <Parameters.Select label="mode" value={panelMode}
-            options={modeOptions} setValue={this.props.setMode.bind(this, 'panel')}
+            options={modeOptions} setValue={this.props.setMode.bind(this, 'switching', 'panel')}
           />
         </Column>
         <Column width={50} >
           <Parameters.Select label="mode" value={videoMode}
-            options={modeOptions} setValue={this.props.setMode.bind(this, 'video')}
+            options={modeOptions} setValue={this.props.setMode.bind(this, 'switching', 'video')}
           />
         </Column>
         <Column width={50} >
-          { panelMode === 0 ?
+          { panelMode.get('value') === 0 ?
             <Input type="number" label="value to cycle"
               onChange={this._setValue.bind(this, 'panel')} value={panelValue}
             />
             : null }
         </Column>
         <Column width={50} >
-          { videoMode === 0 ?
+          { videoMode.get('value') === 0 ?
             <Input type="number" label="value to cycle"
               onChange={this._setValue.bind(this, 'video')} value={videoValue}
             />
@@ -93,5 +92,3 @@ class Switching extends Component {
     );
   }
 }
-
-export default bindStateForComponent('switching', Switching);

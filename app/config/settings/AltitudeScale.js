@@ -1,14 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../parameters';
-import { bindStateForComponent } from '../../utils/parameters';
 import Column from '../../components/Column';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class AltitudeScale extends Component {
+export default class AltitudeScale extends Component {
   static propTypes = {
-    numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
+      numberOfPanels: PropTypes.number.isRequired,
       positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       scaleAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
@@ -22,15 +21,17 @@ class AltitudeScale extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return !this.props.parameters.equals(nextProps.parameters) ||
-      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+    return !this.props.parameters.equals(nextProps.parameters);
   }
 
   render() {
     const {
-      setPosition, setScaleAlignment, setScaleType, setVisibleOn, numberOfPanels
+      setPosition, setScaleAlignment, setScaleType, setVisibleOn
     } = this.props;
-    const { positionX, positionY, scaleAlignment, scaleType, visibleOn } = this.props.parameters;
+
+    const {
+      numberOfPanels, positionX, positionY, scaleAlignment, scaleType, visibleOn
+    } = this.props.parameters;
 
     return (
       <Parameters.ParameterList name="altitude scale">
@@ -39,18 +40,16 @@ class AltitudeScale extends Component {
         </Column>
         <Column width={50} >
           <Parameters.ScaleAlignment setScaleAlignment={setScaleAlignment}
-            scaleAlignment={scaleAlignment}
+            scaleAlignment={scaleAlignment} name="altitudeScale"
           />
         </Column>
-        <Parameters.Position labelX="position x" labelY="offset y"
+        <Parameters.Position labelX="position x" labelY="offset y" name="altitudeScale"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
         <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn}
-          numberOfPanels={numberOfPanels}
+          numberOfPanels={numberOfPanels} name="altitudeScale"
         />
       </Parameters.ParameterList>
     );
   }
 }
-
-export default bindStateForComponent('altitudeScale', AltitudeScale);

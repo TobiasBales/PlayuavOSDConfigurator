@@ -7,6 +7,7 @@ import styles from './VisibleOn.css';
 
 export default class ParameterPanels extends Component {
   static propTypes = {
+    name: PropTypes.string.isRequired,
     numberOfPanels: PropTypes.number.isRequired,
     setVisibleOn: PropTypes.func.isRequired,
     visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
@@ -17,7 +18,7 @@ export default class ParameterPanels extends Component {
       this.props.visibleOn.get('value') | Math.pow(2, index) :
       this.props.visibleOn.get('value') ^ Math.pow(2, index);
 
-    this.props.setVisibleOn(visibleOn);
+    this.props.setVisibleOn(this.props.name, visibleOn);
   }
 
   render() {

@@ -4,14 +4,20 @@ import CustomPropTypes from '../../utils/PropTypes';
 
 export default class Radius extends Component {
   static propTypes = {
-    radiusKey: PropTypes.string.isRequired,
-    radius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    radius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+    radiusKey: PropTypes.string.isRequired,
     setRadius: PropTypes.func.isRequired,
+    step: PropTypes.number,
+  }
+
+  static defaultProps = {
+    step: 0.1,
   }
 
   _onChange(radius) {
-    this.props.setRadius(this.props.radiusKey, parseInt(radius, 10));
+    this.props.setRadius(this.props.name, this.props.radiusKey, parseInt(radius, 10));
   }
 
   render() {
@@ -23,6 +29,7 @@ export default class Radius extends Component {
           type="number"
           label={label}
           value={radius}
+          step={this.props.step}
           onChange={this._onChange.bind(this)}
         />
       </div>

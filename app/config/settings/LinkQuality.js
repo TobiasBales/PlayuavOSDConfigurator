@@ -4,18 +4,16 @@ import Column from '../../components/Column';
 import Select from '../parameters/Select';
 import SimpleSettings from './SimpleSettings';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { bindStateForComponent } from '../../utils/parameters';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class LinkQuality extends Component {
+export default class LinkQuality extends Component {
   static propTypes = {
-    name: PropTypes.string,
-    numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
       fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       max: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       min: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      numberOfPanels: PropTypes.number.isRequired,
       positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       raw: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
@@ -33,24 +31,23 @@ class LinkQuality extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return !this.props.parameters.equals(nextProps.parameters) ||
-      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+    return !this.props.parameters.equals(nextProps.parameters);
   }
 
   _setMin = (min) => {
-    this.props.setMin(parseInt(min, 10));
+    this.props.setMin('linkQuality', parseInt(min, 10));
   }
 
   _setMax = (max) => {
-    this.props.setMax(parseInt(max, 10));
+    this.props.setMax('linkQuality', parseInt(max, 10));
   }
 
   _setType = (type) => {
-    this.props.setType(type);
+    this.props.setType('linkQuality', type);
   }
 
   _setRaw = (raw) => {
-    this.props.setRaw(raw);
+    this.props.setRaw('linkQuality', raw);
   }
 
   render() {
@@ -70,7 +67,7 @@ class LinkQuality extends Component {
     const maxInput = 2000;
 
     return (
-      <SimpleSettings name="link quality" {...this.props}>
+      <SimpleSettings label="link quality" name="linkQuality" {...this.props}>
         <Column width={50} >
           <Input type="number" min={minInput} max={maxInput}
             label="min" value={min} onChange={this._setMin}
@@ -91,5 +88,3 @@ class LinkQuality extends Component {
      );
   }
 }
-
-export default bindStateForComponent('linkQuality', LinkQuality);

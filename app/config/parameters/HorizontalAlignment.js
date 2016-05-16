@@ -7,10 +7,11 @@ export default class HorizontalAlignment extends Component {
   static propTypes = {
     hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     setHAlignment: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
   }
 
   _onChange = (hAlignment) => {
-    this.props.setHAlignment(hAlignment);
+    this.props.setHAlignment(this.props.name, hAlignment);
   }
 
   render() {

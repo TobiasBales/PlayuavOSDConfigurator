@@ -3,10 +3,9 @@ import Column from '../../components/Column';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Input from '../../components/Input';
 import Parameters from '../parameters';
-import { bindStateForComponent } from '../../utils/parameters';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class Alarms extends Component {
+export default class Alarms extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
       fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
@@ -36,12 +35,16 @@ class Alarms extends Component {
     return !this.props.parameters.equals(nextProps.parameters);
   }
 
-  _setEnabled(alarm, enabled) {
-    this.props.setAlarmEnabled(alarm, parseInt(enabled, 10));
+  _setEnabled(alarm) {
+    return (enabled) => {
+      this.props.setAlarmEnabled(alarm, parseInt(enabled, 10));
+    };
   }
 
-  _setValue(alarm, value) {
-    this.props.setAlarmValue(alarm, parseInt(value, 10));
+  _setValue(alarm) {
+    return (value) => {
+      this.props.setAlarmValue(alarm, parseInt(value, 10));
+    };
   }
 
   render() {
@@ -58,73 +61,73 @@ class Alarms extends Component {
 
     return (
       <Parameters.ParameterList name="alarms">
-        <Parameters.Position labelX="position x" labelY="position y"
+        <Parameters.Position labelX="position x" labelY="position y" name="alarms"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
         <Column width={50} >
-          <Parameters.FontSize fontSize={fontSize} setFontSize={setFontSize} />
+          <Parameters.FontSize fontSize={fontSize} name="alarms" setFontSize={setFontSize} />
         </Column>
         <Column width={50} >
-          <Parameters.HorizontalAlignment hAlignment={hAlignment} setHAlignment={setHAlignment} />
+          <Parameters.HorizontalAlignment name="alarms"
+            hAlignment={hAlignment} setHAlignment={setHAlignment}
+          />
         </Column>
         <Column width={25} >
           <Parameters.Select label="under speed" options={options}
-            setValue={this._setEnabled.bind(this, 'underSpeed')} value={underSpeedEnabled}
+            setValue={this._setEnabled('underSpeed')} value={underSpeedEnabled}
           />
         </Column>
         <Column width={25}>
           <Input type="number" label="value"
-            onChange={this._setValue.bind(this, 'underSpeed')} value={underSpeedValue}
+            onChange={this._setValue('underSpeed')} value={underSpeedValue}
           />
         </Column>
         <Column width={25}>
           <Parameters.Select label="over speed" options={options}
-            setValue={this._setEnabled.bind(this, 'overSpeed')} value={overSpeedEnabled}
+            setValue={this._setEnabled('overSpeed')} value={overSpeedEnabled}
           />
         </Column>
         <Column width={25} >
           <Input type="number" label="value"
-            onChange={this._setValue.bind(this, 'overSpeed')} value={overSpeedValue}
+            onChange={this._setValue('overSpeed')} value={overSpeedValue}
           />
         </Column>
         <Column width={25} >
           <Parameters.Select label="under alt" options={options}
-            setValue={this._setEnabled.bind(this, 'underAlt')} value={underAltEnabled}
+            setValue={this._setEnabled('underAlt')} value={underAltEnabled}
           />
         </Column>
         <Column width={25}>
           <Input type="number" label="value"
-            onChange={this._setValue.bind(this, 'underAlt')} value={underAltValue}
+            onChange={this._setValue('underAlt')} value={underAltValue}
           />
         </Column>
         <Column width={25}>
           <Parameters.Select label="over alt" options={options}
-            setValue={this._setEnabled.bind(this, 'overAlt')} value={overAltEnabled}
+            setValue={this._setEnabled('overAlt')} value={overAltEnabled}
           />
         </Column>
         <Column width={25} >
           <Input type="number" label="value"
-            onChange={this._setValue.bind(this, 'overAlt')} value={overAltValue}
+            onChange={this._setValue('overAlt')} value={overAltValue}
           />
         </Column>
         <Column width={25} >
           <Parameters.Select label="low battery" options={options}
-            setValue={this._setEnabled.bind(this, 'lowBattery')} value={lowBatteryEnabled}
+            setValue={this._setEnabled('lowBattery')} value={lowBatteryEnabled}
           />
         </Column>
         <Column width={25}>
           <Input label="value" type="number"
-            onChange={this._setValue.bind(this, 'lowBattery')} value={lowBatteryValue}
+            onChange={this._setValue('lowBattery')} value={lowBatteryValue}
           />
         </Column>
         <Column width={50} >
           <Parameters.Select label="gps status" options={options}
-            setValue={this._setEnabled.bind(this, 'gpsStatus')} value={gpsStatusEnabled}
+            setValue={this._setEnabled('gpsStatus')} value={gpsStatusEnabled}
           />
         </Column>
       </Parameters.ParameterList>
     );
   }
 }
-
-export default bindStateForComponent('alarms', Alarms);

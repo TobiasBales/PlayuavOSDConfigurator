@@ -7,6 +7,7 @@ export default class Input extends Component {
   static propTypes = {
     label: PropTypes.string,
     onChange: PropTypes.func.isRequired,
+    step: PropTypes.number,
     type: PropTypes.string,
     value: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
   }
@@ -24,6 +25,7 @@ export default class Input extends Component {
     return (
       <BaseInput
         className={classes}
+        step={this.props.step}
         type={this.props.type}
         label={this.props.label}
         onChange={this.props.onChange}

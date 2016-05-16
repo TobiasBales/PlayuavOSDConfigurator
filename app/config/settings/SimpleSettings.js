@@ -7,11 +7,12 @@ import CustomPropTypes from '../../utils/PropTypes';
 export default class SimpleSettings extends Component {
   static propTypes = {
     name: PropTypes.string,
+    label: PropTypes.string,
     children: PropTypes.node,
-    numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
       fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      numberOfPanels: PropTypes.number.isRequired,
       positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
@@ -23,8 +24,7 @@ export default class SimpleSettings extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return !this.props.parameters.equals(nextProps.parameters) ||
-      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+    return !this.props.parameters.equals(nextProps.parameters);
   }
 
   parameterModified(key) {
@@ -34,7 +34,6 @@ export default class SimpleSettings extends Component {
   render() {
     const {
       children,
-      numberOfPanels,
       setFontSize,
       setHAlignment,
       setPosition,
@@ -43,26 +42,30 @@ export default class SimpleSettings extends Component {
     const {
       fontSize,
       hAlignment,
+      numberOfPanels,
       positionX,
       positionY,
       visibleOn,
     } = this.props.parameters;
 
     const name = this.props.name || this.name;
+    const label = this.props.label || this.label || name;
 
     return (
-      <Parameters.ParameterList name={name}>
-        <Parameters.Position labelX="position x" labelY="position y"
+      <Parameters.ParameterList name={label}>
+        <Parameters.Position labelX="position x" labelY="position y" name={name}
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
         <Column width={50} >
-          <Parameters.FontSize fontSize={fontSize} setFontSize={setFontSize} />
+          <Parameters.FontSize name={name} fontSize={fontSize} setFontSize={setFontSize} />
         </Column>
         <Column width={50} >
-          <Parameters.HorizontalAlignment hAlignment={hAlignment} setHAlignment={setHAlignment} />
+          <Parameters.HorizontalAlignment name={name}
+            hAlignment={hAlignment} setHAlignment={setHAlignment}
+          />
         </Column>
         {children}
-        <Parameters.VisibleOn visibleOn={visibleOn} setVisibleOn={setVisibleOn}
+        <Parameters.VisibleOn name={name} visibleOn={visibleOn} setVisibleOn={setVisibleOn}
           numberOfPanels={numberOfPanels}
         />
       </Parameters.ParameterList>

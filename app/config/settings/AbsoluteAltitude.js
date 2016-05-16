@@ -1,8 +1,6 @@
 import SimpleSettings from './SimpleSettings';
-import { bindStateForComponent } from '../../utils/parameters';
 
-class AbsoluteAltitude extends SimpleSettings {
-  name = 'absolute altitude';
+export default class AbsoluteAltitude extends SimpleSettings {
+  label = 'absolute altitude';
+  name = 'absoluteAltitude';
 }
-
-export default bindStateForComponent('absoluteAltitude', AbsoluteAltitude);

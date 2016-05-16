@@ -4,18 +4,16 @@ import Column from '../../components/Column';
 import Select from '../parameters/Select';
 import SimpleSettings from './SimpleSettings';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { bindStateForComponent } from '../../utils/parameters';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class Rssi extends Component {
+export default class Rssi extends Component {
   static propTypes = {
-    name: PropTypes.string,
-    numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
       fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       max: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       min: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      numberOfPanels: PropTypes.number.isRequired,
       positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       raw: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
@@ -33,24 +31,23 @@ class Rssi extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return !this.props.parameters.equals(nextProps.parameters) ||
-      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+    return !this.props.parameters.equals(nextProps.parameters);
   }
 
   _setMin = (min) => {
-    this.props.setMin(parseInt(min, 10));
+    this.props.setMin('rssi', parseInt(min, 10));
   }
 
   _setMax = (max) => {
-    this.props.setMax(parseInt(max, 10));
+    this.props.setMax('rssi', parseInt(max, 10));
   }
 
   _setType = (type) => {
-    this.props.setType(type);
+    this.props.setType('rssi', type);
   }
 
   _setRaw = (raw) => {
-    this.props.setRaw(raw);
+    this.props.setRaw('rssi', raw);
   }
 
   render() {
@@ -71,7 +68,7 @@ class Rssi extends Component {
     const maxInput = type === 0 ? 255 : 2000;
 
     return (
-      <SimpleSettings name="rssi" {...this.props}>
+      <SimpleSettings name="rssi" label="rssi" {...this.props}>
         <Column width={50} >
           <Input type="number" min={minInput} max={maxInput}
             label="min" value={min} onChange={this._setMin}
@@ -92,5 +89,3 @@ class Rssi extends Component {
      );
   }
 }
-
-export default bindStateForComponent('rssi', Rssi);

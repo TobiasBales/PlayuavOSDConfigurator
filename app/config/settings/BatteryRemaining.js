@@ -1,8 +1,6 @@
 import SimpleSettings from './SimpleSettings';
-import { bindStateForComponent } from '../../utils/parameters';
 
-class BatteryRemaining extends SimpleSettings {
-  name = 'battery remaining';
+export default class BatteryRemaining extends SimpleSettings {
+  label = 'battery remaining';
+  name = 'batteryRemaining';
 }
-
-export default bindStateForComponent('batteryRemaining', BatteryRemaining);

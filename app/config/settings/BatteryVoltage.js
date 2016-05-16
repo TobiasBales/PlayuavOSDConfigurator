@@ -1,8 +1,6 @@
 import SimpleSettings from './SimpleSettings';
-import { bindStateForComponent } from '../../utils/parameters';
 
-class BatteryVoltage extends SimpleSettings {
-  name = 'battery voltage';
+export default class BatteryVoltage extends SimpleSettings {
+  label = 'battery voltage'
+  name = 'batteryVoltage';
 }
-
-export default bindStateForComponent('batteryVoltage', BatteryVoltage);

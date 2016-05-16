@@ -27,114 +27,145 @@ export const VALUE = 'parameters/value';
 export const MODE = 'parameters/mode';
 export const VISIBLE_ON = 'parameters/visible_on';
 
-export function setAlarm(parameter, alarm) {
+function setAlarm(parameter, alarm) {
   return { type: ALARM, parameter, payload: alarm };
 }
 
-export function setAlarmEnabled(parameter, alarm, enabled) {
-  return { type: ALARM_ENABLED, parameter, payload: { alarm, enabled } };
+function setAlarmEnabled(parameter, alarm, enabled) {
+  return { type: ALARM_ENABLED, parameter: 'alarms', payload: { alarm, enabled } };
 }
 
-export function setAlarmValue(parameter, alarm, value) {
-  return { type: ALARM_VALUE, parameter, payload: { alarm, value } };
+function setAlarmValue(parameter, alarm, value) {
+  return { type: ALARM_VALUE, parameter: 'alarms', payload: { alarm, value } };
 }
 
-export function setAsBaseState(state) {
+function setAsBaseState(state) {
   return { type: AS_BASE_STATE, state };
 }
 
-export function setBaudRate(parameter, baudRate) {
-  return { type: BAUD_RATE, parameter, payload: baudRate };
+function setBaudRate(baudRate) {
+  return { type: BAUD_RATE, parameter: 'serial', payload: baudRate };
 }
 
-export function setChannel(parameter, key, channel) {
+function setChannel(parameter, key, channel) {
   return { type: CHANNEL, parameter, payload: { key, channel } };
 }
 
-export function setFcType(parameter, fcType) {
-  return { type: FC_TYPE, parameter, fcType };
+function setFcType(fcType) {
+  return { type: FC_TYPE, parameter: 'serial', fcType };
 }
 
-export function setFontSize(parameter, fontSize) {
+function setFontSize(parameter, fontSize) {
   return { type: FONT_SIZE, parameter, payload: fontSize };
 }
 
-export function setHAlignment(parameter, hAlignment) {
+function setHAlignment(parameter, hAlignment) {
   return { type: H_ALIGNMENT, parameter, payload: hAlignment };
 }
 
-export function setMax(parameter, max) {
+function setMax(parameter, max) {
   return { type: MAX, parameter, payload: max };
 }
 
-export function setMaxPanels(parameter, maxPanels) {
-  return { type: MAX_PANELS, parameter, payload: maxPanels };
+function setMaxPanels(maxPanels) {
+  return { type: MAX_PANELS, parameter: 'video', payload: parseInt(maxPanels, 10) };
 }
 
-export function setMin(parameter, min) {
+function setMin(parameter, min) {
   return { type: MIN, parameter, payload: min };
 }
 
-export function setOffset(parameter, x, y) {
+function setOffset(parameter, x, y) {
   return { type: OFFSET, parameter, payload: { x, y } };
 }
 
-export function setPanel(parameter, panel) {
+function setPanel(parameter, panel) {
   return { type: PANEL, parameter, panel };
 }
 
-export function setParamsFromEEPROM(eepromData) {
+function setParamsFromEEPROM(eepromData) {
   return { type: PARAMS_FROM_EEPROM, eepromData };
 }
 
-export function setPosition(parameter, x, y) {
+function setPosition(parameter, x, y) {
   return { type: POSITION, parameter, payload: { x, y } };
 }
 
-export function setRadius(parameter, key, radius) {
+function setRadius(parameter, key, radius) {
   return { type: RADIUS, parameter, key, radius };
 }
 
-export function setRaw(parameter, raw) {
+function setRaw(parameter, raw) {
   return { type: RAW, parameter, raw };
 }
 
-export function setScale(parameter, scale) {
+function setScale(parameter, scale) {
   return { type: SCALE, parameter, scale };
 }
 
-export function setScaleAlignment(parameter, scaleAlignment) {
+function setScaleAlignment(parameter, scaleAlignment) {
   return { type: SCALE_ALIGNMENT, parameter, scaleAlignment };
 }
 
-export function setScaleEnabled(parameter, scaleEnabled) {
+function setScaleEnabled(parameter, scaleEnabled) {
   return { type: SCALE_ENABLED, parameter, scaleEnabled };
 }
 
-export function setScaleType(parameter, scaleType) {
+function setScaleType(parameter, scaleType) {
   return { type: SCALE_TYPE, parameter, scaleType };
 }
 
-export function setType(parameter, typeValue) {
+function setType(parameter, typeValue) {
   return { type: TYPE, parameter, typeValue };
 }
 
-export function setUnits(parameter, units) {
+function setUnits(parameter, units) {
   return { type: UNITS, parameter, units };
 }
 
-export function setVAlignment(parameter, vAlignment) {
+function setVAlignment(parameter, vAlignment) {
   return { type: V_ALIGNMENT, parameter, vAlignment };
 }
 
-export function setValue(parameter, key, value) {
+function setValue(parameter, key, value) {
   return { type: VALUE, parameter, key, value };
 }
 
-export function setMode(parameter, prefix, mode) {
-  return { type: MODE, parameter, prefix, mode };
+function setMode(parameter, prefix, mode) {
+  return { type: MODE, parameter, prefix, mode: parseInt(mode, 10) };
 }
 
-export function setVisibleOn(parameter, visibleOn) {
+function setVisibleOn(parameter, visibleOn) {
   return { type: VISIBLE_ON, parameter, payload: visibleOn };
 }
+
+export default {
+  setAlarm,
+  setAlarmEnabled,
+  setAlarmValue,
+  setAsBaseState,
+  setBaudRate,
+  setChannel,
+  setFcType,
+  setFontSize,
+  setHAlignment,
+  setMax,
+  setMaxPanels,
+  setMin,
+  setOffset,
+  setPanel,
+  setParamsFromEEPROM,
+  setPosition,
+  setRadius,
+  setRaw,
+  setScale,
+  setScaleAlignment,
+  setScaleEnabled,
+  setScaleType,
+  setType,
+  setUnits,
+  setVAlignment,
+  setValue,
+  setMode,
+  setVisibleOn,
+};

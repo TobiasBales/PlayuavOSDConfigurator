@@ -4,12 +4,13 @@ import CustomPropTypes from '../../utils/PropTypes';
 
 export default class SpeedScaleType extends Component {
   static propTypes = {
+    name: PropTypes.string.isRequired,
     scaleType: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     setScaleType: PropTypes.func.isRequired,
   }
 
   _onChange = (scaleType) => {
-    this.props.setScaleType(scaleType);
+    this.props.setScaleType(this.props.name, scaleType);
   }
 
   render() {

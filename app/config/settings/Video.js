@@ -2,11 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Input from '../../components/Input';
 import Parameters from '../parameters';
-import { bindStateForComponent } from '../../utils/parameters';
 import Column from '../../components/Column';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class Video extends Component {
+export default class Video extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
       maxPanels: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
@@ -32,13 +31,14 @@ class Video extends Component {
     return (
       <Parameters.ParameterList name="video">
         <Column width={50} >
-          <Parameters.VideoMode videoMode={videoMode} setVideoMode={setMode.bind(this, 'video')} />
+          <Parameters.VideoMode videoMode={videoMode} setMode={setMode} />
         </Column>
         <Column width={50}>
-          <Parameters.Units units={units} setUnits={setUnits} />
+          <Parameters.Units name="video" units={units} setUnits={setUnits} />
         </Column>
-        <Parameters.Position labelX="offset x" labelY="offset y" xMin={-20} xMax={20}
-          yMin={0} yMax={20} positionX={offsetX} positionY={offsetY} setPosition={setOffset}
+        <Parameters.Position labelX="offset x" labelY="offset y" name="video"
+          xMin={-20} xMax={20} yMin={0} yMax={20}
+          positionX={offsetX} positionY={offsetY} setPosition={setOffset}
         />
         <Column width={50} >
           <Input
@@ -52,5 +52,3 @@ class Video extends Component {
     );
   }
 }
-
-export default bindStateForComponent('video', Video);

@@ -2,14 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../parameters';
 import Column from '../../components/Column';
-import { bindStateForComponent } from '../../utils/parameters';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class Radar extends Component {
+export default class Radar extends Component {
   static propTypes = {
-    numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
       homeRadius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      numberOfPanels: PropTypes.number.isRequired,
       positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       radius: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
@@ -22,19 +21,18 @@ class Radar extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return !this.props.parameters.equals(nextProps.parameters) ||
-      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+    return !this.props.parameters.equals(nextProps.parameters);
   }
 
   render() {
     const {
-      numberOfPanels,
       setPosition,
       setRadius,
       setVisibleOn,
     } = this.props;
     const {
       homeRadius,
+      numberOfPanels,
       positionX,
       positionY,
       radius,
@@ -44,30 +42,28 @@ class Radar extends Component {
 
     return (
       <Parameters.ParameterList name="radar">
-        <Parameters.Position labelX="position x" labelY="position y"
+        <Parameters.Position labelX="position x" labelY="position y" name="radar"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
         <Column width={33} >
           <Parameters.Radius label="radius" radiusKey="radius"
-            radius={radius} setRadius={setRadius}
+            radius={radius} setRadius={setRadius} name="radar"
           />
         </Column>
         <Column width={33}>
           <Parameters.Radius label="home radius" radiusKey="homeRadius"
-            radius={homeRadius} setRadius={setRadius}
+            radius={homeRadius} setRadius={setRadius} name="radar"
           />
         </Column>
         <Column width={33} >
           <Parameters.Radius label="wp radius" radiusKey="wpRadius"
-            radius={wpRadius} setRadius={setRadius}
+            radius={wpRadius} setRadius={setRadius} name="radar"
           />
         </Column>
-        <Parameters.VisibleOn visibleOn={visibleOn}
+        <Parameters.VisibleOn visibleOn={visibleOn} name="radar"
           setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
         />
       </Parameters.ParameterList>
     );
   }
 }
-
-export default bindStateForComponent('radar', Radar);

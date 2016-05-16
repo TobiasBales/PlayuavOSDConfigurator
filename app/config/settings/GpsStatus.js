@@ -1,8 +1,6 @@
 import SimpleSettings from './SimpleSettings';
-import { bindStateForComponent } from '../../utils/parameters';
 
-class GpsStatus extends SimpleSettings {
-  name = 'gps status';
+export default class GpsStatus extends SimpleSettings {
+  labels = 'gps status';
+  name = 'gpsStatus';
 }
-
-export default bindStateForComponent('gpsStatus', GpsStatus);

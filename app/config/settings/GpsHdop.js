@@ -1,8 +1,6 @@
 import SimpleSettings from './SimpleSettings';
-import { bindStateForComponent } from '../../utils/parameters';
 
-class GpsHdop extends SimpleSettings {
-  name = 'gps hdop';
+export default class GpsHdop extends SimpleSettings {
+  label = 'gps hdop';
+  name = 'gpsHdop';
 }
-
-export default bindStateForComponent('gpsHdop', GpsHdop);

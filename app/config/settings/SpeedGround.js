@@ -1,8 +1,6 @@
 import SimpleSettings from './SimpleSettings';
-import { bindStateForComponent } from '../../utils/parameters';
 
-class SpeedGround extends SimpleSettings {
-  name = 'speed ground';
+export default class SpeedGround extends SimpleSettings {
+  label = 'speed ground';
+  name = 'speedGround';
 }
-
-export default bindStateForComponent('speedGround', SpeedGround);

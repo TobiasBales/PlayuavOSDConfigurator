@@ -2,16 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../parameters';
 import SimpleSettings from './SimpleSettings';
-import { bindStateForComponent } from '../../utils/parameters';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class Time extends Component {
+export default class Time extends Component {
   static propTypes = {
-    name: PropTypes.string,
-    numberOfPanels: PropTypes.number.isRequired,
     parameters: ImmutablePropTypes.contains({
       fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       hAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      numberOfPanels: PropTypes.number.isRequired,
       positionX: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       positionY: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       type: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
@@ -25,12 +23,14 @@ class Time extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return !this.props.parameters.equals(nextProps.parameters) ||
-      this.props.numberOfPanels !== (nextProps.numberOfPanels);
+    return !this.props.parameters.equals(nextProps.parameters);
+  }
+
+  _setType = (type) => {
+    this.props.setType('time', type);
   }
 
   render() {
-    const { setType } = this.props;
     const { type } = this.props.parameters;
     const typeOptions = [
       { value: 0, label: 'power on' },
@@ -40,12 +40,10 @@ class Time extends Component {
 
     return (
       <SimpleSettings name="time" {...this.props}>
-        <Parameters.Select label="since" setValue={setType}
+        <Parameters.Select label="since" setValue={this._setType}
           value={type} options={typeOptions}
         />
       </SimpleSettings>
      );
   }
 }
-
-export default bindStateForComponent('time', Time);

@@ -7,10 +7,11 @@ export default class Position extends Component {
   static propTypes = {
     fontSize: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     setFontSize: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
   }
 
   _onChange = (fontSize) => {
-    this.props.setFontSize(fontSize);
+    this.props.setFontSize(this.props.name, fontSize);
   }
 
   render() {

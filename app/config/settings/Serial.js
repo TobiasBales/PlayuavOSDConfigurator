@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../parameters';
-import { bindStateForComponent } from '../../utils/parameters';
 import Column from '../../components/Column';
 import CustomPropTypes from '../../utils/PropTypes';
 
-class Serial extends Component {
+export default class Serial extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
       baudRate: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
@@ -47,11 +46,9 @@ class Serial extends Component {
           />
         </Column>
         <Column width={50} >
-        <Parameters.Text text={version.get('value')} label="version" />
+          <Parameters.Text text={version.get('value')} label="version" />
         </Column>
       </Parameters.ParameterList>
     );
   }
 }
-
-export default bindStateForComponent('serial', Serial);

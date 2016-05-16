@@ -7,10 +7,11 @@ export default class Units extends Component {
   static propTypes = {
     units: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     setUnits: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
   }
 
   _onChange = (units) => {
-    this.props.setUnits(units);
+    this.props.setUnits(this.props.name, units);
   }
 
   render() {

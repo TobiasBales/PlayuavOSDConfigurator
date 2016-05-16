@@ -14,12 +14,14 @@ export default class Position extends Component {
     xMax: PropTypes.number,
     yMin: PropTypes.number,
     yMax: PropTypes.number,
+    name: PropTypes.string.isRequired,
   }
 
   _onChange(axis, position) {
+    const name = this.props.name;
     const x = axis === 'x' ? parseInt(position, 10) : this.props.positionX.get('value');
     const y = axis === 'y' ? parseInt(position, 10) : this.props.positionY.get('value');
-    this.props.setPosition(x, y);
+    this.props.setPosition(name, x, y);
   }
 
   render() {

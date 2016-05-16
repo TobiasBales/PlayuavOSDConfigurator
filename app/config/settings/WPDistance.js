@@ -1,8 +1,6 @@
 import SimpleSettings from './SimpleSettings';
-import { bindStateForComponent } from '../../utils/parameters';
 
-class WPDistance extends SimpleSettings {
-  name = 'way-point distance';
+export default class WPDistance extends SimpleSettings {
+  label = 'way-point distance';
+  name = 'wpDistance'
 }
-
-export default bindStateForComponent('wpDistance', WPDistance);

@@ -6,11 +6,11 @@ import classNames from 'classnames';
 export default class VideoMode extends Component {
   static propTypes = {
     videoMode: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
-    setVideoMode: PropTypes.func.isRequired,
+    setMode: PropTypes.func.isRequired,
   }
 
   _onChange = (videoMode) => {
-    this.props.setVideoMode(videoMode);
+    this.props.setMode('video', 'video', videoMode);
   }
 
   render() {

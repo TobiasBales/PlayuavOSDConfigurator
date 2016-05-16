@@ -5,12 +5,13 @@ import classNames from 'classnames';
 
 export default class VerticalAlignment extends Component {
   static propTypes = {
-    vAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+    name: PropTypes.string.isRequired,
     setVAlignment: PropTypes.func.isRequired,
+    vAlignment: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
   }
 
   _onChange = (vAlignment) => {
-    this.props.setVAlignment(vAlignment);
+    this.props.setVAlignment(this.props.name, parseInt(vAlignment, 10));
   }
 
   render() {

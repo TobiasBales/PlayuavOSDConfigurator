@@ -4,12 +4,13 @@ import CustomPropTypes from '../../utils/PropTypes';
 
 export default class Scale extends Component {
   static propTypes = {
+    name: PropTypes.string.isRequired,
     scale: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     setScale: PropTypes.func.isRequired,
   }
 
   _onChange = (scale) => {
-    this.props.setScale(parseFloat(scale));
+    this.props.setScale(this.props.name, parseFloat(scale));
   }
 
   render() {

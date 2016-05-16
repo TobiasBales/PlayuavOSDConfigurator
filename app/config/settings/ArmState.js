@@ -1,8 +1,6 @@
 import SimpleSettings from './SimpleSettings';
-import { bindStateForComponent } from '../../utils/parameters';
 
-class ArmState extends SimpleSettings {
-  name = 'arm state';
+export default class ArmState extends SimpleSettings {
+  label = 'arm state';
+  name = 'armState';
 }
-
-export default bindStateForComponent('armState', ArmState);
