@@ -30,10 +30,8 @@ Helper to make new icons/characters
 
 ## Binaries
 - [Windows](https://www.dropbox.com/s/2t72nirw21kmvap/PlayUAVOSDConfigurator-win32-ia32.zip?dl=0)
-- [OS X](https://circleci.com/api/v1/project/TobiasBales/PlayuavOSDConfigurator-OS-X/latest/artifacts/0/$CIRCLE_ARTIFACTS/PlayUAVOSDConfigurator-darwin-x64.zip?branch=master&filter=successful)
-- [Linux](https://circleci.com/api/v1/project/TobiasBales/PlayuavOSDConfigurator/latest/artifacts/0/$CIRCLE_ARTIFACTS/PlayUAVOSDConfigurator-linux-x64.zip?branch=master&filter=successful)
-
-![build status](https://circleci.com/gh/TobiasBales/PlayuavOSDConfigurator.png?circle-token=48fc88939139fd5c29f96cfe25e14c412c2dd244&style=shield)
+- [OS X](https://circleci.com/api/v1/project/TobiasBales/PlayuavOSDConfigurator-OS-X/latest/artifacts/0/$CIRCLE_ARTIFACTS/PlayUAVOSDConfigurator-darwin-x64.zip?branch=master&filter=successful)![build status](https://circleci.com/gh/TobiasBales/PlayuavOSDConfigurator-OS-X.png?circle-token=d24a0adf7aacec01182951c81d120f2127869fbc&style=shield)
+- [Linux](https://circleci.com/api/v1/project/TobiasBales/PlayuavOSDConfigurator/latest/artifacts/0/$CIRCLE_ARTIFACTS/PlayUAVOSDConfigurator-linux-x64.zip?branch=master&filter=successful) ![build status](https://circleci.com/gh/TobiasBales/PlayuavOSDConfigurator.png?circle-token=48fc88939139fd5c29f96cfe25e14c412c2dd244&style=shield)
 
 The windows build is currently done by hand and will most likely be a bit older, linux and os x are the last successful build of the master branch.
 
