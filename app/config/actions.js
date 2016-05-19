@@ -1,4 +1,3 @@
-export const ALARM = 'parameters/alarm';
 export const ALARM_ENABLED = 'parameters/alarm_enabled';
 export const ALARM_VALUE = 'parameters/alarm_value';
 export const AS_BASE_STATE = 'as_base_state';
@@ -12,7 +11,6 @@ export const MAX_PANELS = 'parameters/max_panels';
 export const MIN = 'parameters/min';
 export const MODE = 'parameters/mode';
 export const OFFSET = 'parameters/offset';
-export const PANEL = 'parameters/panels';
 export const PARAMS_FROM_EEPROM = 'parameters/params_from_eeprom';
 export const POSITION = 'parameters/position';
 export const RADIUS = 'parameters/radius';
@@ -21,16 +19,11 @@ export const SCALE = 'parameters/scale';
 export const SCALE_ALIGNMENT = 'parameters/scale_alignment';
 export const SCALE_ENABLED = 'parameters/scale_enabled';
 export const SCALE_TYPE = 'parameters/scale_type';
-export const TOGGLE_GRID = 'parameters/toggle_grid';
 export const TYPE = 'parameters/type';
 export const UNITS = 'parameters/units';
 export const V_ALIGNMENT = 'parameters/v_alignment';
 export const VALUE = 'parameters/value';
 export const VISIBLE_ON = 'parameters/visible_on';
-
-function setAlarm(parameter, alarm) {
-  return { type: ALARM, parameter, payload: alarm };
-}
 
 function setAlarmEnabled(parameter, alarm, enabled) {
   return { type: ALARM_ENABLED, parameter: 'alarms', payload: { alarm, enabled } };
@@ -78,10 +71,6 @@ function setMin(parameter, min) {
 
 function setOffset(parameter, x, y) {
   return { type: OFFSET, parameter, payload: { x, y } };
-}
-
-function setPanel(parameter, panel) {
-  return { type: PANEL, parameter, panel };
 }
 
 function setParamsFromEEPROM(eepromData) {
@@ -140,12 +129,7 @@ function setVisibleOn(parameter, visibleOn) {
   return { type: VISIBLE_ON, parameter, payload: visibleOn };
 }
 
-function toggleGrid() {
-  return { type: TOGGLE_GRID, parameter: 'preview' };
-}
-
 export default {
-  setAlarm,
   setAlarmEnabled,
   setAlarmValue,
   setAsBaseState,
@@ -159,7 +143,6 @@ export default {
   setMin,
   setMode,
   setOffset,
-  setPanel,
   setParamsFromEEPROM,
   setPosition,
   setRadius,
@@ -173,5 +156,4 @@ export default {
   setVAlignment,
   setValue,
   setVisibleOn,
-  toggleGrid,
 };

@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import Canvas from '../../utils/Canvas';
+import Canvas from '../utils/Canvas';
 import PreviewBase from './PreviewBase';
-import fonts from '../../utils/fonts';
-import icons from '../../utils/icons';
+import fonts from '../utils/fonts';
+import icons from '../utils/icons';
 
 export default class StringPreview extends PreviewBase {
   static propTypes = {

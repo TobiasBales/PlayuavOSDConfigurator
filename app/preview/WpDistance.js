@@ -1,7 +1,7 @@
 import { PropTypes } from 'react';
 import StringPreview from './StringPreview';
-import units from '../../utils/units';
-import * as icons from '../../data/icons/lookup';
+import units from '../utils/units';
+import * as icons from '../data/icons/lookup';
 
 export default class WpDistance extends StringPreview {
   static propTypes = {

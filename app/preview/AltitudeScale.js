@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import Canvas from '../../utils/Canvas';
+import Canvas from '../utils/Canvas';
 import PreviewBase from './PreviewBase';
-import fonts from '../../utils/fonts';
-import units from '../../utils/units';
+import fonts from '../utils/fonts';
+import units from '../utils/units';
 
 export default class AltitudeScale extends PreviewBase {
   static propTypes = {

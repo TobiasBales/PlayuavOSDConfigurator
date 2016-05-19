@@ -1,6 +1,6 @@
 import { PropTypes } from 'react';
 import StringPreview from './StringPreview';
-import units from '../../utils/units';
+import units from '../utils/units';
 
 export default class AbsoluteAltitude extends StringPreview {
   static propTypes = {

@@ -1,6 +1,6 @@
 import { PropTypes } from 'react';
 import StringPreview from './StringPreview';
-import * as icons from '../../data/icons/lookup';
+import * as icons from '../data/icons/lookup';
 
 function padNumber(number, digits) {
   return (`0000000000000${number}`).slice(-digits);

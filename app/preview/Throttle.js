@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import Canvas from '../../utils/Canvas';
+import Canvas from '../utils/Canvas';
 import PreviewBase from './PreviewBase';
-import fonts from '../../utils/fonts';
+import fonts from '../utils/fonts';
 
 export default class ThrottlePreview extends PreviewBase {
   static propTypes = {

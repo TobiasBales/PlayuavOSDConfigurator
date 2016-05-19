@@ -1,11 +1,11 @@
 import eeprom from '../utils/eeprom';
 
 import {
-  ALARM, ALARM_ENABLED, ALARM_VALUE, AS_BASE_STATE, BAUD_RATE, CHANNEL,
-  FC_TYPE, FONT_SIZE, H_ALIGNMENT, MAX, MAX_PANELS, MIN, OFFSET, PANEL,
+  ALARM_ENABLED, ALARM_VALUE, AS_BASE_STATE, BAUD_RATE, CHANNEL,
+  FC_TYPE, FONT_SIZE, H_ALIGNMENT, MAX, MAX_PANELS, MIN, OFFSET,
   PARAMS_FROM_EEPROM, POSITION, RADIUS, RAW, SCALE, SCALE_ALIGNMENT,
-  SCALE_ENABLED, SCALE_TYPE, TOGGLE_GRID, TYPE, UNITS, V_ALIGNMENT,
-  VALUE, MODE, VISIBLE_ON,
+  SCALE_ENABLED, SCALE_TYPE, TYPE, UNITS, V_ALIGNMENT, VALUE,
+  MODE, VISIBLE_ON,
 } from './actions';
 
 function addPreviewState(state) {
@@ -26,8 +26,6 @@ export default function parameters(state = initialState, action) {
   const payload = action.payload;
 
   switch (action.type) {
-    case ALARM:
-      return state.setIn([parameterName, 'alarm'], payload);
     case ALARM_ENABLED:
       return state.setIn([parameterName, `${payload.alarm}Enabled`], payload.enabled);
     case ALARM_VALUE:
@@ -54,8 +52,6 @@ export default function parameters(state = initialState, action) {
       return state
         .setIn([parameterName, 'offsetX'], payload.x)
         .setIn([parameterName, 'offsetY'], payload.y);
-    case PANEL:
-      return state.updateIn([parameterName, 'panel'], () => action.panel);
     case PARAMS_FROM_EEPROM: {
       let eepromData = action.eepromData;
       for (let i = eepromData.length; i > 0; i--) {
@@ -88,8 +84,6 @@ export default function parameters(state = initialState, action) {
       return state.updateIn([parameterName, 'scaleEnabled'], () => action.scaleEnabled);
     case SCALE_TYPE:
       return state.updateIn([parameterName, 'scaleType'], () => action.scaleType);
-    case TOGGLE_GRID:
-      return state.updateIn([parameterName, 'showGrid'], (show) => !show);
     case TYPE:
       return state.updateIn([parameterName, 'type'], () => action.typeValue);
     case UNITS:

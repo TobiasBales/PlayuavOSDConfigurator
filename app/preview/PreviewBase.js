@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Canvas from '../../utils/Canvas';
+import Canvas from '../utils/Canvas';
 
 export default class PreviewBase extends Component {
   static propTypes = {

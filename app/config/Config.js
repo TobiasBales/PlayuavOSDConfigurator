@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ParametersModule from './ParametersModule';
 import Snackbar from 'react-toolbox/lib/snackbar';
 import Sidebar from './Sidebar';
-import Preview from './preview/Preview';
+import Preview from '../preview/Preview';
 
 
 export default class Index extends Component {

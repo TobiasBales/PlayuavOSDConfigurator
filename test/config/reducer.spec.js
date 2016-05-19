@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import config from '../../app/config/reducer';
 import {
-  ALARM, ALARM_ENABLED, ALARM_VALUE, BAUD_RATE, CHANNEL, FONT_SIZE, H_ALIGNMENT, MAX,
+  ALARM_ENABLED, ALARM_VALUE, BAUD_RATE, CHANNEL, FONT_SIZE, H_ALIGNMENT, MAX,
   MAX_PANELS, MIN, OFFSET, POSITION, VISIBLE_ON
 } from '../../app/config/actions';
 
@@ -10,11 +10,6 @@ describe('reducers', () => {
     it('should handle initial state', () => {
       const state = config(undefined, {});
       expect(state).to.not.be.empty;
-    });
-
-    it('should handle ALARM', () => {
-      const state = config(undefined, { type: ALARM, parameter: 'preview', payload: 'TEST ALARM' });
-      expect(state.getIn(['preview', 'alarm'])).to.equal('TEST ALARM');
     });
 
     it('should handle ALARM_ENABLED', () => {

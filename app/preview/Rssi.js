@@ -1,6 +1,6 @@
 import { PropTypes } from 'react';
 import StringPreview from './StringPreview';
-import * as icons from '../../data/icons/lookup';
+import * as icons from '../data/icons/lookup';
 
 export default class Rssi extends StringPreview {
   static propTypes = {
