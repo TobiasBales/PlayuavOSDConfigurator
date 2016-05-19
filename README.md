@@ -41,6 +41,9 @@ If anyone knows a nice service for building things on windows/linux/os x and dis
 
 ## Contributing
 
+### Installing node
+The prefered way is using [ndenv](https://github.com/riywo/ndenv) and running node `5.9.0`
+
 ### Development server
     npm run hot-server
     npm run start-hot
