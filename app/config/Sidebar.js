@@ -15,11 +15,11 @@ import ProgressBar from 'react-toolbox/lib/progress_bar';
 
 class Sidebar extends Component {
   static propTypes = {
-    setParamsFromEEPROM: PropTypes.func.isRequired,
+    parameters: ImmutablePropTypes.map.isRequired,
     setAsBaseState: PropTypes.func.isRequired,
+    setParamsFromEEPROM: PropTypes.func.isRequired,
     showError: PropTypes.func.isRequired,
     showInfo: PropTypes.func.isRequired,
-    state: ImmutablePropTypes.map,
   }
 
   constructor(props) {
@@ -78,7 +78,7 @@ class Sidebar extends Component {
 
   _onOSDConfigWritten = () => {
     this.setState({ ...this.state, writingOSD: false, progress: 0 });
-    this.props.setAsBaseState(this.props.state);
+    this.props.setAsBaseState(this.props.parameters);
     this.props.showInfo('finished writing osd configuration');
   }
 
@@ -118,11 +118,11 @@ class Sidebar extends Component {
   _writeToOSD = () => {
     this.props.showInfo('writing osd configuration');
     this.setState({ ...this.state, writingOSD: true });
-    ipc.send('write-osd', this.state.serialPort, eeprom.fromParameters(this.props.state));
+    ipc.send('write-osd', this.state.serialPort, eeprom.fromParameters(this.props.parameters));
   }
 
   _writeToFile = () => {
-    ipc.send('write-file', eeprom.fromParameters(this.props.state));
+    ipc.send('write-file', eeprom.fromParameters(this.props.parameters));
   }
 
   _readFile = () => {
@@ -265,8 +265,8 @@ class Sidebar extends Component {
   }
 }
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return { parameters: state.parameters };
 }
 
 function mapDispatchToProps(dispatch) {
