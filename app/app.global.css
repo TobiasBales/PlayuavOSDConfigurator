@@ -69,6 +69,7 @@ html {
 
 .preview {
   position: relative;
+  overflow: hidden;
 }
 
 .preview img {
