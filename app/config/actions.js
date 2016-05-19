@@ -10,6 +10,7 @@ export const H_ALIGNMENT = 'parameters/h_alignment';
 export const MAX = 'parameters/max';
 export const MAX_PANELS = 'parameters/max_panels';
 export const MIN = 'parameters/min';
+export const MODE = 'parameters/mode';
 export const OFFSET = 'parameters/offset';
 export const PANEL = 'parameters/panels';
 export const PARAMS_FROM_EEPROM = 'parameters/params_from_eeprom';
@@ -20,11 +21,11 @@ export const SCALE = 'parameters/scale';
 export const SCALE_ALIGNMENT = 'parameters/scale_alignment';
 export const SCALE_ENABLED = 'parameters/scale_enabled';
 export const SCALE_TYPE = 'parameters/scale_type';
+export const TOGGLE_GRID = 'parameters/toggle_grid';
 export const TYPE = 'parameters/type';
 export const UNITS = 'parameters/units';
 export const V_ALIGNMENT = 'parameters/v_alignment';
 export const VALUE = 'parameters/value';
-export const MODE = 'parameters/mode';
 export const VISIBLE_ON = 'parameters/visible_on';
 
 function setAlarm(parameter, alarm) {
@@ -139,6 +140,10 @@ function setVisibleOn(parameter, visibleOn) {
   return { type: VISIBLE_ON, parameter, payload: visibleOn };
 }
 
+function toggleGrid() {
+  return { type: TOGGLE_GRID, parameter: 'preview' };
+}
+
 export default {
   setAlarm,
   setAlarmEnabled,
@@ -152,6 +157,7 @@ export default {
   setMax,
   setMaxPanels,
   setMin,
+  setMode,
   setOffset,
   setPanel,
   setParamsFromEEPROM,
@@ -166,6 +172,6 @@ export default {
   setUnits,
   setVAlignment,
   setValue,
-  setMode,
   setVisibleOn,
+  toggleGrid,
 };

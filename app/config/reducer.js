@@ -4,14 +4,15 @@ import {
   ALARM, ALARM_ENABLED, ALARM_VALUE, AS_BASE_STATE, BAUD_RATE, CHANNEL,
   FC_TYPE, FONT_SIZE, H_ALIGNMENT, MAX, MAX_PANELS, MIN, OFFSET, PANEL,
   PARAMS_FROM_EEPROM, POSITION, RADIUS, RAW, SCALE, SCALE_ALIGNMENT,
-  SCALE_ENABLED, SCALE_TYPE, TYPE, UNITS, V_ALIGNMENT, VALUE, MODE,
-  VISIBLE_ON,
+  SCALE_ENABLED, SCALE_TYPE, TOGGLE_GRID, TYPE, UNITS, V_ALIGNMENT,
+  VALUE, MODE, VISIBLE_ON,
 } from './actions';
 
 function addPreviewState(state) {
   return state
-    .updateIn(['preview', 'panel'], () => 0)
-    .updateIn(['preview', 'alarm'], () => 0);
+    .updateIn(['preview', 'panel'], (val) => val || 0)
+    .updateIn(['preview', 'alarm'], (val) => val || 0)
+    .updateIn(['preview', 'showGrid'], (val) => val || false);
 }
 
 function setAsBaseState(state, baseState = null) {
@@ -87,6 +88,8 @@ export default function parameters(state = initialState, action) {
       return state.updateIn([parameterName, 'scaleEnabled'], () => action.scaleEnabled);
     case SCALE_TYPE:
       return state.updateIn([parameterName, 'scaleType'], () => action.scaleType);
+    case TOGGLE_GRID:
+      return state.updateIn([parameterName, 'showGrid'], (show) => !show);
     case TYPE:
       return state.updateIn([parameterName, 'type'], () => action.typeValue);
     case UNITS:

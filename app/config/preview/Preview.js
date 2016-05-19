@@ -7,7 +7,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Column from '../../components/Column';
 import CustomPropTypes from '../../utils/PropTypes';
-import Dropdown from 'react-toolbox/lib/dropdown';
+import { Checkbox, Dropdown } from 'react-toolbox';
+import Grid from './Grid';
 import Immutable from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Label from '../../components/Label';
@@ -17,11 +18,13 @@ class Preview extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
       panel: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      showGrid: CustomPropTypes.value(PropTypes.bool.isRequired).isRequired,
     }).isRequired,
     setAlarm: PropTypes.func.isRequired,
     setPanel: PropTypes.func.isRequired,
     setPosition: PropTypes.func.isRequired,
     state: ImmutablePropTypes.map.isRequired,
+    toggleGrid: PropTypes.func.isRequired,
   }
 
   _onPanelChange = (panel) => {
@@ -103,12 +106,14 @@ class Preview extends Component {
 
     const setPosition = (parameter) =>
       (x, y) => this.props.setPosition(parameter, x, y);
+    const showGrid = this.props.parameters.getIn(['showGrid', 'value']);
 
     return (
       <Card className="preview-card">
         <CardText>
           <div className="preview" style={style}>
             <img src={background} />
+            <Grid visible={showGrid} />
             <Previews.AbsoluteAltitude {...absoluteAltitude.toJS()} {...fcStatus}
               units={units} setPosition={setPosition('absoluteAltitude')}
             />
@@ -237,6 +242,11 @@ class Preview extends Component {
               value={alarm} onChange={this._onAlarmChange}
             />
           </Column>
+          <Checkbox
+            checked={showGrid}
+            label="show grid"
+            onChange={this.props.toggleGrid}
+          />
         </CardText>
       </Card>
     );
