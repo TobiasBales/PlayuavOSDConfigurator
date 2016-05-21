@@ -11,7 +11,7 @@ function getFont(size) {
     case 2:
       return large;
     default:
-      throw new Error('trying to get unsupported font for size', size);
+      throw new Error(`trying to get unsupported font for size ${size}`);
   }
 }
 
