@@ -3,7 +3,6 @@ extensiblePolyfill('immutable');
 
 import chai from 'chai';
 import chaiImmutable from 'chai-immutable';
-import 'babel-polyfill';
 import { jsdom } from 'jsdom';
 
 chai.use(chaiImmutable);
