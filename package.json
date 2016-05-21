@@ -154,6 +154,7 @@
   },
   "pre-commit": [
     "lint",
-    "test"
+    "test",
+    "validate"
   ]
 }
