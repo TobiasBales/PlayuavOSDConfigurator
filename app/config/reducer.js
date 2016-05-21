@@ -8,18 +8,11 @@ import {
   MODE, VISIBLE_ON,
 } from './actions';
 
-function addPreviewState(state) {
-  return state
-    .updateIn(['preview', 'panel'], (val) => val || 0)
-    .updateIn(['preview', 'alarm'], (val) => val || 0)
-    .updateIn(['preview', 'showGrid'], (val) => val || false);
-}
-
 function setAsBaseState(state, baseState = null) {
   return state.updateIn(['originalState'], () => baseState || state);
 }
 
-const initialState = setAsBaseState(addPreviewState(eeprom.toParameters(eeprom.defaultEEPROM)));
+const initialState = setAsBaseState(eeprom.toParameters(eeprom.defaultEEPROM));
 
 export default function parameters(state = initialState, action) {
   const parameterName = action.parameter;
@@ -66,7 +59,7 @@ export default function parameters(state = initialState, action) {
         const missingData = defaultEEPROM.slice(eepromData.length, defaultEEPROM.length);
         eepromData = eepromData.concat(missingData);
       }
-      return setAsBaseState(addPreviewState(eeprom.toParameters(eepromData)));
+      return setAsBaseState(eeprom.toParameters(eepromData));
     }
     case POSITION:
       return state
