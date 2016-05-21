@@ -5,7 +5,7 @@
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "main": "main.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test babel-node node_modules/.bin/mocha --compilers js:babel-core/register --recursive --require ./test/setup.js test/**/*.spec.js",
+    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive --require ./test/setup.js test/**/*.spec.js",
     "test-ci": "cross-env NODE_ENV=test babel-node node_modules/.bin/babel-istanbul cover _mocha -- --recursive --reporter mocha-multi --reporter-options mocha-junit-reporter=test-results.xml,spec=- --require ./test/setup.js test/**/*.spec.js",
     "coveralls": "cross-env NODE_ENV=test istanbul-coveralls",
     "test-watch": "npm test -- --watch",
