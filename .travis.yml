@@ -1,32 +1,40 @@
-sudo: false
 language: node_js
-node_js:
-  - "4"
-  - "5"
+
+
+matrix:
+  include:
+    - os: linux
+      sudo: required
+      dist: trusty
+      node_js:
+        - "5.9.0"
+    - os: osx
+      osx_image: xcode7.3
+      node_js:
+        - "5.9.0"
 
 cache:
   directories:
-    - node_modules
+  - node_modules
+  - app/node_modules
+  - $HOME/.electron
 
 addons:
   apt:
-    sources:
-    - ubuntu-toolchain-r-test
     packages:
-    - g++-4.8
+      - libnotify4
+      - icnsutils
+      - graphicsmagick
+
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
 
 install:
-- export CXX="g++-4.8"
+- nvm install 5.9.0
 - npm install
-- "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
-
-before_script:
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start &
-- sleep 3
 
 script:
 - npm run lint
-- npm run test
-- npm run build
-- npm run test-e2e
+- npm run test-ci
+- npm run validate
+- if [[ "$TRAVIS_BRANCH" == "master" ]]; then npm run package ; fi
