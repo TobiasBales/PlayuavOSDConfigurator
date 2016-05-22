@@ -16,7 +16,7 @@ module.exports = {
     {
       test: /\.scss$/,
       loaders: ['style', 'css?modules', 'sass'],
-      include: path.resolve(__dirname, './node_modules'),
+      include: path.resolve(__dirname, './app/node_modules'),
     },
     {
       test: /\.node$/,
@@ -37,20 +37,24 @@ module.exports = {
   ]
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'app'),
     filename: 'bundle.js',
     libraryTarget: 'commonjs2'
   },
   resolve: {
+    root: [
+      path.resolve('./app/node_modules'),
+      path.resolve('.'),
+    ],
     extensions: ['', '.js', '.jsx', '.scss'],
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
   },
   plugins: [
-
   ],
   externals: [
     // put your node 3rd party libraries which can't be built
     // with webpack here (mysql, mongodb, and so on..)
-    'node_modules'
+    'node_modules',
+    'app/node_modules',
   ]
 };

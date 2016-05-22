@@ -1,0 +1,51 @@
+{
+  "name": "playuav-osd-configurator",
+  "productName": "PlayUAVOSDConfigurator",
+  "version": "0.2.0",
+  "description": "A simple cross platform tool to configure the PlayUAV OSD",
+  "main": "main.js",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TobiasBales/PlayuavOSDConfigurator/issues"
+  },
+  "author": {
+    "name": "Tobias Bales",
+    "email": "tobias.bales@gmail.com",
+    "url": "https://github.com/TobiasBales"
+  },
+  "dependencies": {
+    "atob": "^2.0.3",
+    "bluebird": "2.9.33",
+    "chokidar": "1.4.3",
+    "classnames": "2.2.3",
+    "crc-32": "0.4.0",
+    "extensible-polyfill": "1.0.1",
+    "flexboxgrid": "6.3.0",
+    "font-awesome": "4.4.0",
+    "immutable": "3.7.6",
+    "material-design-icons-iconfont": "2.0.5",
+    "normalize.css": "^4.1.1",
+    "react": "15.0.1",
+    "react-addons-css-transition-group": "15.0.1",
+    "react-dom": "15.0.1",
+    "react-immutable-proptypes": "1.7.0",
+    "react-redux": "4.4.2",
+    "react-router": "2.0.0",
+    "react-router-redux": "4.0.0",
+    "react-semantify": "0.4.1",
+    "react-tap-event-plugin": "1.0.0",
+    "react-toolbox": "0.16.2",
+    "redux": "3.2.1",
+    "redux-promise": "0.5.0",
+    "redux-thunk": "1.0.2",
+    "roboto-fontface": "0.4.5",
+    "serialport": "2.0.6",
+    "sleep": "3.0.1"
+  },
+  "devDependencies": {
+    "redux-devtools-dock-monitor": "1.1.1",
+    "redux-devtools-log-monitor": "1.0.11",
+    "redux-devtools": "3.2.0",
+    "redux-logger": "2.6.1"
+  }
+}

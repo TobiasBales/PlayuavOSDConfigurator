@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import fonts from '../../app/utils/fonts';
+import fonts from '../../src/utils/fonts';
 
 describe('fonts', () => {
   describe('small', () => {

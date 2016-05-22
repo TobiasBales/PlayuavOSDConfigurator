@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import preview from '../../app/preview/reducer';
-import { ALARM } from '../../app/preview/actions';
+import preview from '../../src/preview/reducer';
+import { ALARM } from '../../src/preview/actions';
 
 describe('reducers', () => {
   describe('preview', () => {

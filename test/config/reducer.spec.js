@@ -1,9 +1,9 @@
 import { expect } from 'chai';
-import config from '../../app/config/reducer';
+import config from '../../src/config/reducer';
 import {
   ALARM_ENABLED, ALARM_VALUE, BAUD_RATE, CHANNEL, FONT_SIZE, H_ALIGNMENT, MAX,
   MAX_PANELS, MIN, OFFSET, POSITION, VISIBLE_ON
-} from '../../app/config/actions';
+} from '../../src/config/actions';
 
 describe('reducers', () => {
   describe('config', () => {

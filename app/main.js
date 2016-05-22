@@ -16,8 +16,8 @@ const SerialPort = require('serialport');
 const ipc = electron.ipcMain;
 const chokidar = require('chokidar');
 const dialog = electron.dialog;
-const OSDInterface = require('./app/main/osd_interface');
-const menus = require('./app/main/menu');
+const OSDInterface = require('./osd_interface');
+const menus = require('./menu');
 const fs = require('fs');
 
 let mainWindow = null;
@@ -39,10 +39,10 @@ app.on('window-all-closed', () => {
 
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow({ width: 1024, height: 728, icon: 'app/app.png' });
+  mainWindow = new BrowserWindow({ width: 1024, height: 728, icon: './app.png' });
   mainWindow.maximize();
 
-  mainWindow.loadURL(`file://${__dirname}/app/app.html`);
+  mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   mainWindow.on('closed', () => {
     mainWindow = null;
