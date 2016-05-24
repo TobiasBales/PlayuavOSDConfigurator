@@ -5,6 +5,7 @@ A simple cross platform tool the playuav osd.
 
 [![Build Status](https://travis-ci.org/TobiasBales/PlayuavOSDConfigurator.svg?branch=master)](https://travis-ci.org/TobiasBales/PlayuavOSDConfigurator)
 [![Coverage Status](https://coveralls.io/repos/github/TobiasBales/PlayuavOSDConfigurator/badge.svg?branch=master)](https://coveralls.io/github/TobiasBales/PlayuavOSDConfigurator?branch=master)
+[![Code Climate](https://codeclimate.com/github/TobiasBales/PlayuavOSDConfigurator/badges/gpa.svg)](https://codeclimate.com/github/TobiasBales/PlayuavOSDConfigurator)
 
 ## What does it look like?
 ![](preview.png)
