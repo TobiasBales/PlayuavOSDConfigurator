@@ -13,12 +13,6 @@ matrix:
       node_js:
         - "5.9.0"
 
-cache:
-  directories:
-  - node_modules
-  - app/node_modules
-  - $HOME/.electron
-
 addons:
   apt:
     packages:
