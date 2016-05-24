@@ -3,7 +3,7 @@
 A simple cross platform tool the playuav osd.
 
 
-![build status](https://circleci.com/gh/TobiasBales/PlayuavOSDConfigurator.png?circle-token=48fc88939139fd5c29f96cfe25e14c412c2dd244&style=shield)
+[![Build Status](https://travis-ci.org/TobiasBales/PlayuavOSDConfigurator.svg?branch=master)](https://travis-ci.org/TobiasBales/PlayuavOSDConfigurator)
 [![Coverage Status](https://coveralls.io/repos/github/TobiasBales/PlayuavOSDConfigurator/badge.svg?branch=master)](https://coveralls.io/github/TobiasBales/PlayuavOSDConfigurator?branch=master)
 
 ## What does it look like?
