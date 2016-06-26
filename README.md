@@ -10,9 +10,9 @@ A simple cross platform tool the playuav osd.
 ## What does it look like?
 ![](preview.png)
 
-## Downloads
+## Releases
 
-Can be found under [releases](https://github.com/TobiasBales/PlayuavOSDConfigurator/releases)
+Can be found in the [chrome webstore](https://chrome.google.com/webstore/detail/playuav-osd-configurator/clledgfbcikcmblfhbkhjeoebioekcnb)
 
 ## Features
 
@@ -37,14 +37,13 @@ Helper to make new icons/characters
 ### Installing node
 The prefered way is using [ndenv](https://github.com/riywo/ndenv) and running node `5.9.0`
 
-### Building
 
-    npm install
-    npm run package
+### Development
+- `npm install`
+- `npm run dev`
+- enable [chrome extension developer mode](chrome://extensions/)
+- load unpacked extension from `./src`
 
-### Development server
-    npm run hot-server
-    npm run start-hot
 
 ### Commit messages, ci, linting etc
 - Commit messages should follow the [angular commit message format](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#format-of-the-commit-message)
