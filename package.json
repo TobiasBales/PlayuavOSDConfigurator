@@ -18,7 +18,7 @@
     "build": "webpack webpack.config.js",
     "coveralls": "cross-env NODE_ENV=test istanbul-coveralls",
     "dist": "PRODUCTION=1 webpack webpack.config.js",
-    "lint": "eslint src app/main.js app/menu.js app/osd_interface.js",
+    "lint": "eslint",
     "start": "webpack --watch webpack.config.js",
     "test-ci": "cross-env NODE_ENV=test babel-node node_modules/.bin/babel-istanbul cover _mocha -- --recursive --reporter mocha-multi --reporter-options mocha-junit-reporter=test-results.xml,spec=- --require ./test/setup.js test/**/*.spec.js",
     "test-e2e": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --require ./test/setup.js --require co-mocha ./test/e2e.js",
