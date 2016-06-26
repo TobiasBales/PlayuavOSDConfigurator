@@ -18,6 +18,7 @@ addons:
 
 install:
 - nvm install 5.9.0
+- npm prune
 - npm install
 
 script:
