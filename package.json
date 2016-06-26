@@ -27,9 +27,6 @@
     "validate": "npm ls"
   },
   "homepage": "https://github.com/TobiasBales/PlayuavOSDConfigurator#readme",
-  "bin": {
-    "electron": "./node_modules/.bin/electron"
-  },
   "build": {
     "app-bundle-id": "net.prettytandom.playuav-osd-configurator",
     "app-category-type": "public.app-category.productivity",
