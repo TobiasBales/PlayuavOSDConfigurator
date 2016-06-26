@@ -1,8 +1,3 @@
-!app/app.html
-!app/main.js
-!app/menu.js
-!app/osd_interface.js
-!app/package.json
 .DS_Store
 .grunt
 .jshintignore
@@ -11,15 +6,10 @@
 *.log
 *.pid
 *.seed
-# Logs
-app
-build/Release
+app/dist
 coverage
 default.conf
-dist
 lib-cov
 logs
 node_modules
-pids
-release
 test-results.xml

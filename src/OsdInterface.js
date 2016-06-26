@@ -1,8 +1,3 @@
-/* eslint strict: 0 */
-'use strict';
-
-const SerialPort = require('serialport');
-
 const code = {
   NOP: 0x00,
   OK: 0x10,
@@ -39,7 +34,9 @@ const VERSION = 1;
 
 class OSDInterface {
   constructor() {
-    this.buffer = new Buffer(0);
+    this.buffer = [];
+    chrome.serial.onReceive.addListener(this._onData);
+    chrome.serial.onReceiveError.addListener(this._onError);
   }
 
   readParameters(serialPort, progressCallback) {
@@ -49,7 +46,7 @@ class OSDInterface {
       .then(this._reportProgress.bind(this, progressCallback, 10))
       .then(this._readWithSyncOk.bind(this, 1024))
       .then(this._reportProgress.bind(this, progressCallback, 80))
-      .then(this._toUInt16LE.bind(this))
+      .then(this._toUInt16.bind(this))
       .then(this._reportProgress.bind(this, progressCallback, 100))
       .then(this._disconnect.bind(this));
   }
@@ -112,33 +109,21 @@ class OSDInterface {
   }
 
   _connect(serialPort) {
-    this.serialPort = new SerialPort.SerialPort(serialPort, { baudrate: 115200 });
-    this.serialPort.on('data', this._onData.bind(this));
-    this.serialPort.on('error', this._onError.bind(this));
+    this._serialPort = serialPort;
     this._info = {};
-    return this._promise((resolve, reject) => {
-      this.serialPort.on('open', (err) => {
-        if (err) {
-          return reject(err);
-        }
-
+    return this._promise((resolve) => {
+      chrome.serial.connect(this._serialPort, { bitrate: 115200 }, (connectionInfo) => {
+        this._connectionId = connectionInfo.connectionId;
         resolve();
       });
     });
   }
 
   _disconnect(...parameters) {
-    return this._promise((resolve, reject) => {
-      if (this.serialPort.isOpen()) {
-        this.serialPort.close((err) => {
-          if (err) {
-            return reject(err);
-          }
-          return resolve(...parameters);
-        });
-      } else {
-        reject('Trying to close closed port');
-      }
+    return this._promise((resolve) => {
+      chrome.serial.disconnect(this._connectionId, () => {
+        return resolve(...parameters);
+      });
     });
   }
 
@@ -256,30 +241,23 @@ class OSDInterface {
     });
   }
 
-  _toUint8(data) {
+  _toUInt16(data) {
     return this._promise((resolve) => {
-      const result = [];
-      for (let offset = 0; offset < data.length; offset++) {
-        result.push(data.readUInt8(offset, false));
-      }
-
-      resolve(result);
-    });
-  }
-
-  _toUInt16LE(data) {
-    return this._promise((resolve) => {
-      const result = [];
-      for (let offset = 0; offset < data.length - 2; offset += 2) {
-        result.push(data.readUInt16LE(offset, false));
-      }
+      const uint8 = Uint8Array.from(data);
+      const uint16 = new Uint16Array(uint8.buffer);
+      const result = Array.from(uint16);
 
       resolve(result);
     });
   }
 
   _flush() {
-    this.buffer = new Buffer(0);
+    this.buffer = [];
+    return this._promise((resolve) => {
+      chrome.serial.flush(this._connectionId, () => {
+        resolve();
+      });
+    });
   }
 
   _read(bytes) {
@@ -288,15 +266,14 @@ class OSDInterface {
 
       const retry = () => {
         if (this.buffer.length >= bytes) {
-          const result = new Buffer(bytes);
-          this.buffer.copy(result, 0, 0, bytes);
+          const result = this.buffer.slice(0, bytes);
           this.buffer = this.buffer.slice(bytes, this.buffer.length);
           return resolve(result);
         }
 
-        if (!this.serialPort.isOpen()) {
-          return reject('serial port was closed while waiting to read data', null);
-        }
+        // if (!this.serialPort.isOpen()) {
+        //   return reject('serial port was closed while waiting to read data', null);
+        // }
 
         if (count >= 100) {
           return reject(`waited to long (1s) to read ${bytes} bytes`, null);
@@ -311,26 +288,16 @@ class OSDInterface {
   }
 
   _write(...data) {
-    return this._promise((resolve, reject) => {
-      this._flush();
-      this.serialPort.write(data, (err) => {
-        if (err) {
-          return reject(err);
+    return this._promise((resolve) => {
+      this._flush().then(() => {
+        const arrayBuffer = new ArrayBuffer((data.length));
+        const bytes = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < data.length; i++) {
+          bytes[i] = data[i];
         }
-
-        resolve();
-      });
-    }).then(this._drain.bind(this));
-  }
-
-  _drain() {
-    return this._promise((resolve, reject) => {
-      this.serialPort.drain((err) => {
-        if (err) {
-          return reject(err);
-        }
-
-        resolve();
+        chrome.serial.send(this._connectionId, arrayBuffer, () => {
+          resolve();
+        });
       });
     });
   }
@@ -366,22 +333,21 @@ class OSDInterface {
   _getInfo(info) {
     return this._write(code.GET_DEVICE, info, code.EOC)
       .then(this._readWithSyncOk.bind(this, 4))
-      .then(this._toUint8.bind(this))
       .then(this._storeInfo.bind(this, info));
   }
 
   _getVersion() {
     return this._write(code.GET_DEVICE, code.INFO_OSD_REV, code.EOC)
       .then(this._readWithSyncOk.bind(this, 1))
-      .then(this._toUint8.bind(this))
       .then(this._first.bind(this));
   }
 
-  _onData(data) {
-    this.buffer = Buffer.concat([this.buffer, data], this.buffer.length + data.length);
+  _onData = (info) => {
+    const data = new Uint8Array(info.data);
+    this.buffer = this.buffer.concat(Array.from(data));
   }
 
-  _onError(err) {
+  _onError = (err) => {
     if (err) {
       throw new Error(err);
     }

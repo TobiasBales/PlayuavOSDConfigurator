@@ -1,11 +1,13 @@
+/* eslint no-param-reassign: ["error", { props: false }] */
 import React, { Component, PropTypes } from 'react';
 import { Card, CardText } from 'react-toolbox/lib/card';
-import { ipcRenderer as ipc } from 'electron';
+import OsdInterface from '../OsdInterface';
 import actions from './actions';
 import { bindActionCreators } from 'redux';
 import Button from 'react-toolbox/lib/button';
 import { connect } from 'react-redux';
 import Column from '../components/Column';
+import pako from 'pako';
 import Dropdown from 'react-toolbox/lib/dropdown';
 import eeprom from '../utils/eeprom';
 import ImmutablePropTypes from 'react-immutable-proptypes';
@@ -24,17 +26,9 @@ class Sidebar extends Component {
 
   constructor(props) {
     super(props);
-    ipc.on('serial-ports', this._onSerialPortsReceived);
-    ipc.on('osd-config', this._onOSDConfigReceived);
-    ipc.on('osd-config-written', this._onOSDConfigWritten);
-    ipc.on('osd-file-written', this._onConfigFileWritten);
-    ipc.on('osd-file-read', this._onConfigFileRead);
-    ipc.on('firmware-uploading', this._onFirmwareUploading);
-    ipc.on('firmware-uploaded', this._onFirmwareUploaded);
-    ipc.on('error', this._onError);
-    ipc.on('progress', this._onProgress);
-    ipc.send('get-serial-ports');
-    ipc.send('load-default-config');
+    this._osdInterface = new OsdInterface();
+    this._updateSerialPorts();
+    this._loadDefaultConfig();
 
     this.state = {
       serialPorts: [],
@@ -48,29 +42,40 @@ class Sidebar extends Component {
     };
   }
 
+  _loadDefaultConfig() {
+  }
 
-  _onError = (e, error) => {
+  _updateSerialPorts = () => {
+    chrome.serial.getDevices(this._onSerialPortsReceived);
+    setTimeout(this._updateSerialPorts, 1000);
+  }
+
+  _onError = (error) => {
     this.props.showError(error);
-    this.setState({ ...this.state,
-      readingOSD: false, writingOSD: false, uploading: false, progress: 0
+    this.setState({
+      ...this.state,
+      readingOSD: false,
+      writingOSD: false,
+      uploading: false,
+      progress: 0
     });
   }
 
-  _onProgress = (_, progress) => {
+  _onProgress = (progress) => {
     this.setState({ ...this.state, progress });
   }
 
-  _onSerialPortsReceived = (_, serialPorts) => {
+  _onSerialPortsReceived = (serialPorts) => {
     let serialPort = this.state.serialPort;
     if (serialPorts.length === 0) {
       serialPort = null;
-    } else if (serialPorts.indexOf(serialPort) < 0) {
-      serialPort = serialPorts[0].comName;
+    } else if (serialPorts.map((s) => s.path).indexOf(serialPort) < 0) {
+      serialPort = serialPorts[0].path;
     }
     this.setState({ ...this.state, serialPorts, serialPort });
   }
 
-  _onOSDConfigReceived = (_, eepromData) => {
+  _onOSDConfigReceived = (eepromData) => {
     this.setState({ ...this.state, readingOSD: false, progress: 0 });
     this.props.setParamsFromEEPROM(eepromData);
     this.props.showInfo('finished reading osd configuration');
@@ -86,18 +91,13 @@ class Sidebar extends Component {
     this.props.showInfo('wrote configuration to file');
   }
 
-  _onConfigFileRead = (_, eepromData, wasDefaultFile = false) => {
+  _onConfigFileRead = (eepromData, wasDefaultFile = false) => {
     this.props.setParamsFromEEPROM(eepromData);
     if (wasDefaultFile) {
       this.props.showInfo('read default configuration from default.conf');
     } else {
       this.props.showInfo('read configuration from file');
     }
-  }
-
-  _onFirmwareUploading = () => {
-    this.setState({ ...this.state, uploading: true, progress: 0 });
-    this.props.showInfo('uploading firmware');
   }
 
   _onFirmwareUploaded = () => {
@@ -112,34 +112,145 @@ class Sidebar extends Component {
   _readFromOSD = () => {
     this.props.showInfo('reading osd configuration');
     this.setState({ ...this.state, readingOSD: true });
-    ipc.send('read-osd', this.state.serialPort);
+    this._osdInterface
+      .readParameters(this.state.serialPort, this._onProgress)
+      .then(this._onOSDConfigReceived, this._onError);
   }
 
   _writeToOSD = () => {
     this.props.showInfo('writing osd configuration');
     this.setState({ ...this.state, writingOSD: true });
-    ipc.send('write-osd', this.state.serialPort, eeprom.fromParameters(this.props.parameters));
+    const data = eeprom.fromParameters(this.props.parameters);
+    this._osdInterface
+      .writeParameters(this.state.serialPort, data, this._onProgress)
+      .then(this._onOSDConfigWritten, this._onError);
   }
 
   _writeToFile = () => {
-    ipc.send('write-file', eeprom.fromParameters(this.props.parameters));
+    chrome.fileSystem.chooseEntry({
+      type: 'saveFile',
+      suggestedName: 'playuav.conf',
+      accepts: [{
+        description: 'configuration files',
+        mimeTypes: ['application/json'],
+        extensions: ['conf']
+      }],
+      acceptsAllTypes: false,
+      acceptsMultiple: false,
+    }, (entry) => {
+      if (chrome.runtime.lastError) {
+        this._onError(chrome.runtime.lastError.message);
+        chrome.runtime.lastError = undefined;
+        return;
+      }
+
+      if (!entry) {
+        return;
+      }
+
+      entry.createWriter((writer) => {
+        writer.onerror = this._onError;
+        writer.onwriteend = () => {
+          this._onConfigFileWritten();
+        };
+
+        const data = JSON.stringify(eeprom.fromParameters(this.props.parameters));
+        const blob = new Blob([data], { type: 'application/json' });
+
+        writer.write(blob);
+      }, this._onError);
+    });
   }
 
   _readFile = () => {
-    ipc.send('read-file');
+    chrome.fileSystem.chooseEntry({
+      type: 'openFile',
+      suggestedName: 'playuav.conf',
+      accepts: [{
+        description: 'configuration files',
+        mimeTypes: ['application/json'],
+        extensions: ['conf']
+      }],
+      acceptsAllTypes: false,
+      acceptsMultiple: false,
+    }, (entry) => {
+      if (chrome.runtime.lastError) {
+        this._onError(chrome.runtime.lastError.message);
+        chrome.runtime.lastError = undefined;
+        return;
+      }
+
+      if (!entry) {
+        return;
+      }
+
+      entry.file((file) => {
+        const reader = new FileReader();
+        reader.onerror = this._onError;
+        reader.onloadend = () => {
+          const data = JSON.parse(reader.result);
+          this._onConfigFileRead(data, false);
+        };
+        reader.readAsText(file);
+      });
+    });
   }
 
   _uploadFirmware = () => {
-    ipc.send('upload-firmware', this.state.serialPort);
+    this.setState({ ...this.state, uploading: true, progress: 0 });
+    this.props.showInfo('uploading firmware');
+
+    chrome.fileSystem.chooseEntry({
+      type: 'openFile',
+      suggestedName: 'playuav.hex',
+      accepts: [{
+        description: 'hex files',
+        mimeTypes: ['application/json'],
+        extensions: ['hex']
+      }],
+      acceptsAllTypes: false,
+      acceptsMultiple: false,
+    }, (entry) => {
+      if (chrome.runtime.lastError) {
+        this._onError(chrome.runtime.lastError.message);
+        chrome.runtime.lastError = undefined;
+        return;
+      }
+
+      if (!entry) {
+        return;
+      }
+
+      entry.file((file) => {
+        const reader = new FileReader();
+        reader.onerror = this._onError;
+        reader.onloadend = () => {
+          const firmware = JSON.parse(reader.result);
+          const binary = atob(firmware.image);
+          const buffer = new Buffer(firmware.image.length);
+          for (let i = 0; i < buffer.length; i++) {
+            buffer[i] = binary.charCodeAt(i);
+          }
+          firmware.imagebytes = pako.inflate(buffer);
+          this.setState({ ...this.state, uploading: true, progress: 0 });
+          this.props.showInfo('uploading firmware');
+
+          this._osdInterface.uploadFirmware(
+            this.state.serialPort,
+            firmware,
+            this._onProgress
+          )
+          .then(this._onFirmwareUploaded)
+          .catch(this._onError);
+        };
+        reader.readAsText(file);
+      });
+    });
   }
 
   _loadDefaults = () => {
     this.props.setParamsFromEEPROM(eeprom.defaultEEPROM);
     this.props.showInfo('loaded default osd configuration');
-  }
-
-  _refreshSerialPorts() {
-    ipc.send('get-serial-ports');
   }
 
   _renderReadOSDButton() {
@@ -197,7 +308,7 @@ class Sidebar extends Component {
 
   _renderSerialPortDropdown() {
     const serialPorts = this.state.serialPorts.map((port) => ({
-      value: port.comName, label: port.comName
+      value: port.path, label: port.path
     }));
 
     return (

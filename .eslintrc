@@ -3,14 +3,16 @@
   "extends": "airbnb",
   "env": {
     "browser": true,
-    "node": true
+  },
+  "globals": {
+    "chrome": false
   },
   "rules": {
-    "react/jsx-no-bind": 0,
-
+    "arrow-body-style": 0,
     "comma-dangle": 0,
+    "consistent-return": 0,
     "no-use-before-define": 0,
-    "consistent-return": 0
+    "react/jsx-no-bind": 0
   },
   "plugins": [
     "react"
