@@ -8,10 +8,6 @@ matrix:
       dist: trusty
       node_js:
         - "5.9.0"
-    - os: osx
-      osx_image: xcode7.3
-      node_js:
-        - "5.9.0"
 
 addons:
   apt:
@@ -19,9 +15,6 @@ addons:
       - libnotify4
       - icnsutils
       - graphicsmagick
-
-before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
 
 install:
 - nvm install 5.9.0
@@ -31,4 +24,3 @@ script:
 - npm run lint
 - npm run test-ci
 - npm run validate
-- if [[ "$TRAVIS_BRANCH" == "master" ]]; then npm run package ; fi
