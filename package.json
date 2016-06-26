@@ -89,7 +89,6 @@
     "roboto-fontface": "0.4.5"
   },
   "devDependencies": {
-    "asar": "0.10.0",
     "babel-cli": "6.9.0",
     "babel-core": "6.9.0",
     "babel-eslint": "6.0.2",
@@ -107,12 +106,10 @@
     "chai-immutable": "1.5.4",
     "chromedriver": "2.19.0",
     "co-mocha": "1.1.2",
-    "concurrently": "2.0.0",
     "coveralls": "2.11.9",
     "cross-env": "1.0.7",
     "css-loader": "0.23.1",
     "css-modules-require-hook": "3.0.0",
-    "del": "2.0.2",
     "eslint": "~2.7.0",
     "eslint-config-airbnb": "6.0.2",
     "eslint-plugin-immutable": "git+https://github.com/jhusain/eslint-plugin-immutable.git",
