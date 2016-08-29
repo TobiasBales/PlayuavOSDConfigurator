@@ -374,7 +374,7 @@ const eepromMapping = [
 ];
 
 const skeletonParameters = {
-  alarm: {},
+  alarms: {},
   altitudeAbsolute: {},
   relativeAltitude: {},
   altitudeScale: {},

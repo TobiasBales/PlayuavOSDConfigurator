@@ -25,11 +25,11 @@ export const V_ALIGNMENT = 'parameters/v_alignment';
 export const VALUE = 'parameters/value';
 export const VISIBLE_ON = 'parameters/visible_on';
 
-function setAlarmEnabled(parameter, alarm, enabled) {
+function setAlarmEnabled(alarm, enabled) {
   return { type: ALARM_ENABLED, parameter: 'alarms', payload: { alarm, enabled } };
 }
 
-function setAlarmValue(parameter, alarm, value) {
+function setAlarmValue(alarm, value) {
   return { type: ALARM_VALUE, parameter: 'alarms', payload: { alarm, value } };
 }
 
