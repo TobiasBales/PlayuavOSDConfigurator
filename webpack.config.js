@@ -54,6 +54,8 @@ module.exports = {
       loaders: ['babel-loader'],
       exclude: /node_modules/
     }, {
+      test: /\.tsx?$/, loader: 'ts-loader'
+    }, {
       test: /\.json$/,
       loader: 'json-loader'
     }, {
@@ -91,6 +93,9 @@ module.exports = {
     }
   ]
   },
+  preLoaders: [
+      { test: /\.js$/, loader: 'source-map-loader' }
+  ],
   output: {
     path: path.join(__dirname, 'app', 'dist'),
     filename: '[name].js',
@@ -98,7 +103,7 @@ module.exports = {
     publicPath: './dist/',
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.scss'],
+    extensions: ['', '.js', '.jsx', '.tsx', '.ts', '.scss'],
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
   },
   node: {

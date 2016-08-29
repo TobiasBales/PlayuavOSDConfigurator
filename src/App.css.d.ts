@@ -1,0 +1,1 @@
+export const mainContent: string;

@@ -1,11 +1,11 @@
+*.log
+*.pid
+*.seed
 .DS_Store
 .grunt
 .jshintignore
 .jshintrc
 .lock-wscript
-*.log
-*.pid
-*.seed
 app/dist
 coverage
 default.conf
@@ -13,3 +13,4 @@ lib-cov
 logs
 node_modules
 test-results.xml
+typings
