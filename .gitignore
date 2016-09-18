@@ -13,3 +13,4 @@ lib-cov
 logs
 node_modules
 test-results.xml
+0.*.zip
