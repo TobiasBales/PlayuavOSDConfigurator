@@ -18,7 +18,7 @@ const defaultEEPROM = [
   0, 2, 0, 1, 4, 120, 1, 0, 0, 1, 2, 5, 25, 0, 0, 1, 1, 2, 5, 55,
   0, 0, 0, 1, 7, 1, 1, 1, 350, 200, 0, 2, 1, 1,
   0, 0, 200, 220, 0, 0, 5, 1000, 2000, 0, 0, 0, 200, 200,
-  1, 1, 15, 15, 1, 1, 184, 240, 0, 0, 1, 1, 264, 240, 0, 0,
+  1, 1, 15, 15, 1, 1, 184, 240, 0, 0, 1, 1, 264, 240, 0, 0, 0, 0, 0, 0, 0, 0,
 ];
 
 function toEnabled(byte) {
@@ -371,6 +371,13 @@ const eepromMapping = [
   { path: ['homeLongitude', 'positionY'] },
   { path: ['homeLongitude', 'fontSize'] },
   { path: ['homeLongitude', 'hAlignment'] },
+  { path: ['watt', 'visibleOn'],
+    convertFromParameters: toEnabled },
+  { path: ['watt', 'visibleOn'] },
+  { path: ['watt', 'positionX'] },
+  { path: ['watt', 'positionY'] },
+  { path: ['watt', 'fontSize'] },
+  { path: ['watt', 'hAlignment'] },
 ];
 
 const skeletonParameters = {
@@ -416,6 +423,7 @@ const skeletonParameters = {
   time: {},
   totalTrip: {},
   video: {},
+  watt: {},
   wind: {},
   wpDistance: {},
 };

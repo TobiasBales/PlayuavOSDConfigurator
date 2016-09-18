@@ -155,6 +155,10 @@ class ParametersModule extends Component {
             parameters={this._props('efficiency')}
             {...this._actions()}
           />
+          <Settings.Watt
+            parameters={this._props('watt')}
+            {...this._actions()}
+          />
         </Tab>
         <Tab label="Flight controller">
           <Settings.Time

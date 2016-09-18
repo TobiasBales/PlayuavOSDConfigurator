@@ -21,7 +21,7 @@ function Preview(props) {
     flightMode, linkQuality, homeLatitude, homeLongitude, gpsHdop, gpsLatitude, gpsLongitude,
     gpsStatus, gps2Hdop, gps2Latitude, gps2Longitude, gps2Status, homeDirection, homeDistance,
     radar, relativeAltitude, rssi, speedAir, speedScale, speedGround, throttle, time,
-    totalTrip, varioGraph, wpDistance, wind,
+    totalTrip, varioGraph, watt, wpDistance, wind,
   } = props.parameters;
   const units = props.parameters.get('video').get('units');
   const videoMode = props.parameters.get('video').get('videoMode');
@@ -124,7 +124,7 @@ function Preview(props) {
             setPosition={setPosition('compass')}
           />
           <Previews.Efficiency {...efficiency.toJS()} {...fcStatus}
-            units={units} setPosition={setPosition('compass')}
+            units={units} setPosition={setPosition('efficiency')}
           />
           <Previews.FlightMode {...flightMode.toJS()} {...fcStatus}
             setPosition={setPosition('flightMode')}
@@ -197,6 +197,9 @@ function Preview(props) {
           />
           <Previews.VarioGraph {...varioGraph.toJS()} {...fcStatus}
             setPosition={setPosition('varioGraph')}
+          />
+          <Previews.Watt {...watt.toJS()} {...fcStatus}
+            setPosition={setPosition('watt')}
           />
           <Previews.WpDistance {...wpDistance.toJS()} {...fcStatus}
             units={units} setPosition={setPosition('wpDistance')}

@@ -39,6 +39,7 @@ import Time from './Time';
 import TotalTrip from './TotalTrip';
 import VarioGraph from './VarioGraph';
 import Video from './Video';
+import Watt from './Watt';
 import Wind from './Wind';
 import WPDistance from './WPDistance';
 
@@ -84,6 +85,7 @@ export default {
   TotalTrip,
   VarioGraph,
   Video,
+  Watt,
   Wind,
   WPDistance,
 };

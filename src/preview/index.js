@@ -30,6 +30,7 @@ import Throttle from './Throttle';
 import Time from './Time';
 import TotalTrip from './TotalTrip';
 import VarioGraph from './VarioGraph';
+import Watt from './Watt';
 import Wind from './Wind';
 import WpDistance from './WpDistance';
 
@@ -66,6 +67,7 @@ export default {
   Time,
   TotalTrip,
   VarioGraph,
+  Watt,
   Wind,
   WpDistance,
 };
