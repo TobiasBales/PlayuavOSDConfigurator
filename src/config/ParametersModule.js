@@ -79,6 +79,10 @@ class ParametersModule extends Component {
             parameters={this._props('batteryRemaining')}
             {...this._actions()}
           />
+          <Settings.Watt
+            parameters={this._props('watt')}
+            {...this._actions()}
+          />
         </Tab>
         <Tab label="position">
           <Settings.AbsoluteAltitude
@@ -153,10 +157,6 @@ class ParametersModule extends Component {
           />
           <Settings.Efficiency
             parameters={this._props('efficiency')}
-            {...this._actions()}
-          />
-          <Settings.Watt
-            parameters={this._props('watt')}
             {...this._actions()}
           />
         </Tab>
