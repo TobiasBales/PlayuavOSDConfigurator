@@ -374,6 +374,15 @@ class Sidebar extends Component {
           <Button onClick={this._readFile} label="read from file" icon="folder_open" raised />
           <br />
           <br />
+          <br />
+          <a
+            href="https://circleci.com/api/v1/project/TobiasBales/PlayuavOSD/latest/artifacts/0/$CIRCLE_ARTIFACTS/PlayuavOSD.hex?branch=master&filter=successful"
+            target="_blank"
+          >
+            Download latest firmware
+          </a>
+          <br />
+          <br />
           <Label text={version} />
         </CardText>
       </Card>
