@@ -9,6 +9,8 @@ const OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin'
 const path = require('path');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
+const fs = require('fs');
+const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, 'app', 'manifest.json')));
 
 const production = Boolean(process.env.PRODUCTION);
 
@@ -19,7 +21,8 @@ const plugins = production ?
     __DEV__: false,
     'process.env': {
       NODE_ENV: JSON.stringify('production')
-    }
+    },
+    VERSION: JSON.stringify(manifest.version),
   }),
   new UglifyJsPlugin({
     compressor: {
@@ -37,7 +40,8 @@ const plugins = production ?
     __DEV__: true,
     'process.env': {
       NODE_ENV: JSON.stringify('development')
-    }
+    },
+    VERSION: JSON.stringify(manifest.version),
   })
 ];
 

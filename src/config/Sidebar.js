@@ -348,6 +348,8 @@ class Sidebar extends Component {
       serialPortSelector = this._renderNoSerialPorts();
     }
 
+    const version = `config tool version: ${VERSION}`;
+
     return (
       <Card className="connection">
         <CardText>
@@ -370,6 +372,9 @@ class Sidebar extends Component {
           <br />
           <Button onClick={this._writeToFile} label="save to file" icon="save" raised />
           <Button onClick={this._readFile} label="read from file" icon="folder_open" raised />
+          <br />
+          <br />
+          <Label text={version} />
         </CardText>
       </Card>
     );
