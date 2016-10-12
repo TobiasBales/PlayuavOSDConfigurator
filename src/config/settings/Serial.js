@@ -9,7 +9,6 @@ export default class Serial extends Component {
     parameters: ImmutablePropTypes.contains({
       baudRate: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       fcType: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
-      version: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setBaudRate: PropTypes.func.isRequired,
     setFcType: PropTypes.func.isRequired,
@@ -20,7 +19,7 @@ export default class Serial extends Component {
   }
 
   render() {
-    const { baudRate, fcType, version, } = this.props.parameters;
+    const { baudRate, fcType, } = this.props.parameters;
     const { setBaudRate, setFcType } = this.props;
     const fcTypeOptions = [
       { value: 0, label: 'apm/pixhawk' }, { value: 1, label: 'cc3d/revo' }
@@ -44,9 +43,6 @@ export default class Serial extends Component {
           <Parameters.Select label="baud rate" options={baudRateOptions}
             setValue={setBaudRate} value={baudRate}
           />
-        </Column>
-        <Column width={50} >
-          <Parameters.Text text={version.get('value')} label="version" />
         </Column>
       </Parameters.ParameterList>
     );
