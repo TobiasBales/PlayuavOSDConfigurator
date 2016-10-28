@@ -3,6 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Parameters from '../parameters';
 import Column from '../../components/Column';
 import CustomPropTypes from '../../utils/PropTypes';
+import Input from '../../components/Input';
 
 export default class Serial extends Component {
   static propTypes = {
@@ -13,12 +14,19 @@ export default class Serial extends Component {
     }).isRequired,
     setBaudRate: PropTypes.func.isRequired,
     setFcType: PropTypes.func.isRequired,
+    setSerialValue: PropTypes.func.isRequired,
   }
 
   shouldComponentUpdate(nextProps) {
     return !this.props.parameters.equals(nextProps.parameters);
   }
-
+  
+  _setValue(serial) {
+    return (value) => {
+      this.props.setSerialValue(serial, parseInt(value, 10));
+    };
+  }
+  
   render() {
     const { baudRate, fcType, splashMillisecondsToShowValue } = this.props.parameters;
     const { setBaudRate, setFcType } = this.props;
@@ -48,7 +56,7 @@ export default class Serial extends Component {
         </Column>
 
         <Column width={100} >
-          <Input type="number" label="Milliseconds to show PlayUAVOSD Version Splash Screen on startup"
+          <Input type="number" label="Milliseconds to show version dialog on startup"
             onChange={this._setValue('splashMillisecondsToShow')} value={splashMillisecondsToShowValue}
           />
         </Column>
