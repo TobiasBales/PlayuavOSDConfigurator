@@ -40,7 +40,7 @@ The prefered way is using [ndenv](https://github.com/riywo/ndenv) and running no
 
 ### Development
 - `npm install`
-- `npm run dev`
+- `npm start`
 - enable [chrome extension developer mode](chrome://extensions/)
 - load unpacked extension from `./src`
 
