@@ -23,6 +23,7 @@ export default class Alarms extends Component {
       underAltValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       overAltEnabled: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
       overAltValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      alarmMillisecondsToShowValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
     }).isRequired,
     setAlarmEnabled: PropTypes.func.isRequired,
     setAlarmValue: PropTypes.func.isRequired,
@@ -53,7 +54,7 @@ export default class Alarms extends Component {
       fontSize, hAlignment, positionX, positionY, gpsStatusEnabled,
       lowBatteryEnabled, lowBatteryValue, underSpeedEnabled, underSpeedValue,
       overSpeedEnabled, overSpeedValue, underAltEnabled, underAltValue,
-      overAltEnabled, overAltValue,
+      overAltEnabled, overAltValue, alarmMillisecondsToShowValue
     } = this.props.parameters;
     const options = [
       { value: 0, label: 'disabled' }, { value: 1, label: 'enabled' }
@@ -127,6 +128,13 @@ export default class Alarms extends Component {
             setValue={this._setEnabled('gpsStatus')} value={gpsStatusEnabled}
           />
         </Column>
+        
+        <Column width={100} >
+          <Input type="number" label="Milliseconds to show each alarm"
+            onChange={this._setValue('alarmMillisecondsToShow')} value={alarmMillisecondsToShowValue}
+          />
+        </Column>
+                     
       </Parameters.ParameterList>
     );
   }
