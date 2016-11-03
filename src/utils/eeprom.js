@@ -19,6 +19,7 @@ const defaultEEPROM = [
   0, 0, 0, 1, 7, 1, 1, 1, 350, 200, 0, 2, 1, 1,
   0, 0, 200, 220, 0, 0, 5, 1000, 2000, 0, 0, 0, 200, 200,
   1, 1, 15, 15, 1, 1, 184, 240, 0, 0, 1, 1, 264, 240, 0, 0, 0, 0, 0, 0, 0, 0,
+  5000, 1000
 ];
 
 function toEnabled(byte) {
@@ -378,6 +379,10 @@ const eepromMapping = [
   { path: ['watt', 'positionY'] },
   { path: ['watt', 'fontSize'] },
   { path: ['watt', 'hAlignment'] },
+  
+  { path: ['serial', 'splashMillisecondsToShowValue'] },  
+  { path: ['alarms', 'alarmMillisecondsToShowValue'] }
+  
 ];
 
 const skeletonParameters = {
