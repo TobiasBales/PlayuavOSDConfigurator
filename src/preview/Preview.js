@@ -18,7 +18,7 @@ function Preview(props) {
   const {
     absoluteAltitude, alarms, altitudeScale, armState, artificialHorizont, batteryConsumed,
     batteryCurrent, batteryRemaining, batteryVoltage, climbRate, compass, efficiency,
-    flightMode, linkQuality, homeLatitude, homeLongitude, gpsHdop, gpsLatitude, gpsLongitude,
+    flightMode, linkQuality, rcChannels, homeLatitude, homeLongitude, gpsHdop, gpsLatitude, gpsLongitude,
     gpsStatus, gps2Hdop, gps2Latitude, gps2Longitude, gps2Status, homeDirection, homeDistance,
     radar, relativeAltitude, rssi, speedAir, speedScale, speedGround, throttle, time,
     totalTrip, varioGraph, watt, wpDistance, wind,
@@ -164,6 +164,9 @@ function Preview(props) {
           />
           <Previews.HomeDistance {...homeDistance.toJS()} {...fcStatus}
             units={units} setPosition={setPosition('homeDistance')}
+          />
+          <Previews.RCChannels {...rcChannels.toJS()} {...fcStatus}
+            setPosition={setPosition('rcChannels')}
           />
           <Previews.LinkQuality {...linkQuality.toJS()} {...fcStatus}
             setPosition={setPosition('linkQuality')}
