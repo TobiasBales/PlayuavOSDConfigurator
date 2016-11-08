@@ -4,9 +4,6 @@ import Canvas from '../utils/Canvas';
 import PreviewBase from './PreviewBase';
 import fonts from '../utils/fonts';
 
-
-// This is just the throttle preview at the moment! Needs to be
-// customized for the RC Channels control
 export default class RCChannelsPreview extends PreviewBase {
   static propTypes = {
     panel: PropTypes.number.isRequired,
