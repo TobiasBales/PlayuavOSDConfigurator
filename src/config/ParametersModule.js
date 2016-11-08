@@ -185,6 +185,10 @@ class ParametersModule extends Component {
             parameters={this._props('linkQuality')}
             {...this._actions()}
           />
+          <Settings.RCChannels
+            parameters={this._props('rcChannels')}
+            {...this._actions()}
+          />
           <Settings.WPDistance
             parameters={this._props('wpDistance')}
             {...this._actions()}

@@ -20,6 +20,7 @@ import GpsStatus from './GpsStatus';
 import HomeDirection from './HomeDirection';
 import HomeDistance from './HomeDistance';
 import LinkQuality from './LinkQuality';
+import RCChannels from './RCChannels';
 import Radar from './Radar';
 import RelativeAltitude from './RelativeAltitude';
 import Rssi from './Rssi';
@@ -57,6 +58,7 @@ export default {
   HomeDirection,
   HomeDistance,
   LinkQuality,
+  RCChannels,
   Radar,
   RelativeAltitude,
   Rssi,
