@@ -4,7 +4,7 @@ import Parameters from '../parameters';
 import Column from '../../components/Column';
 import CustomPropTypes from '../../utils/PropTypes';
 
-export default class ArtificialHorizont extends Component {
+export default class ArtificialHorizon extends Component {
   static propTypes = {
     parameters: ImmutablePropTypes.contains({
       numberOfPanels: PropTypes.number.isRequired,
@@ -25,7 +25,7 @@ export default class ArtificialHorizont extends Component {
   }
 
   _setType = (type) => {
-    this.props.setType('artificialHorizont', type);
+    this.props.setType('artificialHorizon', type);
   }
 
   render() {
@@ -46,19 +46,19 @@ export default class ArtificialHorizont extends Component {
     const typeOptions = [{ value: 0, label: 'mission planner' }, { value: 1, label: 'simple ' }];
 
     return (
-      <Parameters.ParameterList name="artifical horizont">
-        <Parameters.Position labelX="position x" labelY="position y" name="artificialHorizont"
+      <Parameters.ParameterList name="artificial horizon">
+        <Parameters.Position labelX="position x" labelY="position y" name="artificialHorizon"
           positionX={positionX} positionY={positionY} setPosition={setPosition}
         />
         <Column width={50}>
-          <Parameters.Scale name="artificialHorizont" setScale={setScale} scale={scale} />
+          <Parameters.Scale name="artificialHorizon" setScale={setScale} scale={scale} />
         </Column>
         <Column width={50}>
           <Parameters.Select label="type" setValue={this._setType}
             options={typeOptions} value={type}
           />
         </Column>
-        <Parameters.VisibleOn visibleOn={visibleOn} name="artificialHorizont"
+        <Parameters.VisibleOn visibleOn={visibleOn} name="artificialHorizon"
           setVisibleOn={setVisibleOn} numberOfPanels={numberOfPanels}
         />
       </Parameters.ParameterList>

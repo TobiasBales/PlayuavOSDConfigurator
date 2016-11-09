@@ -135,8 +135,8 @@ class ParametersModule extends Component {
             parameters={this._props('totalTrip')}
             {...this._actions()}
           />
-          <Settings.ArtificialHorizont
-            parameters={this._props('artificialHorizont')}
+          <Settings.ArtificialHorizon
+            parameters={this._props('artificialHorizon')}
             {...this._actions()}
           />
           <Settings.Attitude3d
