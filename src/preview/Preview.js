@@ -16,7 +16,7 @@ import Previews from '.';
 function Preview(props) {
   const { alarm, panel } = props;
   const {
-    absoluteAltitude, alarms, altitudeScale, armState, artificialHorizont, batteryConsumed,
+    absoluteAltitude, alarms, altitudeScale, armState, artificialHorizon, batteryConsumed,
     batteryCurrent, batteryRemaining, batteryVoltage, climbRate, compass, efficiency,
     flightMode, linkQuality, rcChannels, homeLatitude, homeLongitude, gpsHdop, gpsLatitude, gpsLongitude,
     gpsStatus, gps2Hdop, gps2Latitude, gps2Longitude, gps2Status, homeDirection, homeDistance,
@@ -102,8 +102,8 @@ function Preview(props) {
           <Previews.ArmState {...armState.toJS()} {...fcStatus}
             setPosition={setPosition('armState')}
           />
-          <Previews.ArtificialHorizont {...artificialHorizont.toJS()} {...fcStatus}
-            setPosition={setPosition('artificialHorizont')}
+          <Previews.ArtificialHorizon {...artificialHorizon.toJS()} {...fcStatus}
+            setPosition={setPosition('artificialHorizon')}
           />
           <Previews.BatteryConsumed {...batteryConsumed.toJS()} {...fcStatus}
             setPosition={setPosition('batteryConsumed')}
