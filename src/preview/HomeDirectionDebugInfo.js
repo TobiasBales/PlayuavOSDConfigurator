@@ -13,7 +13,7 @@ export default class HomeDirectionDebugInfo extends PreviewBase {
   }
 
   draw() {
-    const font = fonts.getFont(0);      
+    const font = fonts.getFont(0);
     this.canvas.clear();
     const height = this.refs.canvas.height;
 
@@ -23,15 +23,15 @@ export default class HomeDirectionDebugInfo extends PreviewBase {
                             'rel h.b. -7',
                             'comp. b 75'
                          ];    
-        var currentLineYOffset = 0;                         
+        var currentLineYOffset = 0;
         for (let debugLineIndex = 0; debugLineIndex < debugLines.length; debugLineIndex++) {
             // Get the current line
-            var currentDebugLine = debugLines[debugLineIndex];                                        
+            var currentDebugLine = debugLines[debugLineIndex];
             // Draw the current line
             var debugLineStringPosition = Canvas.calculateStringPosition(currentDebugLine, 0, currentLineYOffset, Canvas_types.H_ALIGNMENT_LEFT, Canvas_types.V_ALIGNMENT_TOP, font);
             this.canvas.drawString(currentDebugLine, 0, currentLineYOffset, font); 
             // Move Y position down one line
-            currentLineYOffset += debugLineStringPosition.height;    
+            currentLineYOffset += debugLineStringPosition.height;
         }
     }
   }

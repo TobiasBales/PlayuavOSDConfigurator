@@ -21,7 +21,9 @@ const defaultEEPROM = [
   1, 1, 15, 15, 1, 1, 184, 240, 0, 0, 1, 1, 264, 240, 0, 0, 0, 0, 0, 0, 0, 0,
   5000, 1000,
   // New parameters for rc channels.
-  0, 0, 55, 40
+  0, 0, 55, 40,
+  // Parameters for home direction debug info panelChannel
+  0, 0, 65, 70
 ];
 
 function toEnabled(byte) {
@@ -381,15 +383,19 @@ const eepromMapping = [
   { path: ['watt', 'positionY'] },
   { path: ['watt', 'fontSize'] },
   { path: ['watt', 'hAlignment'] },
-  { path: ['serial', 'splashMillisecondsToShowValue'] },  
+  { path: ['serial', 'splashMillisecondsToShowValue'] },
   { path: ['alarms', 'alarmMillisecondsToShowValue'] },
-  
   { path: ['rcChannels', 'visibleOn'],
     convertFromParameters: toEnabled },
   { path: ['rcChannels', 'visibleOn'] },
   { path: ['rcChannels', 'positionX'] },
-  { path: ['rcChannels', 'positionY'] }
-  
+  { path: ['rcChannels', 'positionY'] },
+    
+  { path: ['homeDirectionDebugInfo', 'visibleOn'],
+    convertFromParameters: toEnabled },
+  { path: ['homeDirectionDebugInfo', 'visibleOn'] },
+  { path: ['homeDirectionDebugInfo', 'positionX'] },
+  { path: ['homeDirectionDebugInfo', 'positionY'] },
   
 ];
 
@@ -420,6 +426,7 @@ const skeletonParameters = {
   gpsLongitude: {},
   gpsStatus: {},
   homeDirection: {},
+  homeDirectionDebugInfo: {},
   homeDistance: {},
   linkQuality: {},
   rcChannels: {},
