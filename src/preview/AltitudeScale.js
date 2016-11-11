@@ -28,7 +28,7 @@ export default class AltitudeScale extends PreviewBase {
       const prefixPosition = Canvas.calculateStringPosition(prefix, 0, 0, hAlignment, 0, font);
       var unitString = ''
       if (this.props.units === 0) {
-        unitString = 'KM';
+        unitString = 'M';
       } else {
         unitString = 'F';
       }
