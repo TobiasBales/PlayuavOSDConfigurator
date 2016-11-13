@@ -18,6 +18,7 @@ import GpsLatitude from './GpsLatitude';
 import GpsLongitude from './GpsLongitude';
 import GpsStatus from './GpsStatus';
 import HomeDirection from './HomeDirection';
+import HomeDirectionDebugInfo from './HomeDirectionDebugInfo';
 import HomeDistance from './HomeDistance';
 import LinkQuality from './LinkQuality';
 import RCChannels from './RCChannels';
@@ -56,6 +57,7 @@ export default {
   GpsLongitude,
   GpsStatus,
   HomeDirection,
+  HomeDirectionDebugInfo,
   HomeDistance,
   LinkQuality,
   RCChannels,

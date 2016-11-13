@@ -105,6 +105,10 @@ class ParametersModule extends Component {
             parameters={this._props('homeDirection')}
             {...this._actions()}
           />
+          <Settings.HomeDirectionDebugInfo
+            parameters={this._props('homeDirectionDebugInfo')}
+            {...this._actions()}
+          />
           <Settings.Radar
             parameters={this._props('radar')}
             {...this._actions()}
