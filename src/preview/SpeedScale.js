@@ -26,7 +26,12 @@ export default class SpeedScale extends PreviewBase {
       const hAlignment = scaleAlignment === 0 ? 0 : 2;
       const prefix = this.props.scaleType === 0 ? 'GS' : 'AS';
       const prefixPosition = Canvas.calculateStringPosition(prefix, 0, 0, hAlignment, 0, font);
-      const unitString = 'KM/H';
+      var unitString = ''
+      if (this.props.units === 0) {
+        unitString = 'KM/H';
+      } else {
+        unitString = 'M/H';
+      }
       const unitPosition = Canvas.calculateStringPosition(
         unitString, 0, 0, hAlignment, 0, font);
       const speed = this.props.scaleType === 0 ? speedGround : speedAir;

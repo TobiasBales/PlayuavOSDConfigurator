@@ -26,7 +26,12 @@ export default class AltitudeScale extends PreviewBase {
       const hAlignment = scaleAlignment === 0 ? 0 : 2;
       const prefix = this.props.scaleType === 0 ? 'AAlt' : 'Alt';
       const prefixPosition = Canvas.calculateStringPosition(prefix, 0, 0, hAlignment, 0, font);
-      const unitString = 'M';
+      var unitString = ''
+      if (this.props.units === 0) {
+        unitString = 'M';
+      } else {
+        unitString = 'F';
+      }
       const unitPosition = Canvas.calculateStringPosition(
         unitString, 0, 0, hAlignment, 0, font);
       const altitude = this.props.scaleType === 0 ? absoluteAltitude : relativeAltitude;
