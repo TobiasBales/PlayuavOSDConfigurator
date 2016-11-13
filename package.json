@@ -1,7 +1,7 @@
 {
   "name": "playuav-osd-configurator",
   "productName": "PlayUAVOSDConfigurator",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "A simple cross platform tool to configure the PlayUAV OSD",
   "main": "main.js",
   "bugs": {
