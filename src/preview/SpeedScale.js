@@ -26,14 +26,9 @@ export default class SpeedScale extends PreviewBase {
       const hAlignment = scaleAlignment === 0 ? 0 : 2;
       const prefix = this.props.scaleType === 0 ? 'GS' : 'AS';
       const prefixPosition = Canvas.calculateStringPosition(prefix, 0, 0, hAlignment, 0, font);
-      var unitString = ''
-      if (this.props.units === 0) {
-        unitString = 'KM/H';
-      } else {
-        unitString = 'M/H';
-      }
+      const speedUnitString = units.speedUnits(this.props.units);                  
       const unitPosition = Canvas.calculateStringPosition(
-        unitString, 0, 0, hAlignment, 0, font);
+        speedUnitString, 0, 0, hAlignment, 0, font);
       const speed = this.props.scaleType === 0 ? speedGround : speedAir;
       const posX = scaleAlignment === 0 ? 0 : 75;
       const posY = 50;
@@ -42,7 +37,7 @@ export default class SpeedScale extends PreviewBase {
         Math.round(scaleSpeed, 0),
         60, scaleAlignment, posX, posY, 72, 10, 20, 5, 8, 11, 100, font);
       this.canvas.drawString(prefix, posX + prefixPosition.left, posY - 50, font);
-      this.canvas.drawString(unitString, posX + unitPosition.left, posY + 40, font);
+      this.canvas.drawString(speedUnitString, posX + unitPosition.left, posY + 40, font);
     }
   }
 

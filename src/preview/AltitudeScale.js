@@ -25,15 +25,10 @@ export default class AltitudeScale extends PreviewBase {
       const { absoluteAltitude, relativeAltitude, scaleAlignment } = this.props;
       const hAlignment = scaleAlignment === 0 ? 0 : 2;
       const prefix = this.props.scaleType === 0 ? 'AAlt' : 'Alt';
-      const prefixPosition = Canvas.calculateStringPosition(prefix, 0, 0, hAlignment, 0, font);
-      var unitString = ''
-      if (this.props.units === 0) {
-        unitString = 'M';
-      } else {
-        unitString = 'F';
-      }
+      const prefixPosition = Canvas.calculateStringPosition(prefix, 0, 0, hAlignment, 0, font);     
+      const shortDistanceUnitString = units.shortDistanceUnits(this.props.units);                   
       const unitPosition = Canvas.calculateStringPosition(
-        unitString, 0, 0, hAlignment, 0, font);
+        shortDistanceUnitString, 0, 0, hAlignment, 0, font);
       const altitude = this.props.scaleType === 0 ? absoluteAltitude : relativeAltitude;
       const posX = scaleAlignment === 0 ? 0 : 75;
       const posY = 50;
@@ -42,7 +37,7 @@ export default class AltitudeScale extends PreviewBase {
         Math.round(scaleAltitude, 0),
         60, scaleAlignment, posX, posY, 72, 10, 20, 5, 8, 11, 10000, font);
       this.canvas.drawString(prefix, posX + prefixPosition.left, posY - 50, font);
-      this.canvas.drawString(unitString, posX + unitPosition.left, posY + 40, font);
+      this.canvas.drawString(shortDistanceUnitString, posX + unitPosition.left, posY + 40, font);
     }
   }
 

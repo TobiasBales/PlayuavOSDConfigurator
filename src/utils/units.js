@@ -1,16 +1,24 @@
 const speedMultiplier = [3.6, 2.23];
-const speedUnits = ['KM/H', 'M/H'];
+const speedUnitsLong = ['KM/H', 'Mi/H'];
 const distanceMultiplyer = [1.0, 3.28];
 const distanceDivider = [1000, 5280];
 const unitsShort = ['M', 'F'];
-const unitsLong = ['KM', 'M'];
+const unitsLong = ['KM', 'Mi'];
 
-function distanceUnits(units) {
+function longDistanceUnits(units) {
   return unitsLong[units];
 }
 
+function shortDistanceUnits(units) {
+  return unitsShort[units];
+}
+
+function speedUnits(units) {
+  return speedUnitsLong[units];
+}
+
 function convertSpeed(speed, units) {
-  const unitsString = speedUnits[units];
+  const unitsString = speedUnitsLong[units];
   const convertedSpeed = convertSpeedWithoutUnits(speed, units);
 
   return `${convertedSpeed}${unitsString}`;
@@ -55,5 +63,7 @@ export default {
   convertSpeed,
   convertDistanceWithoutUnits,
   convertSpeedWithoutUnits,
-  distanceUnits,
+  longDistanceUnits,
+  shortDistanceUnits,
+  speedUnits
 };
