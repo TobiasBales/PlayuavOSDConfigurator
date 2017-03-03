@@ -31,7 +31,7 @@ function Preview(props) {
   const screenHeight = videoMode === 0 ? 239 : 265;
   const style = { height: screenHeight, width: screenWidth };
   const fcStatus = {
-    absoluteAltitude: 2814,
+    absoluteAltitude: 450,
     alarm,
     armState: 1,
     batteryConsumed: 1344,
