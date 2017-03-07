@@ -15,7 +15,7 @@ export default class Efficiency extends StringPreview {
     const { batteryCurrent, batteryVoltage, speedGround } = this.props;
     const wattage = batteryVoltage * batteryCurrent;
     const efficiency = wattage / speedGround;
-    const distanceString = units.distanceUnits(this.props.units);
+    const distanceString = units.longDistanceUnits(this.props.units);
 
     return `${efficiency.toFixed(1)}W/${distanceString}`;
   }

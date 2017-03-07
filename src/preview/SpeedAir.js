@@ -1,5 +1,6 @@
 import { PropTypes } from 'react';
 import StringPreview from './StringPreview';
+import units from '../utils/units';
 
 export default class SpeedAir extends StringPreview {
   static propTypes = {
@@ -9,19 +10,8 @@ export default class SpeedAir extends StringPreview {
   }
 
   content() {
-    let convertSpeed = 0.0;
-    let unitsSpeed = '';
-    const { speedAir, units } = this.props;
-
-    if (units === 0) {
-      convertSpeed = 3.6;
-      unitsSpeed = 'KM/H';
-    } else {
-      convertSpeed = 3.28;
-      unitsSpeed = 'M/H';
-    }
-
-    const speed = speedAir * convertSpeed;
-    return `AS ${speed.toFixed(0)}${unitsSpeed}`;
+    var speedUnitString = units.speedUnits(this.props.units);           
+    const speed = units.convertSpeedWithoutUnits(this.props.speedAir, this.props.units);      
+    return `AS ${speed.toFixed(0)}${speedUnitString}`;        
   }
 }
