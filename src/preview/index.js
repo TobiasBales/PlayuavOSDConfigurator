@@ -28,6 +28,7 @@ import Rssi from './Rssi';
 import SpeedAir from './SpeedAir';
 import SpeedGround from './SpeedGround';
 import SpeedScale from './SpeedScale';
+import Summary from './Summary';
 import Throttle from './Throttle';
 import Time from './Time';
 import TotalTrip from './TotalTrip';
@@ -67,6 +68,7 @@ export default {
   SpeedAir,
   SpeedGround,
   SpeedScale,
+  Summary,
   Throttle,
   Time,
   TotalTrip,

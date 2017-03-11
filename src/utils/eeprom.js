@@ -23,7 +23,9 @@ const defaultEEPROM = [
   // New parameters for rc channels.
   0, 0, 55, 40,
   // Parameters for home direction debug info panelChannel
-  0, 0, 65, 70
+  0, 0, 65, 70,
+  // Parameters for Summary -- TOTALLY FAKE
+  0, 0, 65, 70  
 ];
 
 function toEnabled(byte) {
@@ -397,6 +399,12 @@ const eepromMapping = [
   { path: ['homeDirectionDebugInfo', 'positionX'] },
   { path: ['homeDirectionDebugInfo', 'positionY'] },
   
+  { path: ['summary', 'visibleOn'],
+    convertFromParameters: toEnabled },
+  { path: ['summary', 'visibleOn'] },
+  { path: ['summary', 'positionX'] },
+  { path: ['summary', 'positionY'] },
+
 ];
 
 const skeletonParameters = {
@@ -440,6 +448,7 @@ const skeletonParameters = {
   speedAir: {},
   speedGround: {},
   speedScale: {},
+  summary: {},
   throttle: {},
   time: {},
   totalTrip: {},

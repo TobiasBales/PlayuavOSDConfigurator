@@ -36,6 +36,7 @@ import SpeedAir from './SpeedAir';
 import SpeedGround from './SpeedGround';
 import SpeedScale from './SpeedScale';
 import Switching from './Switching';
+import Summary from './Summary';
 import Throttle from './Throttle';
 import Time from './Time';
 import TotalTrip from './TotalTrip';
@@ -83,6 +84,7 @@ export default {
   SpeedAir,
   SpeedScale,
   Switching,
+  Summary,
   SpeedGround,
   Throttle,
   Time,

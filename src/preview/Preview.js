@@ -20,7 +20,7 @@ function Preview(props) {
     batteryCurrent, batteryRemaining, batteryVoltage, climbRate, compass, efficiency,
     flightMode, linkQuality, rcChannels, homeLatitude, homeLongitude, gpsHdop, gpsLatitude, gpsLongitude,
     gpsStatus, gps2Hdop, gps2Latitude, gps2Longitude, gps2Status, homeDirection, homeDirectionDebugInfo, homeDistance,
-    radar, relativeAltitude, rssi, speedAir, speedScale, speedGround, throttle, time,
+    radar, relativeAltitude, rssi, speedAir, speedScale, speedGround, summary, throttle, time,
     totalTrip, varioGraph, watt, wpDistance, wind,
   } = props.parameters;
   const units = props.parameters.get('video').get('units');
@@ -194,6 +194,11 @@ function Preview(props) {
           <Previews.SpeedScale {...speedScale.toJS()} {...fcStatus}
             units={units} setPosition={setPosition('speedScale')}
           />
+
+          <Previews.Summary {...summary.toJS()} {...fcStatus}
+            setPosition={setPosition('summary')}
+          />
+
           <Previews.Throttle {...throttle.toJS()} {...fcStatus}
             setPosition={setPosition('throttle')}
           />
