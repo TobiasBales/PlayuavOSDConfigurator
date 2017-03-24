@@ -405,6 +405,12 @@ const eepromMapping = [
   { path: ['summary', 'positionX'] },
   { path: ['summary', 'positionY'] },
 
+
+  { path: ['summary', 'switchChannel'] },
+  { path: ['summary', 'channelMin'] },
+  { path: ['summary', 'channelMax'] },
+
+
 ];
 
 const skeletonParameters = {
