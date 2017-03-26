@@ -25,7 +25,7 @@ const defaultEEPROM = [
   // Parameters for home direction debug info panelChannel
   0, 0, 65, 70,
   // Parameters for Summary -- TOTALLY FAKE
-  0, 0, 65, 70  
+  0, 0, 65, 70, 8, 1000, 2000,
 ];
 
 function toEnabled(byte) {
