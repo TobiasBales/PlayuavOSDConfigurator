@@ -18,16 +18,15 @@ export default class Summary extends Component {
       visibleOn: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
 
       switchChannel: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
-      channelMin: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
-      channelMax: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      minValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
+      maxValue: CustomPropTypes.value(PropTypes.number.isRequired).isRequired,
 
     }).isRequired,
     setPosition: PropTypes.func.isRequired,
     setVisibleOn: PropTypes.func.isRequired,
 
-    setSwitchChannel: PropTypes.func.isRequired,
-    setChannelMin: PropTypes.func.isRequired,
-    setChannelMax: PropTypes.func.isRequired,
+    setChannel: PropTypes.func.isRequired,
+    setValue: PropTypes.func.isRequired,
 
   }
 
@@ -37,15 +36,15 @@ export default class Summary extends Component {
 
 
   _setChannelMin = (channelMin) => {
-    this.props.setChannelMin('summary', parseInt(channelMin, 10));
+    this.props.setValue('summary', 'min', parseInt(channelMin, 10));
   }
 
   _setChannelMax = (channelMax) => {
-    this.props.setChannelMax('summary', parseInt(channelMax, 10));
+    this.props.setValue('summary', 'max', parseInt(channelMax, 10));
   }
 
   _setSwitchChannel = (switchChannel) => {
-    this.props.setSwitchChannel('summary', switchChannel);
+    this.props.setChannel('summary', 'switch', switchChannel);
   }
 
 
@@ -67,9 +66,9 @@ export default class Summary extends Component {
       positionX,
       positionY,
       visibleOn,
-      switchChannel, 
-      channelMin, 
-      channelMax          
+      switchChannel,
+      minValue,
+      maxValue,
     } = this.props.parameters;
     const switchChannelOptions = [
       { value: 5, label: 'rc 5' }, 
@@ -99,12 +98,12 @@ export default class Summary extends Component {
 
         <Column width={50} >
           <Input type="number" min={minChannelInput} max={maxChannelInput}
-            label="min" value={channelMin} onChange={this._setChannelMin}
+            label="min" value={minValue} onChange={this._setChannelMin}
           />
         </Column>
         <Column width={50} >
           <Input type="number" min={minChannelInput} max={maxChannelInput}
-            label="max" value={channelMax} onChange={this._setChannelMax}
+            label="max" value={maxValue} onChange={this._setChannelMax}
           />
         </Column>
         <Column width={50} >

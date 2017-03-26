@@ -407,8 +407,8 @@ const eepromMapping = [
 
 
   { path: ['summary', 'switchChannel'] },
-  { path: ['summary', 'channelMin'] },
-  { path: ['summary', 'channelMax'] },
+  { path: ['summary', 'minValue'] },
+  { path: ['summary', 'maxValue'] },
 
 
 ];
